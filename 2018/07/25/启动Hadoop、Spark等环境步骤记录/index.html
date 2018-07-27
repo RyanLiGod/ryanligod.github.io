@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="Hadoop 启动hdfs集群： 1start-dfs.sh  验证启动是否成功：jps、50070端口spark1：namenode、datanode、secondarynamenodespark2：datanodespark3：datanode   Hive在spark1中，直接输入:1hive ZooKeeper 分别在三台机器上执行： 1zkServer.sh start  检查ZooKe">
+<meta name="description" content="Hadoop 启动hdfs集群： 1start-dfs.sh  验证启动是否成功：jps、50070端口spark1：namenode、datanode、secondarynamenodespark2：datanodespark3：datanode   YARN1/usr/local/hadoop/sbin/start-dfs.sh Hive在spark1中，直接输入:1hive ZooKeepe">
 <meta property="og:type" content="article">
 <meta property="og:title" content="启动Hadoop、Spark等环境步骤记录">
 <meta property="og:url" content="https://ryanlic.github.io/2018/07/25/启动Hadoop、Spark等环境步骤记录/index.html">
 <meta property="og:site_name" content="Ryan Li God">
-<meta property="og:description" content="Hadoop 启动hdfs集群： 1start-dfs.sh  验证启动是否成功：jps、50070端口spark1：namenode、datanode、secondarynamenodespark2：datanodespark3：datanode   Hive在spark1中，直接输入:1hive ZooKeeper 分别在三台机器上执行： 1zkServer.sh start  检查ZooKe">
+<meta property="og:description" content="Hadoop 启动hdfs集群： 1start-dfs.sh  验证启动是否成功：jps、50070端口spark1：namenode、datanode、secondarynamenodespark2：datanodespark3：datanode   YARN1/usr/local/hadoop/sbin/start-dfs.sh Hive在spark1中，直接输入:1hive ZooKeepe">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-25T04:46:02.822Z">
+<meta property="og:updated_time" content="2018-07-27T00:21:27.383Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="启动Hadoop、Spark等环境步骤记录">
-<meta name="twitter:description" content="Hadoop 启动hdfs集群： 1start-dfs.sh  验证启动是否成功：jps、50070端口spark1：namenode、datanode、secondarynamenodespark2：datanodespark3：datanode   Hive在spark1中，直接输入:1hive ZooKeeper 分别在三台机器上执行： 1zkServer.sh start  检查ZooKe">
+<meta name="twitter:description" content="Hadoop 启动hdfs集群： 1start-dfs.sh  验证启动是否成功：jps、50070端口spark1：namenode、datanode、secondarynamenodespark2：datanodespark3：datanode   YARN1/usr/local/hadoop/sbin/start-dfs.sh Hive在spark1中，直接输入:1hive ZooKeepe">
 
 
 
@@ -306,6 +306,7 @@
 <li><p>验证启动是否成功：jps、50070端口<br>spark1：namenode、datanode、secondarynamenode<br>spark2：datanode<br>spark3：datanode</p>
 </li>
 </ol>
+<h2 id="YARN"><a href="#YARN" class="headerlink" title="YARN"></a>YARN</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/hadoop/sbin/start-dfs.sh</span><br></pre></td></tr></table></figure>
 <h2 id="Hive"><a href="#Hive" class="headerlink" title="Hive"></a>Hive</h2><p>在spark1中，直接输入:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hive</span><br></pre></td></tr></table></figure></p>
 <h2 id="ZooKeeper"><a href="#ZooKeeper" class="headerlink" title="ZooKeeper"></a>ZooKeeper</h2><ol>
 <li><p>分别在三台机器上执行：</p>
@@ -484,7 +485,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hadoop"><span class="nav-number">1.</span> <span class="nav-text">Hadoop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hive"><span class="nav-number">2.</span> <span class="nav-text">Hive</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ZooKeeper"><span class="nav-number">3.</span> <span class="nav-text">ZooKeeper</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kafka"><span class="nav-number">4.</span> <span class="nav-text">kafka</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spark"><span class="nav-number">5.</span> <span class="nav-text">Spark</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hadoop"><span class="nav-number">1.</span> <span class="nav-text">Hadoop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#YARN"><span class="nav-number">2.</span> <span class="nav-text">YARN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hive"><span class="nav-number">3.</span> <span class="nav-text">Hive</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ZooKeeper"><span class="nav-number">4.</span> <span class="nav-text">ZooKeeper</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kafka"><span class="nav-number">5.</span> <span class="nav-text">kafka</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spark"><span class="nav-number">6.</span> <span class="nav-text">Spark</span></a></li></ol></div>
             
 
           </div>

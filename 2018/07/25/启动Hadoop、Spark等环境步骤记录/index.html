@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="Hadoop 启动hdfs集群： 1start-dfs.sh  验证启动是否成功：jps、50070端口spark1：namenode、datanode、secondarynamenodespark2：datanodespark3：datanode   YARN1/usr/local/hadoop/sbin/start-dfs.sh Hive在spark1中，直接输入:1hive ZooKeepe">
+<meta name="description" content="Hadoop 启动hdfs集群： 1start-dfs.sh  验证启动是否成功：jps、50070端口spark1：namenode、datanode、secondarynamenodespark2：datanodespark3：datanode   YARN1/usr/local/hadoop/sbin/start-yarn.sh Hive在spark1中，直接输入:1hive ZooKeep">
 <meta property="og:type" content="article">
 <meta property="og:title" content="启动Hadoop、Spark等环境步骤记录">
 <meta property="og:url" content="https://ryanlic.github.io/2018/07/25/启动Hadoop、Spark等环境步骤记录/index.html">
 <meta property="og:site_name" content="Ryan Li God">
-<meta property="og:description" content="Hadoop 启动hdfs集群： 1start-dfs.sh  验证启动是否成功：jps、50070端口spark1：namenode、datanode、secondarynamenodespark2：datanodespark3：datanode   YARN1/usr/local/hadoop/sbin/start-dfs.sh Hive在spark1中，直接输入:1hive ZooKeepe">
+<meta property="og:description" content="Hadoop 启动hdfs集群： 1start-dfs.sh  验证启动是否成功：jps、50070端口spark1：namenode、datanode、secondarynamenodespark2：datanodespark3：datanode   YARN1/usr/local/hadoop/sbin/start-yarn.sh Hive在spark1中，直接输入:1hive ZooKeep">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-27T00:21:27.383Z">
+<meta property="og:updated_time" content="2018-07-27T00:23:25.709Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="启动Hadoop、Spark等环境步骤记录">
-<meta name="twitter:description" content="Hadoop 启动hdfs集群： 1start-dfs.sh  验证启动是否成功：jps、50070端口spark1：namenode、datanode、secondarynamenodespark2：datanodespark3：datanode   YARN1/usr/local/hadoop/sbin/start-dfs.sh Hive在spark1中，直接输入:1hive ZooKeepe">
+<meta name="twitter:description" content="Hadoop 启动hdfs集群： 1start-dfs.sh  验证启动是否成功：jps、50070端口spark1：namenode、datanode、secondarynamenodespark2：datanodespark3：datanode   YARN1/usr/local/hadoop/sbin/start-yarn.sh Hive在spark1中，直接输入:1hive ZooKeep">
 
 
 
@@ -306,7 +306,7 @@
 <li><p>验证启动是否成功：jps、50070端口<br>spark1：namenode、datanode、secondarynamenode<br>spark2：datanode<br>spark3：datanode</p>
 </li>
 </ol>
-<h2 id="YARN"><a href="#YARN" class="headerlink" title="YARN"></a>YARN</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/hadoop/sbin/start-dfs.sh</span><br></pre></td></tr></table></figure>
+<h2 id="YARN"><a href="#YARN" class="headerlink" title="YARN"></a>YARN</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/hadoop/sbin/start-yarn.sh</span><br></pre></td></tr></table></figure>
 <h2 id="Hive"><a href="#Hive" class="headerlink" title="Hive"></a>Hive</h2><p>在spark1中，直接输入:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hive</span><br></pre></td></tr></table></figure></p>
 <h2 id="ZooKeeper"><a href="#ZooKeeper" class="headerlink" title="ZooKeeper"></a>ZooKeeper</h2><ol>
 <li><p>分别在三台机器上执行：</p>

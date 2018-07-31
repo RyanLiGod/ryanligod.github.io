@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Ryan Li God">
 <meta property="og:description" content="安装scala 2.11.8注意，scala的版本和之后要安装的spark版本密切关联，必须要和spark/jars中的scala-compiler-2.11.8.jar版本一致，而且之后用IDE打包的时候，选择scala版本也要一致   将scala-2.11.8.tgz使用WinSCP拷贝到spark1的/usr/local目录下。 对scala-2.11.8.tgz进行解压缩： 1tar -">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-31T05:02:16.014Z">
+<meta property="og:updated_time" content="2018-07-31T05:14:53.036Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spark学习笔记（五）：Kafka 2.9.2-0.8.1集群搭建（包括scala安装）">
 <meta name="twitter:description" content="安装scala 2.11.8注意，scala的版本和之后要安装的spark版本密切关联，必须要和spark/jars中的scala-compiler-2.11.8.jar版本一致，而且之后用IDE打包的时候，选择scala版本也要一致   将scala-2.11.8.tgz使用WinSCP拷贝到spark1的/usr/local目录下。 对scala-2.11.8.tgz进行解压缩： 1tar -">
@@ -344,7 +344,7 @@
 <li><p>使用jps检查启动是否成功</p>
 </li>
 </ol>
-<h2 id="测试kafka集群"><a href="#测试kafka集群" class="headerlink" title="测试kafka集群"></a>测试kafka集群</h2><p>使用基本命令检查kafka是否搭建成功<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh --zookeeper 192.168.1.107:2181,192.168.1.108:2181,192.168.1.109:2181 --topic TestTopic --replication-factor 1 --partitions 1 --create</span><br><span class="line"></span><br><span class="line">bin/kafka-console-producer.sh --broker-list 192.168.1.107:9092,192.168.1.108:9092,192.168.1.109:9092 --topic TestTopic</span><br><span class="line"></span><br><span class="line">bin/kafka-console-consumer.sh --zookeeper 192.168.1.107:2181,192.168.1.108:2181,192.168.1.109:2181 --topic TestTopic --from-beginning</span><br></pre></td></tr></table></figure></p>
+<h2 id="测试kafka集群"><a href="#测试kafka集群" class="headerlink" title="测试kafka集群"></a>测试kafka集群</h2><p>使用基本命令检查kafka是否搭建成功<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh --zookeeper 10.211.55.24:2181,10.211.55.25:2181,10.211.55.26:2181 --topic TestTopic --replication-factor 1 --partitions 1 --create</span><br><span class="line"></span><br><span class="line">bin/kafka-console-producer.sh --broker-list 10.211.55.24:9092,10.211.55.25:9092,10.211.55.26:9092 --topic TestTopic</span><br><span class="line"></span><br><span class="line">bin/kafka-console-consumer.sh --zookeeper 10.211.55.24:2181,10.211.55.25:2181,10.211.55.26:2181 --topic TestTopic --from-beginning</span><br></pre></td></tr></table></figure></p>
 
       
     </div>

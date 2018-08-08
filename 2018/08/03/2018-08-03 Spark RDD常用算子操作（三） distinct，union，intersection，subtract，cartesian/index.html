@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="本文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428  distinct，union，intersection，subtract，cartesianspark伪集合尽管 RDD 本身不是严格意义上的集合，但它也支持许多数学上的集合操作，比如合并和相交操作, 下">
+<meta name="description" content="原文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428  distinct，union，intersection，subtract，cartesianspark伪集合尽管 RDD 本身不是严格意义上的集合，但它也支持许多数学上的集合操作，比如合并和相交操作, 下">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spark RDD常用算子操作（三） distinct，union，intersection，subtract，cartesian">
 <meta property="og:url" content="https://ryanlic.github.io/2018/08/03/2018-08-03 Spark RDD常用算子操作（三） distinct，union，intersection，subtract，cartesian/index.html">
 <meta property="og:site_name" content="Ryan Li God">
-<meta property="og:description" content="本文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428  distinct，union，intersection，subtract，cartesianspark伪集合尽管 RDD 本身不是严格意义上的集合，但它也支持许多数学上的集合操作，比如合并和相交操作, 下">
+<meta property="og:description" content="原文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428  distinct，union，intersection，subtract，cartesianspark伪集合尽管 RDD 本身不是严格意义上的集合，但它也支持许多数学上的集合操作，比如合并和相交操作, 下">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-08T07:07:30.121Z">
+<meta property="og:updated_time" content="2018-08-08T07:14:22.048Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spark RDD常用算子操作（三） distinct，union，intersection，subtract，cartesian">
-<meta name="twitter:description" content="本文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428  distinct，union，intersection，subtract，cartesianspark伪集合尽管 RDD 本身不是严格意义上的集合，但它也支持许多数学上的集合操作，比如合并和相交操作, 下">
+<meta name="twitter:description" content="原文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428  distinct，union，intersection，subtract，cartesianspark伪集合尽管 RDD 本身不是严格意义上的集合，但它也支持许多数学上的集合操作，比如合并和相交操作, 下">
 
 
 
@@ -300,7 +300,7 @@
 
       
         <blockquote>
-<p>本文作者：翟开顺<br>首发：CSDN<br>本人仅为自己方便查阅做了摘抄，请支持原作者<br>原文地址：<a href="https://blog.csdn.net/t1dmzks/article/details/72077428" target="_blank" rel="noopener">https://blog.csdn.net/t1dmzks/article/details/72077428</a></p>
+<p>原文作者：翟开顺<br>首发：CSDN<br>本人仅为自己方便查阅做了摘抄，请支持原作者<br>原文地址：<a href="https://blog.csdn.net/t1dmzks/article/details/72077428" target="_blank" rel="noopener">https://blog.csdn.net/t1dmzks/article/details/72077428</a></p>
 </blockquote>
 <h1 id="distinct，union，intersection，subtract，cartesian"><a href="#distinct，union，intersection，subtract，cartesian" class="headerlink" title="distinct，union，intersection，subtract，cartesian"></a>distinct，union，intersection，subtract，cartesian</h1><p><strong>spark伪集合</strong><br>尽管 RDD 本身不是严格意义上的集合，但它也支持许多数学上的集合操作，比如合并和相交操作, 下图展示了这四种操作 </p>
 <h2 id="distinct"><a href="#distinct" class="headerlink" title="distinct"></a>distinct</h2><p>distinct用于去重， 我们生成的RDD可能有重复的元素，使用distinct方法可以去掉重复的元素, 不过此方法涉及到混洗，操作开销很大<br><strong>scala版本</strong><br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="keyword">var</span> <span class="type">RDD1</span> = sc.parallelize(<span class="type">List</span>(<span class="string">"aa"</span>,<span class="string">"aa"</span>,<span class="string">"bb"</span>,<span class="string">"cc"</span>,<span class="string">"dd"</span>))</span><br><span class="line"></span><br><span class="line">scala&gt; <span class="type">RDD1</span>.collect</span><br><span class="line">res3: <span class="type">Array</span>[<span class="type">String</span>] = <span class="type">Array</span>(aa, aa, bb, cc, dd)</span><br><span class="line"></span><br><span class="line">scala&gt; <span class="keyword">var</span> distinctRDD = <span class="type">RDD1</span>.distinct</span><br><span class="line"></span><br><span class="line">scala&gt; distinctRDD.collect</span><br><span class="line">res5: <span class="type">Array</span>[<span class="type">String</span>] = <span class="type">Array</span>(aa, dd, bb, cc)</span><br></pre></td></tr></table></figure></p>

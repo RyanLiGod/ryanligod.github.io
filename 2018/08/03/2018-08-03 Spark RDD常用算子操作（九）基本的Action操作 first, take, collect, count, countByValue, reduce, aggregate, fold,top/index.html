@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="本文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428  基本的Action操作 first, take, collect, count, countByValue, reduce, aggregate, fold,topfirst返回第一个元素scala123">
+<meta name="description" content="原文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428  基本的Action操作 first, take, collect, count, countByValue, reduce, aggregate, fold,topfirst返回第一个元素scala123">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spark RDD常用算子操作（九）基本的Action操作 first, take, collect, count, countByValue, reduce, aggregate, fold,top">
 <meta property="og:url" content="https://ryanlic.github.io/2018/08/03/2018-08-03 Spark RDD常用算子操作（九）基本的Action操作 first, take, collect, count, countByValue, reduce, aggregate, fold,top/index.html">
 <meta property="og:site_name" content="Ryan Li God">
-<meta property="og:description" content="本文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428  基本的Action操作 first, take, collect, count, countByValue, reduce, aggregate, fold,topfirst返回第一个元素scala123">
+<meta property="og:description" content="原文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428  基本的Action操作 first, take, collect, count, countByValue, reduce, aggregate, fold,topfirst返回第一个元素scala123">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-08T07:08:07.254Z">
+<meta property="og:updated_time" content="2018-08-08T07:14:10.691Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spark RDD常用算子操作（九）基本的Action操作 first, take, collect, count, countByValue, reduce, aggregate, fold,top">
-<meta name="twitter:description" content="本文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428  基本的Action操作 first, take, collect, count, countByValue, reduce, aggregate, fold,topfirst返回第一个元素scala123">
+<meta name="twitter:description" content="原文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428  基本的Action操作 first, take, collect, count, countByValue, reduce, aggregate, fold,topfirst返回第一个元素scala123">
 
 
 
@@ -300,7 +300,7 @@
 
       
         <blockquote>
-<p>本文作者：翟开顺<br>首发：CSDN<br>本人仅为自己方便查阅做了摘抄，请支持原作者<br>原文地址：<a href="https://blog.csdn.net/t1dmzks/article/details/72077428" target="_blank" rel="noopener">https://blog.csdn.net/t1dmzks/article/details/72077428</a></p>
+<p>原文作者：翟开顺<br>首发：CSDN<br>本人仅为自己方便查阅做了摘抄，请支持原作者<br>原文地址：<a href="https://blog.csdn.net/t1dmzks/article/details/72077428" target="_blank" rel="noopener">https://blog.csdn.net/t1dmzks/article/details/72077428</a></p>
 </blockquote>
 <h1 id="基本的Action操作-first-take-collect-count-countByValue-reduce-aggregate-fold-top"><a href="#基本的Action操作-first-take-collect-count-countByValue-reduce-aggregate-fold-top" class="headerlink" title="基本的Action操作 first, take, collect, count, countByValue, reduce, aggregate, fold,top"></a>基本的Action操作 first, take, collect, count, countByValue, reduce, aggregate, fold,top</h1><h2 id="first"><a href="#first" class="headerlink" title="first"></a>first</h2><p>返回第一个元素<br><strong>scala</strong><br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="keyword">val</span> rdd = sc.parallelize(<span class="type">List</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">3</span>))</span><br><span class="line"></span><br><span class="line">scala&gt; rdd.first()</span><br><span class="line">res1: <span class="type">Int</span> = <span class="number">1</span></span><br></pre></td></tr></table></figure></p>
 <p><strong>java</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">JavaRDD&lt;Integer&gt; rdd = sc.parallelize(Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>));</span><br><span class="line">Integer first = rdd.first();</span><br></pre></td></tr></table></figure></p>

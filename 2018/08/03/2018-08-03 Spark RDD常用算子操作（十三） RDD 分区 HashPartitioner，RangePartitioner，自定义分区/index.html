@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="本文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428  RDD 分区 HashPartitioner，RangePartitioner，自定义分区关键字: spark分区方式，java HashPartitioner分区，scala HashPartition">
+<meta name="description" content="原文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428  RDD 分区 HashPartitioner，RangePartitioner，自定义分区关键字: spark分区方式，java HashPartitioner分区，scala HashPartition">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spark RDD常用算子操作（十三） RDD 分区 HashPartitioner，RangePartitioner，自定义分区">
 <meta property="og:url" content="https://ryanlic.github.io/2018/08/03/2018-08-03 Spark RDD常用算子操作（十三） RDD 分区 HashPartitioner，RangePartitioner，自定义分区/index.html">
 <meta property="og:site_name" content="Ryan Li God">
-<meta property="og:description" content="本文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428  RDD 分区 HashPartitioner，RangePartitioner，自定义分区关键字: spark分区方式，java HashPartitioner分区，scala HashPartition">
+<meta property="og:description" content="原文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428  RDD 分区 HashPartitioner，RangePartitioner，自定义分区关键字: spark分区方式，java HashPartitioner分区，scala HashPartition">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-08T07:08:28.791Z">
+<meta property="og:updated_time" content="2018-08-08T07:14:33.349Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spark RDD常用算子操作（十三） RDD 分区 HashPartitioner，RangePartitioner，自定义分区">
-<meta name="twitter:description" content="本文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428  RDD 分区 HashPartitioner，RangePartitioner，自定义分区关键字: spark分区方式，java HashPartitioner分区，scala HashPartition">
+<meta name="twitter:description" content="原文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428  RDD 分区 HashPartitioner，RangePartitioner，自定义分区关键字: spark分区方式，java HashPartitioner分区，scala HashPartition">
 
 
 
@@ -300,7 +300,7 @@
 
       
         <blockquote>
-<p>本文作者：翟开顺<br>首发：CSDN<br>本人仅为自己方便查阅做了摘抄，请支持原作者<br>原文地址：<a href="https://blog.csdn.net/t1dmzks/article/details/72077428" target="_blank" rel="noopener">https://blog.csdn.net/t1dmzks/article/details/72077428</a></p>
+<p>原文作者：翟开顺<br>首发：CSDN<br>本人仅为自己方便查阅做了摘抄，请支持原作者<br>原文地址：<a href="https://blog.csdn.net/t1dmzks/article/details/72077428" target="_blank" rel="noopener">https://blog.csdn.net/t1dmzks/article/details/72077428</a></p>
 </blockquote>
 <h1 id="RDD-分区-HashPartitioner，RangePartitioner，自定义分区"><a href="#RDD-分区-HashPartitioner，RangePartitioner，自定义分区" class="headerlink" title="RDD 分区 HashPartitioner，RangePartitioner，自定义分区"></a>RDD 分区 HashPartitioner，RangePartitioner，自定义分区</h1><p><strong>关键字:</strong> spark分区方式，java HashPartitioner分区，scala HashPartitioner分区， java RangePartitioner 分区，scala RangePartitioner分区， java 自定义分区，scala自定义分区</p>
 <h2 id="默认分区和HashPartitioner分区"><a href="#默认分区和HashPartitioner分区" class="headerlink" title="默认分区和HashPartitioner分区"></a>默认分区和HashPartitioner分区</h2><p>默认的分区就是HashPartition分区,默认分区不再介绍，下面介绍HashPartition的使用</p>

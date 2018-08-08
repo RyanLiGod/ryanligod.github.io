@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="本文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428  parallelize，makeRDD，textFileparallelize调用SparkContext 的 parallelize()，将一个存在的集合，变成一个RDD，这种方式试用于学习spark和做">
+<meta name="description" content="本文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：&amp;lt;https://blog.csdn.net/t1dmzks/article/details/72077428  parallelize，makeRDD，textFileparallelize调用SparkContext 的 parallelize()，将一个存在的集合，变成一个RDD，这种方式试用于学习sp">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spark RDD常用算子操作合辑">
 <meta property="og:url" content="https://ryanlic.github.io/2018/08/03/2018-08-03 Spark RDD常用算子操作合辑/index.html">
 <meta property="og:site_name" content="Ryan Li God">
-<meta property="og:description" content="本文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428  parallelize，makeRDD，textFileparallelize调用SparkContext 的 parallelize()，将一个存在的集合，变成一个RDD，这种方式试用于学习spark和做">
+<meta property="og:description" content="本文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：&amp;lt;https://blog.csdn.net/t1dmzks/article/details/72077428  parallelize，makeRDD，textFileparallelize调用SparkContext 的 parallelize()，将一个存在的集合，变成一个RDD，这种方式试用于学习sp">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://raw.githubusercontent.com/zhaikaishun/blog_img/master/blog/spark_join/spark-join.png">
-<meta property="og:updated_time" content="2018-08-03T13:27:23.039Z">
+<meta property="og:updated_time" content="2018-08-07T18:00:54.681Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spark RDD常用算子操作合辑">
-<meta name="twitter:description" content="本文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428  parallelize，makeRDD，textFileparallelize调用SparkContext 的 parallelize()，将一个存在的集合，变成一个RDD，这种方式试用于学习spark和做">
+<meta name="twitter:description" content="本文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：&amp;lt;https://blog.csdn.net/t1dmzks/article/details/72077428  parallelize，makeRDD，textFileparallelize调用SparkContext 的 parallelize()，将一个存在的集合，变成一个RDD，这种方式试用于学习sp">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/zhaikaishun/blog_img/master/blog/spark_join/spark-join.png">
 
 
@@ -301,7 +301,8 @@
       
 
       
-        <blockquote><p>本文作者：翟开顺<br>首发：CSDN<br>本人仅为自己方便查阅做了摘抄，请支持原作者<br>原文地址：<a href="https://blog.csdn.net/t1dmzks/article/details/72077428" target="_blank" rel="noopener">https://blog.csdn.net/t1dmzks/article/details/72077428</a></p>
+        <blockquote>
+<p>本文作者：翟开顺<br>首发：CSDN<br>本人仅为自己方便查阅做了摘抄，请支持原作者<br>原文地址：&lt;<a href="https://blog.csdn.net/t1dmzks/article/details/72077428" target="_blank" rel="noopener">https://blog.csdn.net/t1dmzks/article/details/72077428</a></p>
 </blockquote>
 <h1 id="parallelize，makeRDD，textFile"><a href="#parallelize，makeRDD，textFile" class="headerlink" title="parallelize，makeRDD，textFile"></a>parallelize，makeRDD，textFile</h1><h2 id="parallelize"><a href="#parallelize" class="headerlink" title="parallelize"></a>parallelize</h2><p>调用SparkContext 的 parallelize()，将一个存在的集合，变成一个RDD，这种方式试用于学习spark和做一些spark的测试</p>
 <p><strong>scala版本</strong><br>def parallelize[T](seq: Seq[T], numSlices: Int = defaultParallelism)(implicit arg0: ClassTag[T]): RDD[T] </p>

@@ -232,6 +232,409 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ryanlic.github.io/RyanLi.github.io/2018/08/03/2018-08-03 Spark RDD常用算子操作（六） 键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/RyanLi.github.io/uploads/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ryan Li God">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/RyanLi.github.io/2018/08/03/2018-08-03 Spark RDD常用算子操作（六） 键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey/" itemprop="url">Spark RDD常用算子操作（六） 键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-03T21:26:50+10:00">
+                2018-08-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>原文作者：翟开顺<br>首发：CSDN<br>本人仅为自己方便查阅做了摘抄，请支持原作者<br>原文地址：<a href="https://blog.csdn.net/t1dmzks/article/details/72077428" target="_blank" rel="noopener">https://blog.csdn.net/t1dmzks/article/details/72077428</a></p>
+</blockquote>
+<h1 id="键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey"><a href="#键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey" class="headerlink" title="键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey"></a>键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey</h1><h2 id="reduceByKey"><a href="#reduceByKey" class="headerlink" title="reduceByKey"></a>reduceByKey</h2><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reduceByKey</span></span>(func: (<span class="type">V</span>, <span class="type">V</span>) =&gt; <span class="type">V</span>): <span class="type">RDD</span>[(<span class="type">K</span>, <span class="type">V</span>)]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reduceByKey</span></span>(func: (<span class="type">V</span>, <span class="type">V</span>) =&gt; <span class="type">V</span>, numPartitions: <span class="type">Int</span>): <span class="type">RDD</span>[(<span class="type">K</span>, <span class="type">V</span>)]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reduceByKey</span></span>(partitioner: <span class="type">Partitioner</span>, func: (<span class="type">V</span>, <span class="type">V</span>) =&gt; <span class="type">V</span>): <span class="type">RDD</span>[(<span class="type">K</span>, <span class="type">V</span>)]</span><br></pre></td></tr></table></figure>
+<p>接收一个函数，按照相同的key进行reduce操作，类似于scala的reduce的操作<br>例如RDD {(1, 2), (3, 4), (3, 6)}进行reduce<br><strong>scala版本</strong><br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">var</span> mapRDD = sc.parallelize(<span class="type">List</span>((<span class="number">1</span>,<span class="number">2</span>),(<span class="number">3</span>,<span class="number">4</span>),(<span class="number">3</span>,<span class="number">6</span>)))</span><br><span class="line">    <span class="keyword">var</span> reduceRDD = mapRDD.reduceByKey((x,y)=&gt;x+y)</span><br><span class="line">    reduceRDD.foreach(x=&gt;println(x))</span><br><span class="line">------输出---------</span><br><span class="line">(<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">(<span class="number">3</span>,<span class="number">10</span>)</span><br></pre></td></tr></table></figure></p>
+<p>再举例<br>单词计数<br>F:\sparktest\sample.txt中的内容如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">aa bb cc aa aa aa dd dd ee ee ee ee </span><br><span class="line">ff aa bb zks</span><br><span class="line">ee kks</span><br><span class="line">ee  zz zks</span><br></pre></td></tr></table></figure></p>
+<p><strong>scala版本</strong><br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">val</span> lines = sc.textFile(<span class="string">"F:\\sparktest\\sample.txt"</span>)</span><br><span class="line">    <span class="keyword">val</span> wordsRDD = lines.flatMap(x=&gt;x.split(<span class="string">"\\s+"</span>)).map(x=&gt;(x,<span class="number">1</span>))</span><br><span class="line">    <span class="keyword">val</span> wordCountRDD = wordsRDD.reduceByKey((x,y)=&gt;x+y)</span><br><span class="line">    wordCountRDD.foreach(x=&gt;println(x))</span><br><span class="line">---------输出-----------</span><br><span class="line">(ee,<span class="number">6</span>)</span><br><span class="line">(aa,<span class="number">5</span>)</span><br><span class="line">(dd,<span class="number">2</span>)</span><br><span class="line">(zz,<span class="number">1</span>)</span><br><span class="line">(zks,<span class="number">2</span>)</span><br><span class="line">(kks,<span class="number">1</span>)</span><br><span class="line">(ff,<span class="number">1</span>)</span><br><span class="line">(bb,<span class="number">2</span>)</span><br><span class="line">(cc,<span class="number">1</span>)</span><br></pre></td></tr></table></figure></p>
+<p><strong>java版本</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"> JavaRDD&lt;String&gt; lines = sc.textFile(<span class="string">"F:\\sparktest\\sample.txt"</span>);</span><br><span class="line"></span><br><span class="line">        JavaPairRDD&lt;String, Integer&gt; wordPairRDD = lines.flatMapToPair(<span class="keyword">new</span> PairFlatMapFunction&lt;String, String, Integer&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> Iterable&lt;Tuple2&lt;String, Integer&gt;&gt; call(String s) <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">                ArrayList&lt;Tuple2&lt;String, Integer&gt;&gt; tpLists = <span class="keyword">new</span> ArrayList&lt;Tuple2&lt;String, Integer&gt;&gt;();</span><br><span class="line">                String[] split = s.split(<span class="string">"\\s+"</span>);</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;split.length ; i++) &#123;</span><br><span class="line">                    Tuple2 tp = <span class="keyword">new</span> Tuple2&lt;String,Integer&gt;(split[i], <span class="number">1</span>);</span><br><span class="line">                    tpLists.add(tp);</span><br><span class="line">                &#125;</span><br><span class="line">            <span class="keyword">return</span> tpLists;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        JavaPairRDD&lt;String, Integer&gt; wordCountRDD = wordPairRDD.reduceByKey(<span class="keyword">new</span> Function2&lt;Integer, Integer, Integer&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> Integer <span class="title">call</span><span class="params">(Integer i1, Integer i2)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> i1 + i2;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        Map&lt;String, Integer&gt; collectAsMap = wordCountRDD.collectAsMap();</span><br><span class="line">        <span class="keyword">for</span> (String key:collectAsMap.keySet()) &#123;</span><br><span class="line">            System.out.println(<span class="string">"("</span>+key+<span class="string">","</span>+collectAsMap.get(key)+<span class="string">")"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">----------输出-------------------------------</span><br><span class="line">(kks,<span class="number">1</span>)</span><br><span class="line">(ee,<span class="number">6</span>)</span><br><span class="line">(bb,<span class="number">2</span>)</span><br><span class="line">(zz,<span class="number">1</span>)</span><br><span class="line">(ff,<span class="number">1</span>)</span><br><span class="line">(cc,<span class="number">1</span>)</span><br><span class="line">(zks,<span class="number">2</span>)</span><br><span class="line">(dd,<span class="number">2</span>)</span><br><span class="line">(aa,<span class="number">5</span>)</span><br></pre></td></tr></table></figure></p>
+<h2 id="foldByKey"><a href="#foldByKey" class="headerlink" title="foldByKey"></a>foldByKey</h2><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foldByKey</span></span>(zeroValue: <span class="type">V</span>)(func: (<span class="type">V</span>, <span class="type">V</span>) =&gt; <span class="type">V</span>): <span class="type">RDD</span>[(<span class="type">K</span>, <span class="type">V</span>)]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foldByKey</span></span>(zeroValue: <span class="type">V</span>, numPartitions: <span class="type">Int</span>)(func: (<span class="type">V</span>, <span class="type">V</span>) =&gt; <span class="type">V</span>): <span class="type">RDD</span>[(<span class="type">K</span>, <span class="type">V</span>)]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foldByKey</span></span>(zeroValue: <span class="type">V</span>, partitioner: <span class="type">Partitioner</span>)(func: (<span class="type">V</span>, <span class="type">V</span>) =&gt; <span class="type">V</span>): <span class="type">RDD</span>[(<span class="type">K</span>, <span class="type">V</span>)]</span><br></pre></td></tr></table></figure>
+<p>该函数用于RDD[K,V]根据K将V做折叠、合并处理，其中的参数zeroValue表示先根据映射函数将zeroValue应用于V,进行初始化V,再将映射函数应用于初始化后的V.<br>foldByKey可以参考我之前的<a href="http://blog.csdn.net/t1dmzks/article/details/69858060#t27" target="_blank" rel="noopener">scala的fold的介绍</a><br>与reduce不同的是 foldByKey开始折叠的第一个元素不是集合中的第一个元素，而是传入的一个元素<br><a href="http://lxw1234.com/archives/2015/07/358.htm" target="_blank" rel="noopener">参考LXW的博客 scala的例子</a><br><strong>直接看例子</strong><br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="keyword">var</span> rdd1 = sc.makeRDD(<span class="type">Array</span>((<span class="string">"A"</span>,<span class="number">0</span>),(<span class="string">"A"</span>,<span class="number">2</span>),(<span class="string">"B"</span>,<span class="number">1</span>),(<span class="string">"B"</span>,<span class="number">2</span>),(<span class="string">"C"</span>,<span class="number">1</span>)))</span><br><span class="line">scala&gt; rdd1.foldByKey(<span class="number">0</span>)(_+_).collect</span><br><span class="line">res75: <span class="type">Array</span>[(<span class="type">String</span>, <span class="type">Int</span>)] = <span class="type">Array</span>((<span class="type">A</span>,<span class="number">2</span>), (<span class="type">B</span>,<span class="number">3</span>), (<span class="type">C</span>,<span class="number">1</span>)) </span><br><span class="line"><span class="comment">//将rdd1中每个key对应的V进行累加，注意zeroValue=0,需要先初始化V,映射函数为+操</span></span><br><span class="line"><span class="comment">//作，比如("A",0), ("A",2)，先将zeroValue应用于每个V,得到：("A",0+0), ("A",2+0)，即：</span></span><br><span class="line"><span class="comment">//("A",0), ("A",2)，再将映射函数应用于初始化后的V，最后得到(A,0+2),即(A,2)</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>再看：</strong><br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; rdd1.foldByKey(<span class="number">2</span>)(_+_).collect</span><br><span class="line">res76: <span class="type">Array</span>[(<span class="type">String</span>, <span class="type">Int</span>)] = <span class="type">Array</span>((<span class="type">A</span>,<span class="number">6</span>), (<span class="type">B</span>,<span class="number">7</span>), (<span class="type">C</span>,<span class="number">3</span>))</span><br><span class="line"><span class="comment">//先将zeroValue=2应用于每个V,得到：("A",0+2), ("A",2+2)，即：("A",2), ("A",4)，再将映射函</span></span><br><span class="line"><span class="comment">//数应用于初始化后的V，最后得到：(A,2+4)，即：(A,6)</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>再看乘法操作：</strong><br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; rdd1.foldByKey(<span class="number">0</span>)(_*_).collect</span><br><span class="line">res77: <span class="type">Array</span>[(<span class="type">String</span>, <span class="type">Int</span>)] = <span class="type">Array</span>((<span class="type">A</span>,<span class="number">0</span>), (<span class="type">B</span>,<span class="number">0</span>), (<span class="type">C</span>,<span class="number">0</span>))</span><br><span class="line"><span class="comment">//先将zeroValue=0应用于每个V,注意，这次映射函数为乘法，得到：("A",0*0), ("A",2*0)，</span></span><br><span class="line"><span class="comment">//即：("A",0), ("A",0)，再将映射函//数应用于初始化后的V，最后得到：(A,0*0)，即：(A,0)</span></span><br><span class="line"><span class="comment">//其他K也一样，最终都得到了V=0</span></span><br><span class="line"></span><br><span class="line">scala&gt; rdd1.foldByKey(<span class="number">1</span>)(_*_).collect</span><br><span class="line">res78: <span class="type">Array</span>[(<span class="type">String</span>, <span class="type">Int</span>)] = <span class="type">Array</span>((<span class="type">A</span>,<span class="number">0</span>), (<span class="type">B</span>,<span class="number">2</span>), (<span class="type">C</span>,<span class="number">1</span>))</span><br><span class="line"><span class="comment">//映射函数为乘法时，需要将zeroValue设为1，才能得到我们想要的结果。</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="SortByKey"><a href="#SortByKey" class="headerlink" title="SortByKey"></a>SortByKey</h2><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sortByKey</span></span>(ascending : scala.<span class="type">Boolean</span> = &#123; <span class="comment">/* compiled code */</span> &#125;, numPartitions : scala.<span class="type">Int</span> = &#123; <span class="comment">/* compiled code */</span> &#125;) : org.apache.spark.rdd.<span class="type">RDD</span>[scala.<span class="type">Tuple2</span>[<span class="type">K</span>, <span class="type">V</span>]] = &#123; <span class="comment">/* compiled code */</span> &#125;</span><br></pre></td></tr></table></figure>
+<p>SortByKey用于对pairRDD按照key进行排序，第一个参数可以设置true或者false，默认是true<br><strong>scala例子</strong><br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="keyword">val</span> rdd = sc.parallelize(<span class="type">Array</span>((<span class="number">3</span>, <span class="number">4</span>),(<span class="number">1</span>, <span class="number">2</span>),(<span class="number">4</span>,<span class="number">4</span>),(<span class="number">2</span>,<span class="number">5</span>), (<span class="number">6</span>,<span class="number">5</span>), (<span class="number">5</span>, <span class="number">6</span>)))  </span><br><span class="line"></span><br><span class="line"><span class="comment">// sortByKey不是Action操作，只能算是转换操作</span></span><br><span class="line">scala&gt; rdd.sortByKey()</span><br><span class="line">res9: org.apache.spark.rdd.<span class="type">RDD</span>[(<span class="type">Int</span>, <span class="type">Int</span>)] = <span class="type">ShuffledRDD</span>[<span class="number">28</span>] at sortByKey at &lt;console&gt;:<span class="number">24</span> </span><br><span class="line"></span><br><span class="line"><span class="comment">//看看sortByKey后是什么类型</span></span><br><span class="line">scala&gt; rdd.sortByKey().collect() </span><br><span class="line">res10: <span class="type">Array</span>[(<span class="type">Int</span>, <span class="type">Int</span>)] = <span class="type">Array</span>((<span class="number">1</span>,<span class="number">2</span>), (<span class="number">2</span>,<span class="number">5</span>), (<span class="number">3</span>,<span class="number">4</span>), (<span class="number">4</span>,<span class="number">4</span>), (<span class="number">5</span>,<span class="number">6</span>), (<span class="number">6</span>,<span class="number">5</span>)) </span><br><span class="line"></span><br><span class="line"><span class="comment">//降序排序</span></span><br><span class="line">scala&gt; rdd.sortByKey(<span class="literal">false</span>).collect() </span><br><span class="line">res12: <span class="type">Array</span>[(<span class="type">Int</span>, <span class="type">Int</span>)] = <span class="type">Array</span>((<span class="number">6</span>,<span class="number">5</span>), (<span class="number">5</span>,<span class="number">6</span>), (<span class="number">4</span>,<span class="number">4</span>), (<span class="number">3</span>,<span class="number">4</span>), (<span class="number">2</span>,<span class="number">5</span>), (<span class="number">1</span>,<span class="number">2</span>))</span><br></pre></td></tr></table></figure></p>
+<p>java例子也是一样的，这里就不写了</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ryanlic.github.io/RyanLi.github.io/2018/08/03/2018-08-03 Spark RDD常用算子操作（五） 键值对聚合操作 combineByKey/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/RyanLi.github.io/uploads/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ryan Li God">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/RyanLi.github.io/2018/08/03/2018-08-03 Spark RDD常用算子操作（五） 键值对聚合操作 combineByKey/" itemprop="url">Spark RDD常用算子操作（五） 键值对聚合操作 combineByKey</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-03T21:25:50+10:00">
+                2018-08-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>原文作者：翟开顺<br>首发：CSDN<br>本人仅为自己方便查阅做了摘抄，请支持原作者<br>原文地址：<a href="https://blog.csdn.net/t1dmzks/article/details/72077428" target="_blank" rel="noopener">https://blog.csdn.net/t1dmzks/article/details/72077428</a></p>
+</blockquote>
+<h1 id="键值对聚合操作-combineByKey"><a href="#键值对聚合操作-combineByKey" class="headerlink" title="键值对聚合操作 combineByKey"></a>键值对聚合操作 combineByKey</h1><h2 id="combineByKey"><a href="#combineByKey" class="headerlink" title="combineByKey"></a>combineByKey</h2><p>聚合数据一般在集中式数据比较方便，如果涉及到分布式的数据集，该如何去实现呢。这里介绍一下combineByKey, 这个是各种聚集操作的鼻祖，应该要好好了解一下,参考<br><a href="http://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.rdd.PairRDDFunctions" target="_blank" rel="noopener">scala API</a></p>
+<h3 id="简要介绍"><a href="#简要介绍" class="headerlink" title="简要介绍"></a>简要介绍</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">combineByKey</span></span>[<span class="type">C</span>](createCombiner: (<span class="type">V</span>) =&gt; <span class="type">C</span>,  </span><br><span class="line">                    mergeValue: (<span class="type">C</span>, <span class="type">V</span>) =&gt; <span class="type">C</span>,   </span><br><span class="line">                    mergeCombiners: (<span class="type">C</span>, <span class="type">C</span>) =&gt; <span class="type">C</span>): <span class="type">RD</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>createCombiner:</strong> combineByKey() 会遍历分区中的所有元素，因此每个元素的键要么还没有遇到过，要么就和之前的某个元素的键相同。如果这是一个新的元素， combineByKey() 会使用一个叫做createCombiner() 的函数来创建那个键对应的累加器的初始值</li>
+<li><strong>mergeValue:</strong> 如果这是一个在处理当前分区之前已经遇到的键，它会使用 mergeValue() 方法将该键的累加器对应的当前值与这个新的值进行合并</li>
+<li><strong>mergeCombiners:</strong> 由于每个分区都是独立处理的， 因此对于同一个键可以有多个累加器。如果有两个或者更多的分区都有对应同一个键的累加器， 就需要使用用户提供的 mergeCombiners() 方法将各个分区的结果进行合并。</li>
+</ul>
+<h3 id="计算学生平均成绩例子"><a href="#计算学生平均成绩例子" class="headerlink" title="计算学生平均成绩例子"></a>计算学生平均成绩例子</h3><p>这里举一个计算学生平均成绩的例子,例子参考至<a href="https://www.edureka.co/blog/apache-spark-combinebykey-explained" target="_blank" rel="noopener">https://www.edureka.co/blog/apache-spark-combinebykey-explained</a>, <a href="https://github.com/prithvirajbose/spark-dev/blob/master/src/main/scala/examples/TestCombineByKey.scala" target="_blank" rel="noopener">github源码</a> 我对此进行了解析<br><strong>创建一个学生成绩说明的类</strong><br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">ScoreDetail</span>(<span class="params">studentName: <span class="type">String</span>, subject: <span class="type">String</span>, score: <span class="type">Float</span></span>)</span></span><br></pre></td></tr></table></figure></p>
+<p>下面是一些测试数据，加载测试数据集合 key = Students name and value = ScoreDetail instance<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> scores = <span class="type">List</span>(</span><br><span class="line">  <span class="type">ScoreDetail</span>(<span class="string">"xiaoming"</span>, <span class="string">"Math"</span>, <span class="number">98</span>),</span><br><span class="line">  <span class="type">ScoreDetail</span>(<span class="string">"xiaoming"</span>, <span class="string">"English"</span>, <span class="number">88</span>),</span><br><span class="line">  <span class="type">ScoreDetail</span>(<span class="string">"wangwu"</span>, <span class="string">"Math"</span>, <span class="number">75</span>),</span><br><span class="line">  <span class="type">ScoreDetail</span>(<span class="string">"wangwu"</span>, <span class="string">"English"</span>, <span class="number">78</span>),</span><br><span class="line">  <span class="type">ScoreDetail</span>(<span class="string">"lihua"</span>, <span class="string">"Math"</span>, <span class="number">90</span>),</span><br><span class="line">  <span class="type">ScoreDetail</span>(<span class="string">"lihua"</span>, <span class="string">"English"</span>, <span class="number">80</span>),</span><br><span class="line">  <span class="type">ScoreDetail</span>(<span class="string">"zhangsan"</span>, <span class="string">"Math"</span>, <span class="number">91</span>),</span><br><span class="line">  <span class="type">ScoreDetail</span>(<span class="string">"zhangsan"</span>, <span class="string">"English"</span>, <span class="number">80</span>))</span><br></pre></td></tr></table></figure></p>
+<p>将集合转换成二元组， 也可以理解成转换成一个map, 利用了for 和 yield的组合<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> scoresWithKey = <span class="keyword">for</span> &#123; i &lt;- scores &#125; <span class="keyword">yield</span> (i.studentName, i)</span><br></pre></td></tr></table></figure></p>
+<p>创建RDD, 并且指定三个分区<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> scoresWithKeyRDD = sc.parallelize(scoresWithKey).partitionBy(<span class="keyword">new</span> <span class="type">HashPartitioner</span>(<span class="number">3</span>)).cache</span><br></pre></td></tr></table></figure></p>
+<p>输出打印一下各个分区的长度和各个分区的一些数据<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">    println(<span class="string">"&gt;&gt;&gt;&gt; Elements in each partition"</span>)</span><br><span class="line"></span><br><span class="line">    scoresWithKeyRDD.foreachPartition(partition =&gt; println(partition.length))</span><br><span class="line"></span><br><span class="line">    <span class="comment">// explore each partition...</span></span><br><span class="line">    println(<span class="string">"&gt;&gt;&gt;&gt; Exploring partitions' data..."</span>)</span><br><span class="line"></span><br><span class="line">    scoresWithKeyRDD.foreachPartition(</span><br><span class="line">      partition =&gt; partition.foreach(</span><br><span class="line">        item =&gt; println(item._2)))</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">会输出 </span></span><br><span class="line"><span class="comment">&gt;&gt;&gt;&gt; Elements in each partition</span></span><br><span class="line"><span class="comment">6</span></span><br><span class="line"><span class="comment">2</span></span><br><span class="line"><span class="comment">0</span></span><br><span class="line"><span class="comment">&gt;&gt;&gt;&gt; Exploring partitions' data...</span></span><br><span class="line"><span class="comment">ScoreDetail(xiaoming,Math,98.0)</span></span><br><span class="line"><span class="comment">ScoreDetail(xiaoming,English,88.0)</span></span><br><span class="line"><span class="comment">ScoreDetail(lihua,Math,90.0)</span></span><br><span class="line"><span class="comment">ScoreDetail(lihua,English,80.0)</span></span><br><span class="line"><span class="comment">ScoreDetail(zhangsan,Math,91.0)</span></span><br><span class="line"><span class="comment">ScoreDetail(zhangsan,English,80.0)</span></span><br><span class="line"><span class="comment">ScoreDetail(wangwu,Math,75.0)</span></span><br><span class="line"><span class="comment">ScoreDetail(wangwu,English,78.0)</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></p>
+<p>聚合求平均值让后打印<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">      <span class="keyword">val</span> avgScoresRDD = scoresWithKeyRDD.combineByKey(</span><br><span class="line">      (x: <span class="type">ScoreDetail</span>) =&gt; (x.score, <span class="number">1</span>) <span class="comment">/*createCombiner*/</span>,</span><br><span class="line">      (acc: (<span class="type">Float</span>, <span class="type">Int</span>), x: <span class="type">ScoreDetail</span>) =&gt; (acc._1 + x.score, acc._2 + <span class="number">1</span>) <span class="comment">/*mergeValue*/</span>,</span><br><span class="line">      (acc1: (<span class="type">Float</span>, <span class="type">Int</span>), acc2: (<span class="type">Float</span>, <span class="type">Int</span>)) =&gt; (acc1._1 + acc2._1, acc1._2 + acc2._2) <span class="comment">/*mergeCombiners*/</span></span><br><span class="line">      <span class="comment">// calculate the average</span></span><br><span class="line">    ).map( &#123; <span class="keyword">case</span>(key, value) =&gt; (key, value._1/value._2) &#125;)</span><br><span class="line"></span><br><span class="line">    avgScoresRDD.collect.foreach(println)</span><br><span class="line"><span class="comment">/*输出:</span></span><br><span class="line"><span class="comment">(zhangsan,85.5)</span></span><br><span class="line"><span class="comment">(lihua,85.0)</span></span><br><span class="line"><span class="comment">(xiaoming,93.0)</span></span><br><span class="line"><span class="comment">(wangwu,76.5)</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>解释一下scoresWithKeyRDD.combineByKey</strong><br><strong>createCombiner:</strong> (x: ScoreDetail) =&gt; (x.score, 1)<br>这是第一次遇到zhangsan，创建一个函数，把map中的value转成另外一个类型 ，这里是把(zhangsan,(ScoreDetail类))转换成(zhangsan,(91,1))<br><strong>mergeValue:</strong> (acc: (Float, Int), x: ScoreDetail) =&gt; (acc._1 + x.score, acc._2 + 1) 再次碰到张三， 就把这两个合并, 这里是将(zhangsan,(91,1)) 这种类型 和 (zhangsan,(ScoreDetail类))这种类型合并，合并成了(zhangsan,(171,2))<br><strong>mergeCombiners:</strong> (acc1: (Float, Int), acc2: (Float, Int)) 这个是将多个分区中的zhangsan的数据进行合并， 我们这里zhansan在同一个分区，这个地方就没有用上</p>
+<h3 id="java版本的介绍"><a href="#java版本的介绍" class="headerlink" title="java版本的介绍"></a>java版本的介绍</h3><p><strong>ScoreDetail类</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ScoreDetail</span> <span class="keyword">implements</span> <span class="title">Serializable</span></span>&#123;</span><br><span class="line">    <span class="comment">//case class ScoreDetail(studentName: String, subject: String, score: Float)</span></span><br><span class="line">    <span class="keyword">public</span> String studentName;</span><br><span class="line">    <span class="keyword">public</span> String subject;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">float</span> score;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ScoreDetail</span><span class="params">(String studentName, String subject, <span class="keyword">float</span> score)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.studentName = studentName;</span><br><span class="line">        <span class="keyword">this</span>.subject = subject;</span><br><span class="line">        <span class="keyword">this</span>.score = score;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>CombineByKey的测试类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CombineTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SparkConf sparkConf = <span class="keyword">new</span> SparkConf().setAppName(<span class="string">"JavaWordCount"</span>).setMaster(<span class="string">"local"</span>);</span><br><span class="line">        JavaSparkContext sc = <span class="keyword">new</span> JavaSparkContext(sparkConf);</span><br><span class="line">        ArrayList&lt;ScoreDetail&gt; scoreDetails = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        scoreDetails.add(<span class="keyword">new</span> ScoreDetail(<span class="string">"xiaoming"</span>, <span class="string">"Math"</span>, <span class="number">98</span>));</span><br><span class="line">        scoreDetails.add(<span class="keyword">new</span> ScoreDetail(<span class="string">"xiaoming"</span>, <span class="string">"English"</span>, <span class="number">88</span>));</span><br><span class="line">        scoreDetails.add(<span class="keyword">new</span> ScoreDetail(<span class="string">"wangwu"</span>, <span class="string">"Math"</span>, <span class="number">75</span>));</span><br><span class="line">        scoreDetails.add(<span class="keyword">new</span> ScoreDetail(<span class="string">"wangwu"</span>, <span class="string">"Englist"</span>, <span class="number">78</span>));</span><br><span class="line">        scoreDetails.add(<span class="keyword">new</span> ScoreDetail(<span class="string">"lihua"</span>, <span class="string">"Math"</span>, <span class="number">90</span>));</span><br><span class="line">        scoreDetails.add(<span class="keyword">new</span> ScoreDetail(<span class="string">"lihua"</span>, <span class="string">"English"</span>, <span class="number">80</span>));</span><br><span class="line">        scoreDetails.add(<span class="keyword">new</span> ScoreDetail(<span class="string">"zhangsan"</span>, <span class="string">"Math"</span>, <span class="number">91</span>));</span><br><span class="line">        scoreDetails.add(<span class="keyword">new</span> ScoreDetail(<span class="string">"zhangsan"</span>, <span class="string">"English"</span>, <span class="number">80</span>));</span><br><span class="line"></span><br><span class="line">        JavaRDD&lt;ScoreDetail&gt; scoreDetailsRDD = sc.parallelize(scoreDetails);</span><br><span class="line"></span><br><span class="line">        JavaPairRDD&lt;String, ScoreDetail&gt; pairRDD = scoreDetailsRDD.mapToPair(<span class="keyword">new</span> PairFunction&lt;ScoreDetail, String, ScoreDetail&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> Tuple2&lt;String, ScoreDetail&gt; <span class="title">call</span><span class="params">(ScoreDetail scoreDetail)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> Tuple2&lt;&gt;(scoreDetail.studentName, scoreDetail);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"><span class="comment">//        new Function&lt;ScoreDetail, Float,Integer&gt;();</span></span><br><span class="line"></span><br><span class="line">        Function&lt;ScoreDetail, Tuple2&lt;Float, Integer&gt;&gt; createCombine = <span class="keyword">new</span> Function&lt;ScoreDetail, Tuple2&lt;Float, Integer&gt;&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> Tuple2&lt;Float, Integer&gt; <span class="title">call</span><span class="params">(ScoreDetail scoreDetail)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> Tuple2&lt;&gt;(scoreDetail.score, <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Function2传入两个值，返回一个值</span></span><br><span class="line">        Function2&lt;Tuple2&lt;Float, Integer&gt;, ScoreDetail, Tuple2&lt;Float, Integer&gt;&gt; mergeValue = <span class="keyword">new</span> Function2&lt;Tuple2&lt;Float, Integer&gt;, ScoreDetail, Tuple2&lt;Float, Integer&gt;&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> Tuple2&lt;Float, Integer&gt; <span class="title">call</span><span class="params">(Tuple2&lt;Float, Integer&gt; tp, ScoreDetail scoreDetail)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> Tuple2&lt;&gt;(tp._1 + scoreDetail.score, tp._2 + <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        Function2&lt;Tuple2&lt;Float, Integer&gt;, Tuple2&lt;Float, Integer&gt;, Tuple2&lt;Float, Integer&gt;&gt; mergeCombiners = <span class="keyword">new</span> Function2&lt;Tuple2&lt;Float, Integer&gt;, Tuple2&lt;Float, Integer&gt;, Tuple2&lt;Float, Integer&gt;&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> Tuple2&lt;Float, Integer&gt; <span class="title">call</span><span class="params">(Tuple2&lt;Float, Integer&gt; tp1, Tuple2&lt;Float, Integer&gt; tp2)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> Tuple2&lt;&gt;(tp1._1 + tp2._1, tp1._2 + tp2._2);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        JavaPairRDD&lt;String, Tuple2&lt;Float,Integer&gt;&gt; combineByRDD  = pairRDD.combineByKey(createCombine,mergeValue,mergeCombiners);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//打印平均数</span></span><br><span class="line">        Map&lt;String, Tuple2&lt;Float, Integer&gt;&gt; stringTuple2Map = combineByRDD.collectAsMap();</span><br><span class="line">        <span class="keyword">for</span> ( String et:stringTuple2Map.keySet()) &#123;</span><br><span class="line">            System.out.println(et+<span class="string">" "</span>+stringTuple2Map.get(et)._1/stringTuple2Map.get(et)._2);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>注意有个坑的地方</strong> createCombine方法必须是这样的<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Function&lt;ScoreDetail, Tuple2&lt;Float, Integer&gt;&gt; createCombine = <span class="keyword">new</span> Function&lt;ScoreDetail, Tuple2&lt;Float, Integer&gt;&gt;() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Tuple2&lt;Float, Integer&gt; <span class="title">call</span><span class="params">(ScoreDetail scoreDetail)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Tuple2&lt;&gt;(scoreDetail.score, <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>而不能是这样的, 即使最后的RDD都类似<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">PairFunction&lt;ScoreDetail, Float, Integer&gt; createCombine = <span class="keyword">new</span> PairFunction&lt;ScoreDetail, Float, Integer&gt;() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Tuple2&lt;Float, Integer&gt; <span class="title">call</span><span class="params">(ScoreDetail scoreDetail)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Tuple2&lt;&gt;(scoreDetail.score, <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>再推荐比较好的文章 <a href="http://lxw1234.com/archives/2015/07/358.htm" target="_blank" rel="noopener">LXW的大数据田地: combineByKey</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ryanlic.github.io/RyanLi.github.io/2018/08/03/2018-08-03 Spark RDD常用算子操作（四） 创建键值对RDD mapToPair flatMapToPair/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/RyanLi.github.io/uploads/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ryan Li God">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/RyanLi.github.io/2018/08/03/2018-08-03 Spark RDD常用算子操作（四） 创建键值对RDD mapToPair flatMapToPair/" itemprop="url">Spark RDD常用算子操作（四） 创建键值对RDD mapToPair flatMapToPair</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-03T21:24:50+10:00">
+                2018-08-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>本文作者：翟开顺<br>首发：CSDN<br>本人仅为自己方便查阅做了摘抄，请支持原作者<br>原文地址：<a href="https://blog.csdn.net/t1dmzks/article/details/72077428" target="_blank" rel="noopener">https://blog.csdn.net/t1dmzks/article/details/72077428</a></p>
+</blockquote>
+<h1 id="创建键值对RDD-mapToPair-flatMapToPair"><a href="#创建键值对RDD-mapToPair-flatMapToPair" class="headerlink" title="创建键值对RDD mapToPair flatMapToPair"></a>创建键值对RDD mapToPair flatMapToPair</h1><h2 id="mapToPair"><a href="#mapToPair" class="headerlink" title="mapToPair"></a>mapToPair</h2><p>举例，在F:\sparktest\sample.txt 文件的内容如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">aa bb cc aa aa aa dd dd ee ee ee ee </span><br><span class="line">ff aa bb zks</span><br><span class="line">ee kks</span><br><span class="line">ee  zz zks</span><br></pre></td></tr></table></figure></p>
+<p>将每一行的第一个单词作为键，1 作为value创建pairRDD<br><strong>scala版本</strong><br>scala是没有mapToPair函数的，scala版本只需要map就可以了<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="keyword">val</span> lines = sc.textFile(<span class="string">"F:\\sparktest\\sample.txt"</span>)</span><br><span class="line"></span><br><span class="line">scala&gt; <span class="keyword">val</span> pairs = lines.map(x =&gt; (x.split(<span class="string">"\\s+"</span>)(<span class="number">0</span>), <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">scala&gt; pairs.collect</span><br><span class="line">res0: <span class="type">Array</span>[(<span class="type">String</span>, <span class="type">Int</span>)] = <span class="type">Array</span>((aa,<span class="number">1</span>), (ff,<span class="number">1</span>), (ee,<span class="number">1</span>), (ee,<span class="number">1</span>))</span><br></pre></td></tr></table></figure></p>
+<p><strong>java版本</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">JavaRDD&lt;String&gt; lines = sc.textFile(<span class="string">"F:\\sparktest\\sample.txt"</span>);</span><br><span class="line"><span class="comment">//输入的是一个string的字符串，输出的是一个(String, Integer) 的map</span></span><br><span class="line">JavaPairRDD&lt;String, Integer&gt; pairRDD = lines.mapToPair(<span class="keyword">new</span> PairFunction&lt;String, String, Integer&gt;() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Tuple2&lt;String, Integer&gt; <span class="title">call</span><span class="params">(String s)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Tuple2&lt;String, Integer&gt;(s.split(<span class="string">"\\s+"</span>)[<span class="number">0</span>], <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h2 id="flatMapToPair"><a href="#flatMapToPair" class="headerlink" title="flatMapToPair"></a>flatMapToPair</h2><p>类似于xxx连接 mapToPair是一对一，一个元素返回一个元素，而flatMapToPair可以一个元素返回多个，相当于先flatMap,在mapToPair<br>例子: 将每一个单词都分成键为<br><strong>scala版本</strong><br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> lines = sc.textFile(<span class="string">"F:\\sparktest\\sample.txt"</span>)</span><br><span class="line"><span class="keyword">val</span> flatRDD = lines.flatMap(x =&gt; (x.split(<span class="string">"\\s+"</span>)))</span><br><span class="line"><span class="keyword">val</span> pairs = flatRDD.map(x=&gt;(x,<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">scala&gt; pairs.collect</span><br><span class="line">res1: <span class="type">Array</span>[(<span class="type">String</span>, <span class="type">Int</span>)] = <span class="type">Array</span>((aa,<span class="number">1</span>), (bb,<span class="number">1</span>), (cc,<span class="number">1</span>), (aa,<span class="number">1</span>), (aa,<span class="number">1</span>), (aa,<span class="number">1</span>), (dd,<span class="number">1</span>), (dd,<span class="number">1</span>), (ee,<span class="number">1</span>), (ee,<span class="number">1</span>), (ee,<span class="number">1</span>), (ee,<span class="number">1</span>), (ff,<span class="number">1</span>), (aa,<span class="number">1</span>), (bb,<span class="number">1</span>), (zks,<span class="number">1</span>), (ee,<span class="number">1</span>), (kks,<span class="number">1</span>), (ee,<span class="number">1</span>), (zz,<span class="number">1</span>), (zks,<span class="number">1</span>))</span><br></pre></td></tr></table></figure></p>
+<p><strong>java版本 spark2.0以下</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">JavaPairRDD&lt;String, Integer&gt; wordPairRDD = lines.flatMapToPair(<span class="keyword">new</span> PairFlatMapFunction&lt;String, String, Integer&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> Iterable&lt;Tuple2&lt;String, Integer&gt;&gt; call(String s) <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">                ArrayList&lt;Tuple2&lt;String, Integer&gt;&gt; tpLists = <span class="keyword">new</span> ArrayList&lt;Tuple2&lt;String, Integer&gt;&gt;();</span><br><span class="line">                String[] split = s.split(<span class="string">"\\s+"</span>);</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;split.length ; i++) &#123;</span><br><span class="line">                    Tuple2 tp = <span class="keyword">new</span> Tuple2&lt;String,Integer&gt;(split[i], <span class="number">1</span>);</span><br><span class="line">                    tpLists.add(tp);</span><br><span class="line">                &#125;</span><br><span class="line">            <span class="keyword">return</span> tpLists;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure></p>
+<p><strong>java版本 spark2.0以上</strong><br>主要是iterator和iteratable的一些区别<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">JavaPairRDD&lt;String, Integer&gt; wordPairRDD = lines.flatMapToPair(<span class="keyword">new</span> PairFlatMapFunction&lt;String, String, Integer&gt;() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Iterator&lt;Tuple2&lt;String, Integer&gt;&gt; call(String s) <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        ArrayList&lt;Tuple2&lt;String, Integer&gt;&gt; tpLists = <span class="keyword">new</span> ArrayList&lt;Tuple2&lt;String, Integer&gt;&gt;();</span><br><span class="line">        String[] split = s.split(<span class="string">"\\s+"</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;split.length ; i++) &#123;</span><br><span class="line">            Tuple2 tp = <span class="keyword">new</span> Tuple2&lt;String,Integer&gt;(split[i], <span class="number">1</span>);</span><br><span class="line">            tpLists.add(tp);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> tpLists.iterator();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://ryanlic.github.io/RyanLi.github.io/2018/08/03/2018-08-03 Spark RDD常用算子操作（三） distinct，union，intersection，subtract，cartesian/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1237,489 +1640,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ryanlic.github.io/RyanLi.github.io/2018/07/31/2018-07-31 Hadoop2-4-1集群搭建/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan Li">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/RyanLi.github.io/uploads/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ryan Li God">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/RyanLi.github.io/2018/07/31/2018-07-31 Hadoop2-4-1集群搭建/" itemprop="url">Spark学习笔记（二）：Hadoop 2.4.1集群搭建</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-31T13:32:07+10:00">
-                2018-07-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="安装hadoop包"><a href="#安装hadoop包" class="headerlink" title="安装hadoop包"></a>安装hadoop包</h2><ol>
-<li>下载好hadoop-2.4.1.tar.gz，使用SFTP工具上传到CentOS的/usr/local目录下</li>
-<li><p>将hadoop包进行解压缩：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf hadoop-2.4.1.tar.gz</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>对hadoop目录进行重命名：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv hadoop-2.4.1 hadoop</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>配置hadoop相关环境变量</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi .bashrc</span><br><span class="line">export HADOOP_HOME=/usr/local/hadoop</span><br><span class="line">export PATH=$HADOOP_HOME/bin:$HADOOP_HOME/sbin</span><br><span class="line">source .bashrc</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="配置Hadoop"><a href="#配置Hadoop" class="headerlink" title="配置Hadoop"></a>配置Hadoop</h2><h3 id="修改core-site-xml"><a href="#修改core-site-xml" class="headerlink" title="修改core-site.xml"></a>修改core-site.xml</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;fs.default.name&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;hdfs://spark1:9000&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="修改hdfs-site-xml"><a href="#修改hdfs-site-xml" class="headerlink" title="修改hdfs-site.xml"></a>修改hdfs-site.xml</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;dfs.name.dir&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;/usr/local/data/namenode&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;dfs.data.dir&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;/usr/local/data/datanode&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;dfs.tmp.dir&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;/usr/local/data/tmp&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;dfs.replication&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;3&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="修改mapred-site-xml"><a href="#修改mapred-site-xml" class="headerlink" title="修改mapred-site.xml"></a>修改mapred-site.xml</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;mapreduce.framework.name&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;yarn&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="修改yarn-site-xml"><a href="#修改yarn-site-xml" class="headerlink" title="修改yarn-site.xml"></a>修改yarn-site.xml</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.hostname&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;spark1&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;mapreduce_shuffle&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="修改slaves文件"><a href="#修改slaves文件" class="headerlink" title="修改slaves文件"></a>修改slaves文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">spark1</span><br><span class="line">spark2</span><br><span class="line">spark3</span><br></pre></td></tr></table></figure>
-<h3 id="在另外两台机器上搭建hadoop"><a href="#在另外两台机器上搭建hadoop" class="headerlink" title="在另外两台机器上搭建hadoop"></a>在另外两台机器上搭建hadoop</h3><ol>
-<li>使用如上配置在另外两台机器上搭建hadoop，可以使用scp命令将spark1上面的hadoop安装包和.bashrc配置文件都拷贝过去</li>
-<li>要记得对.bashrc文件进行source，以让它生效</li>
-<li>记得在spark2和spark3的/usr/local目录下创建data目录</li>
-</ol>
-<h2 id="启动hdfs集群"><a href="#启动hdfs集群" class="headerlink" title="启动hdfs集群"></a>启动hdfs集群</h2><ol>
-<li><p>格式化namenode：在spark1上执行以下命令(不要执行多次，不然会导致datanode的ID不一致，以后都只要直接第二步):</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs namenode -format</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>启动hdfs集群：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start-dfs.sh</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>验证启动是否成功：jps、50070端口<br>spark1：namenode、datanode、secondarynamenode<br>spark2：datanode<br>spark3：datanode</p>
-</li>
-</ol>
-<h2 id="启动yarn集群"><a href="#启动yarn集群" class="headerlink" title="启动yarn集群"></a>启动yarn集群</h2><ol>
-<li><p>启动yarn集群：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/hadoop/sbin/start-yarn.sh</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>验证启动是否成功：jps、8088端口<br>spark1：resourcemanager、nodemanager<br>spark2：nodemanager<br>spark3：nodemanager</p>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ryanlic.github.io/RyanLi.github.io/2018/07/31/2018-07-31 CentOS6-5集群搭建/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan Li">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/RyanLi.github.io/uploads/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ryan Li God">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/RyanLi.github.io/2018/07/31/2018-07-31 CentOS6-5集群搭建/" itemprop="url">Spark学习笔记（一）：CentOS 6.5集群搭建</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-31T12:46:36+10:00">
-                2018-07-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="运行环境"><a href="#运行环境" class="headerlink" title="运行环境"></a>运行环境</h2><ol>
-<li>CentOS 6.5</li>
-<li>JDK 1.7</li>
-<li>Hadoop 2.4.1</li>
-<li>Hive 0.13</li>
-<li>ZooKeeper 3.4.5</li>
-<li>kafka_2.9.2-0.8.1</li>
-<li>Spark 2.1.3</li>
-<li>scala 2.11.8</li>
-</ol>
-<h2 id="安装CentOS-6-5"><a href="#安装CentOS-6-5" class="headerlink" title="安装CentOS 6.5"></a>安装CentOS 6.5</h2><ol>
-<li>在macOS下，使用<strong><em>Parallels Desktop</em></strong>直接安装，CentOS 6.5使用的只需要官网的一个DVD1.iso文件。</li>
-<li>启动以后使用<strong><em>Termius</em></strong>连接三台机器，使用<strong><em>Transmit</em></strong>传文件。<h2 id="CentOS-6-5防火墙配置"><a href="#CentOS-6-5防火墙配置" class="headerlink" title="CentOS 6.5防火墙配置"></a>CentOS 6.5防火墙配置</h2>关闭防火墙<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">service iptables stop</span><br><span class="line">chkconfig iptables off</span><br><span class="line">vi /etc/selinux/config</span><br><span class="line">SELINUX=disabled</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="JDK-1-7安装"><a href="#JDK-1-7安装" class="headerlink" title="JDK 1.7安装"></a>JDK 1.7安装</h2><p>我下载的CentOS自带，所以不用安装，装之前用java -version测试是否自带JDK。</p>
-<ol>
-<li>将jdk-7u60-linux-i586.rpm通过WinSCP上传到虚拟机中</li>
-<li><p>安装JDK：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh jdk-7u65-linux-i586.rpm</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>配置jdk相关的环境变量</p>
-</li>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi .bashrc</span><br><span class="line">export JAVA_HOME=/usr/java/latest</span><br><span class="line">export PATH=$PATH:$JAVA_HOME/bin</span><br><span class="line">source .bashrc</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>测试jdk安装是否成功：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
-</li>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -f /etc/udev/rules.d/70-persistent-net.rules</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="安装第二台和第三台虚拟机"><a href="#安装第二台和第三台虚拟机" class="headerlink" title="安装第二台和第三台虚拟机"></a>安装第二台和第三台虚拟机</h2><ol>
-<li>安装上述步骤，再安装两台一模一样环境的虚拟机，因为后面hadoop和spark都是要搭建集群的。</li>
-<li>集群的最小环境就是三台。因为后面要搭建ZooKeeper、kafka等集群。</li>
-<li>另外两台机器的hostname分别设置为spark2和spark3即可，通过终端输入ifconfig查看ip，记下。</li>
-<li><p>安装好之后，记得要在三台机器的/etc/hosts文件中，配置全三台机器的ip地址到hostname的映射，而不能只配置本机。比如我的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[spark1@spark1 Desktop]$ cat /etc/hosts</span><br><span class="line">127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4</span><br><span class="line">::1         localhost localhost.localdomain localhost6 localhost6.localdomain6</span><br><span class="line">10.211.55.24 spark1</span><br><span class="line">10.211.55.25 spark2</span><br><span class="line">10.211.55.26 spark3</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>mac中Parallels Desktop会自动配置到虚拟机的地址映射，开启虚拟机以后在mac中可以直接ssh root@spark1进行连接</p>
-</li>
-</ol>
-<h2 id="配置集群ssh免密码登录"><a href="#配置集群ssh免密码登录" class="headerlink" title="配置集群ssh免密码登录"></a>配置集群ssh免密码登录</h2><ol>
-<li><p>首先在三台机器上配置对本机的ssh免密码登录<br>生成本机的公钥，过程中不断敲回车即可，ssh-keygen命令默认会将公钥放在/root/.ssh目录下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>将公钥复制为authorized_keys文件，此时使用ssh连接本机就不需要输入密码了</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /root/.ssh</span><br><span class="line">cp id_rsa.pub authorized_keys</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>接着配置三台机器互相之间的ssh免密码登录，使用ssh-copy-id -i spark{N}命令将本机的公钥拷贝到指定机器的authorized_keys文件中：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@spark1 ~]# ssh-copy-id -i spark2</span><br><span class="line">[root@spark1 ~]# ssh-copy-id -i spark3</span><br><span class="line">[root@spark2 ~]# ssh-copy-id -i spark1</span><br><span class="line">[root@spark2 ~]# ssh-copy-id -i spark3</span><br><span class="line">[root@spark3 ~]# ssh-copy-id -i spark1</span><br><span class="line">[root@spark3 ~]# ssh-copy-id -i spark2</span><br></pre></td></tr></table></figure></li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ryanlic.github.io/RyanLi.github.io/2018/07/25/2018-07-25 启动Hadoop、Spark等环境步骤记录/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan Li">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/RyanLi.github.io/uploads/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ryan Li God">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/RyanLi.github.io/2018/07/25/2018-07-25 启动Hadoop、Spark等环境步骤记录/" itemprop="url">启动Hadoop、Spark等环境步骤记录</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-25T14:19:06+10:00">
-                2018-07-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Hadoop"><a href="#Hadoop" class="headerlink" title="Hadoop"></a>Hadoop</h2><ol>
-<li><p>启动hdfs集群：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start-dfs.sh</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>验证启动是否成功：jps、50070端口<br>spark1：namenode、datanode、secondarynamenode<br>spark2：datanode<br>spark3：datanode</p>
-</li>
-</ol>
-<h2 id="YARN"><a href="#YARN" class="headerlink" title="YARN"></a>YARN</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/hadoop/sbin/start-yarn.sh</span><br></pre></td></tr></table></figure>
-<h2 id="Hive"><a href="#Hive" class="headerlink" title="Hive"></a>Hive</h2><p>在spark1中，直接输入:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hive</span><br></pre></td></tr></table></figure></p>
-<h2 id="ZooKeeper"><a href="#ZooKeeper" class="headerlink" title="ZooKeeper"></a>ZooKeeper</h2><ol>
-<li><p>分别在三台机器上执行：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zkServer.sh start</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>检查ZooKeeper状态：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zkServer.sh status</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="kafka"><a href="#kafka" class="headerlink" title="kafka"></a>kafka</h2><ol>
-<li><p>在三台机器上分别执行以下命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/kafka/</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup bin/kafka-server-start.sh config/server.properties &amp;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="Spark"><a href="#Spark" class="headerlink" title="Spark"></a>Spark</h2><ol>
-<li><p>在spark目录下的sbin目录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/spark/sbin</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./start-all.sh</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用jsp和8080端口可以检查集群是否启动成功</p>
-</li>
-<li>进入spark-shell查看是否正常</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1774,7 +1694,7 @@
               
                 <a href="/RyanLi.github.io/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

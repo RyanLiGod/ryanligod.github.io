@@ -79,17 +79,23 @@
 
 
 
-<meta name="description" content="原文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428  parallelize，makeRDD，textFileparallelize调用SparkContext 的 parallelize()，将一个存在的集合，变成一个RDD，这种方式试用于学习spark和">
+<meta name="description" content="特征缩放Mean normalization 为了让梯度下降时候运行速度更快 将$x$的值控制在$(-1,1)$左右  $x_1=\frac{x_1-\mu_1}{s_1}$ $\mu_1$ 是 $x_1$ 的平均数 $s_1$ 是 $x_1$ 中最大值-最小值 学习率 $\alpha$  直到$J(\theta)$收敛停止学习  $\alpha$大小应该合适： 太大：可能导致$J(\theta)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Spark RDD常用算子操作（一） parallelize，makeRDD，textFile">
-<meta property="og:url" content="https://ryanlic.github.io/2018/08/03/2018-08-03 Spark RDD常用算子操作（一） parallelize，makeRDD，textFile/index.html">
+<meta property="og:title" content="吴恩达机器学习笔记（二） 多元梯度下降、正规方程">
+<meta property="og:url" content="https://ryanlic.github.io/2018/08/10/2018-08-10 吴恩达ML（二）多元梯度下降、正规方程/index.html">
 <meta property="og:site_name" content="Ryan Li God">
-<meta property="og:description" content="原文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428  parallelize，makeRDD，textFileparallelize调用SparkContext 的 parallelize()，将一个存在的集合，变成一个RDD，这种方式试用于学习spark和">
+<meta property="og:description" content="特征缩放Mean normalization 为了让梯度下降时候运行速度更快 将$x$的值控制在$(-1,1)$左右  $x_1=\frac{x_1-\mu_1}{s_1}$ $\mu_1$ 是 $x_1$ 的平均数 $s_1$ 是 $x_1$ 中最大值-最小值 学习率 $\alpha$  直到$J(\theta)$收敛停止学习  $\alpha$大小应该合适： 太大：可能导致$J(\theta)">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-08T07:14:47.094Z">
+<meta property="og:image" content="http://pd4nbaja5.bkt.clouddn.com/2018-08-09-125256.png">
+<meta property="og:image" content="http://pd4nbaja5.bkt.clouddn.com/2018-08-09-130252.png">
+<meta property="og:image" content="http://pd4nbaja5.bkt.clouddn.com/2018-08-09-130535.png">
+<meta property="og:image" content="http://pd4nbaja5.bkt.clouddn.com/2018-08-09-131726.png">
+<meta property="og:image" content="http://pd4nbaja5.bkt.clouddn.com/2018-08-09-135641.png">
+<meta property="og:updated_time" content="2018-08-09T17:28:20.243Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spark RDD常用算子操作（一） parallelize，makeRDD，textFile">
-<meta name="twitter:description" content="原文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428  parallelize，makeRDD，textFileparallelize调用SparkContext 的 parallelize()，将一个存在的集合，变成一个RDD，这种方式试用于学习spark和">
+<meta name="twitter:title" content="吴恩达机器学习笔记（二） 多元梯度下降、正规方程">
+<meta name="twitter:description" content="特征缩放Mean normalization 为了让梯度下降时候运行速度更快 将$x$的值控制在$(-1,1)$左右  $x_1=\frac{x_1-\mu_1}{s_1}$ $\mu_1$ 是 $x_1$ 的平均数 $s_1$ 是 $x_1$ 中最大值-最小值 学习率 $\alpha$  直到$J(\theta)$收敛停止学习  $\alpha$大小应该合适： 太大：可能导致$J(\theta)">
+<meta name="twitter:image" content="http://pd4nbaja5.bkt.clouddn.com/2018-08-09-125256.png">
 
 
 
@@ -119,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="https://ryanlic.github.io/2018/08/03/2018-08-03 Spark RDD常用算子操作（一） parallelize，makeRDD，textFile/"/>
+  <link rel="canonical" href="https://ryanlic.github.io/2018/08/10/2018-08-10 吴恩达ML（二）多元梯度下降、正规方程/"/>
 
 
 
 
 
-  <title>Spark RDD常用算子操作（一） parallelize，makeRDD，textFile | Ryan Li God</title>
+  <title>吴恩达机器学习笔记（二） 多元梯度下降、正规方程 | Ryan Li God</title>
   
 
 
@@ -232,7 +238,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ryanlic.github.io/RyanLi.github.io/2018/08/03/2018-08-03 Spark RDD常用算子操作（一） parallelize，makeRDD，textFile/">
+    <link itemprop="mainEntityOfPage" href="https://ryanlic.github.io/RyanLi.github.io/2018/08/10/2018-08-10 吴恩达ML（二）多元梯度下降、正规方程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ryan Li">
@@ -249,7 +255,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Spark RDD常用算子操作（一） parallelize，makeRDD，textFile</h1>
+          <h1 class="post-title" itemprop="name headline">吴恩达机器学习笔记（二） 多元梯度下降、正规方程</h1>
         
 
         <div class="post-meta">
@@ -261,8 +267,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-03T21:21:50+10:00">
-                2018-08-03
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-10T03:22:50+10:00">
+                2018-08-10
               </time>
             
 
@@ -299,31 +305,67 @@
       
 
       
-        <blockquote>
-<p>原文作者：翟开顺<br>首发：CSDN<br>本人仅为自己方便查阅做了摘抄，请支持原作者<br>原文地址：<a href="https://blog.csdn.net/t1dmzks/article/details/72077428" target="_blank" rel="noopener">https://blog.csdn.net/t1dmzks/article/details/72077428</a></p>
-</blockquote>
-<h1 id="parallelize，makeRDD，textFile"><a href="#parallelize，makeRDD，textFile" class="headerlink" title="parallelize，makeRDD，textFile"></a>parallelize，makeRDD，textFile</h1><h2 id="parallelize"><a href="#parallelize" class="headerlink" title="parallelize"></a>parallelize</h2><p>调用SparkContext 的 parallelize()，将一个存在的集合，变成一个RDD，这种方式试用于学习spark和做一些spark的测试</p>
-<p><strong>scala版本</strong><br>def parallelize[T](seq: Seq[T], numSlices: Int = defaultParallelism)(implicit arg0: ClassTag[T]): RDD[T] </p>
+        <h1 id="特征缩放"><a href="#特征缩放" class="headerlink" title="特征缩放"></a>特征缩放</h1><p>Mean normalization</p>
+<p>为了让梯度下降时候运行速度更快</p>
+<p>将$x$的值控制在$(-1,1)$左右</p>
+<p><img src="http://pd4nbaja5.bkt.clouddn.com/2018-08-09-125256.png" alt="image-20180809225256054"></p>
+<p>$x_1=\frac{x_1-\mu_1}{s_1}$</p>
+<p>$\mu_1$ 是 $x_1$ 的平均数</p>
+<p>$s_1$ 是 $x_1$ 中最大值-最小值</p>
+<h1 id="学习率-alpha"><a href="#学习率-alpha" class="headerlink" title="学习率 $\alpha$"></a>学习率 $\alpha$</h1><p> <img src="http://pd4nbaja5.bkt.clouddn.com/2018-08-09-130252.png" alt="image-20180809230252827"></p>
+<p>直到$J(\theta)$收敛停止学习</p>
+<p><img src="http://pd4nbaja5.bkt.clouddn.com/2018-08-09-130535.png" alt="image-20180809230535410"></p>
+<p><strong>$\alpha$大小应该合适：</strong></p>
+<p>太大：可能导致$J(\theta)$变大</p>
+<p>太小：收敛过慢</p>
+<p>比如0.001，0.003，0.01…</p>
+<p>不断尝试</p>
+<h1 id="特征和多项式回归"><a href="#特征和多项式回归" class="headerlink" title="特征和多项式回归"></a>特征和多项式回归</h1><p><strong>多项式回归：</strong>使用多项式去拟合数据</p>
+<p><img src="http://pd4nbaja5.bkt.clouddn.com/2018-08-09-131726.png" alt="image-20180809231725959"></p>
+<p>为了不让函数降回来，使用平方根</p>
+<h1 id="正规方程-normal-equation"><a href="#正规方程-normal-equation" class="headerlink" title="正规方程 normal equation"></a>正规方程 normal equation</h1><p><strong>区别于梯度下降法，一步到位找到损失函数最小值</strong></p>
+<p>比如求导 使导数为0</p>
+<p><img src="http://pd4nbaja5.bkt.clouddn.com/2018-08-09-135641.png" alt="image-20180809235529758"></p>
+<p><strong>使用 $\theta=(X^TX)^{-1}X^Ty$ 会给出最好的$\theta$值</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">梯度下降</th>
+<th>正规方程</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">需要确定$\alpha$</td>
+<td>不需要确定$\alpha$</td>
+</tr>
+<tr>
+<td style="text-align:left">需要很多次迭代</td>
+<td>不需要迭代</td>
+</tr>
+<tr>
+<td style="text-align:left">在$n$非常大的时候仍旧很好</td>
+<td>需要计算$(X^TX)^{-1}$</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>（当$n$大于约10,000使用梯度下降）</strong></td>
+<td>如果$n$特别大就很慢</td>
+</tr>
+</tbody>
+</table>
+<h3 id="当-X-TX-不可逆"><a href="#当-X-TX-不可逆" class="headerlink" title="当$X^TX$不可逆"></a>当$X^TX$不可逆</h3><p>原因：</p>
+<ol>
+<li><p>包含累赘的特征 Redundant features(linearly dependent)</p>
+<p>E.g. $x_1=$ size in feet$^2$</p>
+<p>​       $x_2=$ size in m$^2$</p>
+</li>
+<li><p>包含太多特征 </p>
+<p>E.g. $m \leq n$</p>
 <ul>
-<li>第一个参数一是一个 Seq集合 </li>
-<li>第二个参数是分区数 </li>
-<li>返回的是RDD[T]</li>
+<li>Delete some features, or use regularization (正则化).</li>
 </ul>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; sc.parallelize(<span class="type">List</span>(<span class="string">"shenzhen"</span>, <span class="string">"is a beautiful city"</span>))</span><br><span class="line">res1: org.apache.spark.rdd.<span class="type">RDD</span>[<span class="type">String</span>] = <span class="type">ParallelCollectionRDD</span>[<span class="number">1</span>] at parallelize at &lt;console&gt;:<span class="number">22</span></span><br></pre></td></tr></table></figure>
-<p><strong>java版本</strong><br>def parallelize[T](list : java.util.List[T], numSlices : scala.Int) : org.apache.spark.api.java.JavaRDD[T] = { /* compiled code */ } </p>
-<ul>
-<li>第一个参数是一个List集合 </li>
-<li>第二个参数是一个分区，可以默认 </li>
-<li>返回的是一个JavaRDD[T]<br>java版本只能接收List的集合</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JavaRDD&lt;String&gt; javaStringRDD = sc.parallelize(Arrays.asList(<span class="string">"shenzhen"</span>, <span class="string">"is a beautiful city"</span>));</span><br></pre></td></tr></table></figure>
-<h2 id="makeRDD"><a href="#makeRDD" class="headerlink" title="makeRDD"></a>makeRDD</h2><p>只有scala版本的才有makeRDD<br>def makeRDD[T](seq : scala.Seq[T], numSlices : scala.Int = { /* compiled code */ })<br>跟parallelize类似</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sc.makeRDD(<span class="type">List</span>(<span class="string">"shenzhen"</span>, <span class="string">"is a beautiful city"</span>))</span><br></pre></td></tr></table></figure>
-<h2 id="textFile"><a href="#textFile" class="headerlink" title="textFile"></a>textFile</h2><p>调用SparkContext.textFile()方法，从外部存储中读取数据来创建 RDD<br>例如在我本地F:\dataexample\wordcount\input下有个sample.txt文件，文件随便写了点内容，我需要将里面的内容读取出来创建RDD</p>
-<p><strong>scala版本</strong><br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> lines = sc.textFile(<span class="string">"F:\\dataexample\\wordcount\\input"</span>)</span><br></pre></td></tr></table></figure></p>
-<p><strong>java版本</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JavaRDD&lt;String&gt; lines = sc.textFile(<span class="string">"F:\\dataexample\\wordcount\\input"</span>);</span><br></pre></td></tr></table></figure></p>
-<p>注: textFile支持分区，支持模式匹配，例如把F:\dataexample\wordcount\目录下inp开头的给转换成RDD<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var lines = sc.textFile(<span class="string">"F:\\dataexample\\wordcount\\inp*"</span>)</span><br></pre></td></tr></table></figure></p>
-<p>多个路径可以使用逗号分隔，例如<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var lines = sc.textFile(<span class="string">"dir1,dir2"</span>,<span class="number">3</span>)</span><br></pre></td></tr></table></figure></p>
+</li>
+</ol>
 
       
     </div>
@@ -348,8 +390,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/RyanLi.github.io/2018/07/31/2018-07-31 Spark2-1-3集群搭建/" rel="next" title="Spark学习笔记（六）：Spark 2.1.3集群搭建">
-                <i class="fa fa-chevron-left"></i> Spark学习笔记（六）：Spark 2.1.3集群搭建
+              <a href="/RyanLi.github.io/2018/08/10/2018-08-10 吴恩达ML（一） 单变量线性回归/" rel="next" title="吴恩达机器学习笔记（一） 单变量线性回归">
+                <i class="fa fa-chevron-left"></i> 吴恩达机器学习笔记（一） 单变量线性回归
               </a>
             
           </div>
@@ -358,8 +400,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/RyanLi.github.io/2018/08/03/2018-08-03 Spark RDD常用算子操作（二） filter,map,flatMap/" rel="prev" title="Spark RDD常用算子操作（二） filter,map,flatMap">
-                Spark RDD常用算子操作（二） filter,map,flatMap <i class="fa fa-chevron-right"></i>
+              <a href="/RyanLi.github.io/2018/08/10/2018-08-10 吴恩达ML（三）Logistic 回归/" rel="prev" title="吴恩达机器学习笔记（三） Logistic 回归">
+                吴恩达机器学习笔记（三） Logistic 回归 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -478,7 +520,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#parallelize，makeRDD，textFile"><span class="nav-number">1.</span> <span class="nav-text">parallelize，makeRDD，textFile</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#parallelize"><span class="nav-number">1.1.</span> <span class="nav-text">parallelize</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#makeRDD"><span class="nav-number">1.2.</span> <span class="nav-text">makeRDD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#textFile"><span class="nav-number">1.3.</span> <span class="nav-text">textFile</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#特征缩放"><span class="nav-number">1.</span> <span class="nav-text">特征缩放</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#学习率-alpha"><span class="nav-number">2.</span> <span class="nav-text">学习率 $\alpha$</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#特征和多项式回归"><span class="nav-number">3.</span> <span class="nav-text">特征和多项式回归</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正规方程-normal-equation"><span class="nav-number">4.</span> <span class="nav-text">正规方程 normal equation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#当-X-TX-不可逆"><span class="nav-number">4.0.1.</span> <span class="nav-text">当$X^TX$不可逆</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

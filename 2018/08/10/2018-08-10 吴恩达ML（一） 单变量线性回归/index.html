@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="原文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428  parallelize，makeRDD，textFileparallelize调用SparkContext 的 parallelize()，将一个存在的集合，变成一个RDD，这种方式试用于学习spark和">
+<meta name="description" content="损失函数$J(\theta_0, \theta_1) = \frac{1}{2m}\sum_{i=1}^{m}(h_\theta(x^{(i)}) - y^{(i)})^2$ 通过使 J 值取最小来满足需求 -&amp;gt; 使用梯度下降方法寻找损失函数的最小值 梯度下降好比我们下山，每次在一点环顾四周，往最陡峭的路向下走 repeat until convergence{  ​         $\t">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Spark RDD常用算子操作（一） parallelize，makeRDD，textFile">
-<meta property="og:url" content="https://ryanlic.github.io/2018/08/03/2018-08-03 Spark RDD常用算子操作（一） parallelize，makeRDD，textFile/index.html">
+<meta property="og:title" content="吴恩达机器学习笔记（一） 单变量线性回归">
+<meta property="og:url" content="https://ryanlic.github.io/2018/08/10/2018-08-10 吴恩达ML（一） 单变量线性回归/index.html">
 <meta property="og:site_name" content="Ryan Li God">
-<meta property="og:description" content="原文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428  parallelize，makeRDD，textFileparallelize调用SparkContext 的 parallelize()，将一个存在的集合，变成一个RDD，这种方式试用于学习spark和">
+<meta property="og:description" content="损失函数$J(\theta_0, \theta_1) = \frac{1}{2m}\sum_{i=1}^{m}(h_\theta(x^{(i)}) - y^{(i)})^2$ 通过使 J 值取最小来满足需求 -&amp;gt; 使用梯度下降方法寻找损失函数的最小值 梯度下降好比我们下山，每次在一点环顾四周，往最陡峭的路向下走 repeat until convergence{  ​         $\t">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-08T07:14:47.094Z">
+<meta property="og:updated_time" content="2018-08-09T17:27:42.332Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spark RDD常用算子操作（一） parallelize，makeRDD，textFile">
-<meta name="twitter:description" content="原文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428  parallelize，makeRDD，textFileparallelize调用SparkContext 的 parallelize()，将一个存在的集合，变成一个RDD，这种方式试用于学习spark和">
+<meta name="twitter:title" content="吴恩达机器学习笔记（一） 单变量线性回归">
+<meta name="twitter:description" content="损失函数$J(\theta_0, \theta_1) = \frac{1}{2m}\sum_{i=1}^{m}(h_\theta(x^{(i)}) - y^{(i)})^2$ 通过使 J 值取最小来满足需求 -&amp;gt; 使用梯度下降方法寻找损失函数的最小值 梯度下降好比我们下山，每次在一点环顾四周，往最陡峭的路向下走 repeat until convergence{  ​         $\t">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="https://ryanlic.github.io/2018/08/03/2018-08-03 Spark RDD常用算子操作（一） parallelize，makeRDD，textFile/"/>
+  <link rel="canonical" href="https://ryanlic.github.io/2018/08/10/2018-08-10 吴恩达ML（一） 单变量线性回归/"/>
 
 
 
 
 
-  <title>Spark RDD常用算子操作（一） parallelize，makeRDD，textFile | Ryan Li God</title>
+  <title>吴恩达机器学习笔记（一） 单变量线性回归 | Ryan Li God</title>
   
 
 
@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ryanlic.github.io/RyanLi.github.io/2018/08/03/2018-08-03 Spark RDD常用算子操作（一） parallelize，makeRDD，textFile/">
+    <link itemprop="mainEntityOfPage" href="https://ryanlic.github.io/RyanLi.github.io/2018/08/10/2018-08-10 吴恩达ML（一） 单变量线性回归/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ryan Li">
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Spark RDD常用算子操作（一） parallelize，makeRDD，textFile</h1>
+          <h1 class="post-title" itemprop="name headline">吴恩达机器学习笔记（一） 单变量线性回归</h1>
         
 
         <div class="post-meta">
@@ -261,8 +261,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-03T21:21:50+10:00">
-                2018-08-03
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-10T03:21:50+10:00">
+                2018-08-10
               </time>
             
 
@@ -299,31 +299,14 @@
       
 
       
-        <blockquote>
-<p>原文作者：翟开顺<br>首发：CSDN<br>本人仅为自己方便查阅做了摘抄，请支持原作者<br>原文地址：<a href="https://blog.csdn.net/t1dmzks/article/details/72077428" target="_blank" rel="noopener">https://blog.csdn.net/t1dmzks/article/details/72077428</a></p>
-</blockquote>
-<h1 id="parallelize，makeRDD，textFile"><a href="#parallelize，makeRDD，textFile" class="headerlink" title="parallelize，makeRDD，textFile"></a>parallelize，makeRDD，textFile</h1><h2 id="parallelize"><a href="#parallelize" class="headerlink" title="parallelize"></a>parallelize</h2><p>调用SparkContext 的 parallelize()，将一个存在的集合，变成一个RDD，这种方式试用于学习spark和做一些spark的测试</p>
-<p><strong>scala版本</strong><br>def parallelize[T](seq: Seq[T], numSlices: Int = defaultParallelism)(implicit arg0: ClassTag[T]): RDD[T] </p>
-<ul>
-<li>第一个参数一是一个 Seq集合 </li>
-<li>第二个参数是分区数 </li>
-<li>返回的是RDD[T]</li>
-</ul>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; sc.parallelize(<span class="type">List</span>(<span class="string">"shenzhen"</span>, <span class="string">"is a beautiful city"</span>))</span><br><span class="line">res1: org.apache.spark.rdd.<span class="type">RDD</span>[<span class="type">String</span>] = <span class="type">ParallelCollectionRDD</span>[<span class="number">1</span>] at parallelize at &lt;console&gt;:<span class="number">22</span></span><br></pre></td></tr></table></figure>
-<p><strong>java版本</strong><br>def parallelize[T](list : java.util.List[T], numSlices : scala.Int) : org.apache.spark.api.java.JavaRDD[T] = { /* compiled code */ } </p>
-<ul>
-<li>第一个参数是一个List集合 </li>
-<li>第二个参数是一个分区，可以默认 </li>
-<li>返回的是一个JavaRDD[T]<br>java版本只能接收List的集合</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JavaRDD&lt;String&gt; javaStringRDD = sc.parallelize(Arrays.asList(<span class="string">"shenzhen"</span>, <span class="string">"is a beautiful city"</span>));</span><br></pre></td></tr></table></figure>
-<h2 id="makeRDD"><a href="#makeRDD" class="headerlink" title="makeRDD"></a>makeRDD</h2><p>只有scala版本的才有makeRDD<br>def makeRDD[T](seq : scala.Seq[T], numSlices : scala.Int = { /* compiled code */ })<br>跟parallelize类似</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sc.makeRDD(<span class="type">List</span>(<span class="string">"shenzhen"</span>, <span class="string">"is a beautiful city"</span>))</span><br></pre></td></tr></table></figure>
-<h2 id="textFile"><a href="#textFile" class="headerlink" title="textFile"></a>textFile</h2><p>调用SparkContext.textFile()方法，从外部存储中读取数据来创建 RDD<br>例如在我本地F:\dataexample\wordcount\input下有个sample.txt文件，文件随便写了点内容，我需要将里面的内容读取出来创建RDD</p>
-<p><strong>scala版本</strong><br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> lines = sc.textFile(<span class="string">"F:\\dataexample\\wordcount\\input"</span>)</span><br></pre></td></tr></table></figure></p>
-<p><strong>java版本</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JavaRDD&lt;String&gt; lines = sc.textFile(<span class="string">"F:\\dataexample\\wordcount\\input"</span>);</span><br></pre></td></tr></table></figure></p>
-<p>注: textFile支持分区，支持模式匹配，例如把F:\dataexample\wordcount\目录下inp开头的给转换成RDD<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var lines = sc.textFile(<span class="string">"F:\\dataexample\\wordcount\\inp*"</span>)</span><br></pre></td></tr></table></figure></p>
-<p>多个路径可以使用逗号分隔，例如<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var lines = sc.textFile(<span class="string">"dir1,dir2"</span>,<span class="number">3</span>)</span><br></pre></td></tr></table></figure></p>
+        <h1 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h1><p>$J(\theta_0, \theta_1) = \frac{1}{2m}\sum_{i=1}^{m}(h_\theta(x^{(i)}) - y^{(i)})^2$</p>
+<p>通过使 J 值取最小来满足需求</p>
+<p>-&gt; 使用<strong>梯度下降</strong>方法寻找损失函数的最小值</p>
+<h1 id="梯度下降"><a href="#梯度下降" class="headerlink" title="梯度下降"></a>梯度下降</h1><p>好比我们下山，每次在一点环顾四周，往最陡峭的路向下走</p>
+<p>repeat until convergence{ </p>
+<p>​         $\theta_j := \theta_j - \alpha\frac{\partial}{\partial\theta_j}J(\theta_0, \theta_1)$  $(for　j=0　and　 j=1)$</p>
+<p>}</p>
+<p>$\alpha$ 学习率 learning rate  -&gt;  控制梯度下降时跨多大的步子</p>
 
       
     </div>
@@ -348,8 +331,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/RyanLi.github.io/2018/07/31/2018-07-31 Spark2-1-3集群搭建/" rel="next" title="Spark学习笔记（六）：Spark 2.1.3集群搭建">
-                <i class="fa fa-chevron-left"></i> Spark学习笔记（六）：Spark 2.1.3集群搭建
+              <a href="/RyanLi.github.io/2018/08/03/2018-08-03 Spark RDD常用算子操作（十三） RDD 分区 HashPartitioner，RangePartitioner，自定义分区/" rel="next" title="Spark RDD常用算子操作（十三） RDD 分区 HashPartitioner，RangePartitioner，自定义分区">
+                <i class="fa fa-chevron-left"></i> Spark RDD常用算子操作（十三） RDD 分区 HashPartitioner，RangePartitioner，自定义分区
               </a>
             
           </div>
@@ -358,8 +341,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/RyanLi.github.io/2018/08/03/2018-08-03 Spark RDD常用算子操作（二） filter,map,flatMap/" rel="prev" title="Spark RDD常用算子操作（二） filter,map,flatMap">
-                Spark RDD常用算子操作（二） filter,map,flatMap <i class="fa fa-chevron-right"></i>
+              <a href="/RyanLi.github.io/2018/08/10/2018-08-10 吴恩达ML（二）多元梯度下降、正规方程/" rel="prev" title="吴恩达机器学习笔记（二） 多元梯度下降、正规方程">
+                吴恩达机器学习笔记（二） 多元梯度下降、正规方程 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -478,7 +461,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#parallelize，makeRDD，textFile"><span class="nav-number">1.</span> <span class="nav-text">parallelize，makeRDD，textFile</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#parallelize"><span class="nav-number">1.1.</span> <span class="nav-text">parallelize</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#makeRDD"><span class="nav-number">1.2.</span> <span class="nav-text">makeRDD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#textFile"><span class="nav-number">1.3.</span> <span class="nav-text">textFile</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#损失函数"><span class="nav-number">1.</span> <span class="nav-text">损失函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#梯度下降"><span class="nav-number">2.</span> <span class="nav-text">梯度下降</span></a></li></ol></div>
             
 
           </div>

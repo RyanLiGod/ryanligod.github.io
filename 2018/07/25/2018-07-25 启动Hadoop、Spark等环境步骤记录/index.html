@@ -11,7 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
-
+<link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" rel="stylesheet">
 
 
 
@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="Hadoop 启动hdfs集群： 1start-dfs.sh  验证启动是否成功：jps、50070端口spark1：namenode、datanode、secondarynamenodespark2：datanodespark3：datanode   YARN1/usr/local/hadoop/sbin/start-yarn.sh Hive在spark1中，直接输入:1hive ZooKeep">
+<meta name="description" content="Hadoop  启动hdfs集群：  1start-dfs.sh  验证启动是否成功：jps、50070端口 spark1：namenode、datanode、secondarynamenode spark2：datanode spark3：datanode   YARN 1/usr/local/hadoop/sbin/start-yarn.sh  Hive 在spark1中，直接输入: 1hi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="启动Hadoop、Spark等环境步骤记录">
 <meta property="og:url" content="https://ryanlic.github.io/2018/07/25/2018-07-25 启动Hadoop、Spark等环境步骤记录/index.html">
 <meta property="og:site_name" content="Ryan Li God">
-<meta property="og:description" content="Hadoop 启动hdfs集群： 1start-dfs.sh  验证启动是否成功：jps、50070端口spark1：namenode、datanode、secondarynamenodespark2：datanodespark3：datanode   YARN1/usr/local/hadoop/sbin/start-yarn.sh Hive在spark1中，直接输入:1hive ZooKeep">
+<meta property="og:description" content="Hadoop  启动hdfs集群：  1start-dfs.sh  验证启动是否成功：jps、50070端口 spark1：namenode、datanode、secondarynamenode spark2：datanode spark3：datanode   YARN 1/usr/local/hadoop/sbin/start-yarn.sh  Hive 在spark1中，直接输入: 1hi">
 <meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2018-07-31T03:57:39.793Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="启动Hadoop、Spark等环境步骤记录">
-<meta name="twitter:description" content="Hadoop 启动hdfs集群： 1start-dfs.sh  验证启动是否成功：jps、50070端口spark1：namenode、datanode、secondarynamenodespark2：datanodespark3：datanode   YARN1/usr/local/hadoop/sbin/start-yarn.sh Hive在spark1中，直接输入:1hive ZooKeep">
+<meta name="twitter:description" content="Hadoop  启动hdfs集群：  1start-dfs.sh  验证启动是否成功：jps、50070端口 spark1：namenode、datanode、secondarynamenode spark2：datanode spark3：datanode   YARN 1/usr/local/hadoop/sbin/start-yarn.sh  Hive 在spark1中，直接输入: 1hi">
 
 
 
@@ -299,40 +299,51 @@
       
 
       
-        <h2 id="Hadoop"><a href="#Hadoop" class="headerlink" title="Hadoop"></a>Hadoop</h2><ol>
-<li><p>启动hdfs集群：</p>
+        <h2 id="hadoop"><a class="markdownIt-Anchor" href="#hadoop"></a> Hadoop</h2>
+<ol>
+<li>启动hdfs集群：</li>
+</ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start-dfs.sh</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>验证启动是否成功：jps、50070端口<br>spark1：namenode、datanode、secondarynamenode<br>spark2：datanode<br>spark3：datanode</p>
-</li>
+<ol start="2">
+<li>验证启动是否成功：jps、50070端口<br>
+spark1：namenode、datanode、secondarynamenode<br>
+spark2：datanode<br>
+spark3：datanode</li>
 </ol>
-<h2 id="YARN"><a href="#YARN" class="headerlink" title="YARN"></a>YARN</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/hadoop/sbin/start-yarn.sh</span><br></pre></td></tr></table></figure>
-<h2 id="Hive"><a href="#Hive" class="headerlink" title="Hive"></a>Hive</h2><p>在spark1中，直接输入:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hive</span><br></pre></td></tr></table></figure></p>
-<h2 id="ZooKeeper"><a href="#ZooKeeper" class="headerlink" title="ZooKeeper"></a>ZooKeeper</h2><ol>
-<li><p>分别在三台机器上执行：</p>
+<h2 id="yarn"><a class="markdownIt-Anchor" href="#yarn"></a> YARN</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/hadoop/sbin/start-yarn.sh</span><br></pre></td></tr></table></figure>
+<h2 id="hive"><a class="markdownIt-Anchor" href="#hive"></a> Hive</h2>
+<p>在spark1中，直接输入:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hive</span><br></pre></td></tr></table></figure>
+<h2 id="zookeeper"><a class="markdownIt-Anchor" href="#zookeeper"></a> ZooKeeper</h2>
+<ol>
+<li>分别在三台机器上执行：</li>
+</ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zkServer.sh start</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>检查ZooKeeper状态：</p>
+<ol start="2">
+<li>检查ZooKeeper状态：</li>
+</ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zkServer.sh status</span><br></pre></td></tr></table></figure>
-</li>
+<h2 id="kafka"><a class="markdownIt-Anchor" href="#kafka"></a> kafka</h2>
+<ol>
+<li>在三台机器上分别执行以下命令：</li>
 </ol>
-<h2 id="kafka"><a href="#kafka" class="headerlink" title="kafka"></a>kafka</h2><ol>
-<li><p>在三台机器上分别执行以下命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/kafka/</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup bin/kafka-server-start.sh config/server.properties &amp;</span><br></pre></td></tr></table></figure>
-</li>
+<ol start="2">
+<li>执行</li>
 </ol>
-<h2 id="Spark"><a href="#Spark" class="headerlink" title="Spark"></a>Spark</h2><ol>
-<li><p>在spark目录下的sbin目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup bin/kafka-server-start.sh config/server.properties &amp;</span><br></pre></td></tr></table></figure>
+<h2 id="spark"><a class="markdownIt-Anchor" href="#spark"></a> Spark</h2>
+<ol>
+<li>在spark目录下的sbin目录</li>
+</ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/spark/sbin</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>执行</p>
+<ol start="2">
+<li>执行</li>
+</ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./start-all.sh</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用jsp和8080端口可以检查集群是否启动成功</p>
-</li>
+<ol start="3">
+<li>使用jsp和8080端口可以检查集群是否启动成功</li>
 <li>进入spark-shell查看是否正常</li>
 </ol>
 
@@ -489,7 +500,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hadoop"><span class="nav-number">1.</span> <span class="nav-text">Hadoop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#YARN"><span class="nav-number">2.</span> <span class="nav-text">YARN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hive"><span class="nav-number">3.</span> <span class="nav-text">Hive</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ZooKeeper"><span class="nav-number">4.</span> <span class="nav-text">ZooKeeper</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kafka"><span class="nav-number">5.</span> <span class="nav-text">kafka</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spark"><span class="nav-number">6.</span> <span class="nav-text">Spark</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#hadoop"><span class="nav-number">1.</span> <span class="nav-text"> Hadoop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#yarn"><span class="nav-number">2.</span> <span class="nav-text"> YARN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hive"><span class="nav-number">3.</span> <span class="nav-text"> Hive</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zookeeper"><span class="nav-number">4.</span> <span class="nav-text"> ZooKeeper</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kafka"><span class="nav-number">5.</span> <span class="nav-text"> kafka</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spark"><span class="nav-number">6.</span> <span class="nav-text"> Spark</span></a></li></ol></div>
             
 
           </div>

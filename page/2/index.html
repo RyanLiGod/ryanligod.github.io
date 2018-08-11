@@ -368,14 +368,10 @@
         
           
           
-原文作者：翟开顺
-首发：CSDN
-本人仅为自己方便查阅做了摘抄，请支持原作者
-原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428
+原文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428
 
- 键值对分组操作 groupByKey，cogroup
- groupByKey
-12345def groupByKey(): RDD[(K, Iterable[V])]def groupByKey(numPartitions: Int): RDD[(K, Iterable[V])]def groupByKey(partitioner: Partitioner): RDD[(K, Iterable
+键值对分组操作 groupByKey，cogroupgroupByKey12345def groupByKey(): RDD[(K, Iterable[V])]def groupByKey(numPartitions: Int): RDD[(K, Iterable[V])]def groupByKey(partitioner: Partitioner): RDD[(K, Iterable[V])]
+g
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -546,14 +542,9 @@
         
           
           
-原文作者：翟开顺
-首发：CSDN
-本人仅为自己方便查阅做了摘抄，请支持原作者
-原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428
+原文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428
 
- 键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey
- reduceByKey
-12345def reduceByKey(func: (V, V) =&gt; V): RDD[(K, V)]def reduceByKey(func: (V, V) =&gt; V, numPartitions: Int): RDD[(K, V)]def reduceByKey(p
+键值对聚合操作reduceByKey，foldByKey，排序操作sortByKeyreduceByKey12345def reduceByKey(func: (V, V) =&gt; V): RDD[(K, V)]def reduceByKey(func: (V, V) =&gt; V, numPartitions: Int): RDD[(K, V)]def reduceByKey(partitio
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -724,17 +715,10 @@
         
           
           
-原文作者：翟开顺
-首发：CSDN
-本人仅为自己方便查阅做了摘抄，请支持原作者
-原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428
+原文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428
 
- 键值对聚合操作 combineByKey
- combineByKey
-聚合数据一般在集中式数据比较方便，如果涉及到分布式的数据集，该如何去实现呢。这里介绍一下combineByKey, 这个是各种聚集操作的鼻祖，应该要好好了解一下,参考
-scala API
- 简要介绍
-123def combineByKey[C](createCombiner: (V) =&gt; C,            
+键值对聚合操作 combineByKeycombineByKey聚合数据一般在集中式数据比较方便，如果涉及到分布式的数据集，该如何去实现呢。这里介绍一下combineByKey, 这个是各种聚集操作的鼻祖，应该要好好了解一下,参考scala API
+简要介绍123def combineByKey[C](createCombiner: (V) =&gt; C,                      
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -905,18 +889,10 @@ scala API
         
           
           
-本文作者：翟开顺
-首发：CSDN
-本人仅为自己方便查阅做了摘抄，请支持原作者
-原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428
+本文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428
 
- 创建键值对RDD mapToPair flatMapToPair
- mapToPair
-举例，在F:\sparktest\sample.txt 文件的内容如下
-1234aa bb cc aa aa aa dd dd ee ee ee ee ff aa bb zksee kksee  zz zks
-将每一行的第一个单词作为键，1 作为value创建pairRDD
-scala版本
-scala是没有
+创建键值对RDD mapToPair flatMapToPairmapToPair举例，在F:\sparktest\sample.txt 文件的内容如下1234aa bb cc aa aa aa dd dd ee ee ee ee ff aa bb zksee kksee  zz zks
+将每一行的第一个单词作为键，1 作为value创建pairRDDscala版本scala是没有mapToPair函
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1087,17 +1063,10 @@ scala是没有
         
           
           
-原文作者：翟开顺
-首发：CSDN
-本人仅为自己方便查阅做了摘抄，请支持原作者
-原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428
+原文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428
 
- distinct，union，intersection，subtract，cartesian
-spark伪集合
-尽管 RDD 本身不是严格意义上的集合，但它也支持许多数学上的集合操作，比如合并和相交操作, 下图展示了这四种操作
- distinct
-distinct用于去重， 我们生成的RDD可能有重复的元素，使用distinct方法可以去掉重复的元素, 不过此方法涉及到混洗，操作开销很大
-sc
+distinct，union，intersection，subtract，cartesianspark伪集合尽管 RDD 本身不是严格意义上的集合，但它也支持许多数学上的集合操作，比如合并和相交操作, 下图展示了这四种操作 
+distinctdistinct用于去重， 我们生成的RDD可能有重复的元素，使用distinct方法可以去掉重复的元素, 不过此方法涉及到混洗，操作开销很大scala版本123
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1268,18 +1237,10 @@ sc
         
           
           
-原文作者：翟开顺
-首发：CSDN
-本人仅为自己方便查阅做了摘抄，请支持原作者
-原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428
+原文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428
 
- filter,map,flatMap
- filter
-举例，在F:\sparktest\sample.txt 文件的内容如下
-1234aa bb cc aa aa aa dd dd ee ee ee ee ff aa bb zksee kksee  zz zks
-我要将包含zks的行的内容给找出来
-scala版本
-123456    val lines = sc.textFile("F:\\s
+filter,map,flatMapfilter举例，在F:\sparktest\sample.txt 文件的内容如下1234aa bb cc aa aa aa dd dd ee ee ee ee ff aa bb zksee kksee  zz zks
+我要将包含zks的行的内容给找出来scala版本123456    val lines = sc.textFile("F:\\sparktest\\
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1450,16 +1411,10 @@ scala版本
         
           
           
-原文作者：翟开顺
-首发：CSDN
-本人仅为自己方便查阅做了摘抄，请支持原作者
-原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428
+原文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428
 
- parallelize，makeRDD，textFile
- parallelize
-调用SparkContext 的 parallelize()，将一个存在的集合，变成一个RDD，这种方式试用于学习spark和做一些spark的测试
-scala版本
-def parallelize[T](seq: Seq[T], numSlices: Int = defaultParallelism)(impl
+parallelize，makeRDD，textFileparallelize调用SparkContext 的 parallelize()，将一个存在的集合，变成一个RDD，这种方式试用于学习spark和做一些spark的测试
+scala版本def parallelize[T](seq: Seq[T], numSlices: Int = defaultParallelism)(implicit arg
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1629,20 +1584,16 @@ def parallelize[T](seq: Seq[T], numSlices: Int = defaultParallelism)(impl
       
         
           
-           安装Spark包
-
+          安装Spark包
 将spark-2.1.3-bin-hadoop2.4.tgz使用SFTP上传到/usr/local目录下。
 解压缩spark包：
-
 1tar zxvf spark-2.1.3-bin-hadoop2.4.tgz
 
 更改spark目录名：
-
 1mv spark-2.1.3-bin-hadoop2.4 spark
 
 设置spark环境变量
-
-123456vi .bashrcexport SPARK_HOME=/usr/local/sparkexport PATH=$SPARK_HOME/binexport CLASSPATH=.:$CLASSPATH:$JAVA_HOME/l
+123456vi .bashrcexport SPARK_HOME=/usr/local/sparkexport PATH=$SPARK_HOME/binexport CLASSPATH=.:$CLASSPATH:$JAVA_HOME/lib:$J
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1812,22 +1763,18 @@ def parallelize[T](seq: Seq[T], numSlices: Int = defaultParallelism)(impl
       
         
           
-           安装scala 2.11.8
-注意，scala的版本和之后要安装的spark版本密切关联，必须要和spark/jars中的scala-compiler-2.11.8.jar版本一致，而且之后用IDE打包的时候，选择scala版本也要一致
+          安装scala 2.11.8注意，scala的版本和之后要安装的spark版本密切关联，必须要和spark/jars中的scala-compiler-2.11.8.jar版本一致，而且之后用IDE打包的时候，选择scala版本也要一致
 
 
 将scala-2.11.8.tgz使用WinSCP拷贝到spark1的/usr/local目录下。
 对scala-2.11.8.tgz进行解压缩：
-
 1tar -zxvf scala-2.11.8.tgz
 
 对scala目录进行重命名：
-
 1mv scala-2.11.8 scala
 
 配置scala相关的环境变量
-
-12345vi .bashrcexp
+12345vi .bashrcexport S
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1997,21 +1944,19 @@ def parallelize[T](seq: Seq[T], numSlices: Int = defaultParallelism)(impl
       
         
           
-           安装ZooKeeper包
-
+          安装ZooKeeper包
 将zookeeper-3.4.5.tar.gz使用SFTP工具拷贝到spark1的/usr/local目录下
 对zookeeper-3.4.5.tar.gz进行解压缩：
-
 1tar -zxvf zookeeper-3.4.5.tar.gz
 
 对zookeeper目录进行重命名：
-
 1mv zookeeper-3.4.5 zk
 
 配置zookeeper相关的环境变量
-
 1234vi .bashrcexport ZOOKEEPER_HOME=/usr/local/zkexport PATH=$ZOOKEEPER_HOME/binsource .bashrc
- 配置zo
+
+
+配置zoo.cf
           ...
           <!--noindex-->
           <div class="post-button text-center">

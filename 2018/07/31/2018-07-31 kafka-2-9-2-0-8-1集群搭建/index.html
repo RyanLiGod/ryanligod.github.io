@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="安装scala 2.11.8 注意，scala的版本和之后要安装的spark版本密切关联，必须要和spark/jars中的scala-compiler-2.11.8.jar版本一致，而且之后用IDE打包的时候，选择scala版本也要一致   将scala-2.11.8.tgz使用WinSCP拷贝到spark1的/usr/local目录下。 对scala-2.11.8.tgz进行解压缩：  1ta">
+<meta name="description" content="安装scala 2.11.8注意，scala的版本和之后要安装的spark版本密切关联，必须要和spark/jars中的scala-compiler-2.11.8.jar版本一致，而且之后用IDE打包的时候，选择scala版本也要一致   将scala-2.11.8.tgz使用WinSCP拷贝到spark1的/usr/local目录下。 对scala-2.11.8.tgz进行解压缩： 1tar -">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spark学习笔记（五）：Kafka 2.9.2-0.8.1集群搭建（包括scala安装）">
 <meta property="og:url" content="https://ryanligod.github.io/2018/07/31/2018-07-31 kafka-2-9-2-0-8-1集群搭建/index.html">
 <meta property="og:site_name" content="Ryan Li God">
-<meta property="og:description" content="安装scala 2.11.8 注意，scala的版本和之后要安装的spark版本密切关联，必须要和spark/jars中的scala-compiler-2.11.8.jar版本一致，而且之后用IDE打包的时候，选择scala版本也要一致   将scala-2.11.8.tgz使用WinSCP拷贝到spark1的/usr/local目录下。 对scala-2.11.8.tgz进行解压缩：  1ta">
+<meta property="og:description" content="安装scala 2.11.8注意，scala的版本和之后要安装的spark版本密切关联，必须要和spark/jars中的scala-compiler-2.11.8.jar版本一致，而且之后用IDE打包的时候，选择scala版本也要一致   将scala-2.11.8.tgz使用WinSCP拷贝到spark1的/usr/local目录下。 对scala-2.11.8.tgz进行解压缩： 1tar -">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-08-11T17:07:51.207Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spark学习笔记（五）：Kafka 2.9.2-0.8.1集群搭建（包括scala安装）">
-<meta name="twitter:description" content="安装scala 2.11.8 注意，scala的版本和之后要安装的spark版本密切关联，必须要和spark/jars中的scala-compiler-2.11.8.jar版本一致，而且之后用IDE打包的时候，选择scala版本也要一致   将scala-2.11.8.tgz使用WinSCP拷贝到spark1的/usr/local目录下。 对scala-2.11.8.tgz进行解压缩：  1ta">
+<meta name="twitter:description" content="安装scala 2.11.8注意，scala的版本和之后要安装的spark版本密切关联，必须要和spark/jars中的scala-compiler-2.11.8.jar版本一致，而且之后用IDE打包的时候，选择scala版本也要一致   将scala-2.11.8.tgz使用WinSCP拷贝到spark1的/usr/local目录下。 对scala-2.11.8.tgz进行解压缩： 1tar -">
 
 
 
@@ -363,64 +363,52 @@
       
 
       
-        <h2 id="安装scala-2118"><a class="markdownIt-Anchor" href="#安装scala-2118"></a> 安装scala 2.11.8</h2>
-<blockquote><p>注意，scala的版本和之后要安装的spark版本密切关联，必须要和spark/jars中的scala-compiler-2.11.8.jar版本一致，而且之后用IDE打包的时候，选择scala版本也要一致</p>
+        <h2 id="安装scala-2-11-8"><a href="#安装scala-2-11-8" class="headerlink" title="安装scala 2.11.8"></a>安装scala 2.11.8</h2><blockquote><p>注意，scala的版本和之后要安装的spark版本密切关联，必须要和spark/jars中的scala-compiler-2.11.8.jar版本一致，而且之后用IDE打包的时候，选择scala版本也要一致</p>
 </blockquote>
 <ol>
 <li>将scala-2.11.8.tgz使用WinSCP拷贝到spark1的/usr/local目录下。</li>
-<li>对scala-2.11.8.tgz进行解压缩：</li>
-</ol>
+<li><p>对scala-2.11.8.tgz进行解压缩：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf scala-2.11.8.tgz</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>对scala目录进行重命名：</li>
-</ol>
+</li>
+<li><p>对scala目录进行重命名：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv scala-2.11.8 scala</span><br></pre></td></tr></table></figure>
-<ol start="4">
-<li>配置scala相关的环境变量</li>
-</ol>
+</li>
+<li><p>配置scala相关的环境变量</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vi .bashrc</span><br><span class="line">export SCALA_HOME=/usr/local/scala</span><br><span class="line">export PATH=$SCALA_HOME/bin</span><br><span class="line"></span><br><span class="line">source .bashrc</span><br></pre></td></tr></table></figure>
-<ol start="5">
-<li>查看scala是否安装成功：</li>
-</ol>
+</li>
+<li><p>查看scala是否安装成功：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scala -version</span><br></pre></td></tr></table></figure>
-<ol start="6">
-<li>按照上述步骤在spark2和spark3机器上都安装好scala。使用scp将scala和.bashrc拷贝到spark2和spark3上即可</li>
+</li>
+<li><p>按照上述步骤在spark2和spark3机器上都安装好scala。使用scp将scala和.bashrc拷贝到spark2和spark3上即可</p>
+</li>
 </ol>
-<h2 id="安装kafka包"><a class="markdownIt-Anchor" href="#安装kafka包"></a> 安装Kafka包</h2>
-<ol>
+<h2 id="安装Kafka包"><a href="#安装Kafka包" class="headerlink" title="安装Kafka包"></a>安装Kafka包</h2><ol>
 <li>将kafka_2.9.2-0.8.1.tgz使用SFTP工具拷贝到spark1的/usr/local目录下</li>
-<li>对kafka_2.9.2-0.8.1.tgz进行解压缩：</li>
-</ol>
+<li><p>对kafka_2.9.2-0.8.1.tgz进行解压缩：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf kafka_2.9.2-0.8.1.tgz</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>对kafka目录进行改名：</li>
-</ol>
+</li>
+<li><p>对kafka目录进行改名：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv kafka_2.9.2-0.8.1 kafka</span><br></pre></td></tr></table></figure>
-<ol start="4">
-<li>配置kafka</li>
-</ol>
+</li>
+<li><p>配置kafka</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vi /usr/local/kafka/config/server.properties</span><br><span class="line"># broker.id：依次增长的整数，0、1、2、3、4，集群中Broker的唯一id</span><br><span class="line"></span><br><span class="line">zookeeper.connect=10.211.55.24:2181,10.211.55.25:2181,10.211.55.26:2181</span><br><span class="line"># 这里填写自己的 spark1:2181,spark2:2181,spark3:2181</span><br></pre></td></tr></table></figure>
-<ol start="5">
-<li>安装slf4j<br>
-将slf4j-1.7.6.zip上传到/usr/local目录下，再把slf4j中的slf4j-nop-1.7.6.jar复制到kafka的libs目录下面</li>
-</ol>
+</li>
+<li><p>安装slf4j<br>将slf4j-1.7.6.zip上传到/usr/local目录下，再把slf4j中的slf4j-nop-1.7.6.jar复制到kafka的libs目录下面</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip slf4j-1.7.6.zip</span><br></pre></td></tr></table></figure>
-<h2 id="搭建kafka集群"><a class="markdownIt-Anchor" href="#搭建kafka集群"></a> 搭建kafka集群</h2>
-<ol>
+</li>
+</ol>
+<h2 id="搭建kafka集群"><a href="#搭建kafka集群" class="headerlink" title="搭建kafka集群"></a>搭建kafka集群</h2><ol>
 <li>按照上述步骤在spark2和spark3分别安装kafka。用scp把kafka拷贝到spark2和spark3即可。</li>
-<li>唯一区别的，<a href="http://xn--server-ve8k937d.xn--propertiesbroker-z79yb524c.id" target="_blank" rel="noopener">就是server.properties中的broker.id</a>，要设置为1和2</li>
+<li>唯一区别的，就是server.properties中的broker.id，要设置为1和2</li>
 </ol>
-<h2 id="启动kafka集群"><a class="markdownIt-Anchor" href="#启动kafka集群"></a> 启动kafka集群</h2>
-<ol>
-<li>在三台机器上分别执行以下命令：</li>
-</ol>
+<h2 id="启动kafka集群"><a href="#启动kafka集群" class="headerlink" title="启动kafka集群"></a>启动kafka集群</h2><ol>
+<li><p>在三台机器上分别执行以下命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup bin/kafka-server-start.sh config/server.properties &amp;</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>使用jps检查启动是否成功</li>
+</li>
+<li><p>使用jps检查启动是否成功</p>
+</li>
 </ol>
-<h2 id="测试kafka集群"><a class="markdownIt-Anchor" href="#测试kafka集群"></a> 测试kafka集群</h2>
-<p>使用基本命令检查kafka是否搭建成功</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh --zookeeper 10.211.55.24:2181,10.211.55.25:2181,10.211.55.26:2181 --topic TestTopic --replication-factor 1 --partitions 1 --create</span><br><span class="line"></span><br><span class="line">bin/kafka-console-producer.sh --broker-list 10.211.55.24:9092,10.211.55.25:9092,10.211.55.26:9092 --topic TestTopic</span><br><span class="line"></span><br><span class="line">bin/kafka-console-consumer.sh --zookeeper 10.211.55.24:2181,10.211.55.25:2181,10.211.55.26:2181 --topic TestTopic --from-beginning</span><br></pre></td></tr></table></figure>
+<h2 id="测试kafka集群"><a href="#测试kafka集群" class="headerlink" title="测试kafka集群"></a>测试kafka集群</h2><p>使用基本命令检查kafka是否搭建成功<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh --zookeeper 10.211.55.24:2181,10.211.55.25:2181,10.211.55.26:2181 --topic TestTopic --replication-factor 1 --partitions 1 --create</span><br><span class="line"></span><br><span class="line">bin/kafka-console-producer.sh --broker-list 10.211.55.24:9092,10.211.55.25:9092,10.211.55.26:9092 --topic TestTopic</span><br><span class="line"></span><br><span class="line">bin/kafka-console-consumer.sh --zookeeper 10.211.55.24:2181,10.211.55.25:2181,10.211.55.26:2181 --topic TestTopic --from-beginning</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -594,7 +582,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装scala-2118"><span class="nav-number">1.</span> <span class="nav-text"> 安装scala 2.11.8</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装kafka包"><span class="nav-number">2.</span> <span class="nav-text"> 安装Kafka包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建kafka集群"><span class="nav-number">3.</span> <span class="nav-text"> 搭建kafka集群</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动kafka集群"><span class="nav-number">4.</span> <span class="nav-text"> 启动kafka集群</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试kafka集群"><span class="nav-number">5.</span> <span class="nav-text"> 测试kafka集群</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装scala-2-11-8"><span class="nav-number">1.</span> <span class="nav-text">安装scala 2.11.8</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Kafka包"><span class="nav-number">2.</span> <span class="nav-text">安装Kafka包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建kafka集群"><span class="nav-number">3.</span> <span class="nav-text">搭建kafka集群</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动kafka集群"><span class="nav-number">4.</span> <span class="nav-text">启动kafka集群</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试kafka集群"><span class="nav-number">5.</span> <span class="nav-text">测试kafka集群</span></a></li></ol></div>
             
 
           </div>

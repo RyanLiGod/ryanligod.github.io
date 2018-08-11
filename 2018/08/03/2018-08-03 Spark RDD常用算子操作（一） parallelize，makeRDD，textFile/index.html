@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="原文作者：翟开顺 首发：CSDN 本人仅为自己方便查阅做了摘抄，请支持原作者 原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428   parallelize，makeRDD，textFile  parallelize 调用SparkContext 的 parallelize()，将一个存在的集合，变成一个RDD，这种方式试用于学">
+<meta name="description" content="原文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428  parallelize，makeRDD，textFileparallelize调用SparkContext 的 parallelize()，将一个存在的集合，变成一个RDD，这种方式试用于学习spark和">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spark RDD常用算子操作（一） parallelize，makeRDD，textFile">
 <meta property="og:url" content="https://ryanligod.github.io/2018/08/03/2018-08-03 Spark RDD常用算子操作（一） parallelize，makeRDD，textFile/index.html">
 <meta property="og:site_name" content="Ryan Li God">
-<meta property="og:description" content="原文作者：翟开顺 首发：CSDN 本人仅为自己方便查阅做了摘抄，请支持原作者 原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428   parallelize，makeRDD，textFile  parallelize 调用SparkContext 的 parallelize()，将一个存在的集合，变成一个RDD，这种方式试用于学">
+<meta property="og:description" content="原文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428  parallelize，makeRDD，textFileparallelize调用SparkContext 的 parallelize()，将一个存在的集合，变成一个RDD，这种方式试用于学习spark和">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-08-11T17:09:04.058Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spark RDD常用算子操作（一） parallelize，makeRDD，textFile">
-<meta name="twitter:description" content="原文作者：翟开顺 首发：CSDN 本人仅为自己方便查阅做了摘抄，请支持原作者 原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428   parallelize，makeRDD，textFile  parallelize 调用SparkContext 的 parallelize()，将一个存在的集合，变成一个RDD，这种方式试用于学">
+<meta name="twitter:description" content="原文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428  parallelize，makeRDD，textFileparallelize调用SparkContext 的 parallelize()，将一个存在的集合，变成一个RDD，这种方式试用于学习spark和">
 
 
 
@@ -364,47 +364,30 @@
 
       
         <blockquote>
-<p>原文作者：翟开顺<br>
-首发：CSDN<br>
-本人仅为自己方便查阅做了摘抄，请支持原作者<br>
-原文地址：<a href="https://blog.csdn.net/t1dmzks/article/details/72077428" target="_blank" rel="noopener">https://blog.csdn.net/t1dmzks/article/details/72077428</a></p>
+<p>原文作者：翟开顺<br>首发：CSDN<br>本人仅为自己方便查阅做了摘抄，请支持原作者<br>原文地址：<a href="https://blog.csdn.net/t1dmzks/article/details/72077428" target="_blank" rel="noopener">https://blog.csdn.net/t1dmzks/article/details/72077428</a></p>
 </blockquote>
-<h1 id="parallelizemakerddtextfile"><a class="markdownIt-Anchor" href="#parallelizemakerddtextfile"></a> parallelize，makeRDD，textFile</h1>
-<h2 id="parallelize"><a class="markdownIt-Anchor" href="#parallelize"></a> parallelize</h2>
-<p>调用SparkContext 的 parallelize()，将一个存在的集合，变成一个RDD，这种方式试用于学习spark和做一些spark的测试</p>
-<p><strong>scala版本</strong><br>
-def parallelize[T](seq: Seq[T], numSlices: Int = defaultParallelism)(implicit arg0: ClassTag[T]): RDD[T]</p>
+<h1 id="parallelize，makeRDD，textFile"><a href="#parallelize，makeRDD，textFile" class="headerlink" title="parallelize，makeRDD，textFile"></a>parallelize，makeRDD，textFile</h1><h2 id="parallelize"><a href="#parallelize" class="headerlink" title="parallelize"></a>parallelize</h2><p>调用SparkContext 的 parallelize()，将一个存在的集合，变成一个RDD，这种方式试用于学习spark和做一些spark的测试</p>
+<p><strong>scala版本</strong><br>def parallelize[T](seq: Seq[T], numSlices: Int = defaultParallelism)(implicit arg0: ClassTag[T]): RDD[T] </p>
 <ul>
-<li>第一个参数一是一个 Seq集合</li>
-<li>第二个参数是分区数</li>
+<li>第一个参数一是一个 Seq集合 </li>
+<li>第二个参数是分区数 </li>
 <li>返回的是RDD[T]</li>
 </ul>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; sc.parallelize(<span class="type">List</span>(<span class="string">"shenzhen"</span>, <span class="string">"is a beautiful city"</span>))</span><br><span class="line">res1: org.apache.spark.rdd.<span class="type">RDD</span>[<span class="type">String</span>] = <span class="type">ParallelCollectionRDD</span>[<span class="number">1</span>] at parallelize at &lt;console&gt;:<span class="number">22</span></span><br></pre></td></tr></table></figure>
-<p><strong>java版本</strong><br>
-def parallelize[T](list : java.util.List[T], numSlices : scala.Int) : org.apache.spark.api.java.JavaRDD[T] = { /* compiled code */ }</p>
+<p><strong>java版本</strong><br>def parallelize[T](list : java.util.List[T], numSlices : scala.Int) : org.apache.spark.api.java.JavaRDD[T] = { /* compiled code */ } </p>
 <ul>
-<li>第一个参数是一个List集合</li>
-<li>第二个参数是一个分区，可以默认</li>
-<li>返回的是一个JavaRDD[T]<br>
-java版本只能接收List的集合</li>
+<li>第一个参数是一个List集合 </li>
+<li>第二个参数是一个分区，可以默认 </li>
+<li>返回的是一个JavaRDD[T]<br>java版本只能接收List的集合</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JavaRDD&lt;String&gt; javaStringRDD = sc.parallelize(Arrays.asList(<span class="string">"shenzhen"</span>, <span class="string">"is a beautiful city"</span>));</span><br></pre></td></tr></table></figure>
-<h2 id="makerdd"><a class="markdownIt-Anchor" href="#makerdd"></a> makeRDD</h2>
-<p>只有scala版本的才有makeRDD<br>
-def makeRDD[T](seq : scala.Seq[T], numSlices : scala.Int = { /* compiled code */ })<br>
-跟parallelize类似</p>
+<h2 id="makeRDD"><a href="#makeRDD" class="headerlink" title="makeRDD"></a>makeRDD</h2><p>只有scala版本的才有makeRDD<br>def makeRDD[T](seq : scala.Seq[T], numSlices : scala.Int = { /* compiled code */ })<br>跟parallelize类似</p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sc.makeRDD(<span class="type">List</span>(<span class="string">"shenzhen"</span>, <span class="string">"is a beautiful city"</span>))</span><br></pre></td></tr></table></figure>
-<h2 id="textfile"><a class="markdownIt-Anchor" href="#textfile"></a> textFile</h2>
-<p>调用SparkContext.textFile()方法，从外部存储中读取数据来创建 RDD<br>
-例如在我本地F:\dataexample\wordcount\input下有个sample.txt文件，文件随便写了点内容，我需要将里面的内容读取出来创建RDD</p>
-<p><strong>scala版本</strong></p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> lines = sc.textFile(<span class="string">"F:\\dataexample\\wordcount\\input"</span>)</span><br></pre></td></tr></table></figure>
-<p><strong>java版本</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JavaRDD&lt;String&gt; lines = sc.textFile(<span class="string">"F:\\dataexample\\wordcount\\input"</span>);</span><br></pre></td></tr></table></figure>
-<p>注: textFile支持分区，支持模式匹配，例如把F:\dataexample\wordcount\目录下inp开头的给转换成RDD</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var lines = sc.textFile(<span class="string">"F:\\dataexample\\wordcount\\inp*"</span>)</span><br></pre></td></tr></table></figure>
-<p>多个路径可以使用逗号分隔，例如</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var lines = sc.textFile(<span class="string">"dir1,dir2"</span>,<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="textFile"><a href="#textFile" class="headerlink" title="textFile"></a>textFile</h2><p>调用SparkContext.textFile()方法，从外部存储中读取数据来创建 RDD<br>例如在我本地F:\dataexample\wordcount\input下有个sample.txt文件，文件随便写了点内容，我需要将里面的内容读取出来创建RDD</p>
+<p><strong>scala版本</strong><br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> lines = sc.textFile(<span class="string">"F:\\dataexample\\wordcount\\input"</span>)</span><br></pre></td></tr></table></figure></p>
+<p><strong>java版本</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JavaRDD&lt;String&gt; lines = sc.textFile(<span class="string">"F:\\dataexample\\wordcount\\input"</span>);</span><br></pre></td></tr></table></figure></p>
+<p>注: textFile支持分区，支持模式匹配，例如把F:\dataexample\wordcount\目录下inp开头的给转换成RDD<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var lines = sc.textFile(<span class="string">"F:\\dataexample\\wordcount\\inp*"</span>)</span><br></pre></td></tr></table></figure></p>
+<p>多个路径可以使用逗号分隔，例如<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var lines = sc.textFile(<span class="string">"dir1,dir2"</span>,<span class="number">3</span>)</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -578,7 +561,7 @@ def makeRDD[T](seq : scala.Seq[T], numSlices : scala.Int = { /* compiled code */
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#parallelizemakerddtextfile"><span class="nav-number">1.</span> <span class="nav-text"> parallelize，makeRDD，textFile</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#parallelize"><span class="nav-number">1.1.</span> <span class="nav-text"> parallelize</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#makerdd"><span class="nav-number">1.2.</span> <span class="nav-text"> makeRDD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#textfile"><span class="nav-number">1.3.</span> <span class="nav-text"> textFile</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#parallelize，makeRDD，textFile"><span class="nav-number">1.</span> <span class="nav-text">parallelize，makeRDD，textFile</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#parallelize"><span class="nav-number">1.1.</span> <span class="nav-text">parallelize</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#makeRDD"><span class="nav-number">1.2.</span> <span class="nav-text">makeRDD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#textFile"><span class="nav-number">1.3.</span> <span class="nav-text">textFile</span></a></li></ol></li></ol></div>
             
 
           </div>

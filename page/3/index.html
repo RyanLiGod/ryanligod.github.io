@@ -367,21 +367,23 @@
       
         
           
-          安装hive包
+           安装hive包
+
 将apache-hive-0.13.1-bin.tar.gz使用SFTP工具上传到spark1的/usr/local目录下。
 解压缩hive安装包：
+
 1tar -zxvf apache-hive-0.13.1-bin.tar.gz
 
 重命名hive目录：
+
 1mv apache-hive-0.13.1-bin hive
 
 配置hive相关的环境变量
+
 1234vi .bashrcexport HIVE_HOME=/usr/local/hiveexport PATH=$HIVE_HOME/binsource .bashrc
+ 安装mysql
 
-
-安装mysql
 在spark1上安装mysql
-使用yu
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -551,19 +553,22 @@
       
         
           
-          安装hadoop包
+           安装hadoop包
+
 下载好hadoop-2.4.1.tar.gz，使用SFTP工具上传到CentOS的/usr/local目录下
 将hadoop包进行解压缩：
+
 1tar -zxvf hadoop-2.4.1.tar.gz
 
 对hadoop目录进行重命名：
+
 1mv hadoop-2.4.1 hadoop
 
 配置hadoop相关环境变量
+
 1234vi .bashrcexport HADOOP_HOME=/usr/local/hadoopexport PATH=$HADOOP_HOME/bin:$HADOOP_HOME/sbinsource .bashrc
-
-
-配置Hadoop修改core-site
+ 配置Hadoop
+ 修改cor
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -733,7 +738,8 @@
       
         
           
-          运行环境
+           运行环境
+
 CentOS 6.5
 JDK 1.7
 Hadoop 2.4.1
@@ -743,9 +749,14 @@ kafka_2.9.2-0.8.1
 Spark 2.1.3
 scala 2.11.8
 
-安装CentOS 6.5
-在macOS下，使用Parallels Desktop直接安装，CentOS 6.5使用的只需要官网的一个DVD1.iso文件。
-启动以后使用Termius连接三台机器，使用Transmit传文件。CentOS 6.5防火墙配置关闭防火墙1234service iptables stopchkconfig iptables offvi /etc/selinu
+ 安装CentOS 6.5
+
+在macOS下，使用***Parallels Desktop***直接安装，CentOS 6.5使用的只需要官网的一个DVD1.iso文件。
+启动以后使用***Termius***连接三台机器，使用***Transmit***传文件。
+
+ CentOS 6.5防火墙配置
+关闭防火墙
+1234service iptables stopchkconfig
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -915,26 +926,34 @@ scala 2.11.8
       
         
           
-          Hadoop
+           Hadoop
+
 启动hdfs集群：
+
 1start-dfs.sh
 
-验证启动是否成功：jps、50070端口spark1：namenode、datanode、secondarynamenodespark2：datanodespark3：datanode
+验证启动是否成功：jps、50070端口
+spark1：namenode、datanode、secondarynamenode
+spark2：datanode
+spark3：datanode
 
+ YARN
+1/usr/local/hadoop/sbin/start-yarn.sh
+ Hive
+在spark1中，直接输入:
+1hive
+ ZooKeeper
 
-YARN1/usr/local/hadoop/sbin/start-yarn.sh
-Hive在spark1中，直接输入:1hive
-ZooKeeper
 分别在三台机器上执行：
+
 1zkServer.sh start
 
 检查ZooKeeper状态：
+
 1zkServer.sh status
+ kafka
 
-
-kafka
-在三台机器上分别执行以下命令：
-1cd /u
+在三台机器上分别
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1103,79 +1122,108 @@ kafka
 
       
         
-          <h2 id="Markdown-的设计哲学"><a href="#Markdown-的设计哲学" class="headerlink" title="Markdown 的设计哲学"></a>Markdown 的设计哲学</h2><blockquote>
-<p>Markdown 的目標是實現「易讀易寫」<br>不過最需要強調的便是它的可讀性。一份使用 Markdown 格式撰寫的文件應該可以直接以純文字發佈，並且看起來不會像是由許多標籤或是格式指令所構成。<br>Markdown 的語法有個主要的目的：用來作為一種網路內容的<em>寫作</em>用語言。</p>
+          <h2 id="markdown-的设计哲学"><a class="markdownIt-Anchor" href="#markdown-的设计哲学"></a> Markdown 的设计哲学</h2>
+<blockquote>
+<p>Markdown 的目標是實現「易讀易寫」<br>
+不過最需要強調的便是它的可讀性。一份使用 Markdown 格式撰寫的文件應該可以直接以純文字發佈，並且看起來不會像是由許多標籤或是格式指令所構成。<br>
+Markdown 的語法有個主要的目的：用來作為一種網路內容的<em>寫作</em>用語言。</p>
 </blockquote>
-<h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><p>Markdown 语法：</p>
+<h2 id="标题"><a class="markdownIt-Anchor" href="#标题"></a> 标题</h2>
+<p>Markdown 语法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 第一级标题 `&lt;h1&gt;` </span><br><span class="line">## 第二级标题 `&lt;h2&gt;` </span><br><span class="line">###### 第六级标题 `&lt;h6&gt;`</span><br></pre></td></tr></table></figure>
 <p>效果如下：</p>
-<h1 id="第一级标题-lt-h1-gt"><a href="#第一级标题-lt-h1-gt" class="headerlink" title="第一级标题 &lt;h1&gt;"></a>第一级标题 <code>&lt;h1&gt;</code></h1><h2 id="第二级标题-lt-h2-gt"><a href="#第二级标题-lt-h2-gt" class="headerlink" title="第二级标题 &lt;h2&gt;"></a>第二级标题 <code>&lt;h2&gt;</code></h2><h6 id="第六级标题-lt-h6-gt"><a href="#第六级标题-lt-h6-gt" class="headerlink" title="第六级标题 &lt;h6&gt;"></a>第六级标题 <code>&lt;h6&gt;</code></h6><h2 id="强调"><a href="#强调" class="headerlink" title="强调"></a>强调</h2><p>Markdown 语法：</p>
+<h1 id="第一级标题-h1"><a class="markdownIt-Anchor" href="#第一级标题-h1"></a> 第一级标题 <code>&lt;h1&gt;</code></h1>
+<h2 id="第二级标题-h2"><a class="markdownIt-Anchor" href="#第二级标题-h2"></a> 第二级标题 <code>&lt;h2&gt;</code></h2>
+<h6 id="第六级标题-h6"><a class="markdownIt-Anchor" href="#第六级标题-h6"></a> 第六级标题 <code>&lt;h6&gt;</code></h6>
+<h2 id="强调"><a class="markdownIt-Anchor" href="#强调"></a> 强调</h2>
+<p>Markdown 语法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">*这些文字会生成`&lt;em&gt;`*</span><br><span class="line">_这些文字会生成`&lt;u&gt;`_</span><br><span class="line"></span><br><span class="line">**这些文字会生成`&lt;strong&gt;`**</span><br><span class="line">__这些文字会生成`&lt;strong&gt;`__</span><br></pre></td></tr></table></figure>
 <p>效果如下：</p>
-<p><em>这些文字会生成<code>&lt;em&gt;</code></em><br><em>这些文字会生成<code>&lt;u&gt;</code></em></p>
-<p><strong>这些文字会生成<code>&lt;strong&gt;</code></strong><br><strong>这些文字会生成<code>&lt;strong&gt;</code></strong></p>
-<h2 id="换行"><a href="#换行" class="headerlink" title="换行"></a>换行</h2><p>四个及以上空格加回车。</p>
-<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><h3 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h3><p>Markdown 语法：</p>
+<p><em>这些文字会生成<code>&lt;em&gt;</code></em><br>
+<em>这些文字会生成<code>&lt;u&gt;</code></em></p>
+<p><strong>这些文字会生成<code>&lt;strong&gt;</code></strong><br>
+<strong>这些文字会生成<code>&lt;strong&gt;</code></strong></p>
+<h2 id="换行"><a class="markdownIt-Anchor" href="#换行"></a> 换行</h2>
+<p>四个及以上空格加回车。</p>
+<h2 id="列表"><a class="markdownIt-Anchor" href="#列表"></a> 列表</h2>
+<h3 id="无序列表"><a class="markdownIt-Anchor" href="#无序列表"></a> 无序列表</h3>
+<p>Markdown 语法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">* 项目一 无序列表 `* + 空格键`</span><br><span class="line">* 项目二</span><br><span class="line">	* 项目二的子项目一 无序列表 `TAB + * + 空格键`</span><br><span class="line">	* 项目二的子项目二</span><br></pre></td></tr></table></figure>
 <p>效果如下：</p>
 <ul>
 <li>项目一 无序列表 <code>* + 空格键</code></li>
-<li>项目二<ul>
+<li>项目二
+<ul>
 <li>项目二的子项目一 无序列表 <code>TAB + * + 空格键</code></li>
 <li>项目二的子项目二</li>
 </ul>
 </li>
 </ul>
-<h3 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h3><p>Markdown 语法：</p>
+<h3 id="有序列表"><a class="markdownIt-Anchor" href="#有序列表"></a> 有序列表</h3>
+<p>Markdown 语法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. 项目一 有序列表 `数字 + . + 空格键`</span><br><span class="line">2. 项目二 </span><br><span class="line">3. 项目三</span><br><span class="line">	1. 项目三的子项目一 有序列表 `TAB + 数字 + . + 空格键`</span><br><span class="line">	2. 项目三的子项目二</span><br></pre></td></tr></table></figure>
 <p>效果如下：</p>
 <ol>
 <li>项目一 有序列表 <code>数字 + . + 空格键</code></li>
-<li>项目二 </li>
-<li>项目三<ol>
+<li>项目二</li>
+<li>项目三
+<ol>
 <li>项目三的子项目一 有序列表 <code>TAB + 数字 + . + 空格键</code></li>
 <li>项目三的子项目二</li>
 </ol>
 </li>
 </ol>
-<h3 id="任务列表（Task-lists）"><a href="#任务列表（Task-lists）" class="headerlink" title="任务列表（Task lists）"></a>任务列表（Task lists）</h3><p>Markdown 语法：</p>
+<h3 id="任务列表task-lists"><a class="markdownIt-Anchor" href="#任务列表task-lists"></a> 任务列表（Task lists）</h3>
+<p>Markdown 语法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- [ ] 任务一 未做任务 `- + 空格 + [ ]`</span><br><span class="line">- [x] 任务二 已做任务 `- + 空格 + [x]`</span><br></pre></td></tr></table></figure>
 <p>效果如下：</p>
 <ul>
-<li style="list-style: none"><input type="checkbox"> 任务一 未做任务 <code>- + 空格 + [ ]</code></li>
-<li style="list-style: none"><input type="checkbox" checked> 任务二 已做任务 <code>- + 空格 + [x]</code></li>
+<li>[ ] 任务一 未做任务 <code>- + 空格 + [ ]</code></li>
+<li>[x] 任务二 已做任务 <code>- + 空格 + [x]</code></li>
 </ul>
-<h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><p>Markdown 语法：</p>
+<h2 id="图片"><a class="markdownIt-Anchor" href="#图片"></a> 图片</h2>
+<p>Markdown 语法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">![GitHub set up](http://zh.mweb.im/asset/img/set-up-git.gif)</span><br><span class="line">格式: ![Alt Text](url)</span><br></pre></td></tr></table></figure>
-<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p>Markdown 语法：</p>
+<h2 id="链接"><a class="markdownIt-Anchor" href="#链接"></a> 链接</h2>
+<p>Markdown 语法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">email &lt;example@example.com&gt;</span><br><span class="line">[GitHub](http://github.com)</span><br><span class="line">自动生成连接  &lt;http://www.github.com/&gt;</span><br></pre></td></tr></table></figure>
 <p>效果如下：</p>
-<p>Email 连接： <a href="mailto:&#x65;&#x78;&#x61;&#x6d;&#x70;&#x6c;&#101;&#x40;&#101;&#x78;&#x61;&#109;&#x70;&#108;&#101;&#x2e;&#99;&#111;&#x6d;" target="_blank" rel="noopener">&#x65;&#x78;&#x61;&#x6d;&#x70;&#x6c;&#101;&#x40;&#101;&#x78;&#x61;&#109;&#x70;&#108;&#101;&#x2e;&#99;&#111;&#x6d;</a><br><a href="http://github.com" target="_blank" rel="noopener">连接标题Github网站</a><br>自动生成连接像： <a href="http://www.github.com/" target="_blank" rel="noopener">http://www.github.com/</a> 这样</p>
-<h2 id="区块引用"><a href="#区块引用" class="headerlink" title="区块引用"></a>区块引用</h2><p>Markdown 语法：</p>
+<p>Email 连接： <a href="mailto:example@example.com" target="_blank" rel="noopener">example@example.com</a><br>
+<a href="http://github.com" target="_blank" rel="noopener">连接标题Github网站</a><br>
+自动生成连接像： <a href="http://www.github.com/" target="_blank" rel="noopener">http://www.github.com/</a> 这样</p>
+<h2 id="区块引用"><a class="markdownIt-Anchor" href="#区块引用"></a> 区块引用</h2>
+<p>Markdown 语法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">某某说:</span><br><span class="line">&gt; 第一行引用</span><br><span class="line">&gt; 第二行费用文字</span><br></pre></td></tr></table></figure>
 <p>效果如下：</p>
 <p>某某说:</p>
 <blockquote>
-<p>第一行引用<br>第二行费用文字</p>
+<p>第一行引用<br>
+第二行费用文字</p>
 </blockquote>
-<h2 id="行内代码"><a href="#行内代码" class="headerlink" title="行内代码"></a>行内代码</h2><p>Markdown 语法：</p>
+<h2 id="行内代码"><a class="markdownIt-Anchor" href="#行内代码"></a> 行内代码</h2>
+<p>Markdown 语法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">像这样即可：`&lt;addr&gt;` `code`</span><br></pre></td></tr></table></figure>
 <p>效果如下：</p>
 <p>像这样即可：<code>&lt;addr&gt;</code> <code>code</code></p>
-<h2 id="多行或者一段代码"><a href="#多行或者一段代码" class="headerlink" title="多行或者一段代码"></a>多行或者一段代码</h2><p>Markdown 语法：</p>
+<h2 id="多行或者一段代码"><a class="markdownIt-Anchor" href="#多行或者一段代码"></a> 多行或者一段代码</h2>
+<p>Markdown 语法：</p>
 <pre><code><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fancyAlert</span>(<span class="params">arg</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(arg) &#123;</span><br><span class="line">    $.facebox(&#123;<span class="attr">div</span>:<span class="string">'#foo'</span>&#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre><p>效果如下：</p>
+</code></pre>
+<p>效果如下：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fancyAlert</span>(<span class="params">arg</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(arg) &#123;</span><br><span class="line">		$.facebox(&#123;<span class="attr">div</span>:<span class="string">'#foo'</span>&#125;)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="顺序图或流程图"><a href="#顺序图或流程图" class="headerlink" title="顺序图或流程图"></a>顺序图或流程图</h2><p>Markdown 语法：</p>
+<h2 id="顺序图或流程图"><a class="markdownIt-Anchor" href="#顺序图或流程图"></a> 顺序图或流程图</h2>
+<p>Markdown 语法：</p>
 <pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">张三-&gt;李四: 嘿，小四儿, 写博客了没?</span><br><span class="line">Note right of 李四: 李四愣了一下，说：</span><br><span class="line">李四--&gt;张三: 忙得吐血，哪有时间写。</span><br></pre></td></tr></table></figure>
 
 
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">st=&gt;start: 开始</span><br><span class="line">e=&gt;end: 结束</span><br><span class="line">op=&gt;operation: 我的操作</span><br><span class="line">cond=&gt;condition: 确认？</span><br><span class="line"></span><br><span class="line">st-&gt;op-&gt;cond</span><br><span class="line">cond(yes)-&gt;e</span><br><span class="line">cond(no)-&gt;op</span><br></pre></td></tr></table></figure>
-</code></pre><p>效果如下（ <code>Preferences</code> - <code>Themes</code> - <code>Enable sequence &amp; flow chart</code> 才会看到效果 ）：</p>
+</code></pre>
+<p>效果如下（ <code>Preferences</code> - <code>Themes</code> - <code>Enable sequence &amp; flow chart</code> 才会看到效果 ）：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">张三-&gt;李四: 嘿，小四儿, 写博客了没?</span><br><span class="line">Note right of 李四: 李四愣了一下，说：</span><br><span class="line">李四--&gt;张三: 忙得吐血，哪有时间写。</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">st=&gt;start: 开始</span><br><span class="line">e=&gt;end: 结束</span><br><span class="line">op=&gt;operation: 我的操作</span><br><span class="line">cond=&gt;condition: 确认？</span><br><span class="line"></span><br><span class="line">st-&gt;op-&gt;cond</span><br><span class="line">cond(yes)-&gt;e</span><br><span class="line">cond(no)-&gt;op</span><br></pre></td></tr></table></figure>
 <p>更多请参考：<a href="http://bramp.github.io/js-sequence-diagrams/" target="_blank" rel="noopener">http://bramp.github.io/js-sequence-diagrams/</a>, <a href="http://adrai.github.io/flowchart.js/" target="_blank" rel="noopener">http://adrai.github.io/flowchart.js/</a></p>
-<h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><p>Markdown 语法：</p>
+<h2 id="表格"><a class="markdownIt-Anchor" href="#表格"></a> 表格</h2>
+<p>Markdown 语法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">第一格表头 | 第二格表头</span><br><span class="line">--------- | -------------</span><br><span class="line">内容单元格 第一列第一格 | 内容单元格第二列第一格</span><br><span class="line">内容单元格 第一列第二格 多加文字 | 内容单元格第二列第二格</span><br></pre></td></tr></table></figure>
 <p>效果如下：</p>
 <table>
@@ -1196,31 +1244,48 @@ kafka
 </tr>
 </tbody>
 </table>
-<h2 id="删除线"><a href="#删除线" class="headerlink" title="删除线"></a>删除线</h2><p>Markdown 语法：</p>
+<h2 id="删除线"><a class="markdownIt-Anchor" href="#删除线"></a> 删除线</h2>
+<p>Markdown 语法：</p>
 <pre><code>加删除线像这样用： ~~删除这些~~
-</code></pre><p>效果如下：</p>
-<p>加删除线像这样用： <del>删除这些</del></p>
-<h2 id="分隔线"><a href="#分隔线" class="headerlink" title="分隔线"></a>分隔线</h2><p>以下三种方式都可以生成分隔线：</p>
+</code></pre>
+<p>效果如下：</p>
+<p>加删除线像这样用： <s>删除这些</s></p>
+<h2 id="分隔线"><a class="markdownIt-Anchor" href="#分隔线"></a> 分隔线</h2>
+<p>以下三种方式都可以生成分隔线：</p>
 <pre><code>***
 
 *****
 
 - - -
-</code></pre><p>效果如下：</p>
+</code></pre>
+<p>效果如下：</p>
 <hr>
 <hr>
 <hr>
-<h2 id="MathJax"><a href="#MathJax" class="headerlink" title="MathJax"></a>MathJax</h2><p>Markdown 语法：</p>
+<h2 id="mathjax"><a class="markdownIt-Anchor" href="#mathjax"></a> MathJax</h2>
+<p>Markdown 语法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">块级公式：</span><br><span class="line">$$	x = \dfrac&#123;-b \pm \sqrt&#123;b^2 - 4ac&#125;&#125;&#123;2a&#125; $$</span><br><span class="line"></span><br><span class="line">\\[ \frac&#123;1&#125;&#123;\Bigl(\sqrt&#123;\phi \sqrt&#123;5&#125;&#125;-\phi\Bigr) e^&#123;\frac25 \pi&#125;&#125; =</span><br><span class="line">1+\frac&#123;e^&#123;-2\pi&#125;&#125; &#123;1+\frac&#123;e^&#123;-4\pi&#125;&#125; &#123;1+\frac&#123;e^&#123;-6\pi&#125;&#125;</span><br><span class="line">&#123;1+\frac&#123;e^&#123;-8\pi&#125;&#125; &#123;1+\ldots&#125; &#125; &#125; &#125; \\]</span><br><span class="line"></span><br><span class="line">行内公式： $\Gamma(n) = (n-1)!\quad\forall n\in\mathbb N$</span><br></pre></td></tr></table></figure>
 <p>效果如下（<code>Preferences</code> - <code>Themes</code> - <code>Enable MathJax</code> 才会看到效果）：</p>
-<p>块级公式：<br>$$    x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a} $$</p>
-<p>\[ \frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} =<br>1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}}<br>{1+\frac{e^{-8\pi}} {1+\ldots} } } } \]</p>
-<p>行内公式： $\Gamma(n) = (n-1)!\quad\forall n\in\mathbb N$</p>
-<h2 id="脚注（Footnote）"><a href="#脚注（Footnote）" class="headerlink" title="脚注（Footnote）"></a>脚注（Footnote）</h2><p>Markdown 语法：</p>
+<p>块级公式：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi><mo>=</mo><mfrac><mrow><mo>−</mo><mi>b</mi><mo>±</mo><msqrt><mrow><msup><mi>b</mi><mn>2</mn></msup><mo>−</mo><mn>4</mn><mi>a</mi><mi>c</mi></mrow></msqrt></mrow><mrow><mn>2</mn><mi>a</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a} 
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:1.590389em;"></span><span class="strut bottom" style="height:2.276389em;vertical-align:-0.686em;"></span><span class="base"><span class="mord mathit">x</span><span class="mord rule" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mord rule" style="margin-right:0.2777777777777778em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.590389em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span><span class="mord mathit">a</span></span></span><span style="top:-3.15em;"><span class="pstrut" style="height:3em;"></span><span class="stretchy" style="height:0.2em;"><svg width="400em" height="0.2em" viewbox="0 0 400000 200" preserveaspectratio="xMinYMin slice"><path d="M0 80H400000 v40H0z M0 80H400000 v40H0z"/></svg></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">−</span><span class="mord mathit">b</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mbin">±</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.913389em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord"><span class="mord mathit">b</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.740108em;"><span style="top:-2.9890000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mord">4</span><span class="mord mathit">a</span><span class="mord mathit">c</span></span></span><span style="top:-2.873389em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg width="400em" height="1.08em" viewbox="0 0 400000 1080" preserveaspectratio="xMinYMin slice"><path d="M95,702c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,
+-10,-9.5,-14c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54c44.2,-33.3,65.8,
+-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10s173,378,173,378c0.7,0,
+35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429c69,-144,104.5,-217.7,106.5,
+-221c5.3,-9.3,12,-14,20,-14H400000v40H845.2724s-225.272,467,-225.272,467
+s-235,486,-235,486c-2.7,4.7,-9,7,-19,7c-6,0,-10,-1,-12,-3s-194,-422,-194,-422
+s-65,47,-65,47z M834 80H400000v40H845z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.12661100000000003em;"></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p>\[ \frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} =<br>
+1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}}<br>
+{1+\frac{e^{-8\pi}} {1+\ldots} } } } \]</p>
+<p>行内公式： <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">Γ</mi><mo>(</mo><mi>n</mi><mo>)</mo><mo>=</mo><mo>(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo>)</mo><mo>!</mo><mspace width="1em"></mspace><mi mathvariant="normal">∀</mi><mi>n</mi><mo>∈</mo><mi mathvariant="double-struck">N</mi></mrow><annotation encoding="application/x-tex">\Gamma(n) = (n-1)!\quad\forall n\in\mathbb N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord">Γ</span><span class="mopen">(</span><span class="mord mathit">n</span><span class="mclose">)</span><span class="mord rule" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mord rule" style="margin-right:0.2777777777777778em;"></span><span class="mopen">(</span><span class="mord mathit">n</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mclose">!</span><span class="mspace quad"></span><span class="mord">∀</span><span class="mord mathit">n</span><span class="mord rule" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mord rule" style="margin-right:0.2777777777777778em;"></span><span class="mord mathbb">N</span></span></span></span></p>
+<h2 id="脚注footnote"><a class="markdownIt-Anchor" href="#脚注footnote"></a> 脚注（Footnote）</h2>
+<p>Markdown 语法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这是一个脚注：[^sample_footnote]</span><br></pre></td></tr></table></figure>
 <p>效果如下：</p>
-<p>这是一个脚注：<a href="这里是脚注信息">^sample_footnote</a></p>
-<h2 id="注释和阅读更多"><a href="#注释和阅读更多" class="headerlink" title="注释和阅读更多"></a>注释和阅读更多</h2><!-- comment -->
+<p>这是一个脚注：<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></p>
+<h2 id="注释和阅读更多"><a class="markdownIt-Anchor" href="#注释和阅读更多"></a> 注释和阅读更多</h2>
+<!-- comment -->
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/07/24/2018-07-24 MarkDown语法/#more" rel="contents">

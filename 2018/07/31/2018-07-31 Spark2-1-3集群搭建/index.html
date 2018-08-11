@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="安装Spark包 将spark-2.1.3-bin-hadoop2.4.tgz使用SFTP上传到/usr/local目录下。 解压缩spark包： 1tar zxvf spark-2.1.3-bin-hadoop2.4.tgz  更改spark目录名： 1mv spark-2.1.3-bin-hadoop2.4 spark  设置spark环境变量 123456vi .bashrcexport S">
+<meta name="description" content="安装Spark包  将spark-2.1.3-bin-hadoop2.4.tgz使用SFTP上传到/usr/local目录下。 解压缩spark包：  1tar zxvf spark-2.1.3-bin-hadoop2.4.tgz  更改spark目录名：  1mv spark-2.1.3-bin-hadoop2.4 spark  设置spark环境变量  123456vi .bashrcexp">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spark学习笔记（六）：Spark 2.1.3集群搭建">
 <meta property="og:url" content="https://ryanligod.github.io/2018/07/31/2018-07-31 Spark2-1-3集群搭建/index.html">
 <meta property="og:site_name" content="Ryan Li God">
-<meta property="og:description" content="安装Spark包 将spark-2.1.3-bin-hadoop2.4.tgz使用SFTP上传到/usr/local目录下。 解压缩spark包： 1tar zxvf spark-2.1.3-bin-hadoop2.4.tgz  更改spark目录名： 1mv spark-2.1.3-bin-hadoop2.4 spark  设置spark环境变量 123456vi .bashrcexport S">
+<meta property="og:description" content="安装Spark包  将spark-2.1.3-bin-hadoop2.4.tgz使用SFTP上传到/usr/local目录下。 解压缩spark包：  1tar zxvf spark-2.1.3-bin-hadoop2.4.tgz  更改spark目录名：  1mv spark-2.1.3-bin-hadoop2.4 spark  设置spark环境变量  123456vi .bashrcexp">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-08-11T17:07:54.451Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spark学习笔记（六）：Spark 2.1.3集群搭建">
-<meta name="twitter:description" content="安装Spark包 将spark-2.1.3-bin-hadoop2.4.tgz使用SFTP上传到/usr/local目录下。 解压缩spark包： 1tar zxvf spark-2.1.3-bin-hadoop2.4.tgz  更改spark目录名： 1mv spark-2.1.3-bin-hadoop2.4 spark  设置spark环境变量 123456vi .bashrcexport S">
+<meta name="twitter:description" content="安装Spark包  将spark-2.1.3-bin-hadoop2.4.tgz使用SFTP上传到/usr/local目录下。 解压缩spark包：  1tar zxvf spark-2.1.3-bin-hadoop2.4.tgz  更改spark目录名：  1mv spark-2.1.3-bin-hadoop2.4 spark  设置spark环境变量  123456vi .bashrcexp">
 
 
 
@@ -363,35 +363,45 @@
       
 
       
-        <h2 id="安装Spark包"><a href="#安装Spark包" class="headerlink" title="安装Spark包"></a>安装Spark包</h2><ol>
+        <h2 id="安装spark包"><a class="markdownIt-Anchor" href="#安装spark包"></a> 安装Spark包</h2>
+<ol>
 <li>将spark-2.1.3-bin-hadoop2.4.tgz使用SFTP上传到/usr/local目录下。</li>
-<li><p>解压缩spark包：</p>
+<li>解压缩spark包：</li>
+</ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar zxvf spark-2.1.3-bin-hadoop2.4.tgz</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>更改spark目录名：</p>
+<ol start="3">
+<li>更改spark目录名：</li>
+</ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv spark-2.1.3-bin-hadoop2.4 spark</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>设置spark环境变量</p>
+<ol start="4">
+<li>设置spark环境变量</li>
+</ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vi .bashrc</span><br><span class="line">export SPARK_HOME=/usr/local/spark</span><br><span class="line">export PATH=$SPARK_HOME/bin</span><br><span class="line">export CLASSPATH=.:$CLASSPATH:$JAVA_HOME/lib:$JAVA_HOME/jre/lib</span><br><span class="line"></span><br><span class="line">source .bashrc</span><br></pre></td></tr></table></figure>
-</li>
+<h2 id="修改spark-envsh文件"><a class="markdownIt-Anchor" href="#修改spark-envsh文件"></a> 修改spark-env.sh文件</h2>
+<ol>
+<li></li>
 </ol>
-<h2 id="修改spark-env-sh文件"><a href="#修改spark-env-sh文件" class="headerlink" title="修改spark-env.sh文件"></a>修改spark-env.sh文件</h2><ol>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/spark/conf</span><br></pre></td></tr></table></figure>
-</li>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp spark-env.sh.template spark-env.sh</span><br></pre></td></tr></table></figure>
-</li>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vi spark-env.sh</span><br><span class="line">export JAVA_HOME=/usr/java/latest</span><br><span class="line">export SCALA_HOME=/usr/local/scala</span><br><span class="line">export SPARK_MASTER_IP=10.211.55.24</span><br><span class="line">export SPARK_WORKER_MEMORY=2g</span><br><span class="line">export HADOOP_CONF_DIR=/usr/local/hadoop/etc/hadoop</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/spark/conf</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li></li>
 </ol>
-<h2 id="修改slaves文件"><a href="#修改slaves文件" class="headerlink" title="修改slaves文件"></a>修改slaves文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">spark1</span><br><span class="line">spark2</span><br><span class="line">spark3</span><br></pre></td></tr></table></figure>
-<h2 id="安装spark集群"><a href="#安装spark集群" class="headerlink" title="安装spark集群"></a>安装spark集群</h2><p>在另外两个节点进行一模一样的配置，使用scp将spark和.bashrc拷贝到spark2和spark3即可。</p>
-<h2 id="启动spark集群"><a href="#启动spark集群" class="headerlink" title="启动spark集群"></a>启动spark集群</h2><ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp spark-env.sh.template spark-env.sh</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vi spark-env.sh</span><br><span class="line">export JAVA_HOME=/usr/java/latest</span><br><span class="line">export SCALA_HOME=/usr/local/scala</span><br><span class="line">export SPARK_MASTER_IP=10.211.55.24</span><br><span class="line">export SPARK_WORKER_MEMORY=2g</span><br><span class="line">export HADOOP_CONF_DIR=/usr/local/hadoop/etc/hadoop</span><br></pre></td></tr></table></figure>
+<h2 id="修改slaves文件"><a class="markdownIt-Anchor" href="#修改slaves文件"></a> 修改slaves文件</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">spark1</span><br><span class="line">spark2</span><br><span class="line">spark3</span><br></pre></td></tr></table></figure>
+<h2 id="安装spark集群"><a class="markdownIt-Anchor" href="#安装spark集群"></a> 安装spark集群</h2>
+<p>在另外两个节点进行一模一样的配置，使用scp将spark和.bashrc拷贝到spark2和spark3即可。</p>
+<h2 id="启动spark集群"><a class="markdownIt-Anchor" href="#启动spark集群"></a> 启动spark集群</h2>
+<ol>
 <li>在spark目录下的sbin目录</li>
-<li><p>执行</p>
+<li>执行</li>
+</ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./start-all.sh</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用jsp和8080端口可以检查集群是否启动成功</p>
-</li>
+<ol start="3">
+<li>使用jsp和8080端口可以检查集群是否启动成功</li>
 <li>进入spark-shell查看是否正常</li>
 </ol>
 
@@ -567,7 +577,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Spark包"><span class="nav-number">1.</span> <span class="nav-text">安装Spark包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改spark-env-sh文件"><span class="nav-number">2.</span> <span class="nav-text">修改spark-env.sh文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改slaves文件"><span class="nav-number">3.</span> <span class="nav-text">修改slaves文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装spark集群"><span class="nav-number">4.</span> <span class="nav-text">安装spark集群</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动spark集群"><span class="nav-number">5.</span> <span class="nav-text">启动spark集群</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装spark包"><span class="nav-number">1.</span> <span class="nav-text"> 安装Spark包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改spark-envsh文件"><span class="nav-number">2.</span> <span class="nav-text"> 修改spark-env.sh文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改slaves文件"><span class="nav-number">3.</span> <span class="nav-text"> 修改slaves文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装spark集群"><span class="nav-number">4.</span> <span class="nav-text"> 安装spark集群</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动spark集群"><span class="nav-number">5.</span> <span class="nav-text"> 启动spark集群</span></a></li></ol></div>
             
 
           </div>

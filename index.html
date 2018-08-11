@@ -367,25 +367,30 @@
       
         
           
-          过拟合问题 Overfitting欠拟合 underfitting (high bias 高偏差)
+           过拟合问题 Overfitting
+欠拟合 underfitting (high bias 高偏差)
 过拟合 overfitting (high variance 高方差)
 
 
-解决的办法
+ 解决的办法
+
 减少特征的数量
+
 手动选择保留哪些特征
 模型选择算法
 
 
 正则化 Regularization
-保留所有特征，但是减少量级或者参数 $\theta$ 的大小
-当特征非常多的时候依旧非常有效，每一个特征都会对预测 $y$ 产生影响
+
+保留所有特征，但是减少量级或者参数 θ\thetaθ 的大小
+当特征非常多的时候依旧非常有效，每一个特征都会对预测 yyy 产生影响
 
 
 
-代价函数
+ 代价函数
+
 解决办法的思想
-在 $\theta_3$ 和 $\theta_4$ 中增加惩罚，增加一个很大的数与之相乘，这样要最小化代价函数，最后 $\theta_3$ 和 $\th
+在 θ3\theta_3θ3​ 和 θ4\theta_4θ4​ 中增加惩罚，增加一个很大的数与之相乘，这样要最小化代价函数，最后 θ3\
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -555,16 +560,16 @@
       
         
           
-          分类 Classfication$y \in {1,0}$0:  “Negative Class” 
-1:  “Positive Class” 
-逻辑回归逻辑回归是一种分类方法
+           分类 Classfication
+ y∈{1,0}y \in \{1,0\}y∈{1,0}
+0:  “Negative Class”
+1:  “Positive Class”
+ 逻辑回归
+逻辑回归是一种分类方法
 Logistic Regression Model
-​    Want  $0 \leq h_\theta(x) \leq 1$
-$h_\theta(x)=g(\theta^Tx)$
-其中  $g(z)=\frac{1}{1+e^{-z}}$  ，称作Sigmoid函数或Logistic函数
-
-$h_\theta(x)=P(y=1|x;\theta)$
-假设陈述$y=1$ if $h_\theta(x)\geq 0.5
+​	Want  0≤hθ(x)≤10 \leq h_\theta(x) \leq 10≤hθ​(x)≤1
+hθ(x)=g(θTx)h_\theta(x)=g(\theta^Tx)hθ​(x)=g(θTx)
+其中  g(z)=11+e−zg(z)=\frac{1}{1+e^{-z}}g(z)=1+e−z1​  ，称作Sigmoid函数
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -734,25 +739,24 @@ $h_\theta(x)=P(y=1|x;\theta)$
       
         
           
-          特征缩放Mean normalization
+           特征缩放
+Mean normalization
 为了让梯度下降时候运行速度更快
-将$x$的值控制在$(-1,1)$左右
+将xxx的值控制在(−1,1)(-1,1)(−1,1)左右
 
-$x_1=\frac{x_1-\mu_1}{s_1}$
-$\mu_1$ 是 $x_1$ 的平均数
-$s_1$ 是 $x_1$ 中最大值-最小值
-学习率 $\alpha$ 
-直到$J(\theta)$收敛停止学习
+x1=x1−μ1s1x_1=\frac{x_1-\mu_1}{s_1}x1​=s1​x1​−μ1​​
+μ1\mu_1μ1​ 是 x1x_1x1​ 的平均数
+s1s_1s1​ 是 x1x_1x1​ 中最大值-最小值
+ 学习率 α\alphaα
 
-$\alpha$大小应该合适：
-太大：可能导致$J(\theta)$变大
+直到J(θ)J(\theta)J(θ)收敛停止学习
+
+α\alphaα大小应该合适：
+太大：可能导致J(θ)J(\theta)J(θ)变大
 太小：收敛过慢
 比如0.001，0.003，0.01…
 不断尝试
-特征和多项式回归多项式回归   使用多项式去拟合数据
-
-为了不让函数降回来，使用平方根
-正规方程 normal equatio
+ 特征
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -922,12 +926,14 @@ $\alpha$大小应该合适：
       
         
           
-          损失函数$J(\theta_0, \theta_1) = \frac{1}{2m}\sum_{i=1}^{m}(h_\theta(x^{(i)}) - y^{(i)})^2$
+           损失函数
+J(θ0,θ1)=12m∑i=1m(hθ(x(i))−y(i))2J(\theta_0, \theta_1) = \frac{1}{2m}\sum_{i=1}^{m}(h_\theta(x^{(i)}) - y^{(i)})^2J(θ0​,θ1​)=2m1​∑i=1m​(hθ​(x(i))−y(i))2
 通过使 J 值取最小来满足需求
 -&gt; 使用梯度下降方法寻找损失函数的最小值
-梯度下降好比我们下山，每次在一点环顾四周，往最陡峭的路向下走
-repeat until convergence{ 
-​         $\theta_j := \theta_j - \alpha\frac{\partial}{\partial\theta_j}J(\theta_0, \theta_1)$  $(for　j=0　and　 j
+ 梯度下降
+好比我们下山，每次在一点环顾四周，往最陡峭的路向下走
+repeat until convergence{
+​         θj:=θj−α∂∂θjJ(θ0,θ1)\theta_j :=
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1098,10 +1104,14 @@ repeat until convergence{
         
           
           
-原文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428
+原文作者：翟开顺
+首发：CSDN
+本人仅为自己方便查阅做了摘抄，请支持原作者
+原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428
 
-RDD 分区 HashPartitioner，RangePartitioner，自定义分区关键字: spark分区方式，java HashPartitioner分区，scala HashPartitioner分区， java RangePartitioner 分区，scala RangePartitioner分区， java 自定义分区，scala自定义分区
-默认分区和HashPartitioner分
+ RDD 分区 HashPartitioner，RangePartitioner，自定义分区
+关键字: spark分区方式，java HashPartitioner分区，scala HashPartitioner分区， java RangePartitioner 分区，scala RangePartitioner分区， java 自定义分区，scala自定义分区
+ 默认分区和HashPartit
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1272,10 +1282,17 @@ RDD 分区 HashPartitioner，RangePartitioner，自定义分区关键字: spark�
         
           
           
-原文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428
+原文作者：翟开顺
+首发：CSDN
+本人仅为自己方便查阅做了摘抄，请支持原作者
+原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428
 
-RDD 分区操作上mapPartitions, mapPartitionsWithIndexmapPartitionsmapPartition可以倒过来理解，先partition，再把每个partition进行map函数，适用场景如果在映射的过程中需要频繁创建额外的对象，使用mapPartitions要比map高效的过。
-比如，将RDD中的所有数据通过JDBC连接写入数据库，如果使用map函数，可能要
+ RDD 分区操作上mapPartitions, mapPartitionsWithIndex
+ mapPartitions
+mapPartition可以倒过来理解，先partition，再把每个partition进行map函数，
+适用场景
+如果在映射的过程中需要频繁创建额外的对象，使用mapPartitions要比map高效的过。
+比如，将RDD中的所有数据通过JDBC连接写入数据库，如果使用
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1446,9 +1463,13 @@ RDD 分区操作上mapPartitions, mapPartitionsWithIndexmapPartitionsmapPartitio
         
           
           
-原文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428
+原文作者：翟开顺
+首发：CSDN
+本人仅为自己方便查阅做了摘抄，请支持原作者
+原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428
 
-RDD Action 保存操作saveAsTextFile,saveAsSequenceFile,saveAsObjectFile,saveAsHadoopFile 等关键字:Spark算子、Spark函数、Spark RDD行动Action、Spark RDD存储操作、saveAsTextFile、saveAsSequenceFile、saveAsObjectFile,saveAsHadoopFil
+ RDD Action 保存操作saveAsTextFile,saveAsSequenceFile,saveAsObjectFile,saveAsHadoopFile 等
+关键字:Spark算子、Spark函数、Spark RDD行动Action、Spark RDD存储操作、saveAsTextFile、saveAsSequenceFile、saveAsObjectFile,saveAsHado
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1619,9 +1640,17 @@ RDD Action 保存操作saveAsTextFile,saveAsSequenceFile,saveAsObjectFile,saveAs
         
           
           
-原文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428
+原文作者：翟开顺
+首发：CSDN
+本人仅为自己方便查阅做了摘抄，请支持原作者
+原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428
 
-PairRDD的Action操作countByKey, collectAsMapcountByKeydef countByKey(): Map[K, Long]以RDD{(1, 2),(2,4),(2,5), (3, 4),(3,5), (3, 6)}为例 rdd.countByKey会返回{(1,1),(2,2),(3,3)}scala例子1234scala&gt; val rdd = sc.par
+ PairRDD的Action操作countByKey, collectAsMap
+ countByKey
+def countByKey(): Map[K, Long]
+以RDD{(1, 2),(2,4),(2,5), (3, 4),(3,5), (3, 6)}为例 rdd.countByKey会返回{(1,1),(2,2),(3,3)}
+scala例子
+1234scala&gt; val rd
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1792,10 +1821,18 @@ PairRDD的Action操作countByKey, collectAsMapcountByKeydef countByKey(): Map[K,
         
           
           
-原文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428
+原文作者：翟开顺
+首发：CSDN
+本人仅为自己方便查阅做了摘抄，请支持原作者
+原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428
 
-基本的Action操作 first, take, collect, count, countByValue, reduce, aggregate, fold,topfirst返回第一个元素scala1234scala&gt; val rdd = sc.parallelize(List(1,2,3,3))scala&gt; rdd.first()res1: Int = 1
-java12JavaRDD&l
+ 基本的Action操作 first, take, collect, count, countByValue, reduce, aggregate, fold,top
+ first
+返回第一个元素
+scala
+1234scala&gt; val rdd = sc.parallelize(List(1,2,3,3))scala&gt; rdd.first()res1: Int = 1
+java
+1
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1966,9 +2003,14 @@ java12JavaRDD&l
         
           
           
-原文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428
+原文作者：翟开顺
+首发：CSDN
+本人仅为自己方便查阅做了摘抄，请支持原作者
+原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428
 
-键值对关联操作 subtractByKey, join,fullOuterJoin, rightOuterJoin, leftOuterJoingithub: https://github.com/zhaikaishun/spark_tutorial/tree/master/src/main/java/com/spark/rdd_tutorial/tutorial8先从spark-learning中的
+ 键值对关联操作 subtractByKey, join,fullOuterJoin, rightOuterJoin, leftOuterJoin
+github: https://github.com/zhaikaishun/spark_tutorial/tree/master/src/main/java/com/spark/rdd_tutorial/tutorial8
+先从spark-lear
           ...
           <!--noindex-->
           <div class="post-button text-center">

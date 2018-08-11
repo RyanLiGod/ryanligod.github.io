@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="安装hadoop包 下载好hadoop-2.4.1.tar.gz，使用SFTP工具上传到CentOS的/usr/local目录下 将hadoop包进行解压缩： 1tar -zxvf hadoop-2.4.1.tar.gz  对hadoop目录进行重命名： 1mv hadoop-2.4.1 hadoop  配置hadoop相关环境变量 1234vi .bashrcexport HADOOP_HOME">
+<meta name="description" content="安装hadoop包  下载好hadoop-2.4.1.tar.gz，使用SFTP工具上传到CentOS的/usr/local目录下 将hadoop包进行解压缩：  1tar -zxvf hadoop-2.4.1.tar.gz  对hadoop目录进行重命名：  1mv hadoop-2.4.1 hadoop  配置hadoop相关环境变量  1234vi .bashrcexport HADOOP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spark学习笔记（二）：Hadoop 2.4.1集群搭建">
 <meta property="og:url" content="https://ryanligod.github.io/2018/07/31/2018-07-31 Hadoop2-4-1集群搭建/index.html">
 <meta property="og:site_name" content="Ryan Li God">
-<meta property="og:description" content="安装hadoop包 下载好hadoop-2.4.1.tar.gz，使用SFTP工具上传到CentOS的/usr/local目录下 将hadoop包进行解压缩： 1tar -zxvf hadoop-2.4.1.tar.gz  对hadoop目录进行重命名： 1mv hadoop-2.4.1 hadoop  配置hadoop相关环境变量 1234vi .bashrcexport HADOOP_HOME">
+<meta property="og:description" content="安装hadoop包  下载好hadoop-2.4.1.tar.gz，使用SFTP工具上传到CentOS的/usr/local目录下 将hadoop包进行解压缩：  1tar -zxvf hadoop-2.4.1.tar.gz  对hadoop目录进行重命名：  1mv hadoop-2.4.1 hadoop  配置hadoop相关环境变量  1234vi .bashrcexport HADOOP">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-08-11T17:07:42.461Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spark学习笔记（二）：Hadoop 2.4.1集群搭建">
-<meta name="twitter:description" content="安装hadoop包 下载好hadoop-2.4.1.tar.gz，使用SFTP工具上传到CentOS的/usr/local目录下 将hadoop包进行解压缩： 1tar -zxvf hadoop-2.4.1.tar.gz  对hadoop目录进行重命名： 1mv hadoop-2.4.1 hadoop  配置hadoop相关环境变量 1234vi .bashrcexport HADOOP_HOME">
+<meta name="twitter:description" content="安装hadoop包  下载好hadoop-2.4.1.tar.gz，使用SFTP工具上传到CentOS的/usr/local目录下 将hadoop包进行解压缩：  1tar -zxvf hadoop-2.4.1.tar.gz  对hadoop目录进行重命名：  1mv hadoop-2.4.1 hadoop  配置hadoop相关环境变量  1234vi .bashrcexport HADOOP">
 
 
 
@@ -363,44 +363,62 @@
       
 
       
-        <h2 id="安装hadoop包"><a href="#安装hadoop包" class="headerlink" title="安装hadoop包"></a>安装hadoop包</h2><ol>
+        <h2 id="安装hadoop包"><a class="markdownIt-Anchor" href="#安装hadoop包"></a> 安装hadoop包</h2>
+<ol>
 <li>下载好hadoop-2.4.1.tar.gz，使用SFTP工具上传到CentOS的/usr/local目录下</li>
-<li><p>将hadoop包进行解压缩：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf hadoop-2.4.1.tar.gz</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>对hadoop目录进行重命名：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv hadoop-2.4.1 hadoop</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>配置hadoop相关环境变量</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi .bashrc</span><br><span class="line">export HADOOP_HOME=/usr/local/hadoop</span><br><span class="line">export PATH=$HADOOP_HOME/bin:$HADOOP_HOME/sbin</span><br><span class="line">source .bashrc</span><br></pre></td></tr></table></figure>
-</li>
+<li>将hadoop包进行解压缩：</li>
 </ol>
-<h2 id="配置Hadoop"><a href="#配置Hadoop" class="headerlink" title="配置Hadoop"></a>配置Hadoop</h2><h3 id="修改core-site-xml"><a href="#修改core-site-xml" class="headerlink" title="修改core-site.xml"></a>修改core-site.xml</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;fs.default.name&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;hdfs://spark1:9000&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="修改hdfs-site-xml"><a href="#修改hdfs-site-xml" class="headerlink" title="修改hdfs-site.xml"></a>修改hdfs-site.xml</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;dfs.name.dir&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;/usr/local/data/namenode&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;dfs.data.dir&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;/usr/local/data/datanode&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;dfs.tmp.dir&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;/usr/local/data/tmp&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;dfs.replication&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;3&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="修改mapred-site-xml"><a href="#修改mapred-site-xml" class="headerlink" title="修改mapred-site.xml"></a>修改mapred-site.xml</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;mapreduce.framework.name&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;yarn&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="修改yarn-site-xml"><a href="#修改yarn-site-xml" class="headerlink" title="修改yarn-site.xml"></a>修改yarn-site.xml</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.hostname&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;spark1&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;mapreduce_shuffle&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="修改slaves文件"><a href="#修改slaves文件" class="headerlink" title="修改slaves文件"></a>修改slaves文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">spark1</span><br><span class="line">spark2</span><br><span class="line">spark3</span><br></pre></td></tr></table></figure>
-<h3 id="在另外两台机器上搭建hadoop"><a href="#在另外两台机器上搭建hadoop" class="headerlink" title="在另外两台机器上搭建hadoop"></a>在另外两台机器上搭建hadoop</h3><ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf hadoop-2.4.1.tar.gz</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>对hadoop目录进行重命名：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv hadoop-2.4.1 hadoop</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>配置hadoop相关环境变量</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi .bashrc</span><br><span class="line">export HADOOP_HOME=/usr/local/hadoop</span><br><span class="line">export PATH=$HADOOP_HOME/bin:$HADOOP_HOME/sbin</span><br><span class="line">source .bashrc</span><br></pre></td></tr></table></figure>
+<h2 id="配置hadoop"><a class="markdownIt-Anchor" href="#配置hadoop"></a> 配置Hadoop</h2>
+<h3 id="修改core-sitexml"><a class="markdownIt-Anchor" href="#修改core-sitexml"></a> 修改core-site.xml</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;fs.default.name&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;hdfs://spark1:9000&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="修改hdfs-sitexml"><a class="markdownIt-Anchor" href="#修改hdfs-sitexml"></a> 修改hdfs-site.xml</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;dfs.name.dir&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;/usr/local/data/namenode&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;dfs.data.dir&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;/usr/local/data/datanode&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;dfs.tmp.dir&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;/usr/local/data/tmp&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;dfs.replication&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;3&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="修改mapred-sitexml"><a class="markdownIt-Anchor" href="#修改mapred-sitexml"></a> 修改mapred-site.xml</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;mapreduce.framework.name&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;yarn&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="修改yarn-sitexml"><a class="markdownIt-Anchor" href="#修改yarn-sitexml"></a> 修改yarn-site.xml</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.hostname&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;spark1&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;mapreduce_shuffle&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="修改slaves文件"><a class="markdownIt-Anchor" href="#修改slaves文件"></a> 修改slaves文件</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">spark1</span><br><span class="line">spark2</span><br><span class="line">spark3</span><br></pre></td></tr></table></figure>
+<h3 id="在另外两台机器上搭建hadoop"><a class="markdownIt-Anchor" href="#在另外两台机器上搭建hadoop"></a> 在另外两台机器上搭建hadoop</h3>
+<ol>
 <li>使用如上配置在另外两台机器上搭建hadoop，可以使用scp命令将spark1上面的hadoop安装包和.bashrc配置文件都拷贝过去</li>
 <li>要记得对.bashrc文件进行source，以让它生效</li>
 <li>记得在spark2和spark3的/usr/local目录下创建data目录</li>
 </ol>
-<h2 id="启动hdfs集群"><a href="#启动hdfs集群" class="headerlink" title="启动hdfs集群"></a>启动hdfs集群</h2><ol>
-<li><p>格式化namenode：在spark1上执行以下命令(不要执行多次，不然会导致datanode的ID不一致，以后都只要直接第二步):</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs namenode -format</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>启动hdfs集群：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start-dfs.sh</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>验证启动是否成功：jps、50070端口<br>spark1：namenode、datanode、secondarynamenode<br>spark2：datanode<br>spark3：datanode</p>
-</li>
+<h2 id="启动hdfs集群"><a class="markdownIt-Anchor" href="#启动hdfs集群"></a> 启动hdfs集群</h2>
+<ol>
+<li>格式化namenode：在spark1上执行以下命令(不要执行多次，不然会导致datanode的ID不一致，以后都只要直接第二步):</li>
 </ol>
-<h2 id="启动yarn集群"><a href="#启动yarn集群" class="headerlink" title="启动yarn集群"></a>启动yarn集群</h2><ol>
-<li><p>启动yarn集群：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs namenode -format</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>启动hdfs集群：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start-dfs.sh</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>验证启动是否成功：jps、50070端口<br>
+spark1：namenode、datanode、secondarynamenode<br>
+spark2：datanode<br>
+spark3：datanode</li>
+</ol>
+<h2 id="启动yarn集群"><a class="markdownIt-Anchor" href="#启动yarn集群"></a> 启动yarn集群</h2>
+<ol>
+<li>启动yarn集群：</li>
+</ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/hadoop/sbin/start-yarn.sh</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>验证启动是否成功：jps、8088端口<br>spark1：resourcemanager、nodemanager<br>spark2：nodemanager<br>spark3：nodemanager</p>
-</li>
+<ol start="2">
+<li>验证启动是否成功：jps、8088端口<br>
+spark1：resourcemanager、nodemanager<br>
+spark2：nodemanager<br>
+spark3：nodemanager</li>
 </ol>
 
       
@@ -575,7 +593,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装hadoop包"><span class="nav-number">1.</span> <span class="nav-text">安装hadoop包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置Hadoop"><span class="nav-number">2.</span> <span class="nav-text">配置Hadoop</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改core-site-xml"><span class="nav-number">2.1.</span> <span class="nav-text">修改core-site.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改hdfs-site-xml"><span class="nav-number">2.2.</span> <span class="nav-text">修改hdfs-site.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改mapred-site-xml"><span class="nav-number">2.3.</span> <span class="nav-text">修改mapred-site.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改yarn-site-xml"><span class="nav-number">2.4.</span> <span class="nav-text">修改yarn-site.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改slaves文件"><span class="nav-number">2.5.</span> <span class="nav-text">修改slaves文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在另外两台机器上搭建hadoop"><span class="nav-number">2.6.</span> <span class="nav-text">在另外两台机器上搭建hadoop</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动hdfs集群"><span class="nav-number">3.</span> <span class="nav-text">启动hdfs集群</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动yarn集群"><span class="nav-number">4.</span> <span class="nav-text">启动yarn集群</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装hadoop包"><span class="nav-number">1.</span> <span class="nav-text"> 安装hadoop包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置hadoop"><span class="nav-number">2.</span> <span class="nav-text"> 配置Hadoop</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改core-sitexml"><span class="nav-number">2.1.</span> <span class="nav-text"> 修改core-site.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改hdfs-sitexml"><span class="nav-number">2.2.</span> <span class="nav-text"> 修改hdfs-site.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改mapred-sitexml"><span class="nav-number">2.3.</span> <span class="nav-text"> 修改mapred-site.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改yarn-sitexml"><span class="nav-number">2.4.</span> <span class="nav-text"> 修改yarn-site.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改slaves文件"><span class="nav-number">2.5.</span> <span class="nav-text"> 修改slaves文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在另外两台机器上搭建hadoop"><span class="nav-number">2.6.</span> <span class="nav-text"> 在另外两台机器上搭建hadoop</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动hdfs集群"><span class="nav-number">3.</span> <span class="nav-text"> 启动hdfs集群</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动yarn集群"><span class="nav-number">4.</span> <span class="nav-text"> 启动yarn集群</span></a></li></ol></div>
             
 
           </div>

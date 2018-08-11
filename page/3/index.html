@@ -365,7 +365,14 @@
 
 重命名hive目录：
 
-1mv apache
+1mv apache-hive-0.13.1-bin hive
+
+配置hive相关的环境变量
+
+1234vi .bashrcexport HIVE_HOME=/usr/local/hiveexport PATH=$HIVE_HOME/binsource .bashrc
+ 安装mysql
+
+在spark1上安装mysql
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -533,7 +540,13 @@
 
 对hadoop目录进行重命名：
 
-1mv hadoop-2.4.1 h
+1mv hadoop-2.4.1 hadoop
+
+配置hadoop相关环境变量
+
+1234vi .bashrcexport HADOOP_HOME=/usr/local/hadoopexport PATH=$HADOOP_HOME/bin:$HADOOP_HOME/sbinsource .bashrc
+ 配置Hadoop
+ 修改cor
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -705,7 +718,12 @@ scala 2.11.8
 
  安装CentOS 6.5
 
-在macOS下，使用***Parallels Des
+在macOS下，使用***Parallels Desktop***直接安装，CentOS 6.5使用的只需要官网的一个DVD1.iso文件。
+启动以后使用***Termius***连接三台机器，使用***Transmit***传文件。
+
+ CentOS 6.5防火墙配置
+关闭防火墙
+1234service iptables stopchkconfig
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -876,7 +894,22 @@ spark2：datanode
 spark3：datanode
 
  YARN
-1/usr/local/
+1/usr/local/hadoop/sbin/start-yarn.sh
+ Hive
+在spark1中，直接输入:
+1hive
+ ZooKeeper
+
+分别在三台机器上执行：
+
+1zkServer.sh start
+
+检查ZooKeeper状态：
+
+1zkServer.sh status
+ kafka
+
+在三台机器上分别
           ...
           <!--noindex-->
           <div class="post-button text-center">

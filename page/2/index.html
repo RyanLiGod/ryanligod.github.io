@@ -364,7 +364,7 @@
 
  键值对分组操作 groupByKey，cogroup
  groupByKey
-12345def 
+12345def groupByKey(): RDD[(K, Iterable[V])]def groupByKey(numPartitions: Int): RDD[(K, Iterable[V])]def groupByKey(partitioner: Partitioner): RDD[(K, Iterable
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -530,7 +530,8 @@
 原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428
 
  键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey
- redu
+ reduceByKey
+12345def reduceByKey(func: (V, V) =&gt; V): RDD[(K, V)]def reduceByKey(func: (V, V) =&gt; V, numPartitions: Int): RDD[(K, V)]def reduceByKey(p
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -697,7 +698,10 @@
 
  键值对聚合操作 combineByKey
  combineByKey
-聚合数据一般在集中式数据比
+聚合数据一般在集中式数据比较方便，如果涉及到分布式的数据集，该如何去实现呢。这里介绍一下combineByKey, 这个是各种聚集操作的鼻祖，应该要好好了解一下,参考
+scala API
+ 简要介绍
+123def combineByKey[C](createCombiner: (V) =&gt; C,            
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -864,7 +868,11 @@
 
  创建键值对RDD mapToPair flatMapToPair
  mapToPair
-举例，在
+举例，在F:\sparktest\sample.txt 文件的内容如下
+1234aa bb cc aa aa aa dd dd ee ee ee ee ff aa bb zksee kksee  zz zks
+将每一行的第一个单词作为键，1 作为value创建pairRDD
+scala版本
+scala是没有
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1030,7 +1038,11 @@
 原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428
 
  distinct，union，intersection，subtract，cartesian
-s
+spark伪集合
+尽管 RDD 本身不是严格意义上的集合，但它也支持许多数学上的集合操作，比如合并和相交操作, 下图展示了这四种操作
+ distinct
+distinct用于去重， 我们生成的RDD可能有重复的元素，使用distinct方法可以去掉重复的元素, 不过此方法涉及到混洗，操作开销很大
+sc
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1197,7 +1209,11 @@ s
 
  filter,map,flatMap
  filter
-举例，在F:\sparktest\samp
+举例，在F:\sparktest\sample.txt 文件的内容如下
+1234aa bb cc aa aa aa dd dd ee ee ee ee ff aa bb zksee kksee  zz zks
+我要将包含zks的行的内容给找出来
+scala版本
+123456    val lines = sc.textFile("F:\\s
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1364,7 +1380,9 @@ s
 
  parallelize，makeRDD，textFile
  parallelize
-调用Spar
+调用SparkContext 的 parallelize()，将一个存在的集合，变成一个RDD，这种方式试用于学习spark和做一些spark的测试
+scala版本
+def parallelize[T](seq: Seq[T], numSlices: Int = defaultParallelism)(impl
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1532,7 +1550,11 @@ s
 
 更改spark目录名：
 
-1mv spark-2.1.3-bin
+1mv spark-2.1.3-bin-hadoop2.4 spark
+
+设置spark环境变量
+
+123456vi .bashrcexport SPARK_HOME=/usr/local/sparkexport PATH=$SPARK_HOME/binexport CLASSPATH=.:$CLASSPATH:$JAVA_HOME/l
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1695,7 +1717,18 @@ s
 注意，scala的版本和之后要安装的spark版本密切关联，必须要和spark/jars中的scala-compiler-2.11.8.jar版本一致，而且之后用IDE打包的时候，选择scala版本也要一致
 
 
-将scala-2.11.8.tgz使用WinSCP拷贝到
+将scala-2.11.8.tgz使用WinSCP拷贝到spark1的/usr/local目录下。
+对scala-2.11.8.tgz进行解压缩：
+
+1tar -zxvf scala-2.11.8.tgz
+
+对scala目录进行重命名：
+
+1mv scala-2.11.8 scala
+
+配置scala相关的环境变量
+
+12345vi .bashrcexp
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1861,7 +1894,14 @@ s
 
 1tar -zxvf zookeeper-3.4.5.tar.gz
 
-对zookeeper目录进行
+对zookeeper目录进行重命名：
+
+1mv zookeeper-3.4.5 zk
+
+配置zookeeper相关的环境变量
+
+1234vi .bashrcexport ZOOKEEPER_HOME=/usr/local/zkexport PATH=$ZOOKEEPER_HOME/binsource .bashrc
+ 配置zo
           ...
           <!--noindex-->
           <div class="post-button text-center">

@@ -356,48 +356,24 @@
       
         
           
-            <h2 id="安装hive包"><a class="markdownIt-Anchor" href="#安装hive包"></a> 安装hive包</h2>
-<ol>
-<li>将apache-hive-0.13.1-bin.tar.gz使用SFTP工具上传到spark1的/usr/local目录下。</li>
-<li>解压缩hive安装包：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf apache-hive-0.13.1-bin.tar.gz</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>重命名hive目录：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv apache-hive-0.13.1-bin hive</span><br></pre></td></tr></table></figure>
-<ol start="4">
-<li>配置hive相关的环境变量</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi .bashrc</span><br><span class="line">export HIVE_HOME=/usr/local/hive</span><br><span class="line">export PATH=$HIVE_HOME/bin</span><br><span class="line">source .bashrc</span><br></pre></td></tr></table></figure>
-<h2 id="安装mysql"><a class="markdownIt-Anchor" href="#安装mysql"></a> 安装mysql</h2>
-<ol>
-<li>在spark1上安装mysql</li>
-<li>使用yum安装mysql server</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install -y mysql-server</span><br><span class="line">service mysqld start</span><br><span class="line">chkconfig mysqld on</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>使用yum安装mysql connector</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y mysql-connector-java</span><br></pre></td></tr></table></figure>
-<ol start="4">
-<li>将mysql connector拷贝到hive的lib包中</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /usr/share/java/mysql-connector-java-5.1.17.jar /usr/local/hive/lib</span><br></pre></td></tr></table></figure>
-<ol start="5">
-<li>在mysql上创建hive元数据库，并对hive进行授权</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">create database if not exists hive_metadata;</span><br><span class="line">grant all privileges on hive_metadata.* to &apos;hive&apos;@&apos;%&apos; identified by &apos;hive&apos;;</span><br><span class="line">grant all privileges on hive_metadata.* to &apos;hive&apos;@&apos;localhost&apos; identified by &apos;hive&apos;;</span><br><span class="line">grant all privileges on hive_metadata.* to &apos;hive&apos;@&apos;spark1&apos; identified by &apos;hive&apos;;</span><br><span class="line">flush privileges;</span><br><span class="line">use hive_metadata;</span><br></pre></td></tr></table></figure>
-<h2 id="配置hive-sitexml"><a class="markdownIt-Anchor" href="#配置hive-sitexml"></a> 配置hive-site.xml</h2>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mv hive-default.xml.template hive-site.xml</span><br><span class="line">vi hive-site.xml</span><br></pre></td></tr></table></figure>
-<p>更改如下项目：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;javax.jdo.option.ConnectionURL&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;jdbc:mysql://spark1:3306/hive_metadata?createDatabaseIfNotExist=true&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;javax.jdo.option.ConnectionDriverName&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;com.mysql.jdbc.Driver&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;javax.jdo.option.ConnectionUserName&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;hive&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;javax.jdo.option.ConnectionPassword&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;hive&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;hive.metastore.warehouse.dir&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;/user/hive/warehouse&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="配置hive-envsh和hive-configsh"><a class="markdownIt-Anchor" href="#配置hive-envsh和hive-configsh"></a> <a href="http://xn--hive-env-vz2ve12k.xn--shhive-config-q59v.sh" target="_blank" rel="noopener">配置hive-env.sh和hive-config.sh</a></h2>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mv hive-env.sh.template hive-env.sh</span><br><span class="line">vi /usr/local/hive/bin/hive-config.sh</span><br><span class="line"></span><br><span class="line">export JAVA_HOME=/usr/java/latest</span><br><span class="line">export HIVE_HOME=/usr/local/hive</span><br><span class="line">export HADOOP_HOME=/usr/local/hadoop</span><br></pre></td></tr></table></figure>
-<h2 id="验证hive是否安装成功"><a class="markdownIt-Anchor" href="#验证hive是否安装成功"></a> 验证hive是否安装成功</h2>
-<p>直接输入hive命令，可以进入hive命令行</p>
+           安装hive包
 
-          
+将apache-hive-0.13.1-bin.tar.gz使用SFTP工具上传到spark1的/usr/local目录下。
+解压缩hive安装包：
+
+1tar -zxvf apache-hive-0.13.1-bin.tar.gz
+
+重命名hive目录：
+
+1mv apache
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/31/2018-07-31 Hive0-13搭建/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -548,65 +524,24 @@
       
         
           
-            <h2 id="安装hadoop包"><a class="markdownIt-Anchor" href="#安装hadoop包"></a> 安装hadoop包</h2>
-<ol>
-<li>下载好hadoop-2.4.1.tar.gz，使用SFTP工具上传到CentOS的/usr/local目录下</li>
-<li>将hadoop包进行解压缩：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf hadoop-2.4.1.tar.gz</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>对hadoop目录进行重命名：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv hadoop-2.4.1 hadoop</span><br></pre></td></tr></table></figure>
-<ol start="4">
-<li>配置hadoop相关环境变量</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi .bashrc</span><br><span class="line">export HADOOP_HOME=/usr/local/hadoop</span><br><span class="line">export PATH=$HADOOP_HOME/bin:$HADOOP_HOME/sbin</span><br><span class="line">source .bashrc</span><br></pre></td></tr></table></figure>
-<h2 id="配置hadoop"><a class="markdownIt-Anchor" href="#配置hadoop"></a> 配置Hadoop</h2>
-<h3 id="修改core-sitexml"><a class="markdownIt-Anchor" href="#修改core-sitexml"></a> 修改core-site.xml</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;fs.default.name&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;hdfs://spark1:9000&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="修改hdfs-sitexml"><a class="markdownIt-Anchor" href="#修改hdfs-sitexml"></a> 修改hdfs-site.xml</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;dfs.name.dir&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;/usr/local/data/namenode&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;dfs.data.dir&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;/usr/local/data/datanode&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;dfs.tmp.dir&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;/usr/local/data/tmp&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;dfs.replication&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;3&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="修改mapred-sitexml"><a class="markdownIt-Anchor" href="#修改mapred-sitexml"></a> 修改mapred-site.xml</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;mapreduce.framework.name&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;yarn&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="修改yarn-sitexml"><a class="markdownIt-Anchor" href="#修改yarn-sitexml"></a> 修改yarn-site.xml</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.hostname&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;spark1&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;mapreduce_shuffle&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="修改slaves文件"><a class="markdownIt-Anchor" href="#修改slaves文件"></a> 修改slaves文件</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">spark1</span><br><span class="line">spark2</span><br><span class="line">spark3</span><br></pre></td></tr></table></figure>
-<h3 id="在另外两台机器上搭建hadoop"><a class="markdownIt-Anchor" href="#在另外两台机器上搭建hadoop"></a> 在另外两台机器上搭建hadoop</h3>
-<ol>
-<li>使用如上配置在另外两台机器上搭建hadoop，可以使用scp命令将spark1上面的hadoop安装包和.bashrc配置文件都拷贝过去</li>
-<li>要记得对.bashrc文件进行source，以让它生效</li>
-<li>记得在spark2和spark3的/usr/local目录下创建data目录</li>
-</ol>
-<h2 id="启动hdfs集群"><a class="markdownIt-Anchor" href="#启动hdfs集群"></a> 启动hdfs集群</h2>
-<ol>
-<li>格式化namenode：在spark1上执行以下命令(不要执行多次，不然会导致datanode的ID不一致，以后都只要直接第二步):</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs namenode -format</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>启动hdfs集群：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start-dfs.sh</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>验证启动是否成功：jps、50070端口<br>
-spark1：namenode、datanode、secondarynamenode<br>
-spark2：datanode<br>
-spark3：datanode</li>
-</ol>
-<h2 id="启动yarn集群"><a class="markdownIt-Anchor" href="#启动yarn集群"></a> 启动yarn集群</h2>
-<ol>
-<li>启动yarn集群：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/hadoop/sbin/start-yarn.sh</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>验证启动是否成功：jps、8088端口<br>
-spark1：resourcemanager、nodemanager<br>
-spark2：nodemanager<br>
-spark3：nodemanager</li>
-</ol>
+           安装hadoop包
 
-          
+下载好hadoop-2.4.1.tar.gz，使用SFTP工具上传到CentOS的/usr/local目录下
+将hadoop包进行解压缩：
+
+1tar -zxvf hadoop-2.4.1.tar.gz
+
+对hadoop目录进行重命名：
+
+1mv hadoop-2.4.1 h
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/31/2018-07-31 Hadoop2-4-1集群搭建/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -757,72 +692,28 @@ spark3：nodemanager</li>
       
         
           
-            <h2 id="运行环境"><a class="markdownIt-Anchor" href="#运行环境"></a> 运行环境</h2>
-<ol>
-<li>CentOS 6.5</li>
-<li>JDK 1.7</li>
-<li>Hadoop 2.4.1</li>
-<li>Hive 0.13</li>
-<li>ZooKeeper 3.4.5</li>
-<li>kafka_2.9.2-0.8.1</li>
-<li>Spark 2.1.3</li>
-<li>scala 2.11.8</li>
-</ol>
-<h2 id="安装centos-65"><a class="markdownIt-Anchor" href="#安装centos-65"></a> 安装CentOS 6.5</h2>
-<ol>
-<li>在macOS下，使用***Parallels Desktop***直接安装，CentOS 6.5使用的只需要官网的一个DVD1.iso文件。</li>
-<li>启动以后使用***Termius***连接三台机器，使用***Transmit***传文件。</li>
-</ol>
-<h2 id="centos-65防火墙配置"><a class="markdownIt-Anchor" href="#centos-65防火墙配置"></a> CentOS 6.5防火墙配置</h2>
-<p>关闭防火墙</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">service iptables stop</span><br><span class="line">chkconfig iptables off</span><br><span class="line">vi /etc/selinux/config</span><br><span class="line">SELINUX=disabled</span><br></pre></td></tr></table></figure>
-<h2 id="jdk-17安装"><a class="markdownIt-Anchor" href="#jdk-17安装"></a> JDK 1.7安装</h2>
-<p>我下载的CentOS自带，所以不用安装，装之前用java -version测试是否自带JDK。</p>
-<ol>
-<li>将jdk-7u60-linux-i586.rpm通过WinSCP上传到虚拟机中</li>
-<li>安装JDK：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh jdk-7u65-linux-i586.rpm</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>配置jdk相关的环境变量</li>
-<li></li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi .bashrc</span><br><span class="line">export JAVA_HOME=/usr/java/latest</span><br><span class="line">export PATH=$PATH:$JAVA_HOME/bin</span><br><span class="line">source .bashrc</span><br></pre></td></tr></table></figure>
-<ol start="5">
-<li>测试jdk安装是否成功：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
-<ol start="6">
-<li></li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -f /etc/udev/rules.d/70-persistent-net.rules</span><br></pre></td></tr></table></figure>
-<h2 id="安装第二台和第三台虚拟机"><a class="markdownIt-Anchor" href="#安装第二台和第三台虚拟机"></a> 安装第二台和第三台虚拟机</h2>
-<ol>
-<li>安装上述步骤，再安装两台一模一样环境的虚拟机，因为后面hadoop和spark都是要搭建集群的。</li>
-<li>集群的最小环境就是三台。因为后面要搭建ZooKeeper、kafka等集群。</li>
-<li>另外两台机器的hostname分别设置为spark2和spark3即可，通过终端输入ifconfig查看ip，记下。</li>
-<li>安装好之后，记得要在三台机器的/etc/hosts文件中，配置全三台机器的ip地址到hostname的映射，而不能只配置本机。比如我的：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[spark1@spark1 Desktop]$ cat /etc/hosts</span><br><span class="line">127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4</span><br><span class="line">::1         localhost localhost.localdomain localhost6 localhost6.localdomain6</span><br><span class="line">10.211.55.24 spark1</span><br><span class="line">10.211.55.25 spark2</span><br><span class="line">10.211.55.26 spark3</span><br></pre></td></tr></table></figure>
-<ol start="5">
-<li>mac中Parallels Desktop会自动配置到虚拟机的地址映射，开启虚拟机以后在mac中可以直接ssh root@spark1进行连接</li>
-</ol>
-<h2 id="配置集群ssh免密码登录"><a class="markdownIt-Anchor" href="#配置集群ssh免密码登录"></a> 配置集群ssh免密码登录</h2>
-<ol>
-<li></li>
-</ol>
-<p>首先在三台机器上配置对本机的ssh免密码登录<br>
-生成本机的公钥，过程中不断敲回车即可，ssh-keygen命令默认会将公钥放在/root/.ssh目录下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>将公钥复制为authorized_keys文件，此时使用ssh连接本机就不需要输入密码了</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /root/.ssh</span><br><span class="line">cp id_rsa.pub authorized_keys</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>接着配置三台机器互相之间的ssh免密码登录，使用ssh-copy-id -i spark{N}命令将本机的公钥拷贝到指定机器的authorized_keys文件中：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@spark1 ~]# ssh-copy-id -i spark2</span><br><span class="line">[root@spark1 ~]# ssh-copy-id -i spark3</span><br><span class="line">[root@spark2 ~]# ssh-copy-id -i spark1</span><br><span class="line">[root@spark2 ~]# ssh-copy-id -i spark3</span><br><span class="line">[root@spark3 ~]# ssh-copy-id -i spark1</span><br><span class="line">[root@spark3 ~]# ssh-copy-id -i spark2</span><br></pre></td></tr></table></figure>
-          
+           运行环境
+
+CentOS 6.5
+JDK 1.7
+Hadoop 2.4.1
+Hive 0.13
+ZooKeeper 3.4.5
+kafka_2.9.2-0.8.1
+Spark 2.1.3
+scala 2.11.8
+
+ 安装CentOS 6.5
+
+在macOS下，使用***Parallels Des
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/31/2018-07-31 CentOS6-5集群搭建/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -973,55 +864,27 @@ spark3：nodemanager</li>
       
         
           
-            <h2 id="hadoop"><a class="markdownIt-Anchor" href="#hadoop"></a> Hadoop</h2>
-<ol>
-<li>启动hdfs集群：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start-dfs.sh</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>验证启动是否成功：jps、50070端口<br>
-spark1：namenode、datanode、secondarynamenode<br>
-spark2：datanode<br>
-spark3：datanode</li>
-</ol>
-<h2 id="yarn"><a class="markdownIt-Anchor" href="#yarn"></a> YARN</h2>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/hadoop/sbin/start-yarn.sh</span><br></pre></td></tr></table></figure>
-<h2 id="hive"><a class="markdownIt-Anchor" href="#hive"></a> Hive</h2>
-<p>在spark1中，直接输入:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hive</span><br></pre></td></tr></table></figure>
-<h2 id="zookeeper"><a class="markdownIt-Anchor" href="#zookeeper"></a> ZooKeeper</h2>
-<ol>
-<li>分别在三台机器上执行：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zkServer.sh start</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>检查ZooKeeper状态：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zkServer.sh status</span><br></pre></td></tr></table></figure>
-<h2 id="kafka"><a class="markdownIt-Anchor" href="#kafka"></a> kafka</h2>
-<ol>
-<li>在三台机器上分别执行以下命令：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/kafka/</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>执行</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup bin/kafka-server-start.sh config/server.properties &amp;</span><br></pre></td></tr></table></figure>
-<h2 id="spark"><a class="markdownIt-Anchor" href="#spark"></a> Spark</h2>
-<ol>
-<li>在spark目录下的sbin目录</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/spark/sbin</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>执行</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./start-all.sh</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>使用jsp和8080端口可以检查集群是否启动成功</li>
-<li>进入spark-shell查看是否正常</li>
-</ol>
+           Hadoop
 
-          
+启动hdfs集群：
+
+1start-dfs.sh
+
+验证启动是否成功：jps、50070端口
+spark1：namenode、datanode、secondarynamenode
+spark2：datanode
+spark3：datanode
+
+ YARN
+1/usr/local/
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/25/2018-07-25 启动Hadoop、Spark等环境步骤记录/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

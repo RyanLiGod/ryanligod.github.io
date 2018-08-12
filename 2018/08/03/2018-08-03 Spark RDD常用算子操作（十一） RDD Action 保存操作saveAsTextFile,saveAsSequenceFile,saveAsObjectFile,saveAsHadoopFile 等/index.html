@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="原文作者：翟开顺 首发：CSDN 本人仅为自己方便查阅做了摘抄，请支持原作者 原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428   RDD Action 保存操作saveAsTextFile,saveAsSequenceFile,saveAsObjectFile,saveAsHadoopFile 等 关键字:Spark算子、S">
+<meta name="description" content="原文作者：翟开顺 首发：CSDN 本人仅为自己方便查阅做了摘抄，请支持原作者 原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428   RDD Action 保存操作 关键字:Spark算子、Spark函数、Spark RDD行动Action、Spark RDD存储操作、saveAsTextFile、saveAsSequenceF">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spark RDD常用算子操作（十一） RDD Action 保存操作saveAsTextFile,saveAsSequenceFile,saveAsObjectFile,saveAsHadoopFile 等">
 <meta property="og:url" content="https://ryanligod.github.io/2018/08/03/2018-08-03 Spark RDD常用算子操作（十一） RDD Action 保存操作saveAsTextFile,saveAsSequenceFile,saveAsObjectFile,saveAsHadoopFile 等/index.html">
 <meta property="og:site_name" content="Ryan Li God">
-<meta property="og:description" content="原文作者：翟开顺 首发：CSDN 本人仅为自己方便查阅做了摘抄，请支持原作者 原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428   RDD Action 保存操作saveAsTextFile,saveAsSequenceFile,saveAsObjectFile,saveAsHadoopFile 等 关键字:Spark算子、S">
+<meta property="og:description" content="原文作者：翟开顺 首发：CSDN 本人仅为自己方便查阅做了摘抄，请支持原作者 原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428   RDD Action 保存操作 关键字:Spark算子、Spark函数、Spark RDD行动Action、Spark RDD存储操作、saveAsTextFile、saveAsSequenceF">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-12T08:22:58.524Z">
+<meta property="og:updated_time" content="2018-08-12T08:27:53.018Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spark RDD常用算子操作（十一） RDD Action 保存操作saveAsTextFile,saveAsSequenceFile,saveAsObjectFile,saveAsHadoopFile 等">
-<meta name="twitter:description" content="原文作者：翟开顺 首发：CSDN 本人仅为自己方便查阅做了摘抄，请支持原作者 原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428   RDD Action 保存操作saveAsTextFile,saveAsSequenceFile,saveAsObjectFile,saveAsHadoopFile 等 关键字:Spark算子、S">
+<meta name="twitter:description" content="原文作者：翟开顺 首发：CSDN 本人仅为自己方便查阅做了摘抄，请支持原作者 原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428   RDD Action 保存操作 关键字:Spark算子、Spark函数、Spark RDD行动Action、Spark RDD存储操作、saveAsTextFile、saveAsSequenceF">
 
 
 
@@ -358,7 +358,7 @@
 本人仅为自己方便查阅做了摘抄，请支持原作者<br>
 原文地址：<a href="https://blog.csdn.net/t1dmzks/article/details/72077428" target="_blank" rel="noopener">https://blog.csdn.net/t1dmzks/article/details/72077428</a></p>
 </blockquote>
-<h1 id="rdd-action-保存操作saveastextfilesaveassequencefilesaveasobjectfilesaveashadoopfile-等"><a class="markdownIt-Anchor" href="#rdd-action-保存操作saveastextfilesaveassequencefilesaveasobjectfilesaveashadoopfile-等"></a> RDD Action 保存操作saveAsTextFile,saveAsSequenceFile,saveAsObjectFile,saveAsHadoopFile 等</h1>
+<h1 id="rdd-action-保存操作"><a class="markdownIt-Anchor" href="#rdd-action-保存操作"></a> RDD Action 保存操作</h1>
 <p><strong>关键字:Spark算子、Spark函数、Spark RDD行动Action、Spark RDD存储操作、saveAsTextFile、saveAsSequenceFile、saveAsObjectFile,saveAsHadoopFile、saveAsHadoopDataset,saveAsNewAPIHadoopFile、saveAsNewAPIHadoopDataset</strong></p>
 <h2 id="saveastextfile"><a class="markdownIt-Anchor" href="#saveastextfile"></a> saveAsTextFile</h2>
 <p>def saveAsTextFile(path: String): Unit</p>
@@ -587,7 +587,7 @@ HBase建表：</p>
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#rdd-action-保存操作saveastextfilesaveassequencefilesaveasobjectfilesaveashadoopfile-等"><span class="nav-number">1.</span> <span class="nav-text"> RDD Action 保存操作saveAsTextFile,saveAsSequenceFile,saveAsObjectFile,saveAsHadoopFile 等</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#saveastextfile"><span class="nav-number">1.1.</span> <span class="nav-text"> saveAsTextFile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#saveassequencefile"><span class="nav-number">1.2.</span> <span class="nav-text"> saveAsSequenceFile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#saveasobjectfile"><span class="nav-number">1.3.</span> <span class="nav-text"> saveAsObjectFile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#saveashadoopfile"><span class="nav-number">1.4.</span> <span class="nav-text"> saveAsHadoopFile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#saveashadoopdataset"><span class="nav-number">1.5.</span> <span class="nav-text"> saveAsHadoopDataset</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#saveasnewapihadoopfile"><span class="nav-number">1.6.</span> <span class="nav-text"> saveAsNewAPIHadoopFile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#saveasnewapihadoopdataset"><span class="nav-number">1.7.</span> <span class="nav-text"> saveAsNewAPIHadoopDataset</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#rdd-action-保存操作"><span class="nav-number">1.</span> <span class="nav-text"> RDD Action 保存操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#saveastextfile"><span class="nav-number">1.1.</span> <span class="nav-text"> saveAsTextFile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#saveassequencefile"><span class="nav-number">1.2.</span> <span class="nav-text"> saveAsSequenceFile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#saveasobjectfile"><span class="nav-number">1.3.</span> <span class="nav-text"> saveAsObjectFile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#saveashadoopfile"><span class="nav-number">1.4.</span> <span class="nav-text"> saveAsHadoopFile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#saveashadoopdataset"><span class="nav-number">1.5.</span> <span class="nav-text"> saveAsHadoopDataset</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#saveasnewapihadoopfile"><span class="nav-number">1.6.</span> <span class="nav-text"> saveAsNewAPIHadoopFile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#saveasnewapihadoopdataset"><span class="nav-number">1.7.</span> <span class="nav-text"> saveAsNewAPIHadoopDataset</span></a></li></ol></li></ol></div>
             
 
           </div>

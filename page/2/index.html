@@ -200,6 +200,16 @@
         </li>
       
         
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-categories">
           <a href="/categories/" rel="section">
             
@@ -1472,176 +1482,6 @@ def makeRDD[T](seq : scala.Seq[T], numSlices : scala.Int = { /* compiled code */
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ryanligod.github.io/2018/07/31/2018-07-31 Spark2-1-3集群搭建/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan Li">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ryan Li God">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/31/2018-07-31 Spark2-1-3集群搭建/" itemprop="url">Spark学习笔记（六）：Spark 2.1.3集群搭建</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-31T15:03:43+10:00">
-                2018-07-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Spark/" itemprop="url" rel="index">
-                    <span itemprop="name">Spark</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/07/31/2018-07-31 Spark2-1-3集群搭建/" class="leancloud_visitors" data-flag-title="Spark学习笔记（六）：Spark 2.1.3集群搭建">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="安装spark包"><a class="markdownIt-Anchor" href="#安装spark包"></a> 安装Spark包</h2>
-<ol>
-<li>将spark-2.1.3-bin-hadoop2.4.tgz使用SFTP上传到/usr/local目录下。</li>
-<li>解压缩spark包：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar zxvf spark-2.1.3-bin-hadoop2.4.tgz</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>更改spark目录名：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv spark-2.1.3-bin-hadoop2.4 spark</span><br></pre></td></tr></table></figure>
-<ol start="4">
-<li>设置spark环境变量</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vi .bashrc</span><br><span class="line">export SPARK_HOME=/usr/local/spark</span><br><span class="line">export PATH=$SPARK_HOME/bin</span><br><span class="line">export CLASSPATH=.:$CLASSPATH:$JAVA_HOME/lib:$JAVA_HOME/jre/lib</span><br><span class="line"></span><br><span class="line">source .bashrc</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/31/2018-07-31 Spark2-1-3集群搭建/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://ryanligod.github.io/2018/07/31/2018-07-31 kafka-2-9-2-0-8-1集群搭建/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1821,7 +1661,7 @@ def makeRDD[T](seq : scala.Seq[T], numSlices : scala.Int = { /* compiled code */
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ryanligod.github.io/2018/07/31/2018-07-31 ZooKeeper3-4-5集群搭建/">
+    <link itemprop="mainEntityOfPage" href="https://ryanligod.github.io/2018/07/31/2018-07-31 Hive0-13搭建/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ryan Li">
@@ -1840,7 +1680,7 @@ def makeRDD[T](seq : scala.Seq[T], numSlices : scala.Int = { /* compiled code */
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/31/2018-07-31 ZooKeeper3-4-5集群搭建/" itemprop="url">Spark学习笔记（四）：ZooKeeper 3.4.5集群搭建</a></h2>
+                <a class="post-title-link" href="/2018/07/31/2018-07-31 Hive0-13搭建/" itemprop="url">Spark学习笔记（三）：Hive 0.13搭建</a></h2>
         
 
         <div class="post-meta">
@@ -1852,7 +1692,7 @@ def makeRDD[T](seq : scala.Seq[T], numSlices : scala.Int = { /* compiled code */
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-31T14:32:43+10:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-31T14:24:55+10:00">
                 2018-07-31
               </time>
             
@@ -1892,7 +1732,7 @@ def makeRDD[T](seq : scala.Seq[T], numSlices : scala.Int = { /* compiled code */
 
           
           
-             <span id="/2018/07/31/2018-07-31 ZooKeeper3-4-5集群搭建/" class="leancloud_visitors" data-flag-title="Spark学习笔记（四）：ZooKeeper 3.4.5集群搭建">
+             <span id="/2018/07/31/2018-07-31 Hive0-13搭建/" class="leancloud_visitors" data-flag-title="Spark学习笔记（三）：Hive 0.13搭建">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1924,23 +1764,193 @@ def makeRDD[T](seq : scala.Seq[T], numSlices : scala.Int = { /* compiled code */
 
       
         
-          <h2 id="安装zookeeper包"><a class="markdownIt-Anchor" href="#安装zookeeper包"></a> 安装ZooKeeper包</h2>
+          <h2 id="安装hive包"><a class="markdownIt-Anchor" href="#安装hive包"></a> 安装hive包</h2>
 <ol>
-<li>将zookeeper-3.4.5.tar.gz使用SFTP工具拷贝到spark1的/usr/local目录下</li>
-<li>对zookeeper-3.4.5.tar.gz进行解压缩：</li>
+<li>将apache-hive-0.13.1-bin.tar.gz使用SFTP工具上传到spark1的/usr/local目录下。</li>
+<li>解压缩hive安装包：</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf zookeeper-3.4.5.tar.gz</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf apache-hive-0.13.1-bin.tar.gz</span><br></pre></td></tr></table></figure>
 <ol start="3">
-<li>对zookeeper目录进行重命名：</li>
+<li>重命名hive目录：</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv zookeeper-3.4.5 zk</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv apache-hive-0.13.1-bin hive</span><br></pre></td></tr></table></figure>
 <ol start="4">
-<li>配置zookeeper相关的环境变量</li>
+<li>配置hive相关的环境变量</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi .bashrc</span><br><span class="line">export ZOOKEEPER_HOME=/usr/local/zk</span><br><span class="line">export PATH=$ZOOKEEPER_HOME/bin</span><br><span class="line">source .bashrc</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi .bashrc</span><br><span class="line">export HIVE_HOME=/usr/local/hive</span><br><span class="line">export PATH=$HIVE_HOME/bin</span><br><span class="line">source .bashrc</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/07/31/2018-07-31 ZooKeeper3-4-5集群搭建/#more" rel="contents">
+            <a class="btn" href="/2018/07/31/2018-07-31 Hive0-13搭建/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ryanligod.github.io/2018/07/31/2018-07-31 Hadoop2-4-1集群搭建/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ryan Li God">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/31/2018-07-31 Hadoop2-4-1集群搭建/" itemprop="url">Spark学习笔记（二）：Hadoop 2.4.1集群搭建</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-31T13:32:07+10:00">
+                2018-07-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Spark/" itemprop="url" rel="index">
+                    <span itemprop="name">Spark</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/07/31/2018-07-31 Hadoop2-4-1集群搭建/" class="leancloud_visitors" data-flag-title="Spark学习笔记（二）：Hadoop 2.4.1集群搭建">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="安装hadoop包"><a class="markdownIt-Anchor" href="#安装hadoop包"></a> 安装hadoop包</h2>
+<ol>
+<li>下载好hadoop-2.4.1.tar.gz，使用SFTP工具上传到CentOS的/usr/local目录下</li>
+<li>将hadoop包进行解压缩：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf hadoop-2.4.1.tar.gz</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>对hadoop目录进行重命名：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv hadoop-2.4.1 hadoop</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>配置hadoop相关环境变量</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi .bashrc</span><br><span class="line">export HADOOP_HOME=/usr/local/hadoop</span><br><span class="line">export PATH=$HADOOP_HOME/bin:$HADOOP_HOME/sbin</span><br><span class="line">source .bashrc</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/31/2018-07-31 Hadoop2-4-1集群搭建/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -2032,7 +2042,7 @@ def makeRDD[T](seq : scala.Seq[T], numSlices : scala.Int = { /* compiled code */
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2049,6 +2059,15 @@ def makeRDD[T](seq : scala.Seq[T], numSlices : scala.Int = { /* compiled code */
               </div>
             
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
             
 
           </nav>

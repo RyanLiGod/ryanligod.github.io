@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Ryan Li God">
 <meta property="og:description" content="原文作者：翟开顺 首发：CSDN 本人仅为自己方便查阅做了摘抄，请支持原作者 原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428   parallelize，makeRDD，textFile  parallelize 调用SparkContext 的 parallelize()，将一个存在的集合，变成一个RDD，这种方式试用于学">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-11T17:09:04.058Z">
+<meta property="og:updated_time" content="2018-08-12T08:22:37.992Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spark RDD常用算子操作（一） parallelize，makeRDD，textFile">
 <meta name="twitter:description" content="原文作者：翟开顺 首发：CSDN 本人仅为自己方便查阅做了摘抄，请支持原作者 原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428   parallelize，makeRDD，textFile  parallelize 调用SparkContext 的 parallelize()，将一个存在的集合，变成一个RDD，这种方式试用于学">
@@ -383,6 +383,7 @@ java版本只能接收List的集合</li>
 def makeRDD[T](seq : scala.Seq[T], numSlices : scala.Int = { /* compiled code */ })<br>
 跟parallelize类似</p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sc.makeRDD(<span class="type">List</span>(<span class="string">"shenzhen"</span>, <span class="string">"is a beautiful city"</span>))</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <h2 id="textfile"><a class="markdownIt-Anchor" href="#textfile"></a> textFile</h2>
 <p>调用SparkContext.textFile()方法，从外部存储中读取数据来创建 RDD<br>
 例如在我本地F:\dataexample\wordcount\input下有个sample.txt文件，文件随便写了点内容，我需要将里面的内容读取出来创建RDD</p>

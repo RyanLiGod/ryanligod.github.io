@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Ryan Li God">
 <meta property="og:description" content="原文作者：翟开顺 首发：CSDN 本人仅为自己方便查阅做了摘抄，请支持原作者 原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428   键值对聚合操作 combineByKey  combineByKey 聚合数据一般在集中式数据比较方便，如果涉及到分布式的数据集，该如何去实现呢。这里介绍一下combineByKey, 这个是各种">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-11T17:08:59.092Z">
+<meta property="og:updated_time" content="2018-08-12T08:22:45.162Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spark RDD常用算子操作（五） 键值对聚合操作 combineByKey">
 <meta name="twitter:description" content="原文作者：翟开顺 首发：CSDN 本人仅为自己方便查阅做了摘抄，请支持原作者 原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428   键值对聚合操作 combineByKey  combineByKey 聚合数据一般在集中式数据比较方便，如果涉及到分布式的数据集，该如何去实现呢。这里介绍一下combineByKey, 这个是各种">
@@ -369,6 +369,7 @@
 <li><strong>mergeValue:</strong> 如果这是一个在处理当前分区之前已经遇到的键，它会使用 mergeValue() 方法将该键的累加器对应的当前值与这个新的值进行合并</li>
 <li><strong>mergeCombiners:</strong> 由于每个分区都是独立处理的， 因此对于同一个键可以有多个累加器。如果有两个或者更多的分区都有对应同一个键的累加器， 就需要使用用户提供的 mergeCombiners() 方法将各个分区的结果进行合并。</li>
 </ul>
+<a id="more"></a>
 <h3 id="计算学生平均成绩例子"><a class="markdownIt-Anchor" href="#计算学生平均成绩例子"></a> 计算学生平均成绩例子</h3>
 <p>这里举一个计算学生平均成绩的例子,例子参考至<a href="https://www.edureka.co/blog/apache-spark-combinebykey-explained" target="_blank" rel="noopener">https://www.edureka.co/blog/apache-spark-combinebykey-explained</a>, <a href="https://github.com/prithvirajbose/spark-dev/blob/master/src/main/scala/examples/TestCombineByKey.scala" target="_blank" rel="noopener">github源码</a> 我对此进行了解析<br>
 <strong>创建一个学生成绩说明的类</strong></p>

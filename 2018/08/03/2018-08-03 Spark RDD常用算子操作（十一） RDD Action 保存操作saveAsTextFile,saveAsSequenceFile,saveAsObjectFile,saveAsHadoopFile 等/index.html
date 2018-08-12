@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Ryan Li God">
 <meta property="og:description" content="原文作者：翟开顺 首发：CSDN 本人仅为自己方便查阅做了摘抄，请支持原作者 原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428   RDD Action 保存操作saveAsTextFile,saveAsSequenceFile,saveAsObjectFile,saveAsHadoopFile 等 关键字:Spark算子、S">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-11T17:08:50.552Z">
+<meta property="og:updated_time" content="2018-08-12T08:22:58.524Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spark RDD常用算子操作（十一） RDD Action 保存操作saveAsTextFile,saveAsSequenceFile,saveAsObjectFile,saveAsHadoopFile 等">
 <meta name="twitter:description" content="原文作者：翟开顺 首发：CSDN 本人仅为自己方便查阅做了摘抄，请支持原作者 原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428   RDD Action 保存操作saveAsTextFile,saveAsSequenceFile,saveAsObjectFile,saveAsHadoopFile 等 关键字:Spark算子、S">
@@ -369,6 +369,7 @@
 <p>注意：如果使用rdd1.saveAsTextFile(“file:///tmp/lxw1234.com”)将文件保存到本地文件系统，那么只会保存在Executor所在机器的本地目录。<br>
 <strong>指定压缩格式保存</strong></p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">rdd1.saveAsTextFile(<span class="string">"hdfs://cdh5/tmp/lxw1234.com/"</span>,classOf[com.hadoop.compression.lzo.<span class="type">LzopCodec</span>])</span><br><span class="line"></span><br><span class="line">hadoop fs -ls /tmp/lxw1234.com</span><br><span class="line">-rw-r--r--   <span class="number">2</span> lxw1234 supergroup    <span class="number">0</span> <span class="number">2015</span><span class="number">-07</span><span class="number">-10</span> <span class="number">09</span>:<span class="number">20</span> /tmp/lxw1234.com/_SUCCESS</span><br><span class="line">-rw-r--r--   <span class="number">2</span> lxw1234 supergroup    <span class="number">71</span> <span class="number">2015</span><span class="number">-07</span><span class="number">-10</span> <span class="number">09</span>:<span class="number">20</span> /tmp/lxw1234.com/part<span class="number">-00000.</span>lzo</span><br><span class="line"></span><br><span class="line">hadoop fs -text /tmp/lxw1234.com/part<span class="number">-00000.</span>lzo</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <h2 id="saveassequencefile"><a class="markdownIt-Anchor" href="#saveassequencefile"></a> saveAsSequenceFile</h2>
 <p>saveAsSequenceFile用于将RDD以SequenceFile的文件格式保存到HDFS上。<br>
 用法同saveAsTextFile。</p>

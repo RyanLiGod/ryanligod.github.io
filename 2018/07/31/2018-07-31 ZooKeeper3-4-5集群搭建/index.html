@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Ryan Li God">
 <meta property="og:description" content="安装ZooKeeper包  将zookeeper-3.4.5.tar.gz使用SFTP工具拷贝到spark1的/usr/local目录下 对zookeeper-3.4.5.tar.gz进行解压缩：  1tar -zxvf zookeeper-3.4.5.tar.gz  对zookeeper目录进行重命名：  1mv zookeeper-3.4.5 zk  配置zookeeper相关的环境变量">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-11T17:07:59.046Z">
+<meta property="og:updated_time" content="2018-08-12T08:24:07.010Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spark学习笔记（四）：ZooKeeper 3.4.5集群搭建">
 <meta name="twitter:description" content="安装ZooKeeper包  将zookeeper-3.4.5.tar.gz使用SFTP工具拷贝到spark1的/usr/local目录下 对zookeeper-3.4.5.tar.gz进行解压缩：  1tar -zxvf zookeeper-3.4.5.tar.gz  对zookeeper目录进行重命名：  1mv zookeeper-3.4.5 zk  配置zookeeper相关的环境变量">
@@ -366,6 +366,7 @@
 <li>配置zookeeper相关的环境变量</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi .bashrc</span><br><span class="line">export ZOOKEEPER_HOME=/usr/local/zk</span><br><span class="line">export PATH=$ZOOKEEPER_HOME/bin</span><br><span class="line">source .bashrc</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <h2 id="配置zoocfg"><a class="markdownIt-Anchor" href="#配置zoocfg"></a> 配置zoo.cfg</h2>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cd zk/conf</span><br><span class="line">mv zoo_sample.cfg zoo.cfg</span><br><span class="line"></span><br><span class="line">vi zoo.cfg</span><br><span class="line">修改：dataDir=/usr/local/zk/data</span><br><span class="line">新增：</span><br><span class="line">server.0=spark1:2888:3888	</span><br><span class="line">server.1=spark2:2888:3888</span><br><span class="line">server.2=spark3:2888:3888</span><br></pre></td></tr></table></figure>
 <h2 id="设置zk节点标识"><a class="markdownIt-Anchor" href="#设置zk节点标识"></a> 设置zk节点标识</h2>

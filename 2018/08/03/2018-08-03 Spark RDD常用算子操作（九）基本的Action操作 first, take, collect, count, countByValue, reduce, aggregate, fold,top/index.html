@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Ryan Li God">
 <meta property="og:description" content="原文作者：翟开顺 首发：CSDN 本人仅为自己方便查阅做了摘抄，请支持原作者 原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428   基本的Action操作 first, take, collect, count, countByValue, reduce, aggregate, fold,top  first 返回第一个元素">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-11T17:08:21.062Z">
+<meta property="og:updated_time" content="2018-08-12T08:23:53.625Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spark RDD常用算子操作（九）基本的Action操作 first, take, collect, count, countByValue, reduce, aggregate, fold,top">
 <meta name="twitter:description" content="原文作者：翟开顺 首发：CSDN 本人仅为自己方便查阅做了摘抄，请支持原作者 原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428   基本的Action操作 first, take, collect, count, countByValue, reduce, aggregate, fold,top  first 返回第一个元素">
@@ -365,6 +365,7 @@
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="keyword">val</span> rdd = sc.parallelize(<span class="type">List</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">3</span>))</span><br><span class="line"></span><br><span class="line">scala&gt; rdd.first()</span><br><span class="line">res1: <span class="type">Int</span> = <span class="number">1</span></span><br></pre></td></tr></table></figure>
 <p><strong>java</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">JavaRDD&lt;Integer&gt; rdd = sc.parallelize(Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>));</span><br><span class="line">Integer first = rdd.first();</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <h2 id="take"><a class="markdownIt-Anchor" href="#take"></a> take</h2>
 <p>rdd.take(n)返回第n个元素<br>
 <strong>scala</strong></p>

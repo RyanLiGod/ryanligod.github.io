@@ -886,18 +886,25 @@
         
           <h2 id="安装hadoop包"><a class="markdownIt-Anchor" href="#安装hadoop包"></a> 安装hadoop包</h2>
 <ol>
-<li>下载好hadoop-2.4.1.tar.gz，使用SFTP工具上传到CentOS的/usr/local目录下</li>
-<li>将hadoop包进行解压缩：</li>
+<li>
+<p>下载好hadoop-2.4.1.tar.gz，使用SFTP工具上传到CentOS的/usr/local目录下</p>
+</li>
+<li>
+<p>将hadoop包进行解压缩：<br>
+tar -zxvf hadoop-2.4.1.tar.gz</p>
+</li>
+<li>
+<p>对hadoop目录进行重命名：<br>
+mv hadoop-2.4.1 hadoop</p>
+</li>
+<li>
+<p>配置hadoop相关环境变量<br>
+vi .bashrc<br>
+export HADOOP_HOME=/usr/local/hadoop<br>
+export PATH=<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>H</mi><mi>A</mi><mi>D</mi><mi>O</mi><mi>O</mi><msub><mi>P</mi><mi>H</mi></msub><mi>O</mi><mi>M</mi><mi>E</mi><mi mathvariant="normal">/</mi><mi>b</mi><mi>i</mi><mi>n</mi><mo>:</mo></mrow><annotation encoding="application/x-tex">HADOOP_HOME/bin:</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.08125em;">H</span><span class="mord mathit">A</span><span class="mord mathit" style="margin-right:0.02778em;">D</span><span class="mord mathit" style="margin-right:0.02778em;">O</span><span class="mord mathit" style="margin-right:0.02778em;">O</span><span class="mord"><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight" style="margin-right:0.08125em;">H</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span><span class="mord mathit" style="margin-right:0.02778em;">O</span><span class="mord mathit" style="margin-right:0.10903em;">M</span><span class="mord mathit" style="margin-right:0.05764em;">E</span><span class="mord">/</span><span class="mord mathit">b</span><span class="mord mathit">i</span><span class="mord mathit">n</span><span class="mord rule" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span></span></span></span>HADOOP_HOME/sbin</p>
+<p>source .bashrc</p>
+</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf hadoop-2.4.1.tar.gz</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>对hadoop目录进行重命名：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv hadoop-2.4.1 hadoop</span><br></pre></td></tr></table></figure>
-<ol start="4">
-<li>配置hadoop相关环境变量</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi .bashrc</span><br><span class="line">export HADOOP_HOME=/usr/local/hadoop</span><br><span class="line">export PATH=$HADOOP_HOME/bin:$HADOOP_HOME/sbin</span><br><span class="line">source .bashrc</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/07/31/2018-07-31 Hadoop2-4-1集群搭建/#more" rel="contents">

@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Ryan Li God">
 <meta property="og:description" content="简要介绍 因为要使用MarkDown中使用LaTeX编辑数学公式然后在文档、网页中使用，但是自己总是记不住这么多东西，特别是几天不用，很多都忘记了，因此准备就数学公式的Latex编辑方式做一个整理，以方便自己和读者今后使用。   分数 平方    算式 LaTeX     7x+51+y2\frac{7x+5}{1+y^2}1+y27x+5​ \frac{7x+5}{1+y^2}   7x+51">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-30T00:45:18.909Z">
+<meta property="og:updated_time" content="2018-09-04T06:24:26.489Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MathJax 支持的 LaTeX 总结">
 <meta name="twitter:description" content="简要介绍 因为要使用MarkDown中使用LaTeX编辑数学公式然后在文档、网页中使用，但是自己总是记不住这么多东西，特别是几天不用，很多都忘记了，因此准备就数学公式的Latex编辑方式做一个整理，以方便自己和读者今后使用。   分数 平方    算式 LaTeX     7x+51+y2\frac{7x+5}{1+y^2}1+y27x+5​ \frac{7x+5}{1+y^2}   7x+51">
@@ -1138,6 +1138,80 @@ k_0+k_1+\cdots=n}
 </tr>
 </tbody>
 </table>
+<h5 id="公式序号"><a class="markdownIt-Anchor" href="#公式序号"></a> 公式序号</h5>
+<table>
+<thead>
+<tr>
+<th>形式</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>\eqno{标号}</td>
+<td>系统提供的序号设置命令，将它紧跟在equation*环境或[…]形式的公式行后，可在公式右侧人工设置标号。标号可以是任意文本</td>
+</tr>
+<tr>
+<td>\leqno{标号}</td>
+<td>作用于\eqno相同，只是将标号至于公式的左侧。\eqno与\leqno不能同时在一个公式中使用</td>
+</tr>
+<tr>
+<td>\nonumber</td>
+<td>系统提供的取消序号命令。把它插在换行命令\之前，可以取消为该行公式排序而使其无序号</td>
+</tr>
+<tr>
+<td>\notag</td>
+<td>公式宏包提供的序号取消命令，使用方法和作用与\nonumber命令相同</td>
+</tr>
+<tr>
+<td>\tag{标号}</td>
+<td>公式宏包提供的序号设置命令，把它插在换行命令\之前，可取消为该行公式排序，而以(标号）替代序号。该命令也可用于带星号公式环境中的公式行，使其具有（标号）</td>
+</tr>
+<tr>
+<td>\tag*{标号}</td>
+<td>作用与\tag相同，只是标号的两侧没有圆括号</td>
+</tr>
+</tbody>
+</table>
+<h5 id="公式字体"><a class="markdownIt-Anchor" href="#公式字体"></a> 公式字体</h5>
+<table>
+<thead>
+<tr>
+<th>形式</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>textup{文本}</td>
+<td>显示直立文本</td>
+</tr>
+<tr>
+<td>\textit{文本}</td>
+<td>意大利斜体</td>
+</tr>
+<tr>
+<td>\textsl{文本}</td>
+<td>slanted斜体</td>
+</tr>
+<tr>
+<td>\textsc{文本}</td>
+<td>显示小体大写文本</td>
+</tr>
+<tr>
+<td>\textmd{文本}</td>
+<td>中等权重</td>
+</tr>
+<tr>
+<td>\textbf{文本}</td>
+<td>加粗命令</td>
+</tr>
+<tr>
+<td>\textnormal{文本}</td>
+<td>默认值</td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
@@ -1319,7 +1393,7 @@ k_0+k_1+\cdots=n}
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#分数-平方"><span class="nav-number">1.</span> <span class="nav-text"> 分数 平方</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#下标"><span class="nav-number">2.</span> <span class="nav-text"> 下标</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#省略号"><span class="nav-number">3.</span> <span class="nav-text"> 省略号</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#行间公式使用两个包含公式可以独立一行"><span class="nav-number">4.</span> <span class="nav-text"> 行间公式（使用两个$包含公式可以独立一行）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#开根号"><span class="nav-number">5.</span> <span class="nav-text"> 开根号</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#向量"><span class="nav-number">6.</span> <span class="nav-text"> 向量</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#积分"><span class="nav-number">7.</span> <span class="nav-text"> 积分</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#极限"><span class="nav-number">8.</span> <span class="nav-text"> 极限</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#累加"><span class="nav-number">9.</span> <span class="nav-text"> 累加</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#累乘"><span class="nav-number">10.</span> <span class="nav-text"> 累乘</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#希腊字母"><span class="nav-number">11.</span> <span class="nav-text"> 希腊字母</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#三角运算符"><span class="nav-number">12.</span> <span class="nav-text"> 三角运算符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#积分运算"><span class="nav-number">13.</span> <span class="nav-text"> 积分运算</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#戴帽符号"><span class="nav-number">14.</span> <span class="nav-text"> 戴帽符号</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#对数函数"><span class="nav-number">15.</span> <span class="nav-text"> 对数函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#关系运算符"><span class="nav-number">16.</span> <span class="nav-text"> 关系运算符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#集合运算符"><span class="nav-number">17.</span> <span class="nav-text"> 集合运算符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#多行方程组对齐"><span class="nav-number">18.</span> <span class="nav-text"> 多行方程组对齐</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#多行公式等号对齐"><span class="nav-number">19.</span> <span class="nav-text"> 多行公式等号对齐</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#大括号右多行赋值"><span class="nav-number">20.</span> <span class="nav-text"> 大括号右多行赋值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#矩阵"><span class="nav-number">21.</span> <span class="nav-text"> 矩阵</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#求和符号下多行限制条件"><span class="nav-number">22.</span> <span class="nav-text"> 求和符号下多行限制条件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#条件偏导"><span class="nav-number">23.</span> <span class="nav-text"> 条件偏导</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数学符号字体"><span class="nav-number">24.</span> <span class="nav-text"> 数学符号字体</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#空白类型列举"><span class="nav-number">25.</span> <span class="nav-text"> 空白类型列举</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#分数-平方"><span class="nav-number">1.</span> <span class="nav-text"> 分数 平方</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#下标"><span class="nav-number">2.</span> <span class="nav-text"> 下标</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#省略号"><span class="nav-number">3.</span> <span class="nav-text"> 省略号</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#行间公式使用两个包含公式可以独立一行"><span class="nav-number">4.</span> <span class="nav-text"> 行间公式（使用两个$包含公式可以独立一行）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#开根号"><span class="nav-number">5.</span> <span class="nav-text"> 开根号</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#向量"><span class="nav-number">6.</span> <span class="nav-text"> 向量</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#积分"><span class="nav-number">7.</span> <span class="nav-text"> 积分</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#极限"><span class="nav-number">8.</span> <span class="nav-text"> 极限</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#累加"><span class="nav-number">9.</span> <span class="nav-text"> 累加</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#累乘"><span class="nav-number">10.</span> <span class="nav-text"> 累乘</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#希腊字母"><span class="nav-number">11.</span> <span class="nav-text"> 希腊字母</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#三角运算符"><span class="nav-number">12.</span> <span class="nav-text"> 三角运算符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#积分运算"><span class="nav-number">13.</span> <span class="nav-text"> 积分运算</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#戴帽符号"><span class="nav-number">14.</span> <span class="nav-text"> 戴帽符号</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#对数函数"><span class="nav-number">15.</span> <span class="nav-text"> 对数函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#关系运算符"><span class="nav-number">16.</span> <span class="nav-text"> 关系运算符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#集合运算符"><span class="nav-number">17.</span> <span class="nav-text"> 集合运算符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#多行方程组对齐"><span class="nav-number">18.</span> <span class="nav-text"> 多行方程组对齐</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#多行公式等号对齐"><span class="nav-number">19.</span> <span class="nav-text"> 多行公式等号对齐</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#大括号右多行赋值"><span class="nav-number">20.</span> <span class="nav-text"> 大括号右多行赋值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#矩阵"><span class="nav-number">21.</span> <span class="nav-text"> 矩阵</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#求和符号下多行限制条件"><span class="nav-number">22.</span> <span class="nav-text"> 求和符号下多行限制条件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#条件偏导"><span class="nav-number">23.</span> <span class="nav-text"> 条件偏导</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数学符号字体"><span class="nav-number">24.</span> <span class="nav-text"> 数学符号字体</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#空白类型列举"><span class="nav-number">25.</span> <span class="nav-text"> 空白类型列举</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#公式序号"><span class="nav-number">26.</span> <span class="nav-text"> 公式序号</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#公式字体"><span class="nav-number">27.</span> <span class="nav-text"> 公式字体</span></a></li></ol></div>
             
 
           </div>

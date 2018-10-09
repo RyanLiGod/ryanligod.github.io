@@ -90,7 +90,7 @@
 <meta property="og:image" content="http://pd4nbaja5.bkt.clouddn.com/2018-10-09-095902.png">
 <meta property="og:image" content="http://pd4nbaja5.bkt.clouddn.com/2018-10-09-100156.png">
 <meta property="og:image" content="http://pd4nbaja5.bkt.clouddn.com/2018-10-09-100243.png">
-<meta property="og:updated_time" content="2018-10-09T10:04:12.403Z">
+<meta property="og:updated_time" content="2018-10-09T10:05:40.818Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="维诺图（Voronoi Diagram）分析与实现">
 <meta name="twitter:description" content="介绍  Voronoi图的定义 又叫泰森多边形或Dirichlet图，它是由一组由连接两邻点直线的垂直平分线组成的连续多边形组成。  Voronoi图的特点  每个V多边形内有一个生成元 每个V多边形内点到该生成元距离短于到其它生成元距离 多边形边界上的点到生成此边界的生成元距离相等 邻接图形的Voronoi多边形界线以原邻接界线作为子集。   Voronoi图的应用 在计算几何学科中的重要地位">
@@ -385,6 +385,7 @@
 <p>本次实验采用的是Delaunay三角剖分算法。主要是指生成Voronoi图时先生成其对偶元Delaunay三角网，再找出三角网每一三角形的外接圆圆心，最后连接相邻三角形的外接圆圆心，形成以每一三角形顶点为生成元的多边形网。如下图所示。</p>
 <p><img src="http://pd4nbaja5.bkt.clouddn.com/2018-10-09-095902.png" alt=""></p>
 <p>建立Voronoi图算法的关键是对离散数据点合理地连成三角网，即构建Delaunay三角网。</p>
+<a id="more"></a>
 <p>建立Voronoi图的步骤为：</p>
 <ol>
 <li>离散点自动构建三角网，即构建Delaunay三角网。对离散点和形成的三角形编号，记录每个三角形是由哪三个离散点构成的。</li>

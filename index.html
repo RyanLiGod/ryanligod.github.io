@@ -365,8 +365,7 @@
 
       
         
-          
-            <h2 id="介绍"><a class="markdownIt-Anchor" href="#介绍"></a> 介绍</h2>
+          <h2 id="介绍"><a class="markdownIt-Anchor" href="#介绍"></a> 介绍</h2>
 <h4 id="voronoi图的定义"><a class="markdownIt-Anchor" href="#voronoi图的定义"></a> Voronoi图的定义</h4>
 <p>又叫泰森多边形或Dirichlet图，它是由一组由连接两邻点直线的垂直平分线组成的连续多边形组成。</p>
 <h4 id="voronoi图的特点"><a class="markdownIt-Anchor" href="#voronoi图的特点"></a> Voronoi图的特点</h4>
@@ -384,39 +383,13 @@
 <p>本次实验采用的是Delaunay三角剖分算法。主要是指生成Voronoi图时先生成其对偶元Delaunay三角网，再找出三角网每一三角形的外接圆圆心，最后连接相邻三角形的外接圆圆心，形成以每一三角形顶点为生成元的多边形网。如下图所示。</p>
 <p><img src="http://pd4nbaja5.bkt.clouddn.com/2018-10-09-095902.png" alt=""></p>
 <p>建立Voronoi图算法的关键是对离散数据点合理地连成三角网，即构建Delaunay三角网。</p>
-<p>建立Voronoi图的步骤为：</p>
-<ol>
-<li>离散点自动构建三角网，即构建Delaunay三角网。对离散点和形成的三角形编号，记录每个三角形是由哪三个离散点构成的。</li>
-<li>计算每个三角形的外接圆圆心，并记录之。</li>
-<li>遍历三角形链表，寻找与当前三角形pTri三边共边的相邻三角形TriA，TriB和TriC。</li>
-<li>如果找到，则把寻找到的三角形的外心与pTri的外心连接，存入维诺边链表中。如果找不到，则求出最外边的中垂线射线存入维诺边链表中。</li>
-<li>遍历结束，所有维诺边被找到，根据边画出维诺图。</li>
-</ol>
-<h4 id="delaunay三角网的生成"><a class="markdownIt-Anchor" href="#delaunay三角网的生成"></a> Delaunay三角网的生成</h4>
-<p>建立Voronoi图的关键是Delaunay三角网的生成。Delaunay三角网的特性：<br>
-（1）空圆性，任一三角形外接圆内部不包含其他点。<br>
-（2）最接近：以最近临的三点形成三角形，且各线段(三角形的边)皆不相交。<br>
-（3）唯一性：不论从区域何处开始构建，最终都将得到一致的结果。<br>
-（4）最优性：任意两个相邻三角形形成的凸四边形的对角线如果可以互换的话，那么两个三角形六个内角中最小的角度不会变大。<br>
-（5）最规则：如果将三角网中的每个三角形的最小角进行升序排列，则Delaunay三角网的排列得到的数值最大。<br>
-（6）区域性：新增、删除、移动某一个顶点时只会影响临近的三角形。<br>
-（7）具有凸多边形的外壳：三角网最外层的边界形成一个凸多边形的外壳。<br>
-Delaunay剖分是一种三角剖分的标准，实现它有多种算法。本次采用Bowyer-Watson算法，算法的基本步骤是：<br>
-（1）构造一个超级三角形，包含所有散点，放入三角形链表。<br>
-（2）将点集中的散点依次插入，在三角形链表中找出其外接圆包含<br>
-插入点的三角形（称为该点的影响三角形），删除影响三角形的公共边，将插入点同影响三角形的全部顶点连接起来，从而完成一个点在Delaunay三角形链表中的插入。<br>
-（3）根据优化准则对局部新形成的三角形进行优化。将形成的三角形放入Delaunay三角形链表。<br>
-（4）循环执行上述第2步，直到所有散点插入完毕。</p>
-<p>关键步骤2如下图所示：</p>
-<p><img src="http://pd4nbaja5.bkt.clouddn.com/2018-10-09-100156.png" alt=""></p>
-<p>步骤3的局部优化的准则指的是：<br>
-1.对新形成的三角形进行优化，将两个具有共同边的三角形合成一个多边形。<br>
-2.以最大空圆准则作检查，看其第四个顶点是否在三角形的外接圆之内。<br>
-3.如果在，修正对角线即将对角线对调，即完成局部优化过程的处理。</p>
-<p>LOP (Local Optimization Procedure)处理过程如下图所示：</p>
-<p><img src="http://pd4nbaja5.bkt.clouddn.com/2018-10-09-100243.png" alt=""></p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/09/2018-10-09 维诺图（Voronoi Diagram）分析与实现/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

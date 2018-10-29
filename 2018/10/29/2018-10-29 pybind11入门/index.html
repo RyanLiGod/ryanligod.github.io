@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="pybind11简介与环境安装（macOS） pybind11是一个轻量级的只包含头文件的库，它主要是用来在已有的 C代码的基础上做扩展，它的语法和目标非常像Boost.Python，但Boost.Python为了兼容现有的基本所有的C编译器而变得非常复杂和庞大，而因此付出的代价是很多晦涩的模板技巧以及很多不必要的对旧版编译器的支持。Pybind11摒弃了这些支持，它只支持python2.7以上">
+<meta name="description" content="pybind11简介与环境安装 pybind11是一个轻量级的只包含头文件的库，它主要是用来在已有的 C++代码的基础上做扩展，它的语法和目标非常像Boost.Python，但Boost.Python为了兼容现有的基本所有的C++编译器而变得非常复杂和庞大，而因此付出的代价是很多晦涩的模板技巧以及很多不必要的对旧版编译器的支持。Pybind11摒弃了这些支持，它只支持python2.7以上以及C">
 <meta name="keywords" content="python,C++">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2018-10-29 python调用C++之pybind11入门（macOS）">
 <meta property="og:url" content="https://ryanligod.github.io/2018/10/29/2018-10-29 pybind11入门/index.html">
 <meta property="og:site_name" content="Ryan Li God">
-<meta property="og:description" content="pybind11简介与环境安装（macOS） pybind11是一个轻量级的只包含头文件的库，它主要是用来在已有的 C代码的基础上做扩展，它的语法和目标非常像Boost.Python，但Boost.Python为了兼容现有的基本所有的C编译器而变得非常复杂和庞大，而因此付出的代价是很多晦涩的模板技巧以及很多不必要的对旧版编译器的支持。Pybind11摒弃了这些支持，它只支持python2.7以上">
+<meta property="og:description" content="pybind11简介与环境安装 pybind11是一个轻量级的只包含头文件的库，它主要是用来在已有的 C++代码的基础上做扩展，它的语法和目标非常像Boost.Python，但Boost.Python为了兼容现有的基本所有的C++编译器而变得非常复杂和庞大，而因此付出的代价是很多晦涩的模板技巧以及很多不必要的对旧版编译器的支持。Pybind11摒弃了这些支持，它只支持python2.7以上以及C">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-29T07:28:17.549Z">
+<meta property="og:updated_time" content="2018-10-29T07:30:46.871Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2018-10-29 python调用C++之pybind11入门（macOS）">
-<meta name="twitter:description" content="pybind11简介与环境安装（macOS） pybind11是一个轻量级的只包含头文件的库，它主要是用来在已有的 C代码的基础上做扩展，它的语法和目标非常像Boost.Python，但Boost.Python为了兼容现有的基本所有的C编译器而变得非常复杂和庞大，而因此付出的代价是很多晦涩的模板技巧以及很多不必要的对旧版编译器的支持。Pybind11摒弃了这些支持，它只支持python2.7以上">
+<meta name="twitter:description" content="pybind11简介与环境安装 pybind11是一个轻量级的只包含头文件的库，它主要是用来在已有的 C++代码的基础上做扩展，它的语法和目标非常像Boost.Python，但Boost.Python为了兼容现有的基本所有的C++编译器而变得非常复杂和庞大，而因此付出的代价是很多晦涩的模板技巧以及很多不必要的对旧版编译器的支持。Pybind11摒弃了这些支持，它只支持python2.7以上以及C">
 
 
 
@@ -363,8 +363,8 @@
       
 
       
-        <h2 id="pybind11简介与环境安装macos"><a class="markdownIt-Anchor" href="#pybind11简介与环境安装macos"></a> pybind11简介与环境安装（macOS）</h2>
-<p>pybind11是一个轻量级的只包含头文件的库，它主要是用来在已有的 C<ins>代码的基础上做扩展，它的语法和目标非常像Boost.Python，但Boost.Python为了兼容现有的基本所有的C</ins>编译器而变得非常复杂和庞大，而因此付出的代价是很多晦涩的模板技巧以及很多不必要的对旧版编译器的支持。Pybind11摒弃了这些支持，它只支持python2.7以上以及C++ 11以上的编译器，使得它比Boost.Python更加简洁高效。</p>
+        <h2 id="pybind11简介与环境安装"><a class="markdownIt-Anchor" href="#pybind11简介与环境安装"></a> pybind11简介与环境安装</h2>
+<p>pybind11是一个轻量级的只包含头文件的库，它主要是用来在已有的 C++代码的基础上做扩展，它的语法和目标非常像Boost.Python，但Boost.Python为了兼容现有的基本所有的C++编译器而变得非常复杂和庞大，而因此付出的代价是很多晦涩的模板技巧以及很多不必要的对旧版编译器的支持。Pybind11摒弃了这些支持，它只支持python2.7以上以及C++ 11以上的编译器，使得它比Boost.Python更加简洁高效。</p>
 <p>为了使用pybind11，我们需要支持C++ 11标准的编译器(GCC 4.8以上)以及python 2.7以上的版本，还需要下载<a href="https://cmake.org/cmake-tutorial/" target="_blank" rel="noopener">CMake</a> (macOS中只需要 <code>brew install cmake</code> )，有了这些以后：</p>
 <ol>
 <li>从 pybind11 github网址：<a href="https://github.com/pybind/pybind11" target="_blank" rel="noopener">https://github.com/pybind/pybind11</a> 上下载源码。</li>
@@ -569,7 +569,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#pybind11简介与环境安装macos"><span class="nav-number">1.</span> <span class="nav-text"> pybind11简介与环境安装（macOS）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python调用c"><span class="nav-number">2.</span> <span class="nav-text"> python调用C++</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#编译"><span class="nav-number">2.1.</span> <span class="nav-text"> 编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">2.2.</span> <span class="nav-text"> 总结</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#pybind11简介与环境安装"><span class="nav-number">1.</span> <span class="nav-text"> pybind11简介与环境安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python调用c"><span class="nav-number">2.</span> <span class="nav-text"> python调用C++</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#编译"><span class="nav-number">2.1.</span> <span class="nav-text"> 编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">2.2.</span> <span class="nav-text"> 总结</span></a></li></ol></li></ol></div>
             
 
           </div>

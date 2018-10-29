@@ -365,8 +365,7 @@
 
       
         
-          
-            <h2 id="pybind11简介与环境安装macos"><a class="markdownIt-Anchor" href="#pybind11简介与环境安装macos"></a> pybind11简介与环境安装（macOS）</h2>
+          <h2 id="pybind11简介与环境安装macos"><a class="markdownIt-Anchor" href="#pybind11简介与环境安装macos"></a> pybind11简介与环境安装（macOS）</h2>
 <p>pybind11是一个轻量级的只包含头文件的库，它主要是用来在已有的 C<ins>代码的基础上做扩展，它的语法和目标非常像Boost.Python，但Boost.Python为了兼容现有的基本所有的C</ins>编译器而变得非常复杂和庞大，而因此付出的代价是很多晦涩的模板技巧以及很多不必要的对旧版编译器的支持。Pybind11摒弃了这些支持，它只支持python2.7以上以及C++ 11以上的编译器，使得它比Boost.Python更加简洁高效。</p>
 <p>为了使用pybind11，我们需要支持C++ 11标准的编译器(GCC 4.8以上)以及python 2.7以上的版本，还需要下载<a href="https://cmake.org/cmake-tutorial/" target="_blank" rel="noopener">CMake</a> (macOS中只需要 <code>brew install cmake</code> )，有了这些以后：</p>
 <ol>
@@ -378,20 +377,13 @@
 <p>最后一行命令会编译并且运行tests，如果所有测试用例都通过了，说明安装成功了。</p>
 <h2 id="python调用c"><a class="markdownIt-Anchor" href="#python调用c"></a> python调用C++</h2>
 <p>下载编译好pybind11之后，我们就可以开始对着官方的<a href="http://pybind11.readthedocs.io/en/stable/index.html" target="_blank" rel="noopener">pybind11 Tutorial</a>进行学习了，详细的入门教程及语法请参考官方文档，这里，我们简单演示下如何编写供python调用的C++模块。</p>
-<p>首先，我们编写一个C++源文件，命名为<code>example.cpp</code> 。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pybind11/pybind11.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> i + j;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">PYBIND11_MODULE(example, m) &#123;</span><br><span class="line">    m.doc() = <span class="string">"pybind11 example plugin"</span>; <span class="comment">// optional module docstring</span></span><br><span class="line"></span><br><span class="line">    m.def(<span class="string">"add"</span>, &amp;add, <span class="string">"A function which adds two numbers"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="编译"><a class="markdownIt-Anchor" href="#编译"></a> 编译</h3>
-<p>macOS下运行：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> c++ -O3 -Wall -shared -std=c++11 -undefined dynamic_lookup `python3 -m pybind11 --includes` example.cpp -o example`python3-config --extension-suffix`</span></span><br></pre></td></tr></table></figure>
-<p>Linux下运行：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> c++ -O3 -Wall -shared -std=c++11 -fPIC `python3 -m pybind11 --includes` example.cpp -o example`python3-config --extension-suffix`</span></span><br></pre></td></tr></table></figure>
-<p>之后会在同目录下生成 <code>example.cpython-36m-darwin.so</code> 文件。</p>
-<p>当前路径下运行 <code>python</code> ：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> python</span></span><br><span class="line">Python 3.6.6 |Anaconda custom (64-bit)| (default, Jun 28 2018, 11:07:29)</span><br><span class="line">[GCC 4.2.1 Compatible Clang 4.0.1 (tags/RELEASE_401/final)] on darwin</span><br><span class="line">Type "help", "copyright", "credits" or "license" for more information.</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; import example</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; example.add(3, 4)</span></span><br><span class="line">7</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h3>
-<p>本文中我们简单介绍了怎么使用 <code>pybind11</code> 进行python对C++的调用，这些只是入门级别的例子，但是可以work了，这很重要。深入进行研究使用，还是等以后用到再说吧。</p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/29/2018-10-29 pybind11入门/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

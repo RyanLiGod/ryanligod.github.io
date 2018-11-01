@@ -95,7 +95,7 @@
 <meta property="og:image" content="http://pd4nbaja5.bkt.clouddn.com/2018-10-31-123951.png">
 <meta property="og:image" content="http://pd4nbaja5.bkt.clouddn.com/2018-10-31-124144.png">
 <meta property="og:image" content="http://pd4nbaja5.bkt.clouddn.com/2018-10-31-124253.png">
-<meta property="og:updated_time" content="2018-10-31T13:25:49.233Z">
+<meta property="og:updated_time" content="2018-11-01T02:46:03.445Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue.js入门——Vue CLI，Vue Router，axios，iView，ECharts">
 <meta name="twitter:description" content="简介 近期需要搭建一个展示图数据库的前端平台，之前用了很长一段时间的 AngularJS 1.3 ，但是前端技术发展非常快，在我没写前端的短短一年时间中，Angular 已经从 2.0 版本来到了 7.0 。但是 Angular 真正的大变化基本上还是在 1.0 到 2.0，基本上就是完全不同的两个框架了。 本次我用 Vue.js 来搭建这个平台。对于 Vue.js 我也是听闻已久，借此次机会学">
@@ -376,7 +376,7 @@
 <p>近期需要搭建一个展示图数据库的前端平台，之前用了很长一段时间的 AngularJS 1.3 ，但是前端技术发展非常快，在我没写前端的短短一年时间中，Angular 已经从 2.0 版本来到了 7.0 。但是 Angular 真正的大变化基本上还是在 1.0 到 2.0，基本上就是完全不同的两个框架了。<br>
 本次我用 Vue.js 来搭建这个平台。对于 Vue.js 我也是听闻已久，借此次机会学习一下 Vue.js。至于为什么选择Vue.js，原因如下：</p>
 <ol>
-<li>AngularJS（1.0）使用脏检查，当 watcher 越来越多时会变得越来越慢，因为作用域内的每一次变化，所有 watcher 都要重新计算。AngularJS 用户常常要使用深奥的技术，以解决脏检查循环的问题。</li>
+<li>AngularJS（1.x）使用脏检查，当 watcher 越来越多时会变得越来越慢，因为作用域内的每一次变化，所有 watcher 都要重新计算。AngularJS 用户常常要使用深奥的技术，以解决脏检查循环的问题。</li>
 <li>Vue.js 的学习曲线不像Angular2那样陡峭，而且更加灵活、轻便。具体见 <a href="https://cn.vuejs.org/v2/guide/comparison.html" target="_blank" rel="noopener">Vue对比其他框架</a> 。</li>
 <li>Vue 非常火！</li>
 </ol>
@@ -384,7 +384,7 @@
 <p>Vue 提供了一个<a href="https://github.com/vuejs/vue-cli" target="_blank" rel="noopener">官方的 CLI</a>，为单页面应用 (SPA) 快速搭建繁杂的脚手架。它为现代前端工作流提供了 batteries-included 的构建设置。只需要几分钟的时间就可以运行起来并带有热重载、保存时 lint 校验，以及生产环境可用的构建版本。更多详情可查阅 <a href="https://cli.vuejs.org/" target="_blank" rel="noopener">Vue CLI 的文档</a>。</p>
 <p><strong>安装方法：</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm install -g @vue/cli</span></span><br></pre></td></tr></table></figure>
-<p>本次我进行了一些粗略的应用，使用Vue-CLI创建了项目：</p>
+<p>本次我进行了一些粗略的应用，使用 Vue-CLI 创建了项目：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vue create graph-visualization</span></span><br><span class="line">Vue CLI v3.0.5</span><br><span class="line">? Please pick a preset: (Use arrow keys)</span><br><span class="line">❯ default (babel, eslint)</span><br><span class="line">  Manually select features</span><br></pre></td></tr></table></figure>
 <p>因为要用到路由，我选择了 <code>Manually select features</code> 。</p>
 <a id="more"></a>
@@ -393,16 +393,16 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Vue CLI v3.0.5</span><br><span class="line">? Please pick a preset: Manually select features</span><br><span class="line">? Check the features needed for your project: Babel, Router, Linter</span><br><span class="line">? Use history mode for router? (Requires proper server setup for index fallback in production) (Y/n)</span><br></pre></td></tr></table></figure>
 <p>这个设定路由的模式，设定成 <code>history mode</code> 可以让路由变成传统的路径。默认 hash 模式时使用 URL 的 hash 来模拟一个完整的 URL，于是当 URL 改变时，页面不会重新加载。如果不想要很丑的 hash，我们可以用路由的 <strong>history 模式</strong>，这种模式充分利用 <code>history.pushState</code> API 来完成 URL 跳转而无须重新加载页面。当你使用 history 模式时，URL 就像正常的 url，例如 <code>http://yoursite.com/user/id</code>，也好看！</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Vue CLI v3.0.5</span><br><span class="line">? Please pick a preset: Manually select features</span><br><span class="line">? Check the features needed for your project: Babel, Router, Linter</span><br><span class="line">? Use history mode for router? (Requires proper server setup for index fallback in production) Yes</span><br><span class="line">? Pick a linter / formatter config: (Use arrow keys)</span><br><span class="line">❯ ESLint with error prevention only</span><br><span class="line">  ESLint + Airbnb config</span><br><span class="line">  ESLint + Standard config</span><br><span class="line">  ESLint + Prettier</span><br></pre></td></tr></table></figure>
-<p>接下来选择了最基本的ESLint模式，ESLint用于代码错误提示和纠错 <code>ESLint with error prevention only</code> ，以及 <code>Lint on save</code> ，最后两个选项无关紧要，选择保存配置在 <code>package.json</code> 和不保存目前配置。</p>
+<p>接下来选择了最基本的 ESLint 模式，ESLint 用于代码错误提示和纠错 <code>ESLint with error prevention only</code> ，以及 <code>Lint on save</code> ，最后两个选项无关紧要，选择保存配置在 <code>package.json</code> 和不保存目前配置。</p>
 <h2 id="iview"><a class="markdownIt-Anchor" href="#iview"></a> iView</h2>
-<p>iView是一套基于 Vue.js 的高质量 UI 组件库。官网 <a href="https://www.iviewui.com/" target="_blank" rel="noopener">https://www.iviewui.com/</a> 。组件库的作用就是库里面帮你写好了很多常用的样式。<br>
+<p>iView 是一套基于 Vue.js 的高质量 UI 组件库。官网 <a href="https://www.iviewui.com/" target="_blank" rel="noopener">https://www.iviewui.com/</a> 。组件库的作用就是库里面帮你写好了很多常用的样式。<br>
 <strong>安装方法：</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm install --save axios vue-axios</span></span><br></pre></td></tr></table></figure>
 <p>比如在 <code>.vue</code> 文件的 <code>&lt;template&gt;&lt;/template&gt;</code> 中加入以下代码：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Button</span>&gt;</span>Default<span class="tag">&lt;/<span class="name">Button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Button</span> <span class="attr">type</span>=<span class="string">"primary"</span>&gt;</span>Primary<span class="tag">&lt;/<span class="name">Button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Button</span> <span class="attr">type</span>=<span class="string">"dashed"</span>&gt;</span>Dashed<span class="tag">&lt;/<span class="name">Button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Button</span> <span class="attr">type</span>=<span class="string">"text"</span>&gt;</span>Text<span class="tag">&lt;/<span class="name">Button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Button</span> <span class="attr">type</span>=<span class="string">"info"</span>&gt;</span>Info<span class="tag">&lt;/<span class="name">Button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Button</span> <span class="attr">type</span>=<span class="string">"success"</span>&gt;</span>Success<span class="tag">&lt;/<span class="name">Button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Button</span> <span class="attr">type</span>=<span class="string">"warning"</span>&gt;</span>Warning<span class="tag">&lt;/<span class="name">Button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Button</span> <span class="attr">type</span>=<span class="string">"error"</span>&gt;</span>Error<span class="tag">&lt;/<span class="name">Button</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>就会出现以下效果：</p>
 <p><img src="http://pd4nbaja5.bkt.clouddn.com/2018-10-31-113353.png" alt="image-20181031193341489"></p>
-<p>还有很多其他的样式，iView的做法一般是把普通的标签<strong>首字母大写</strong>，这样就变成了iView的标签，比如 <code>&lt;input&gt;</code> 变成了<code>&lt;Input&gt;</code> ，就会有更加美观的输入框。</p>
+<p>还有很多其他的样式，iView 的做法一般是把普通的标签<strong>首字母大写</strong>，这样就变成了 iView 的标签，比如 <code>&lt;input&gt;</code> 变成了<code>&lt;Input&gt;</code> ，就会有更加美观的输入框。</p>
 <h2 id="vue-router"><a class="markdownIt-Anchor" href="#vue-router"></a> Vue Router</h2>
 <p>Vue Router 是 Vue.js 官方的路由管理器。它和 Vue.js 的核心深度集成，让构建单页面应用变得易如反掌。<br>
 <img src="http://pd4nbaja5.bkt.clouddn.com/2018-10-31-114137.png" alt="image-20181031194126670"></p>
@@ -416,16 +416,15 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Vue.axios.get(api).then(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(response.data)</span><br><span class="line">&#125;)</span><br><span class="line"> </span><br><span class="line"><span class="keyword">this</span>.axios.get(api).then(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(response.data)</span><br><span class="line">&#125;)</span><br><span class="line"> </span><br><span class="line"><span class="keyword">this</span>.$http.get(api).then(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(response.data)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <h2 id="路径说明"><a class="markdownIt-Anchor" href="#路径说明"></a> 路径说明</h2>
 <ul>
-<li><code>node_modules</code> : NPM安装的包</li>
-<li><code>public</code> : index入口</li>
+<li><code>node_modules</code> : NPM 安装的包</li>
+<li><code>public</code> : index 入口，以及一些静态文件</li>
 <li><code>src</code> : 主要项目路径
 <ul>
-<li><code>assets</code> : 项目用到的材料，比如图片等</li>
-<li><code>components</code> : Vue编写的组件</li>
-<li><code>views</code> : Vue编写的页面</li>
-<li><code>App.vue</code> : Vue最外层的页面</li>
-<li><code>main.js</code> : Vue全局控制</li>
-<li><code>router.js</code> : Vue路由编写</li>
+<li><code>components</code> : Vue 编写的组件</li>
+<li><code>views</code> : Vue 编写的页面</li>
+<li><code>App.vue</code> : Vue 最外层的页面</li>
+<li><code>main.js</code> : Vue 全局控制</li>
+<li><code>router.js</code> : Vue 路由编写</li>
 </ul>
 </li>
 </ul>

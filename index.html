@@ -369,7 +369,7 @@
 <p>近期需要搭建一个展示图数据库的前端平台，之前用了很长一段时间的 AngularJS 1.3 ，但是前端技术发展非常快，在我没写前端的短短一年时间中，Angular 已经从 2.0 版本来到了 7.0 。但是 Angular 真正的大变化基本上还是在 1.0 到 2.0，基本上就是完全不同的两个框架了。<br>
 本次我用 Vue.js 来搭建这个平台。对于 Vue.js 我也是听闻已久，借此次机会学习一下 Vue.js。至于为什么选择Vue.js，原因如下：</p>
 <ol>
-<li>AngularJS（1.0）使用脏检查，当 watcher 越来越多时会变得越来越慢，因为作用域内的每一次变化，所有 watcher 都要重新计算。AngularJS 用户常常要使用深奥的技术，以解决脏检查循环的问题。</li>
+<li>AngularJS（1.x）使用脏检查，当 watcher 越来越多时会变得越来越慢，因为作用域内的每一次变化，所有 watcher 都要重新计算。AngularJS 用户常常要使用深奥的技术，以解决脏检查循环的问题。</li>
 <li>Vue.js 的学习曲线不像Angular2那样陡峭，而且更加灵活、轻便。具体见 <a href="https://cn.vuejs.org/v2/guide/comparison.html" target="_blank" rel="noopener">Vue对比其他框架</a> 。</li>
 <li>Vue 非常火！</li>
 </ol>
@@ -377,7 +377,7 @@
 <p>Vue 提供了一个<a href="https://github.com/vuejs/vue-cli" target="_blank" rel="noopener">官方的 CLI</a>，为单页面应用 (SPA) 快速搭建繁杂的脚手架。它为现代前端工作流提供了 batteries-included 的构建设置。只需要几分钟的时间就可以运行起来并带有热重载、保存时 lint 校验，以及生产环境可用的构建版本。更多详情可查阅 <a href="https://cli.vuejs.org/" target="_blank" rel="noopener">Vue CLI 的文档</a>。</p>
 <p><strong>安装方法：</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm install -g @vue/cli</span></span><br></pre></td></tr></table></figure>
-<p>本次我进行了一些粗略的应用，使用Vue-CLI创建了项目：</p>
+<p>本次我进行了一些粗略的应用，使用 Vue-CLI 创建了项目：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vue create graph-visualization</span></span><br><span class="line">Vue CLI v3.0.5</span><br><span class="line">? Please pick a preset: (Use arrow keys)</span><br><span class="line">❯ default (babel, eslint)</span><br><span class="line">  Manually select features</span><br></pre></td></tr></table></figure>
 <p>因为要用到路由，我选择了 <code>Manually select features</code> 。</p>
           <!--noindex-->

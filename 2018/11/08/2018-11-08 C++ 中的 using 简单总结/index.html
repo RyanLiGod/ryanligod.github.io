@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="大数据,Hadoop,Spark," />
+  <meta name="keywords" content="C++," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="安装Spark包  将spark-2.1.3-bin-hadoop2.4.tgz使用SFTP上传到/usr/local目录下。 解压缩spark包：  1tar zxvf spark-2.1.3-bin-hadoop2.4.tgz  更改spark目录名：  1mv spark-2.1.3-bin-hadoop2.4 spark  设置spark环境变量  12345vi .bashrcexpo">
-<meta name="keywords" content="大数据,Hadoop,Spark">
+<meta name="description" content="1. 命名空间 该用法能直接在程序中使用 using 后所跟的命名空间的元素，而不用每次要使用时指定命名空间。 1using namespace std;  2. 定义别名 给某一类型定义别名，和 typedef 作用一样。  using 类型别名 = 原类型;  12using uint = unsigned int;uint i = 0;  //相当于unsigned int;  3. 私有">
+<meta name="keywords" content="C++">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Spark学习笔记（六）：Spark 2.1.3集群搭建">
-<meta property="og:url" content="https://ryanligod.github.io/2018/07/31/2018-07-31 Spark2-1-3集群搭建/index.html">
+<meta property="og:title" content="C++ 中的 using 简单总结">
+<meta property="og:url" content="https://ryanligod.github.io/2018/11/08/2018-11-08 C++ 中的 using 简单总结/index.html">
 <meta property="og:site_name" content="Ryan Li God">
-<meta property="og:description" content="安装Spark包  将spark-2.1.3-bin-hadoop2.4.tgz使用SFTP上传到/usr/local目录下。 解压缩spark包：  1tar zxvf spark-2.1.3-bin-hadoop2.4.tgz  更改spark目录名：  1mv spark-2.1.3-bin-hadoop2.4 spark  设置spark环境变量  12345vi .bashrcexpo">
+<meta property="og:description" content="1. 命名空间 该用法能直接在程序中使用 using 后所跟的命名空间的元素，而不用每次要使用时指定命名空间。 1using namespace std;  2. 定义别名 给某一类型定义别名，和 typedef 作用一样。  using 类型别名 = 原类型;  12using uint = unsigned int;uint i = 0;  //相当于unsigned int;  3. 私有">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-23T09:47:16.800Z">
+<meta property="og:updated_time" content="2018-11-08T08:47:43.029Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spark学习笔记（六）：Spark 2.1.3集群搭建">
-<meta name="twitter:description" content="安装Spark包  将spark-2.1.3-bin-hadoop2.4.tgz使用SFTP上传到/usr/local目录下。 解压缩spark包：  1tar zxvf spark-2.1.3-bin-hadoop2.4.tgz  更改spark目录名：  1mv spark-2.1.3-bin-hadoop2.4 spark  设置spark环境变量  12345vi .bashrcexpo">
+<meta name="twitter:title" content="C++ 中的 using 简单总结">
+<meta name="twitter:description" content="1. 命名空间 该用法能直接在程序中使用 using 后所跟的命名空间的元素，而不用每次要使用时指定命名空间。 1using namespace std;  2. 定义别名 给某一类型定义别名，和 typedef 作用一样。  using 类型别名 = 原类型;  12using uint = unsigned int;uint i = 0;  //相当于unsigned int;  3. 私有">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://ryanligod.github.io/2018/07/31/2018-07-31 Spark2-1-3集群搭建/"/>
+  <link rel="canonical" href="https://ryanligod.github.io/2018/11/08/2018-11-08 C++ 中的 using 简单总结/"/>
 
 
 
 
 
-  <title>Spark学习笔记（六）：Spark 2.1.3集群搭建 | Ryan Li God</title>
+  <title>C++ 中的 using 简单总结 | Ryan Li God</title>
   
 
 
@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ryanligod.github.io/2018/07/31/2018-07-31 Spark2-1-3集群搭建/">
+    <link itemprop="mainEntityOfPage" href="https://ryanligod.github.io/2018/11/08/2018-11-08 C++ 中的 using 简单总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ryan Li">
@@ -280,7 +280,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Spark学习笔记（六）：Spark 2.1.3集群搭建</h2>
+          <h2 class="post-title" itemprop="name headline">C++ 中的 using 简单总结</h2>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-31T15:03:43+08:00">
-                2018-07-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-08T16:33:59+08:00">
+                2018-11-08
               </time>
             
 
@@ -315,8 +315,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Spark/" itemprop="url" rel="index">
-                    <span itemprop="name">Spark</span>
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
                   </a>
                 </span>
 
@@ -332,7 +332,7 @@
 
           
           
-             <span id="/2018/07/31/2018-07-31 Spark2-1-3集群搭建/" class="leancloud_visitors" data-flag-title="Spark学习笔记（六）：Spark 2.1.3集群搭建">
+             <span id="/2018/11/08/2018-11-08 C++ 中的 using 简单总结/" class="leancloud_visitors" data-flag-title="C++ 中的 using 简单总结">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -363,48 +363,28 @@
       
 
       
-        <h2 id="安装spark包"><a class="markdownIt-Anchor" href="#安装spark包"></a> 安装Spark包</h2>
-<ol>
-<li>将spark-2.1.3-bin-hadoop2.4.tgz使用SFTP上传到/usr/local目录下。</li>
-<li>解压缩spark包：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar zxvf spark-2.1.3-bin-hadoop2.4.tgz</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>更改spark目录名：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv spark-2.1.3-bin-hadoop2.4 spark</span><br></pre></td></tr></table></figure>
-<ol start="4">
-<li>设置spark环境变量</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vi .bashrc</span><br><span class="line">export SPARK_HOME=/usr/local/spark</span><br><span class="line">export PATH=$SPARK_HOME/bin</span><br><span class="line">export CLASSPATH=.:$CLASSPATH:$JAVA_HOME/lib:$JAVA_HOME/jre/lib</span><br><span class="line">source .bashrc</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<h2 id="修改spark-envsh文件"><a class="markdownIt-Anchor" href="#修改spark-envsh文件"></a> 修改spark-env.sh文件</h2>
-<ol>
-<li></li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/spark/conf</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li></li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp spark-env.sh.template spark-env.sh</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li></li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vi spark-env.sh</span><br><span class="line">export JAVA_HOME=/usr/java/latest</span><br><span class="line">export SCALA_HOME=/usr/local/scala</span><br><span class="line">export SPARK_MASTER_IP=10.211.55.24</span><br><span class="line">export SPARK_WORKER_MEMORY=2g</span><br><span class="line">export HADOOP_CONF_DIR=/usr/local/hadoop/etc/hadoop</span><br></pre></td></tr></table></figure>
-<h2 id="修改slaves文件"><a class="markdownIt-Anchor" href="#修改slaves文件"></a> 修改slaves文件</h2>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">spark1</span><br><span class="line">spark2</span><br><span class="line">spark3</span><br></pre></td></tr></table></figure>
-<h2 id="安装spark集群"><a class="markdownIt-Anchor" href="#安装spark集群"></a> 安装spark集群</h2>
-<p>在另外两个节点进行一模一样的配置，使用scp将spark和.bashrc拷贝到spark2和spark3即可。</p>
-<h2 id="启动spark集群"><a class="markdownIt-Anchor" href="#启动spark集群"></a> 启动spark集群</h2>
-<ol>
-<li>在spark目录下的sbin目录</li>
-<li>执行</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./start-all.sh</span><br></pre></td></tr></table></figure>
-<ol>
-<li>使用jsp和8080端口可以检查集群是否启动成功</li>
-<li>进入spark-shell查看是否正常</li>
-</ol>
+        <h2 id="1-命名空间"><a class="markdownIt-Anchor" href="#1-命名空间"></a> 1. 命名空间</h2>
+<p>该用法能直接在程序中使用 using 后所跟的命名空间的元素，而不用每次要使用时指定命名空间。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="2-定义别名"><a class="markdownIt-Anchor" href="#2-定义别名"></a> 2. 定义别名</h2>
+<p>给某一类型定义别名，和 typedef 作用一样。</p>
+<blockquote>
+<p>using 类型别名 = 原类型;</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> uint = <span class="keyword">unsigned</span> <span class="keyword">int</span>;</span><br><span class="line">uint i = <span class="number">0</span>;  <span class="comment">//相当于unsigned int;</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-私有继承基类重新声明成员"><a class="markdownIt-Anchor" href="#3-私有继承基类重新声明成员"></a> 3. 私有继承基类重新声明成员</h2>
+<p>当一个派生类私有继承基类时，基类的 public 和 protected 数据成员在派生类中是 private 的形式，如果想让这些继承而来的数据成员作为 public 或者 protected 成员，可以用 using 来重新声明。using 声明语句中名字的访问权限由该 using 声明语句之前的访问说明符决定。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Basic</span> &#123;</span></span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		<span class="keyword">int</span> a;</span><br><span class="line">		<span class="keyword">int</span> b;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bulk</span> :</span> <span class="keyword">private</span> Basic &#123;</span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		<span class="keyword">using</span> Basic::a;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">protected</span>:</span><br><span class="line">		<span class="keyword">using</span> Basic::b;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>上例中，Bulk 类私有继承 Basic，默认情况下，在 Bulk 中，成员 a, b 应该是 private 类型，不过，在上例中用 using 重新声明了 a, b 数据成员，使 a 成为 public，使 b 成为 protected。</p>
+</blockquote>
+<h2 id="4-声明重载的成员函数"><a class="markdownIt-Anchor" href="#4-声明重载的成员函数"></a> 4. 声明重载的成员函数</h2>
+<p>因为派生类可以重载继承自基类的成员函数，所以如果派生类希望所有的重载版本对于它都是可见的，那么它就要覆盖所有版本或者一个也不覆盖。但是，有时一个类仅需要覆盖重载部分函数，若覆盖所有函数，就太繁琐了。<br>
+那么此时，using 就派上用场了。只要为重载的成员函数提供一条 using 声明，这样我们就无需覆盖基类中的每一个版本了。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Basic</span> &#123;</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"func()1"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"func()2"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bulk</span> :</span> <span class="keyword">public</span> Basic&#123;</span><br><span class="line">	<span class="keyword">using</span> Basic::func;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>上例 using 声明指定一个名字而不指定形参列表，所以一条基类成员函数的 using 声明语句就可以把该函数的所有重载实例添加到派生类作用域中。</p>
+</blockquote>
 
       
     </div>
@@ -422,11 +402,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/大数据/" rel="tag"># 大数据</a>
-          
-            <a href="/tags/Hadoop/" rel="tag"># Hadoop</a>
-          
-            <a href="/tags/Spark/" rel="tag"># Spark</a>
+            <a href="/tags/C/" rel="tag"># C++</a>
           
         </div>
       
@@ -439,8 +415,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/31/2018-07-31 kafka-2-9-2-0-8-1集群搭建/" rel="next" title="Spark学习笔记（五）：Kafka 2.9.2-0.8.1集群搭建（包括scala安装）">
-                <i class="fa fa-chevron-left"></i> Spark学习笔记（五）：Kafka 2.9.2-0.8.1集群搭建（包括scala安装）
+              <a href="/2018/11/08/2018-11-08 ShadowsocksX 更新 PAC 方法/" rel="next" title="ShadowsocksX 更新 PAC 方法">
+                <i class="fa fa-chevron-left"></i> ShadowsocksX 更新 PAC 方法
               </a>
             
           </div>
@@ -448,10 +424,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/08/03/2018-08-03 Spark RDD（一） parallelize，makeRDD，textFile/" rel="prev" title="Spark RDD常用算子操作（一） parallelize，makeRDD，textFile">
-                Spark RDD常用算子操作（一） parallelize，makeRDD，textFile <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -592,7 +564,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装spark包"><span class="nav-number">1.</span> <span class="nav-text"> 安装Spark包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改spark-envsh文件"><span class="nav-number">2.</span> <span class="nav-text"> 修改spark-env.sh文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改slaves文件"><span class="nav-number">3.</span> <span class="nav-text"> 修改slaves文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装spark集群"><span class="nav-number">4.</span> <span class="nav-text"> 安装spark集群</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动spark集群"><span class="nav-number">5.</span> <span class="nav-text"> 启动spark集群</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-命名空间"><span class="nav-number">1.</span> <span class="nav-text"> 1. 命名空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-定义别名"><span class="nav-number">2.</span> <span class="nav-text"> 2. 定义别名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-私有继承基类重新声明成员"><span class="nav-number">3.</span> <span class="nav-text"> 3. 私有继承基类重新声明成员</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-声明重载的成员函数"><span class="nav-number">4.</span> <span class="nav-text"> 4. 声明重载的成员函数</span></a></li></ol></div>
             
 
           </div>

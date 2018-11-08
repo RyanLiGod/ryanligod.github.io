@@ -262,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ryanligod.github.io/2018/10/31/2018-10-31 Vue.js入门—Vue CLI，Vue Router/">
+    <link itemprop="mainEntityOfPage" href="https://ryanligod.github.io/2018/11/08/2018-11-8 ShadowsocksX 更新 PAC 方法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ryan Li">
@@ -281,7 +281,157 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/31/2018-10-31 Vue.js入门—Vue CLI，Vue Router/" itemprop="url">Vue.js 入门——Vue CLI，Vue Router，axios，iView，ECharts</a></h2>
+                <a class="post-title-link" href="/2018/11/08/2018-11-8 ShadowsocksX 更新 PAC 方法/" itemprop="url">ShadowsocksX 更新 PAC 方法</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-08T10:20:55+08:00">
+                2018-11-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/11/08/2018-11-8 ShadowsocksX 更新 PAC 方法/" class="leancloud_visitors" data-flag-title="ShadowsocksX 更新 PAC 方法">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="更新方法"><a class="markdownIt-Anchor" href="#更新方法"></a> 更新方法</h3>
+<p>手动下载 gfwlist.txt, 转成 PAC 所用的 gfwlist.js 之后放到默认存放位置。</p>
+<ol>
+<li>
+<p>获取 gfwlist.txt， 最新地址 <a href="https://github.com/gfwlist/gfwlist%EF%BC%9A" target="_blank" rel="noopener">https://github.com/gfwlist/gfwlist：</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> wget https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>安装 gfwlist2pac，注意这里需要 python 2.7 的环境，我这里使用 conda 切换到 python 2.7 的环境：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">source</span> activate py27</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> pip install gfwlist2pac</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>转换 PAC：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gfwlist2pac -i gfwlist.txt -f gfwlist.js -p "SOCKS5 127.0.0.1:1080;" --precise</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>拷贝新生成的 gfwlist.js 到 ShadowsocksX PAC 目录：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cp gfwlist.js ~/.ShadowsocksX/</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ryanligod.github.io/2018/10/31/2018-10-31 Vue.js 入门—Vue CLI，Vue Router/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ryan Li God">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/31/2018-10-31 Vue.js 入门—Vue CLI，Vue Router/" itemprop="url">Vue.js 入门——Vue CLI，Vue Router，axios，iView，ECharts</a></h2>
         
 
         <div class="post-meta">
@@ -333,7 +483,7 @@
 
           
           
-             <span id="/2018/10/31/2018-10-31 Vue.js入门—Vue CLI，Vue Router/" class="leancloud_visitors" data-flag-title="Vue.js 入门——Vue CLI，Vue Router，axios，iView，ECharts">
+             <span id="/2018/10/31/2018-10-31 Vue.js 入门—Vue CLI，Vue Router/" class="leancloud_visitors" data-flag-title="Vue.js 入门——Vue CLI，Vue Router，axios，iView，ECharts">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -382,7 +532,7 @@
 <p>因为要用到路由，我选择了 <code>Manually select features</code> 。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/31/2018-10-31 Vue.js入门—Vue CLI，Vue Router/#more" rel="contents">
+            <a class="btn" href="/2018/10/31/2018-10-31 Vue.js 入门—Vue CLI，Vue Router/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -433,7 +583,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ryanligod.github.io/2018/10/29/2018-10-29 pybind11入门/">
+    <link itemprop="mainEntityOfPage" href="https://ryanligod.github.io/2018/10/29/2018-10-29 pybind11 入门/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ryan Li">
@@ -452,7 +602,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/29/2018-10-29 pybind11入门/" itemprop="url">python调用C++之pybind11入门（macOS）</a></h2>
+                <a class="post-title-link" href="/2018/10/29/2018-10-29 pybind11 入门/" itemprop="url">python 调用 C++ 之 pybind11入门（macOS）</a></h2>
         
 
         <div class="post-meta">
@@ -504,7 +654,7 @@
 
           
           
-             <span id="/2018/10/29/2018-10-29 pybind11入门/" class="leancloud_visitors" data-flag-title="python调用C++之pybind11入门（macOS）">
+             <span id="/2018/10/29/2018-10-29 pybind11 入门/" class="leancloud_visitors" data-flag-title="python 调用 C++ 之 pybind11入门（macOS）">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -537,20 +687,20 @@
       
         
           <h2 id="pybind11简介与环境安装"><a class="markdownIt-Anchor" href="#pybind11简介与环境安装"></a> pybind11简介与环境安装</h2>
-<p>pybind11是一个轻量级的只包含头文件的库，它主要是用来在已有的 C++代码的基础上做扩展，它的语法和目标非常像Boost.Python，但Boost.Python为了兼容现有的基本所有的C++编译器而变得非常复杂和庞大，而因此付出的代价是很多晦涩的模板技巧以及很多不必要的对旧版编译器的支持。Pybind11摒弃了这些支持，它只支持python2.7以上以及C++ 11以上的编译器，使得它比Boost.Python更加简洁高效。</p>
-<p>为了使用pybind11，我们需要支持C++ 11标准的编译器(GCC 4.8以上)以及python 2.7以上的版本，还需要下载<a href="https://cmake.org/cmake-tutorial/" target="_blank" rel="noopener">CMake</a> (macOS中只需要 <code>brew install cmake</code> )，有了这些以后：</p>
+<p>pybind11 是一个轻量级的只包含头文件的库，它主要是用来在已有的 C++ 代码的基础上做扩展，它的语法和目标非常像 Boost.Python，但 Boost.Python 为了兼容现有的基本所有的 C++ 编译器而变得非常复杂和庞大，而因此付出的代价是很多晦涩的模板技巧以及很多不必要的对旧版编译器的支持。Pybind11 摒弃了这些支持，它只支持 python 2.7 以上以及 C++ 11 以上的编译器，使得它比 Boost.Python 更加简洁高效。</p>
+<p>为了使用pybind11，我们需要支持 C++ 11 标准的编译器（GCC 4.8以上）以及 python 2.7 以上的版本，还需要下载 <a href="https://cmake.org/cmake-tutorial/" target="_blank" rel="noopener">CMake</a> (macOS中只需要 <code>brew install cmake</code> )，有了这些以后：</p>
 <ol>
 <li>从 pybind11 github网址：<a href="https://github.com/pybind/pybind11" target="_blank" rel="noopener">https://github.com/pybind/pybind11</a> 上下载源码。</li>
-<li>CMake工程之前，要先安装pytest <code>pip install pytest</code>，否则会出错。</li>
+<li>CMake 工程之前，要先安装pytest <code>pip install pytest</code>，否则会出错。</li>
 <li>用 <code>CMake</code> 编译并运行测试用例：</li>
 </ol>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mkdir build</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> build</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> cmake ..</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> make check -j 4</span></span><br></pre></td></tr></table></figure>
-<p>最后一行命令会编译并且运行tests，如果所有测试用例都通过了，说明安装成功了。</p>
+<p>最后一行命令会编译并且运行 tests，如果所有测试用例都通过了，说明安装成功了。</p>
 <h2 id="python调用c"><a class="markdownIt-Anchor" href="#python调用c"></a> python调用C++</h2>
-<p>下载编译好pybind11之后，我们就可以开始对着官方的<a href="http://pybind11.readthedocs.io/en/stable/index.html" target="_blank" rel="noopener">pybind11 Tutorial</a>进行学习了，详细的入门教程及语法请参考官方文档，这里，我们简单演示下如何编写供python调用的C++模块。</p>
+<p>下载编译好 pybind11 之后，我们就可以开始对着官方的<a href="http://pybind11.readthedocs.io/en/stable/index.html" target="_blank" rel="noopener">pybind11 Tutorial</a>进行学习了，详细的入门教程及语法请参考官方文档，这里，我们简单演示下如何编写供python调用的C++模块。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/29/2018-10-29 pybind11入门/#more" rel="contents">
+            <a class="btn" href="/2018/10/29/2018-10-29 pybind11 入门/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1858,174 +2008,6 @@ Need code to compute:</p>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ryanligod.github.io/2018/08/10/2018-08-10 吴恩达ML（三）Logistic 回归/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan Li">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ryan Li God">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/10/2018-08-10 吴恩达ML（三）Logistic 回归/" itemprop="url">吴恩达机器学习笔记（三） Logistic 回归</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-10T03:26:50+08:00">
-                2018-08-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/机器学习/" itemprop="url" rel="index">
-                    <span itemprop="name">机器学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/08/10/2018-08-10 吴恩达ML（三）Logistic 回归/" class="leancloud_visitors" data-flag-title="吴恩达机器学习笔记（三） Logistic 回归">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="分类-classfication"><a class="markdownIt-Anchor" href="#分类-classfication"></a> 分类 Classfication</h1>
-<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>y</mi><mo>∈</mo><mo>{</mo><mn>1</mn><mo separator="true">,</mo><mn>0</mn><mo>}</mo></mrow><annotation encoding="application/x-tex">y \in \{1,0\}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.03588em;">y</span><span class="mord rule" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mord rule" style="margin-right:0.2777777777777778em;"></span><span class="mopen">{</span><span class="mord">1</span><span class="mpunct">,</span><span class="mord rule" style="margin-right:0.16666666666666666em;"></span><span class="mord">0</span><span class="mclose">}</span></span></span></span><br>
-0:  “Negative Class”<br>
-1:  “Positive Class”</p>
-<h1 id="逻辑回归"><a class="markdownIt-Anchor" href="#逻辑回归"></a> 逻辑回归</h1>
-<p>逻辑回归是一种分类方法<br>
-<strong>Logistic Regression Model</strong><br>
-Want  $ 0 \leq h_\theta(x) \leq 1<span class="katex"><span class="katex-mathml"><math><semantics><mrow></mrow><annotation encoding="application/x-tex">
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0em;"></span><span class="strut bottom" style="height:0em;vertical-align:0em;"></span><span class="base"></span></span></span>h_\theta(x)=g(\theta^Tx)$<br>
-其中  <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>g</mi><mo>(</mo><mi>z</mi><mo>)</mo><mo>=</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mn>1</mn><mo>+</mo><msup><mi>e</mi><mrow><mo>−</mo><mi>z</mi></mrow></msup></mrow></mfrac></mrow><annotation encoding="application/x-tex">g(z)=\dfrac{1}{1+e^{-z}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:1.32144em;"></span><span class="strut bottom" style="height:2.09077em;vertical-align:-0.7693300000000001em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.04398em;">z</span><span class="mclose">)</span><span class="mord rule" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mord rule" style="margin-right:0.2777777777777778em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord mathit">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.697331em;"><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mathit mtight" style="margin-right:0.04398em;">z</span></span></span></span></span></span></span></span></span></span></span><span style="top:-3.15em;"><span class="pstrut" style="height:3em;"></span><span class="stretchy" style="height:0.2em;"><svg width="400em" height="0.2em" viewbox="0 0 400000 200" preserveaspectratio="xMinYMin slice"><path d="M0 80H400000 v40H0z M0 80H400000 v40H0z"/></svg></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693300000000001em;"></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>  ，称作<strong>Sigmoid函数</strong>或<strong>Logistic函数</strong></p>
-<p><img src="http://pd4nbaja5.bkt.clouddn.com/2018-08-09-150915.png" alt="image-20180810010915319"></p>
-<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>h</mi><mi mathvariant="normal">_</mi><mi>θ</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mi>P</mi><mo>(</mo><mi>y</mi><mo>=</mo><mn>1</mn><mi mathvariant="normal">∣</mi><mi>x</mi><mo separator="true">;</mo><mi>θ</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">h\_\theta(x)=P(y=1|x;\theta)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1.06em;vertical-align:-0.31em;"></span><span class="base"><span class="mord mathit">h</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathit" style="margin-right:0.02778em;">θ</span><span class="mopen">(</span><span class="mord mathit">x</span><span class="mclose">)</span><span class="mord rule" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mord rule" style="margin-right:0.2777777777777778em;"></span><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.03588em;">y</span><span class="mord rule" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mord rule" style="margin-right:0.2777777777777778em;"></span><span class="mord">1</span><span class="mord">∣</span><span class="mord mathit">x</span><span class="mpunct">;</span><span class="mord rule" style="margin-right:0.16666666666666666em;"></span><span class="mord mathit" style="margin-right:0.02778em;">θ</span><span class="mclose">)</span></span></span></span></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/10/2018-08-10 吴恩达ML（三）Logistic 回归/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2080,7 +2062,7 @@ Want  $ 0 \leq h_\theta(x) \leq 1<span class="katex"><span class="katex-mathml">
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

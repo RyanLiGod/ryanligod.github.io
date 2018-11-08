@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="1. 命名空间 该用法能直接在程序中使用 using 后所跟的命名空间的元素，而不用每次要使用时指定命名空间。 1using namespace std;  2. 定义别名 给某一类型定义别名，和 typedef 作用一样。  using 类型别名 = 原类型;  12using uint = unsigned int;uint i = 0;  // 相当于unsigned int;  3. 私">
+<meta name="description" content="1. 命名空间 该用法能直接在程序中使用 using 后所跟的命名空间的元素，而不用每次要使用时指定命名空间。 1using namespace std;  2. 定义别名 给某一类型定义别名，和 typedef 作用一样。  using 类型别名 = 原类型;  12using uint = unsigned int;uint i = 0;  // 相当于unsigned int;">
 <meta name="keywords" content="C++">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++ 中的 using 简单总结">
 <meta property="og:url" content="https://ryanligod.github.io/2018/11/08/2018-11-08 C++ 中的 using 简单总结/index.html">
 <meta property="og:site_name" content="Ryan Li God">
-<meta property="og:description" content="1. 命名空间 该用法能直接在程序中使用 using 后所跟的命名空间的元素，而不用每次要使用时指定命名空间。 1using namespace std;  2. 定义别名 给某一类型定义别名，和 typedef 作用一样。  using 类型别名 = 原类型;  12using uint = unsigned int;uint i = 0;  // 相当于unsigned int;  3. 私">
+<meta property="og:description" content="1. 命名空间 该用法能直接在程序中使用 using 后所跟的命名空间的元素，而不用每次要使用时指定命名空间。 1using namespace std;  2. 定义别名 给某一类型定义别名，和 typedef 作用一样。  using 类型别名 = 原类型;  12using uint = unsigned int;uint i = 0;  // 相当于unsigned int;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-08T08:48:45.982Z">
+<meta property="og:updated_time" content="2018-11-08T08:50:01.621Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++ 中的 using 简单总结">
-<meta name="twitter:description" content="1. 命名空间 该用法能直接在程序中使用 using 后所跟的命名空间的元素，而不用每次要使用时指定命名空间。 1using namespace std;  2. 定义别名 给某一类型定义别名，和 typedef 作用一样。  using 类型别名 = 原类型;  12using uint = unsigned int;uint i = 0;  // 相当于unsigned int;  3. 私">
+<meta name="twitter:description" content="1. 命名空间 该用法能直接在程序中使用 using 后所跟的命名空间的元素，而不用每次要使用时指定命名空间。 1using namespace std;  2. 定义别名 给某一类型定义别名，和 typedef 作用一样。  using 类型别名 = 原类型;  12using uint = unsigned int;uint i = 0;  // 相当于unsigned int;">
 
 
 
@@ -372,6 +372,7 @@
 <p>using 类型别名 = 原类型;</p>
 </blockquote>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> uint = <span class="keyword">unsigned</span> <span class="keyword">int</span>;</span><br><span class="line">uint i = <span class="number">0</span>;  <span class="comment">// 相当于unsigned int;</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <h2 id="3-私有继承基类重新声明成员"><a class="markdownIt-Anchor" href="#3-私有继承基类重新声明成员"></a> 3. 私有继承基类重新声明成员</h2>
 <p>当一个派生类私有继承基类时，基类的 public 和 protected 数据成员在派生类中是 private 的形式，如果想让这些继承而来的数据成员作为 public 或者 protected 成员，可以用 using 来重新声明。using 声明语句中名字的访问权限由该 using 声明语句之前的访问说明符决定。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Basic</span> &#123;</span></span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		<span class="keyword">int</span> a;</span><br><span class="line">		<span class="keyword">int</span> b;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bulk</span> :</span> <span class="keyword">private</span> Basic &#123;</span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		<span class="keyword">using</span> Basic::a;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">protected</span>:</span><br><span class="line">		<span class="keyword">using</span> Basic::b;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>

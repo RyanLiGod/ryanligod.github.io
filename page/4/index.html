@@ -370,15 +370,15 @@
 <li>将spark-2.1.3-bin-hadoop2.4.tgz使用SFTP上传到/usr/local目录下。</li>
 <li>解压缩spark包：</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar zxvf spark-2.1.3-bin-hadoop2.4.tgz</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">tar</span> <span class="selector-tag">zxvf</span> <span class="selector-tag">spark-2</span><span class="selector-class">.1</span><span class="selector-class">.3-bin-hadoop2</span><span class="selector-class">.4</span><span class="selector-class">.tgz</span></span><br></pre></td></tr></table></figure>
 <ol start="3">
 <li>更改spark目录名：</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv spark-2.1.3-bin-hadoop2.4 spark</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">mv</span> <span class="selector-tag">spark-2</span><span class="selector-class">.1</span><span class="selector-class">.3-bin-hadoop2</span><span class="selector-class">.4</span> <span class="selector-tag">spark</span></span><br></pre></td></tr></table></figure>
 <ol start="4">
 <li>设置spark环境变量</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vi .bashrc</span><br><span class="line">export SPARK_HOME=/usr/local/spark</span><br><span class="line">export PATH=$SPARK_HOME/bin</span><br><span class="line">export CLASSPATH=.:$CLASSPATH:$JAVA_HOME/lib:$JAVA_HOME/jre/lib</span><br><span class="line">source .bashrc</span><br></pre></td></tr></table></figure>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vi .bashrc</span><br><span class="line">export SPARK_HOME=<span class="regexp">/usr/local</span><span class="regexp">/spark</span></span><br><span class="line"><span class="regexp">export PATH=$SPARK_HOME/bin</span></span><br><span class="line">export CLASSPATH=.:$<span class="symbol">CLASSPATH:</span>$JAVA_HOME/<span class="class"><span class="keyword">lib</span>:$<span class="title">JAVA_HOME</span>/<span class="title">jre</span>/<span class="title">lib</span></span></span><br><span class="line">source .bashrc</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/07/31/2018-07-31 Spark2-1-3集群搭建/#more" rel="contents">
@@ -542,19 +542,19 @@
 <li>将scala-2.11.8.tgz使用WinSCP拷贝到spark1的/usr/local目录下。</li>
 <li>对scala-2.11.8.tgz进行解压缩：</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf scala-2.11.8.tgz</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">tar</span> <span class="selector-tag">-zxvf</span> <span class="selector-tag">scala-2</span><span class="selector-class">.11</span><span class="selector-class">.8</span><span class="selector-class">.tgz</span></span><br></pre></td></tr></table></figure>
 <ol start="3">
 <li>对scala目录进行重命名：</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv scala-2.11.8 scala</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">mv</span> <span class="selector-tag">scala-2</span><span class="selector-class">.11</span><span class="selector-class">.8</span> <span class="selector-tag">scala</span></span><br></pre></td></tr></table></figure>
 <ol start="4">
 <li>配置scala相关的环境变量</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vi .bashrc</span><br><span class="line">export SCALA_HOME=/usr/local/scala</span><br><span class="line">export PATH=$SCALA_HOME/bin</span><br><span class="line"></span><br><span class="line">source .bashrc</span><br></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vi .bashrc</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">SCALA_HOME</span>=/usr/local/scala</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">PATH</span>=<span class="variable">$SCALA_HOME</span>/bin</span><br><span class="line"></span><br><span class="line">source .bashrc</span><br></pre></td></tr></table></figure>
 <ol start="5">
 <li>查看scala是否安装成功：</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scala -version</span><br></pre></td></tr></table></figure>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">scala</span> -<span class="keyword">version</span></span><br></pre></td></tr></table></figure>
 <ol start="6">
 <li>按照上述步骤在spark2和spark3机器上都安装好scala。使用scp将scala和.bashrc拷贝到spark2和spark3上即可</li>
 </ol>
@@ -719,15 +719,15 @@
 <li>将zookeeper-3.4.5.tar.gz使用SFTP工具拷贝到spark1的/usr/local目录下</li>
 <li>对zookeeper-3.4.5.tar.gz进行解压缩：</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf zookeeper-3.4.5.tar.gz</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">tar</span> <span class="selector-tag">-zxvf</span> <span class="selector-tag">zookeeper-3</span><span class="selector-class">.4</span><span class="selector-class">.5</span><span class="selector-class">.tar</span><span class="selector-class">.gz</span></span><br></pre></td></tr></table></figure>
 <ol start="3">
 <li>对zookeeper目录进行重命名：</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv zookeeper-3.4.5 zk</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">mv</span> <span class="selector-tag">zookeeper-3</span><span class="selector-class">.4</span><span class="selector-class">.5</span> <span class="selector-tag">zk</span></span><br></pre></td></tr></table></figure>
 <ol start="4">
 <li>配置zookeeper相关的环境变量</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi .bashrc</span><br><span class="line">export ZOOKEEPER_HOME=/usr/local/zk</span><br><span class="line">export PATH=$ZOOKEEPER_HOME/bin</span><br><span class="line">source .bashrc</span><br></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi .bashrc</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">ZOOKEEPER_HOME</span>=/usr/local/zk</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">PATH</span>=<span class="variable">$ZOOKEEPER_HOME</span>/bin</span><br><span class="line">source .bashrc</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/07/31/2018-07-31 ZooKeeper3-4-5集群搭建/#more" rel="contents">
@@ -889,15 +889,15 @@
 <li>将apache-hive-0.13.1-bin.tar.gz使用SFTP工具上传到spark1的/usr/local目录下。</li>
 <li>解压缩hive安装包：</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf apache-hive-0.13.1-bin.tar.gz</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">tar</span> <span class="selector-tag">-zxvf</span> <span class="selector-tag">apache-hive-0</span><span class="selector-class">.13</span><span class="selector-class">.1-bin</span><span class="selector-class">.tar</span><span class="selector-class">.gz</span></span><br></pre></td></tr></table></figure>
 <ol start="3">
 <li>重命名hive目录：</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv apache-hive-0.13.1-bin hive</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">mv</span> <span class="selector-tag">apache-hive-0</span><span class="selector-class">.13</span><span class="selector-class">.1-bin</span> <span class="selector-tag">hive</span></span><br></pre></td></tr></table></figure>
 <ol start="4">
 <li>配置hive相关的环境变量</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi .bashrc</span><br><span class="line">export HIVE_HOME=/usr/local/hive</span><br><span class="line">export PATH=$HIVE_HOME/bin</span><br><span class="line">source .bashrc</span><br></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi .bashrc</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">HIVE_HOME</span>=/usr/local/hive</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">PATH</span>=<span class="variable">$HIVE_HOME</span>/bin</span><br><span class="line">source .bashrc</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/07/31/2018-07-31 Hive0-13搭建/#more" rel="contents">
@@ -1407,7 +1407,7 @@ export PATH=<span class="katex"><span class="katex-mathml"><math><semantics><mro
 <ol>
 <li>启动hdfs集群：</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start-dfs.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">start</span>-dfs.sh</span><br></pre></td></tr></table></figure>
 <ol start="2">
 <li>验证启动是否成功：jps、50070端口<br>
 spark1：namenode、datanode、secondarynamenode<br>
@@ -1578,14 +1578,14 @@ Markdown 的語法有個主要的目的：用來作為一種網路內容的<em>�
 </blockquote>
 <h2 id="标题"><a class="markdownIt-Anchor" href="#标题"></a> 标题</h2>
 <p>Markdown 语法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 第一级标题 `&lt;h1&gt;` </span><br><span class="line">## 第二级标题 `&lt;h2&gt;` </span><br><span class="line">###### 第六级标题 `&lt;h6&gt;`</span><br></pre></td></tr></table></figure>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 第一级标题 `&lt;h1&gt;` </span><br><span class="line">## 第二级标题 `&lt;h2&gt;` </span><br><span class="line">###### 第六级标题 `&lt;h6&gt;`</span><br></pre></td></tr></table></figure>
 <p>效果如下：</p>
 <h1 id="第一级标题-h1"><a class="markdownIt-Anchor" href="#第一级标题-h1"></a> 第一级标题 <code>&lt;h1&gt;</code></h1>
 <h2 id="第二级标题-h2"><a class="markdownIt-Anchor" href="#第二级标题-h2"></a> 第二级标题 <code>&lt;h2&gt;</code></h2>
 <h6 id="第六级标题-h6"><a class="markdownIt-Anchor" href="#第六级标题-h6"></a> 第六级标题 <code>&lt;h6&gt;</code></h6>
 <h2 id="强调"><a class="markdownIt-Anchor" href="#强调"></a> 强调</h2>
 <p>Markdown 语法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">*这些文字会生成`&lt;em&gt;`*</span><br><span class="line">_这些文字会生成`&lt;u&gt;`_</span><br><span class="line"></span><br><span class="line">**这些文字会生成`&lt;strong&gt;`**</span><br><span class="line">__这些文字会生成`&lt;strong&gt;`__</span><br></pre></td></tr></table></figure>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">*这些文字会生成`&lt;em&gt;`*</span><br><span class="line">_这些文字会生成`&lt;u&gt;`_</span><br><span class="line"></span><br><span class="line">**这些文字会生成`&lt;strong&gt;`**</span><br><span class="line">__这些文字会生成`&lt;strong&gt;`__</span><br></pre></td></tr></table></figure>
 <p>效果如下：</p>
 <p><em>这些文字会生成<code>&lt;em&gt;</code></em><br>
 <em>这些文字会生成<code>&lt;u&gt;</code></em></p>

@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="大数据,Spark,Hadoop,RDD操作," />
+  <meta name="keywords" content="大数据,Hadoop,Spark,RDD操作," />
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="原文作者：翟开顺 首发：CSDN 本人仅为自己方便查阅做了摘抄，请支持原作者 原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428   filter,map,flatMap  filter 举例，在F:\sparktest\sample.txt 文件的内容如下 1234aa bb cc aa aa aa dd dd ee ee e">
-<meta name="keywords" content="大数据,Spark,Hadoop,RDD操作">
+<meta name="keywords" content="大数据,Hadoop,Spark,RDD操作">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spark RDD常用算子操作（二） filter,map,flatMap">
 <meta property="og:url" content="https://ryanligod.github.io/2018/08/03/2018-08-03 Spark RDD（二） filter,map,flatMap/index.html">
@@ -372,7 +372,7 @@
 <h1 id="filtermapflatmap"><a class="markdownIt-Anchor" href="#filtermapflatmap"></a> filter,map,flatMap</h1>
 <h2 id="filter"><a class="markdownIt-Anchor" href="#filter"></a> filter</h2>
 <p>举例，在F:\sparktest\sample.txt 文件的内容如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">aa bb cc aa aa aa dd dd ee ee ee ee </span><br><span class="line">ff aa bb zks</span><br><span class="line">ee kks</span><br><span class="line">ee  zz zks</span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">aa bb cc aa aa aa <span class="selector-tag">dd</span> <span class="selector-tag">dd</span> ee ee ee ee </span><br><span class="line">ff aa bb zks</span><br><span class="line">ee kks</span><br><span class="line">ee  zz zks</span><br></pre></td></tr></table></figure>
 <p>我要将包含zks的行的内容给找出来<br>
 <strong>scala版本</strong></p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">val</span> lines = sc.textFile(<span class="string">"F:\\sparktest\\sample.txt"</span>).filter(line=&gt;line.contains(<span class="string">"zks"</span>))</span><br><span class="line">    <span class="comment">//打印内容</span></span><br><span class="line">    lines.collect().foreach(println(_));</span><br><span class="line">-------------输出------------------</span><br><span class="line">ff aa bb zks</span><br><span class="line">ee  zz zks</span><br></pre></td></tr></table></figure>
@@ -383,7 +383,7 @@
 <p>map() 接收一个函数，把这个函数用于 RDD 中的每个元素，将函数的返回结果作为结果RDD编程 ｜ 31<br>
 RDD 中对应元素的值 map是一对一的关系<br>
 举例，在F:\sparktest\sample.txt 文件的内容如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">aa bb cc aa aa aa dd dd ee ee ee ee </span><br><span class="line">ff aa bb zks</span><br><span class="line">ee kks</span><br><span class="line">ee  zz zks</span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">aa bb cc aa aa aa <span class="selector-tag">dd</span> <span class="selector-tag">dd</span> ee ee ee ee </span><br><span class="line">ff aa bb zks</span><br><span class="line">ee kks</span><br><span class="line">ee  zz zks</span><br></pre></td></tr></table></figure>
 <p>把每一行变成一个数组<br>
 <strong>scala版本</strong></p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//读取数据</span></span><br><span class="line">scala&gt; <span class="keyword">val</span> lines = sc.textFile(<span class="string">"F:\\sparktest\\sample.txt"</span>)</span><br><span class="line"><span class="comment">//用map，对于每一行数据，按照空格分割成一个一个数组，然后返回的是一对一的关系</span></span><br><span class="line">scala&gt; <span class="keyword">var</span> mapRDD = lines.map(line =&gt; line.split(<span class="string">"\\s+"</span>))</span><br><span class="line">---------------输出-----------</span><br><span class="line">res0: <span class="type">Array</span>[<span class="type">Array</span>[<span class="type">String</span>]] = <span class="type">Array</span>(<span class="type">Array</span>(aa, bb, cc, aa, aa, aa, dd, dd, ee, ee, ee, ee), <span class="type">Array</span>(ff, aa, bb, zks), <span class="type">Array</span>(ee, kks), <span class="type">Array</span>(ee, zz, zks))</span><br><span class="line"><span class="comment">//读取第一个元素</span></span><br><span class="line">scala&gt; mapRDD.first</span><br><span class="line">---输出----</span><br><span class="line">res1: <span class="type">Array</span>[<span class="type">String</span>] = <span class="type">Array</span>(aa, bb, cc, aa, aa, aa, dd, dd, ee, ee, ee, ee)</span><br></pre></td></tr></table></figure>
@@ -419,9 +419,9 @@ spark2.0以上，对flatMap的方法有所修改，就是flatMap中的Iterator�
           
             <a href="/tags/大数据/" rel="tag"># 大数据</a>
           
-            <a href="/tags/Spark/" rel="tag"># Spark</a>
-          
             <a href="/tags/Hadoop/" rel="tag"># Hadoop</a>
+          
+            <a href="/tags/Spark/" rel="tag"># Spark</a>
           
             <a href="/tags/RDD操作/" rel="tag"># RDD操作</a>
           

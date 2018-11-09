@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="大数据,Spark,Hadoop,RDD操作," />
+  <meta name="keywords" content="大数据,Hadoop,Spark,RDD操作," />
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="原文作者：翟开顺 首发：CSDN 本人仅为自己方便查阅做了摘抄，请支持原作者 原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428   键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey  reduceByKey 12345def reduceByKey(func: (V, V) =&amp;gt; V)">
-<meta name="keywords" content="大数据,Spark,Hadoop,RDD操作">
+<meta name="keywords" content="大数据,Hadoop,Spark,RDD操作">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spark RDD常用算子操作（六） 键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey">
 <meta property="og:url" content="https://ryanligod.github.io/2018/08/03/2018-08-03 Spark RDD（六） 键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey/index.html">
@@ -379,7 +379,7 @@
 <p>再举例<br>
 单词计数<br>
 F:\sparktest\sample.txt中的内容如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">aa bb cc aa aa aa dd dd ee ee ee ee </span><br><span class="line">ff aa bb zks</span><br><span class="line">ee kks</span><br><span class="line">ee  zz zks</span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">aa bb cc aa aa aa <span class="selector-tag">dd</span> <span class="selector-tag">dd</span> ee ee ee ee </span><br><span class="line">ff aa bb zks</span><br><span class="line">ee kks</span><br><span class="line">ee  zz zks</span><br></pre></td></tr></table></figure>
 <p><strong>scala版本</strong></p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">val</span> lines = sc.textFile(<span class="string">"F:\\sparktest\\sample.txt"</span>)</span><br><span class="line">    <span class="keyword">val</span> wordsRDD = lines.flatMap(x=&gt;x.split(<span class="string">"\\s+"</span>)).map(x=&gt;(x,<span class="number">1</span>))</span><br><span class="line">    <span class="keyword">val</span> wordCountRDD = wordsRDD.reduceByKey((x,y)=&gt;x+y)</span><br><span class="line">    wordCountRDD.foreach(x=&gt;println(x))</span><br><span class="line">---------输出-----------</span><br><span class="line">(ee,<span class="number">6</span>)</span><br><span class="line">(aa,<span class="number">5</span>)</span><br><span class="line">(dd,<span class="number">2</span>)</span><br><span class="line">(zz,<span class="number">1</span>)</span><br><span class="line">(zks,<span class="number">2</span>)</span><br><span class="line">(kks,<span class="number">1</span>)</span><br><span class="line">(ff,<span class="number">1</span>)</span><br><span class="line">(bb,<span class="number">2</span>)</span><br><span class="line">(cc,<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
@@ -422,9 +422,9 @@ foldByKey可以参考我之前的<a href="http://blog.csdn.net/t1dmzks/article/d
           
             <a href="/tags/大数据/" rel="tag"># 大数据</a>
           
-            <a href="/tags/Spark/" rel="tag"># Spark</a>
-          
             <a href="/tags/Hadoop/" rel="tag"># Hadoop</a>
+          
+            <a href="/tags/Spark/" rel="tag"># Spark</a>
           
             <a href="/tags/RDD操作/" rel="tag"># RDD操作</a>
           

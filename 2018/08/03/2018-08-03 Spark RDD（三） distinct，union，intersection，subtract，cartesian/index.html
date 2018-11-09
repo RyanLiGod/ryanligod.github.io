@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="大数据,Spark,Hadoop,RDD操作," />
+  <meta name="keywords" content="大数据,Hadoop,Spark,RDD操作," />
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="原文作者：翟开顺 首发：CSDN 本人仅为自己方便查阅做了摘抄，请支持原作者 原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428   distinct，union，intersection，subtract，cartesian spark伪集合 尽管 RDD 本身不是严格意义上的集合，但它也支持许多数学上的集合操作，比如合并和相">
-<meta name="keywords" content="大数据,Spark,Hadoop,RDD操作">
+<meta name="keywords" content="大数据,Hadoop,Spark,RDD操作">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spark RDD常用算子操作（三） distinct，union，intersection，subtract，cartesian">
 <meta property="og:url" content="https://ryanligod.github.io/2018/08/03/2018-08-03 Spark RDD（三） distinct，union，intersection，subtract，cartesian/index.html">
@@ -391,7 +391,7 @@ intersection 需要混洗数据，比较浪费性能<br>
 <strong>scala版本</strong></p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="keyword">var</span> <span class="type">RDD1</span> = sc.parallelize(<span class="type">List</span>(<span class="string">"aa"</span>,<span class="string">"aa"</span>,<span class="string">"bb"</span>,<span class="string">"cc"</span>,<span class="string">"dd"</span>))</span><br><span class="line">scala&gt; <span class="keyword">var</span> <span class="type">RDD2</span> = sc.parallelize(<span class="type">List</span>(<span class="string">"aa"</span>,<span class="string">"dd"</span>,<span class="string">"ff"</span>))</span><br><span class="line"></span><br><span class="line">scala&gt; <span class="type">RDD1</span>.collect</span><br><span class="line">res6: <span class="type">Array</span>[<span class="type">String</span>] = <span class="type">Array</span>(aa, aa, bb, cc, dd)</span><br><span class="line"></span><br><span class="line">scala&gt; <span class="type">RDD2</span>.collect</span><br><span class="line">res7: <span class="type">Array</span>[<span class="type">String</span>] = <span class="type">Array</span>(aa, dd, ff)</span><br><span class="line"></span><br><span class="line">scala&gt; <span class="keyword">var</span> insertsectionRDD = <span class="type">RDD1</span>.intersection(<span class="type">RDD2</span>)</span><br><span class="line">scala&gt; insertsectionRDD.collect</span><br><span class="line"></span><br><span class="line">res9: <span class="type">Array</span>[<span class="type">String</span>] = <span class="type">Array</span>(aa, dd)</span><br></pre></td></tr></table></figure>
 <p><strong>java版本</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">    JavaRDD&lt;String&gt; RDD1 = sc.parallelize(Arrays.asList(&quot;aa&quot;, &quot;aa&quot;, &quot;bb&quot;, &quot;cc&quot;, &quot;dd&quot;));</span><br><span class="line">    JavaRDD&lt;String&gt; RDD2 = sc.parallelize(Arrays.asList(&quot;aa&quot;,&quot;dd&quot;,&quot;ff&quot;));</span><br><span class="line">    JavaRDD&lt;String&gt; intersectionRDD = RDD1.intersection(RDD2);</span><br><span class="line">    List&lt;String&gt; collect = intersectionRDD.collect();</span><br><span class="line">    for (String str:collect) &#123;</span><br><span class="line">        System.out.print(str+&quot; &quot;);</span><br><span class="line">    &#125;</span><br><span class="line">-------------输出-----------</span><br><span class="line">aa dd</span><br></pre></td></tr></table></figure>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">    JavaRDD&lt;<span class="keyword">String</span>&gt; RDD1 = sc.parallelize(Arrays.asList(<span class="string">"aa"</span>, <span class="string">"aa"</span>, <span class="string">"bb"</span>, <span class="string">"cc"</span>, <span class="string">"dd"</span>));</span><br><span class="line">    JavaRDD&lt;<span class="keyword">String</span>&gt; RDD2 = sc.parallelize(Arrays.asList(<span class="string">"aa"</span>,<span class="string">"dd"</span>,<span class="string">"ff"</span>));</span><br><span class="line">    JavaRDD&lt;<span class="keyword">String</span>&gt; intersectionRDD = RDD1.intersection(RDD2);</span><br><span class="line">    List&lt;<span class="keyword">String</span>&gt; collect = intersectionRDD.collect();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">String</span> <span class="built_in">str</span>:collect) &#123;</span><br><span class="line">        System.out.<span class="built_in">print</span>(<span class="built_in">str</span>+<span class="string">" "</span>);</span><br><span class="line">    &#125;</span><br><span class="line">-------------输出-----------</span><br><span class="line">aa dd</span><br></pre></td></tr></table></figure>
 <h2 id="subtract"><a class="markdownIt-Anchor" href="#subtract"></a> subtract</h2>
 <p>RDD1.subtract(RDD2),返回在RDD1中出现，但是不在RDD2中出现的元素，不去重<br>
 <strong>scala版本</strong></p>
@@ -423,9 +423,9 @@ intersection 需要混洗数据，比较浪费性能<br>
           
             <a href="/tags/大数据/" rel="tag"># 大数据</a>
           
-            <a href="/tags/Spark/" rel="tag"># Spark</a>
-          
             <a href="/tags/Hadoop/" rel="tag"># Hadoop</a>
+          
+            <a href="/tags/Spark/" rel="tag"># Spark</a>
           
             <a href="/tags/RDD操作/" rel="tag"># RDD操作</a>
           

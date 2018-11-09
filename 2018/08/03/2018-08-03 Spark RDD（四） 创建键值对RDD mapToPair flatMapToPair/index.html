@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="大数据,Spark,Hadoop,RDD操作," />
+  <meta name="keywords" content="大数据,Hadoop,Spark,RDD操作," />
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="本文作者：翟开顺 首发：CSDN 本人仅为自己方便查阅做了摘抄，请支持原作者 原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428   创建键值对RDD mapToPair flatMapToPair  mapToPair 举例，在F:\sparktest\sample.txt 文件的内容如下 1234aa bb cc aa aa">
-<meta name="keywords" content="大数据,Spark,Hadoop,RDD操作">
+<meta name="keywords" content="大数据,Hadoop,Spark,RDD操作">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spark RDD常用算子操作（四） 创建键值对RDD mapToPair flatMapToPair">
 <meta property="og:url" content="https://ryanligod.github.io/2018/08/03/2018-08-03 Spark RDD（四） 创建键值对RDD mapToPair flatMapToPair/index.html">
@@ -372,7 +372,7 @@
 <h1 id="创建键值对rdd-maptopair-flatmaptopair"><a class="markdownIt-Anchor" href="#创建键值对rdd-maptopair-flatmaptopair"></a> 创建键值对RDD mapToPair flatMapToPair</h1>
 <h2 id="maptopair"><a class="markdownIt-Anchor" href="#maptopair"></a> mapToPair</h2>
 <p>举例，在F:\sparktest\sample.txt 文件的内容如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">aa bb cc aa aa aa dd dd ee ee ee ee </span><br><span class="line">ff aa bb zks</span><br><span class="line">ee kks</span><br><span class="line">ee  zz zks</span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">aa bb cc aa aa aa <span class="selector-tag">dd</span> <span class="selector-tag">dd</span> ee ee ee ee </span><br><span class="line">ff aa bb zks</span><br><span class="line">ee kks</span><br><span class="line">ee  zz zks</span><br></pre></td></tr></table></figure>
 <p>将每一行的第一个单词作为键，1 作为value创建pairRDD<br>
 <strong>scala版本</strong><br>
 scala是没有mapToPair函数的，scala版本只需要map就可以了</p>
@@ -409,9 +409,9 @@ scala是没有mapToPair函数的，scala版本只需要map就可以了</p>
           
             <a href="/tags/大数据/" rel="tag"># 大数据</a>
           
-            <a href="/tags/Spark/" rel="tag"># Spark</a>
-          
             <a href="/tags/Hadoop/" rel="tag"># Hadoop</a>
+          
+            <a href="/tags/Spark/" rel="tag"># Spark</a>
           
             <a href="/tags/RDD操作/" rel="tag"># RDD操作</a>
           

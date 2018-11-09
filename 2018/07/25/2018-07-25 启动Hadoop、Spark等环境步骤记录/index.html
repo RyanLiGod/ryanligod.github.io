@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="大数据,Spark,Hadoop," />
+  <meta name="keywords" content="大数据,Hadoop,Spark," />
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="Hadoop  启动hdfs集群：  1start-dfs.sh  验证启动是否成功：jps、50070端口 spark1：namenode、datanode、secondarynamenode spark2：datanode spark3：datanode">
-<meta name="keywords" content="大数据,Spark,Hadoop">
+<meta name="keywords" content="大数据,Hadoop,Spark">
 <meta property="og:type" content="article">
 <meta property="og:title" content="启动Hadoop、Spark等环境步骤记录">
 <meta property="og:url" content="https://ryanligod.github.io/2018/07/25/2018-07-25 启动Hadoop、Spark等环境步骤记录/index.html">
@@ -367,7 +367,7 @@
 <ol>
 <li>启动hdfs集群：</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start-dfs.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">start</span>-dfs.sh</span><br></pre></td></tr></table></figure>
 <ol start="2">
 <li>验证启动是否成功：jps、50070端口<br>
 spark1：namenode、datanode、secondarynamenode<br>
@@ -376,37 +376,37 @@ spark3：datanode</li>
 </ol>
 <a id="more"></a>
 <h2 id="yarn"><a class="markdownIt-Anchor" href="#yarn"></a> YARN</h2>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/hadoop/sbin/start-yarn.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/usr/</span>local<span class="regexp">/hadoop/</span>sbin<span class="regexp">/start-yarn.sh</span></span><br></pre></td></tr></table></figure>
 <h2 id="hive"><a class="markdownIt-Anchor" href="#hive"></a> Hive</h2>
 <p>在spark1中，直接输入:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hive</span><br></pre></td></tr></table></figure>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">hive</span></span><br></pre></td></tr></table></figure>
 <h2 id="zookeeper"><a class="markdownIt-Anchor" href="#zookeeper"></a> ZooKeeper</h2>
 <ol>
 <li>分别在三台机器上执行：</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zkServer.sh start</span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zkServer<span class="selector-class">.sh</span> start</span><br></pre></td></tr></table></figure>
 <ol start="2">
 <li>检查ZooKeeper状态：</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zkServer.sh status</span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zkServer<span class="selector-class">.sh</span> status</span><br></pre></td></tr></table></figure>
 <h2 id="kafka"><a class="markdownIt-Anchor" href="#kafka"></a> kafka</h2>
 <ol>
 <li>在三台机器上分别执行以下命令：</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/kafka/</span><br></pre></td></tr></table></figure>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd <span class="regexp">/usr/</span>local<span class="regexp">/kafka/</span></span><br></pre></td></tr></table></figure>
 <ol start="2">
 <li>执行</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup bin/kafka-server-start.sh config/server.properties &amp;</span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup bin/kafka-server-start<span class="selector-class">.sh</span> config/server<span class="selector-class">.properties</span> &amp;</span><br></pre></td></tr></table></figure>
 <h2 id="spark"><a class="markdownIt-Anchor" href="#spark"></a> Spark</h2>
 <ol>
 <li>在spark目录下的sbin目录</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/spark/sbin</span><br></pre></td></tr></table></figure>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd <span class="regexp">/usr/</span>local<span class="regexp">/spark/</span>sbin</span><br></pre></td></tr></table></figure>
 <ol start="2">
 <li>执行</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./start-all.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./start-<span class="keyword">all</span>.<span class="keyword">sh</span></span><br></pre></td></tr></table></figure>
 <ol start="3">
 <li>使用jsp和8080端口可以检查集群是否启动成功</li>
 <li>进入spark-shell查看是否正常</li>
@@ -430,9 +430,9 @@ spark3：datanode</li>
           
             <a href="/tags/大数据/" rel="tag"># 大数据</a>
           
-            <a href="/tags/Spark/" rel="tag"># Spark</a>
-          
             <a href="/tags/Hadoop/" rel="tag"># Hadoop</a>
+          
+            <a href="/tags/Spark/" rel="tag"># Spark</a>
           
         </div>
       

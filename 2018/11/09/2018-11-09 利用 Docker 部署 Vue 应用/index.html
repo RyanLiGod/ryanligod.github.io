@@ -91,7 +91,7 @@
 <meta property="og:image" content="http://pd4nbaja5.bkt.clouddn.com/2018-11-09-134645.png">
 <meta property="og:image" content="http://pd4nbaja5.bkt.clouddn.com/2018-11-09-135230.png">
 <meta property="og:image" content="http://pd4nbaja5.bkt.clouddn.com/2018-11-09-140434.png">
-<meta property="og:updated_time" content="2018-11-09T14:21:59.927Z">
+<meta property="og:updated_time" content="2018-11-09T14:27:21.273Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用 Docker 部署 Vue 应用">
 <meta name="twitter:description" content="前言 初步学习 Docker 以后，我将尝试使用 Docker 部署之前构建的 Vue.js 应用。在实际部署的时候采用的是 vue-cli-service 打包，用 Nginx 作为代理服务器。  打包 Vue 应用 首先在 Vue 项目路径利用 vue-cli-service 打包 Vue 应用： 1$ vue-cli-service build 这样在路径中会生成 dist 文件夹，里面的">
@@ -372,7 +372,7 @@
 <p>初步学习 Docker 以后，我将尝试使用 Docker 部署之前构建的 Vue.js 应用。在实际部署的时候采用的是 <code>vue-cli-service</code> 打包，用 Nginx 作为代理服务器。</p>
 <h1 id="打包-vue-应用"><a class="markdownIt-Anchor" href="#打包-vue-应用"></a> 打包 Vue 应用</h1>
 <p>首先在 Vue 项目路径利用 <code>vue-cli-service</code> 打包 Vue 应用：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vue-cli-service build</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vue-cli-service build</span><br></pre></td></tr></table></figure>
 <p>这样在路径中会生成 <code>dist</code> 文件夹，里面的文件经过了压缩和混淆，可以加快项目运行速度并且保护代码不被轻易拷贝。</p>
 <a id="more"></a>
 <h1 id="编写-dockerfile"><a class="markdownIt-Anchor" href="#编写-dockerfile"></a> 编写 Dockerfile</h1>
@@ -385,7 +385,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ docker build -t graph-visulization </span><br><span class="line">Sending build context to Docker daemon  10.85MB</span><br><span class="line">Step 1/2 : FROM nginx:alpine</span><br><span class="line"> ---&gt; d3dcc25e0dc4</span><br><span class="line">Step 2/2 : COPY dist/  /usr/share/nginx/html/</span><br><span class="line"> ---&gt; 8ce393533061</span><br><span class="line">Successfully built 8ce393533061</span><br><span class="line">Successfully tagged graph-visulization:latest</span><br></pre></td></tr></table></figure>
 <h3 id="运行镜像"><a class="markdownIt-Anchor" href="#运行镜像"></a> 运行镜像</h3>
 <p>在项目路径下运行以下命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> docker run -p 88:80 -d graph-visulization</span></span><br><span class="line">1542c718b8264db2de2d7d0bc727744a45643e4c8f46d7f0a9167102be591489</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -p 88:80 -d graph-visulization</span><br><span class="line">1542c718b8264db2de2d7d0bc727744a45643e4c8f46d7f0a9167102be591489</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p><code>-p 88:80</code> 的作用是将容器中的 80 端口映射到本机的 88 端口<br>
 <code>-d</code> 的作用是后台运行</p>
@@ -413,7 +413,7 @@
 <li>使用 Builder pattern</li>
 </ol>
 <p>这里仅介绍 alpine，以后有空了再深入研究一下Builder pattern。选择了 <code>nginx:alpine</code> 是因为 <code>alpine</code> 镜像较为精简以及安全，这样构建的目标镜像体积较小。在安全上，而且由于可攻击的表面积小了，漏洞较少。在性能上，构造小镜像在部署速度上可以极大提高。以下为 nginx:alpine 和 nginx:1.15 镜像对比：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> docker images</span></span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">graph-visulization  latest              8ce393533061        2 hours ago         28MB</span><br><span class="line">nginx               alpine              d3dcc25e0dc4        2 days ago          17.8MB</span><br><span class="line">nginx               1.15                62f816a209e6        2 days ago          109MB</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ docker images</span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">graph-visulization  latest              8ce393533061        2 hours ago         28MB</span><br><span class="line">nginx               alpine              d3dcc25e0dc4        2 days ago          17.8MB</span><br><span class="line">nginx               1.15                62f816a209e6        2 days ago          109MB</span><br></pre></td></tr></table></figure>
 
       
     </div>

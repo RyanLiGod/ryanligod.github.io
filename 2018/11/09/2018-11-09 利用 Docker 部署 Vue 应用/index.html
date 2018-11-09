@@ -88,7 +88,7 @@
 <meta property="og:description" content="前言 初步学习 Docker 以后，我将尝试使用 Docker 部署之前构建的 Vue.js 应用。在实际部署的时候采用的是 vue-cli-service 打包，用 Nginx 作为代理服务器。  打包 Vue 应用 首先在 Vue 项目路径利用 vue-cli-service 打包 Vue 应用： 1$ vue-cli-service build 这样在路径中会生成 dist 文件夹，里面的">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://pd4nbaja5.bkt.clouddn.com/2018-11-09-112428.png">
-<meta property="og:updated_time" content="2018-11-09T11:34:58.581Z">
+<meta property="og:updated_time" content="2018-11-09T11:48:41.583Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用 Docker 部署 Vue 应用">
 <meta name="twitter:description" content="前言 初步学习 Docker 以后，我将尝试使用 Docker 部署之前构建的 Vue.js 应用。在实际部署的时候采用的是 vue-cli-service 打包，用 Nginx 作为代理服务器。  打包 Vue 应用 首先在 Vue 项目路径利用 vue-cli-service 打包 Vue 应用： 1$ vue-cli-service build 这样在路径中会生成 dist 文件夹，里面的">
@@ -389,8 +389,13 @@
 </blockquote>
 <p>在浏览器输入 <code>localhost:88</code> 即可看到已经运行的 Vue 应用：</p>
 <p><img src="http://pd4nbaja5.bkt.clouddn.com/2018-11-09-112428.png" alt="image-20181109192428410"></p>
-<h1 id="减小镜像的体积"><a class="markdownIt-Anchor" href="#减小镜像的体积"></a> 减小镜像的体积</h1>
-<p>这里选择了 <code>nginx:alpine</code> 是因为 <code>alpine</code> 镜像较为精简，这样构建的目标镜像体积较小，而且由于可攻击的表面积小了，漏洞也较少。和普通的 Nginx 镜像对比：</p>
+<h1 id="构建小而牢固的容器镜像"><a class="markdownIt-Anchor" href="#构建小而牢固的容器镜像"></a> 构建小而牢固的容器镜像</h1>
+<p>减小镜像体积有两种方式：</p>
+<ol>
+<li>使用较小的基础镜像（如 alpine）</li>
+<li>使用 Builder pattern</li>
+</ol>
+<p>这里仅介绍 alpine，以后有空了再深入研究一下Builder pattern。选择了 <code>nginx:alpine</code> 是因为 <code>alpine</code> 镜像较为精简，这样构建的目标镜像体积较小。在安全上，而且由于可攻击的表面积小了，漏洞较少。在性能上，构造小镜像在部署速度上可以极大提高。alpine 和普通的 Nginx 镜像对比：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> docker images</span></span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">docker-vue-alpine   latest              8ce393533061        2 hours ago         28MB</span><br><span class="line">docker-vue          latest              4fff06f5d407        3 hours ago         119MB</span><br><span class="line">nginx               alpine              d3dcc25e0dc4        2 days ago          17.8MB</span><br><span class="line">nginx               1.15                62f816a209e6        2 days ago          109MB</span><br></pre></td></tr></table></figure>
 
       
@@ -571,7 +576,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"> 前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#打包-vue-应用"><span class="nav-number">2.</span> <span class="nav-text"> 打包 Vue 应用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编写-dockerfile"><span class="nav-number">3.</span> <span class="nav-text"> 编写 Dockerfile</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#构建镜像"><span class="nav-number">3.0.1.</span> <span class="nav-text"> 构建镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行镜像"><span class="nav-number">3.0.2.</span> <span class="nav-text"> 运行镜像</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#减小镜像的体积"><span class="nav-number">4.</span> <span class="nav-text"> 减小镜像的体积</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"> 前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#打包-vue-应用"><span class="nav-number">2.</span> <span class="nav-text"> 打包 Vue 应用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编写-dockerfile"><span class="nav-number">3.</span> <span class="nav-text"> 编写 Dockerfile</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#构建镜像"><span class="nav-number">3.0.1.</span> <span class="nav-text"> 构建镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行镜像"><span class="nav-number">3.0.2.</span> <span class="nav-text"> 运行镜像</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#构建小而牢固的容器镜像"><span class="nav-number">4.</span> <span class="nav-text"> 构建小而牢固的容器镜像</span></a></li></ol></div>
             
 
           </div>

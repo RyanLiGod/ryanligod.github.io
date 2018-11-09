@@ -88,7 +88,7 @@
 <meta property="og:description" content="前言 Docker 是世界领先的软件容器平台。开发人员利用 Docker 可以消除协作编码时“在我的机器上可正常工作”的问题。Docker 属于 Linux 容器的一种封装，提供简单易用的容器使用接口。它是目前最流行的 Linux 容器解决方案。Docker 将应用程序与该程序的依赖，打包在一个文件里面。运行这个文件，就会生成一个虚拟容器。程序在这个虚拟容器里运行，就好像在真实的物理机上运行一样">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://pd4nbaja5.bkt.clouddn.com/2018-11-09-101259.jpg">
-<meta property="og:updated_time" content="2018-11-09T10:13:27.498Z">
+<meta property="og:updated_time" content="2018-11-09T10:16:09.426Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker 入门">
 <meta name="twitter:description" content="前言 Docker 是世界领先的软件容器平台。开发人员利用 Docker 可以消除协作编码时“在我的机器上可正常工作”的问题。Docker 属于 Linux 容器的一种封装，提供简单易用的容器使用接口。它是目前最流行的 Linux 容器解决方案。Docker 将应用程序与该程序的依赖，打包在一个文件里面。运行这个文件，就会生成一个虚拟容器。程序在这个虚拟容器里运行，就好像在真实的物理机上运行一样">
@@ -365,7 +365,7 @@
       
 
       
-        <h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+        <h1 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h1>
 <p>Docker 是世界领先的软件容器平台。开发人员利用 Docker 可以消除协作编码时“在我的机器上可正常工作”的问题。Docker 属于 Linux 容器的一种封装，提供简单易用的容器使用接口。它是目前最流行的 Linux 容器解决方案。Docker 将应用程序与该程序的依赖，打包在一个文件里面。运行这个文件，就会生成一个虚拟容器。程序在这个虚拟容器里运行，就好像在真实的物理机上运行一样。有了 Docker，就不用担心环境问题。</p>
 <p>总体来说，Docker 的接口相当简单，用户可以方便地创建和使用容器，把自己的应用放入容器。容器还可以进行版本管理、复制、分享、修改，就像管理普通的代码一样。</p>
 <p><img src="http://pd4nbaja5.bkt.clouddn.com/2018-11-09-101259.jpg" alt=""></p>
@@ -379,7 +379,7 @@
 <li>更轻松的迁移和扩展</li>
 <li>更简单的管理</li>
 </ol>
-<h2 id="docker-安装"><a class="markdownIt-Anchor" href="#docker-安装"></a> Docker 安装</h2>
+<h1 id="docker-安装"><a class="markdownIt-Anchor" href="#docker-安装"></a> Docker 安装</h1>
 <p>在 macOS 上只需要在官网下载 <a href="https://www.docker.com/get-started" target="_blank" rel="noopener">https://www.docker.com/get-started</a></p>
 <p>在 CentOS 上安装方法：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> yum install docker</span></span><br></pre></td></tr></table></figure>
@@ -387,7 +387,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> wget -qO- https://get.docker.com/ | sh</span></span><br></pre></td></tr></table></figure>
 <p>安装完成后用以下命令进行测试，如果正确返回版本信息即安装成功：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> docker version</span></span><br></pre></td></tr></table></figure>
-<h2 id="docker-hello-world"><a class="markdownIt-Anchor" href="#docker-hello-world"></a> Docker Hello World</h2>
+<h1 id="docker-hello-world"><a class="markdownIt-Anchor" href="#docker-hello-world"></a> Docker Hello World</h1>
 <p>下面，通过最简单的 image 文件 “hello world”，感受一下 Docker。</p>
 <p>首先我更换了国内的镜像仓库进行加速，这里我使用了 Daocloud 的加速服务，macOS 下只需打开 Docker 客户端设置，在 Daemon 标签下的 Registry mirrors 添加 <code>http://f1361db2.m.daocloud.io</code> 。</p>
 <p>运行下面的命令，将 image 文件从仓库抓取到本地。</p>
@@ -398,7 +398,7 @@
 <p>现在，运行这个 image 文件。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> docker run hello-world</span></span><br><span class="line"></span><br><span class="line">Hello from Docker!</span><br><span class="line">This message shows that your installation appears to be working correctly.</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 <p>输出这段提示以后，hello world 就会停止运行，容器自动终止。有些容器不会自动终止，因为提供的是服务，比如 Mysql 镜像等。</p>
-<h2 id="基本命令"><a class="markdownIt-Anchor" href="#基本命令"></a> 基本命令</h2>
+<h1 id="基本命令"><a class="markdownIt-Anchor" href="#基本命令"></a> 基本命令</h1>
 <p>除过以上我们使用的 Docker 命令外，Docker 还有一些其它常用的命令。</p>
 <h5 id="拉取-docker-镜像"><a class="markdownIt-Anchor" href="#拉取-docker-镜像"></a> 拉取 Docker 镜像</h5>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker pull IMAGE_NAME:TAG</span><br></pre></td></tr></table></figure>
@@ -615,7 +615,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"> 前言</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么要使用-docker"><span class="nav-number">1.0.1.</span> <span class="nav-text"> 为什么要使用 Docker</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-安装"><span class="nav-number">2.</span> <span class="nav-text"> Docker 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-hello-world"><span class="nav-number">3.</span> <span class="nav-text"> Docker Hello World</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本命令"><span class="nav-number">4.</span> <span class="nav-text"> 基本命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#拉取-docker-镜像"><span class="nav-number">4.0.0.1.</span> <span class="nav-text"> 拉取 Docker 镜像</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查看宿主机上的镜像"><span class="nav-number">4.0.0.2.</span> <span class="nav-text"> 查看宿主机上的镜像</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#删除镜像"><span class="nav-number">4.0.0.3.</span> <span class="nav-text"> 删除镜像</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查看当前有哪些容器正在运行"><span class="nav-number">4.0.0.4.</span> <span class="nav-text"> 查看当前有哪些容器正在运行</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查看所有容器"><span class="nav-number">4.0.0.5.</span> <span class="nav-text"> 查看所有容器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#删除容器的命令"><span class="nav-number">4.0.0.6.</span> <span class="nav-text"> 删除容器的命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查看当前系统-docker-信息"><span class="nav-number">4.0.0.7.</span> <span class="nav-text"> 查看当前系统 Docker 信息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#直接运行容器"><span class="nav-number">4.0.0.8.</span> <span class="nav-text"> 直接运行容器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#运行交互式的容器"><span class="nav-number">4.0.0.9.</span> <span class="nav-text"> 运行交互式的容器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#启动容器后台模式"><span class="nav-number">4.0.0.10.</span> <span class="nav-text"> 启动容器（后台模式）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#停止容器"><span class="nav-number">4.0.0.11.</span> <span class="nav-text"> 停止容器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#后台启动一个容器后如果想进入到这个容器可以使用-attach-命令"><span class="nav-number">4.0.0.12.</span> <span class="nav-text"> 后台启动一个容器后，如果想进入到这个容器，可以使用 attach 命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#映射容器端口到本机"><span class="nav-number">4.0.0.13.</span> <span class="nav-text"> 映射容器端口到本机</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"> 前言</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么要使用-docker"><span class="nav-number">1.0.0.1.</span> <span class="nav-text"> 为什么要使用 Docker</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#docker-安装"><span class="nav-number">2.</span> <span class="nav-text"> Docker 安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#docker-hello-world"><span class="nav-number">3.</span> <span class="nav-text"> Docker Hello World</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本命令"><span class="nav-number">4.</span> <span class="nav-text"> 基本命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#拉取-docker-镜像"><span class="nav-number">4.0.0.0.1.</span> <span class="nav-text"> 拉取 Docker 镜像</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查看宿主机上的镜像"><span class="nav-number">4.0.0.0.2.</span> <span class="nav-text"> 查看宿主机上的镜像</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#删除镜像"><span class="nav-number">4.0.0.0.3.</span> <span class="nav-text"> 删除镜像</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查看当前有哪些容器正在运行"><span class="nav-number">4.0.0.0.4.</span> <span class="nav-text"> 查看当前有哪些容器正在运行</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查看所有容器"><span class="nav-number">4.0.0.0.5.</span> <span class="nav-text"> 查看所有容器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#删除容器的命令"><span class="nav-number">4.0.0.0.6.</span> <span class="nav-text"> 删除容器的命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查看当前系统-docker-信息"><span class="nav-number">4.0.0.0.7.</span> <span class="nav-text"> 查看当前系统 Docker 信息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#直接运行容器"><span class="nav-number">4.0.0.0.8.</span> <span class="nav-text"> 直接运行容器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#运行交互式的容器"><span class="nav-number">4.0.0.0.9.</span> <span class="nav-text"> 运行交互式的容器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#启动容器后台模式"><span class="nav-number">4.0.0.0.10.</span> <span class="nav-text"> 启动容器（后台模式）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#停止容器"><span class="nav-number">4.0.0.0.11.</span> <span class="nav-text"> 停止容器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#后台启动一个容器后如果想进入到这个容器可以使用-attach-命令"><span class="nav-number">4.0.0.0.12.</span> <span class="nav-text"> 后台启动一个容器后，如果想进入到这个容器，可以使用 attach 命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#映射容器端口到本机"><span class="nav-number">4.0.0.0.13.</span> <span class="nav-text"> 映射容器端口到本机</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>

@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Ryan Li God">
 <meta property="og:description" content="Dockerfile 介绍 Dockerfile 是由一系列命令和参数构成的脚本，这些命令应用于基础镜像并最终创建一个新的镜像。它们简化了从头到尾的流程并极大的简化了部署工作。Dockerfile 从 FROM 命令开始，紧接着跟随者各种方法，命令和参数。其产出为一个新的可以用于创建容器的镜像。  Dockerfile 语法 Dockerfile语法由两部分构成，注释 和 命令 + 参数 ： 1">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-09T13:04:11.024Z">
+<meta property="og:updated_time" content="2018-11-09T14:38:00.435Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker 之 Dockerfile">
 <meta name="twitter:description" content="Dockerfile 介绍 Dockerfile 是由一系列命令和参数构成的脚本，这些命令应用于基础镜像并最终创建一个新的镜像。它们简化了从头到尾的流程并极大的简化了部署工作。Dockerfile 从 FROM 命令开始，紧接着跟随者各种方法，命令和参数。其产出为一个新的可以用于创建容器的镜像。  Dockerfile 语法 Dockerfile语法由两部分构成，注释 和 命令 + 参数 ： 1">
@@ -415,9 +415,9 @@
 <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Usage: WORKDIR /path</span></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> ~/</span></span><br></pre></td></tr></table></figure>
 <h1 id="如何使用-dockerfile"><a class="markdownIt-Anchor" href="#如何使用-dockerfile"></a> 如何使用 Dockerfile</h1>
 <p>在 Dockerfile 文件的路径下运行（注意 <code>.</code> 不能忘记）：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Build an image using the Dockerfile at current location</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Example: sudo docker build -t [name] .</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> docker build -t docker-vue-alpine .</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Build an image using the Dockerfile at current location</span></span><br><span class="line"><span class="comment"># Example: sudo docker build -t [name] .</span></span><br><span class="line">$ docker build -t docker-vue-alpine .</span><br></pre></td></tr></table></figure>
 <p>运行所构建的镜像：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> docker run -p 88:80 -d docker-vue-alpine</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -p 88:80 -d docker-vue-alpine</span><br></pre></td></tr></table></figure>
 
       
     </div>

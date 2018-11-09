@@ -88,7 +88,7 @@
 <meta property="og:description" content="前言 Docker 是世界领先的软件容器平台。开发人员利用 Docker 可以消除协作编码时“在我的机器上可正常工作”的问题。Docker 属于 Linux 容器的一种封装，提供简单易用的容器使用接口。它是目前最流行的 Linux 容器解决方案。Docker 将应用程序与该程序的依赖，打包在一个文件里面。运行这个文件，就会生成一个虚拟容器。程序在这个虚拟容器里运行，就好像在真实的物理机上运行一样">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://pd4nbaja5.bkt.clouddn.com/2018-11-09-101259.jpg">
-<meta property="og:updated_time" content="2018-11-09T10:20:47.301Z">
+<meta property="og:updated_time" content="2018-11-09T12:52:31.635Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker 入门">
 <meta name="twitter:description" content="前言 Docker 是世界领先的软件容器平台。开发人员利用 Docker 可以消除协作编码时“在我的机器上可正常工作”的问题。Docker 属于 Linux 容器的一种封装，提供简单易用的容器使用接口。它是目前最流行的 Linux 容器解决方案。Docker 将应用程序与该程序的依赖，打包在一个文件里面。运行这个文件，就会生成一个虚拟容器。程序在这个虚拟容器里运行，就好像在真实的物理机上运行一样">
@@ -421,8 +421,8 @@
 <p>通过 <code>docker run</code> 的两个参数 <code>-i</code> <code>-t</code> ，让 Docker 运行的容器实现&quot;对话”的能力：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -it centos:latest /bin/bash</span><br><span class="line">[root@29ce91d4b2f4 /]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
 <blockquote>
-<p><strong>-t</strong>  在新容器内指定一个伪终端或终端。</p>
-<p><strong>-i</strong>  允许你对容器内的标准输入 (STDIN) 进行交互。</p>
+<p><strong>-t</strong>  在新容器内指定一个伪终端或终端。<br>
+<strong>-i</strong>  允许你对容器内的标准输入 (STDIN) 进行交互。</p>
 </blockquote>
 <h5 id="启动容器后台模式"><a class="markdownIt-Anchor" href="#启动容器后台模式"></a> 启动容器（后台模式）</h5>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -d centos:latest <span class="built_in">echo</span> <span class="string">"Hello world"</span></span><br><span class="line">7461454d0c639f7373d8d53b88b21e456f33a3f2cd662802028d8eced01e89f7</span><br></pre></td></tr></table></figure>

@@ -90,7 +90,7 @@
 <meta property="og:image" content="http://pd4nbaja5.bkt.clouddn.com/2018-11-15-091111.png">
 <meta property="og:image" content="http://pd4nbaja5.bkt.clouddn.com/2018-11-15-102208.png">
 <meta property="og:image" content="http://pd4nbaja5.bkt.clouddn.com/2018-11-15-095845.png">
-<meta property="og:updated_time" content="2018-11-15T11:07:05.227Z">
+<meta property="og:updated_time" content="2018-11-15T12:02:02.531Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用 jQuery 实现 Solr 搜索的前端页面展示">
 <meta name="twitter:description" content="前言 今天要做的是一个具有搜索功能的前端页面，通过调用 Solr 搜索的接口来实现搜索功能。其中为了解决跨域的问题，利用 Python 写了一个简单的 Flask 服务器来请求 Solr，而前端页面仅需请求 Flask 服务器。 之前用 Vue.js 搭建过一个数据可视化平台，本来今天的搜索只需在之前的项目中添加一个 Tab 就可以了，但是这次的要求是初学者比较容易理解和上手，所以这次我们选用了">
@@ -379,7 +379,7 @@
 <h3 id="iconfont-阿里巴巴矢量图片库"><a class="markdownIt-Anchor" href="#iconfont-阿里巴巴矢量图片库"></a> Iconfont —— 阿里巴巴矢量图片库</h3>
 <p><a href="http://www.iconfont.cn" target="_blank" rel="noopener">Iconfont</a> 中可以找到很多简约好用的矢量图，这次我们使用了其中的搜索图标。</p>
 <h1 id="项目结构"><a class="markdownIt-Anchor" href="#项目结构"></a> 项目结构</h1>
-<p>为了更适用于初学者，本次没有使用例如 Yeoman 这样的脚手架构建项目，我们直接新建一个叫 <code>Solr-web</code> 的文件夹，里面的内容如下：</p>
+<p>为了更适用于初学者，本次没有使用例如 Yeoman 这样的脚手架构建项目，我们直接新建一个叫 <code>solr-web</code> 的文件夹，里面的内容如下：</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Solr-web</span><br><span class="line">├── css</span><br><span class="line">│   └── index.css</span><br><span class="line">├── js</span><br><span class="line">│   └── index.js</span><br><span class="line">├── img</span><br><span class="line">│   └── search-white.png</span><br><span class="line">├── lib</span><br><span class="line">│   ├── bootstrap-<span class="number">4.1</span>.<span class="number">3</span>-dist</span><br><span class="line">│   └── jquery-<span class="number">3.3</span>.<span class="number">1</span><span class="selector-class">.min</span><span class="selector-class">.js</span></span><br><span class="line">├── favicon.ico</span><br><span class="line">└── index.html</span><br></pre></td></tr></table></figure>
 <ul>
 <li><code>css</code> 文件夹下存放的是自己写的 CSS 文件。</li>

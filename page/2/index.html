@@ -262,6 +262,180 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ryanligod.github.io/2018/10/09/2018-10-09 维诺图（Voronoi Diagram）分析与实现/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ryan Li God">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/09/2018-10-09 维诺图（Voronoi Diagram）分析与实现/" itemprop="url">维诺图（Voronoi Diagram）分析与实现</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-09T17:50:13+08:00">
+                2018-10-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/10/09/2018-10-09 维诺图（Voronoi Diagram）分析与实现/" class="leancloud_visitors" data-flag-title="维诺图（Voronoi Diagram）分析与实现">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="介绍"><a class="markdownIt-Anchor" href="#介绍"></a> 介绍</h2>
+<h4 id="voronoi图的定义"><a class="markdownIt-Anchor" href="#voronoi图的定义"></a> Voronoi图的定义</h4>
+<p>又叫泰森多边形或Dirichlet图，它是由一组由连接两邻点直线的垂直平分线组成的连续多边形组成。</p>
+<h4 id="voronoi图的特点"><a class="markdownIt-Anchor" href="#voronoi图的特点"></a> Voronoi图的特点</h4>
+<ol>
+<li>每个V多边形内有一个生成元</li>
+<li>每个V多边形内点到该生成元距离短于到其它生成元距离</li>
+<li>多边形边界上的点到生成此边界的生成元距离相等</li>
+<li>邻接图形的Voronoi多边形界线以原邻接界线作为子集。</li>
+</ol>
+<h4 id="voronoi图的应用"><a class="markdownIt-Anchor" href="#voronoi图的应用"></a> Voronoi图的应用</h4>
+<p>在计算几何学科中的重要地位，由于其根据点集划分的区域到点的距离最近的特点，其在地理学、气象学、结晶学、航天、核物理学、机器人等领域具有广泛的应用。如在障碍物点集中，规避障碍寻找最佳路径。</p>
+<h2 id="算法分析"><a class="markdownIt-Anchor" href="#算法分析"></a> 算法分析</h2>
+<p>Voronoi图有着按距离划分邻近区域的普遍特性，应用范围广。生成V图的方法很多，常见的有分治法、扫描线算法和Delaunay三角剖分算法。</p>
+<h4 id="建立voronoi图方法和步骤"><a class="markdownIt-Anchor" href="#建立voronoi图方法和步骤"></a> 建立Voronoi图方法和步骤</h4>
+<p>本次实验采用的是Delaunay三角剖分算法。主要是指生成Voronoi图时先生成其对偶元Delaunay三角网，再找出三角网每一三角形的外接圆圆心，最后连接相邻三角形的外接圆圆心，形成以每一三角形顶点为生成元的多边形网。如下图所示。</p>
+<p><img src="http://pd4nbaja5.bkt.clouddn.com/2018-10-09-095902.png" alt=""></p>
+<p>建立Voronoi图算法的关键是对离散数据点合理地连成三角网，即构建Delaunay三角网。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/09/2018-10-09 维诺图（Voronoi Diagram）分析与实现/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://ryanligod.github.io/2018/08/29/2018-08-29 MathJax 支持的 LaTeX 总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1813,179 +1987,6 @@ Want  $ 0 \leq h_\theta(x) \leq 1<span class="katex"><span class="katex-mathml">
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ryanligod.github.io/2018/08/03/2018-08-03 Spark RDD（十一） RDD Action 保存操作saveAsTextFile,saveAsSequenceFile,saveAsObjectFile,saveAsHadoopFile 等/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan Li">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ryan Li God">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/03/2018-08-03 Spark RDD（十一） RDD Action 保存操作saveAsTextFile,saveAsSequenceFile,saveAsObjectFile,saveAsHadoopFile 等/" itemprop="url">Spark RDD常用算子操作（十一） RDD Action 保存操作saveAsTextFile,saveAsSequenceFile,saveAsObjectFile,saveAsHadoopFile 等</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-03T21:31:50+08:00">
-                2018-08-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Spark/" itemprop="url" rel="index">
-                    <span itemprop="name">Spark</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/08/03/2018-08-03 Spark RDD（十一） RDD Action 保存操作saveAsTextFile,saveAsSequenceFile,saveAsObjectFile,saveAsHadoopFile 等/" class="leancloud_visitors" data-flag-title="Spark RDD常用算子操作（十一） RDD Action 保存操作saveAsTextFile,saveAsSequenceFile,saveAsObjectFile,saveAsHadoopFile 等">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>原文作者：翟开顺<br>
-首发：CSDN<br>
-本人仅为自己方便查阅做了摘抄，请支持原作者<br>
-原文地址：<a href="https://blog.csdn.net/t1dmzks/article/details/72077428" target="_blank" rel="noopener">https://blog.csdn.net/t1dmzks/article/details/72077428</a></p>
-</blockquote>
-<h1 id="rdd-action-保存操作"><a class="markdownIt-Anchor" href="#rdd-action-保存操作"></a> RDD Action 保存操作</h1>
-<p><strong>关键字:Spark算子、Spark函数、Spark RDD行动Action、Spark RDD存储操作、saveAsTextFile、saveAsSequenceFile、saveAsObjectFile,saveAsHadoopFile、saveAsHadoopDataset,saveAsNewAPIHadoopFile、saveAsNewAPIHadoopDataset</strong></p>
-<h2 id="saveastextfile"><a class="markdownIt-Anchor" href="#saveastextfile"></a> saveAsTextFile</h2>
-<p>def saveAsTextFile(path: String): Unit</p>
-<p>def saveAsTextFile(path: String, codec: Class[_ &lt;: CompressionCodec]): Unit</p>
-<p>saveAsTextFile用于将RDD以文本文件的格式存储到文件系统中。</p>
-<p>codec参数可以指定压缩的类名。</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> rdd1 = sc.makeRDD(<span class="number">1</span> to <span class="number">10</span>,<span class="number">2</span>)</span><br><span class="line">scala&gt; rdd1.saveAsTextFile(<span class="string">"hdfs://cdh5/tmp/lxw1234.com/"</span>) <span class="comment">//保存到HDFS</span></span><br><span class="line">hadoop fs -ls /tmp/lxw1234.com</span><br><span class="line"><span class="type">Found</span> <span class="number">2</span> items</span><br><span class="line">-rw-r--r--   <span class="number">2</span> lxw1234 supergroup        <span class="number">0</span> <span class="number">2015</span><span class="number">-07</span><span class="number">-10</span> <span class="number">09</span>:<span class="number">15</span> /tmp/lxw1234.com/_SUCCESS</span><br><span class="line">-rw-r--r--   <span class="number">2</span> lxw1234 supergroup        <span class="number">21</span> <span class="number">2015</span><span class="number">-07</span><span class="number">-10</span> <span class="number">09</span>:<span class="number">15</span> /tmp/lxw1234.com/part<span class="number">-00000</span></span><br><span class="line"></span><br><span class="line">hadoop fs -cat /tmp/lxw1234.com/part<span class="number">-00000</span></span><br></pre></td></tr></table></figure>
-<p>注意：如果使用rdd1.saveAsTextFile(“file:///tmp/lxw1234.com”)将文件保存到本地文件系统，那么只会保存在Executor所在机器的本地目录。<br>
-<strong>指定压缩格式保存</strong></p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">rdd1.saveAsTextFile(<span class="string">"hdfs://cdh5/tmp/lxw1234.com/"</span>,classOf[com.hadoop.compression.lzo.<span class="type">LzopCodec</span>])</span><br><span class="line"></span><br><span class="line">hadoop fs -ls /tmp/lxw1234.com</span><br><span class="line">-rw-r--r--   <span class="number">2</span> lxw1234 supergroup    <span class="number">0</span> <span class="number">2015</span><span class="number">-07</span><span class="number">-10</span> <span class="number">09</span>:<span class="number">20</span> /tmp/lxw1234.com/_SUCCESS</span><br><span class="line">-rw-r--r--   <span class="number">2</span> lxw1234 supergroup    <span class="number">71</span> <span class="number">2015</span><span class="number">-07</span><span class="number">-10</span> <span class="number">09</span>:<span class="number">20</span> /tmp/lxw1234.com/part<span class="number">-00000.</span>lzo</span><br><span class="line"></span><br><span class="line">hadoop fs -text /tmp/lxw1234.com/part<span class="number">-00000.</span>lzo</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/03/2018-08-03 Spark RDD（十一） RDD Action 保存操作saveAsTextFile,saveAsSequenceFile,saveAsObjectFile,saveAsHadoopFile 等/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2040,7 +2041,7 @@ Want  $ 0 \leq h_\theta(x) \leq 1<span class="katex"><span class="katex-mathml">
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2062,7 +2063,7 @@ Want  $ 0 \leq h_\theta(x) \leq 1<span class="katex"><span class="katex-mathml">
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-count">30</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

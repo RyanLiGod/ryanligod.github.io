@@ -262,6 +262,168 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ryanligod.github.io/2018/11/15/2018-11-15 使用 jQuery 实现 Solr 搜索的前端页面展示/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ryan Li God">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/15/2018-11-15 使用 jQuery 实现 Solr 搜索的前端页面展示/" itemprop="url">使用 jQuery 实现 Solr 搜索的前端页面展示</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-15T16:17:28+08:00">
+                2018-11-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/11/15/2018-11-15 使用 jQuery 实现 Solr 搜索的前端页面展示/" class="leancloud_visitors" data-flag-title="使用 jQuery 实现 Solr 搜索的前端页面展示">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h1>
+<p>今天要做的是一个具有搜索功能的前端页面，通过调用 Solr 搜索的接口来实现搜索功能。其中为了解决跨域的问题，利用 Python 写了一个简单的 Flask 服务器来请求 Solr，而前端页面仅需请求 Flask 服务器。</p>
+<p>之前用 Vue.js 搭建过一个数据可视化平台，本来今天的搜索只需在之前的项目中添加一个 Tab 就可以了，但是这次的要求是初学者比较容易理解和上手，所以这次我们选用了 <a href="https://jquery.com/" target="_blank" rel="noopener">jQuery</a> ，<a href="https://getbootstrap.com/" target="_blank" rel="noopener">Bootstrap 4</a> 来构建本次页面。</p>
+<h3 id="jquery-简化的-javascript"><a class="markdownIt-Anchor" href="#jquery-简化的-javascript"></a> jQuery —— 简化的 JavaScript</h3>
+<p>jQuery 曾经是最流行的 Web 前端 JavaScript 库，可是现在无论是国内还是国外他的使用率正在渐渐被其他的基于 <a href="https://www.cnblogs.com/iovec/p/7840228.html" target="_blank" rel="noopener">MVVM</a> 思想的  JavaScript 库（例如  Vue，React，Angular）所代替，随着浏览器厂商对 HTML5 规范统一遵循以及 ECMA6 在浏览器端的实现，jQuery 的使用率将会越来越低。</p>
+<p>jQuery 是使用选择器 <code>$</code> 选取 DOM（文档对象模型，可以理解成 HTML 中的元素）对象，对其进行赋值、取值、事件绑定等操作，其实和原生的 JavaScript 的区别只在于可以更方便的选取和操作 DOM 对象，而数据和界面是在一起的。比如需要获取 label 标签的内容：<code>$(&quot;lable&quot;).val();</code> ，它还是依赖 DOM 元素的值。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/15/2018-11-15 使用 jQuery 实现 Solr 搜索的前端页面展示/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://ryanligod.github.io/2018/11/09/2018-11-09 利用 Docker 部署 Vue 应用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1774,180 +1936,6 @@ s76,-59,76,-59s76,-60,76,-60z M1001 80H40000v40H1012z"/></svg></span></span></sp
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ryanligod.github.io/2018/10/09/2018-10-09 维诺图（Voronoi Diagram）分析与实现/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan Li">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ryan Li God">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/09/2018-10-09 维诺图（Voronoi Diagram）分析与实现/" itemprop="url">维诺图（Voronoi Diagram）分析与实现</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-09T17:50:13+08:00">
-                2018-10-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/机器学习/" itemprop="url" rel="index">
-                    <span itemprop="name">机器学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/10/09/2018-10-09 维诺图（Voronoi Diagram）分析与实现/" class="leancloud_visitors" data-flag-title="维诺图（Voronoi Diagram）分析与实现">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="介绍"><a class="markdownIt-Anchor" href="#介绍"></a> 介绍</h2>
-<h4 id="voronoi图的定义"><a class="markdownIt-Anchor" href="#voronoi图的定义"></a> Voronoi图的定义</h4>
-<p>又叫泰森多边形或Dirichlet图，它是由一组由连接两邻点直线的垂直平分线组成的连续多边形组成。</p>
-<h4 id="voronoi图的特点"><a class="markdownIt-Anchor" href="#voronoi图的特点"></a> Voronoi图的特点</h4>
-<ol>
-<li>每个V多边形内有一个生成元</li>
-<li>每个V多边形内点到该生成元距离短于到其它生成元距离</li>
-<li>多边形边界上的点到生成此边界的生成元距离相等</li>
-<li>邻接图形的Voronoi多边形界线以原邻接界线作为子集。</li>
-</ol>
-<h4 id="voronoi图的应用"><a class="markdownIt-Anchor" href="#voronoi图的应用"></a> Voronoi图的应用</h4>
-<p>在计算几何学科中的重要地位，由于其根据点集划分的区域到点的距离最近的特点，其在地理学、气象学、结晶学、航天、核物理学、机器人等领域具有广泛的应用。如在障碍物点集中，规避障碍寻找最佳路径。</p>
-<h2 id="算法分析"><a class="markdownIt-Anchor" href="#算法分析"></a> 算法分析</h2>
-<p>Voronoi图有着按距离划分邻近区域的普遍特性，应用范围广。生成V图的方法很多，常见的有分治法、扫描线算法和Delaunay三角剖分算法。</p>
-<h4 id="建立voronoi图方法和步骤"><a class="markdownIt-Anchor" href="#建立voronoi图方法和步骤"></a> 建立Voronoi图方法和步骤</h4>
-<p>本次实验采用的是Delaunay三角剖分算法。主要是指生成Voronoi图时先生成其对偶元Delaunay三角网，再找出三角网每一三角形的外接圆圆心，最后连接相邻三角形的外接圆圆心，形成以每一三角形顶点为生成元的多边形网。如下图所示。</p>
-<p><img src="http://pd4nbaja5.bkt.clouddn.com/2018-10-09-095902.png" alt=""></p>
-<p>建立Voronoi图算法的关键是对离散数据点合理地连成三角网，即构建Delaunay三角网。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/10/09/2018-10-09 维诺图（Voronoi Diagram）分析与实现/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2002,7 +1990,7 @@ s76,-59,76,-59s76,-60,76,-60z M1001 80H40000v40H1012z"/></svg></span></span></sp
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2024,7 +2012,7 @@ s76,-59,76,-59s76,-60,76,-60z M1001 80H40000v40H1012z"/></svg></span></span></sp
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-count">30</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

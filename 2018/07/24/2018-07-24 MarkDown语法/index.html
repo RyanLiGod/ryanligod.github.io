@@ -86,7 +86,7 @@
     root: '/',
     scheme: 'Mist',
     version: '6.5.0',
-    sidebar: {"position":"right","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
     fancybox: false,
     fastclick: false,
     lazyload: false,
@@ -185,7 +185,7 @@
     
   
 
-  <div class="container sidebar-position-right page-post-detail">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -516,7 +516,7 @@
 <h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p>Markdown 语法：</p>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">email <span class="xml"><span class="tag">&lt;<span class="name">example@example.com</span>&gt;</span></span></span><br><span class="line">[<span class="string">GitHub</span>](<span class="link">http://github.com</span>)</span><br><span class="line">自动生成连接  <span class="xml"><span class="tag">&lt;<span class="name">http:</span>//<span class="attr">www.github.com</span>/&gt;</span></span></span><br></pre></td></tr></table></figure>
 <p>效果如下：</p>
-<p>Email 连接： <a href="&#109;&#x61;&#x69;&#108;&#x74;&#x6f;&#58;&#101;&#x78;&#97;&#x6d;&#112;&#x6c;&#x65;&#x40;&#x65;&#x78;&#97;&#109;&#x70;&#x6c;&#101;&#46;&#x63;&#x6f;&#x6d;">&#101;&#x78;&#97;&#x6d;&#112;&#x6c;&#x65;&#x40;&#x65;&#x78;&#97;&#109;&#x70;&#x6c;&#101;&#46;&#x63;&#x6f;&#x6d;</a><br><a href="http://github.com" target="_blank" rel="noopener">连接标题Github网站</a><br>自动生成连接像： <a href="http://www.github.com/" target="_blank" rel="noopener">http://www.github.com/</a> 这样</p>
+<p>Email 连接： <a href="&#109;&#x61;&#x69;&#x6c;&#116;&#x6f;&#x3a;&#101;&#x78;&#x61;&#x6d;&#x70;&#108;&#x65;&#x40;&#101;&#x78;&#x61;&#x6d;&#112;&#108;&#101;&#x2e;&#x63;&#111;&#x6d;">&#101;&#x78;&#x61;&#x6d;&#x70;&#108;&#x65;&#x40;&#101;&#x78;&#x61;&#x6d;&#112;&#108;&#101;&#x2e;&#x63;&#111;&#x6d;</a><br><a href="http://github.com" target="_blank" rel="noopener">连接标题Github网站</a><br>自动生成连接像： <a href="http://www.github.com/" target="_blank" rel="noopener">http://www.github.com/</a> 这样</p>
 <h2 id="区块引用"><a href="#区块引用" class="headerlink" title="区块引用"></a>区块引用</h2><p>Markdown 语法：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">某某说:</span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> 第一行引用</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> 第二行费用文字</span></span><br></pre></td></tr></table></figure>
 <p>效果如下：</p>
@@ -634,6 +634,30 @@
     
        
     
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Ryan Li 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
     
 
     
@@ -857,6 +881,32 @@
           
 
           
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/RyanLiGod" title="GitHub &rarr; https://github.com/RyanLiGod" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:ryanligod@gmail.com" title="E-Mail &rarr; mailto:ryanligod@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
 
           
 
@@ -936,6 +986,8 @@
     
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
         
       </div>
     
@@ -1146,6 +1198,75 @@
   
 
   
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('复制成功')
+          else $(this).text('复制失败')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
 
   
 

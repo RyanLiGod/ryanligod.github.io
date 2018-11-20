@@ -86,7 +86,7 @@
     root: '/',
     scheme: 'Mist',
     version: '6.5.0',
-    sidebar: {"position":"right","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
     fancybox: false,
     fastclick: false,
     lazyload: false,
@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="Ryan Li God">
 <meta property="og:description" content="简要介绍因为要使用MarkDown中使用LaTeX编辑数学公式然后在文档、网页中使用，但是自己总是记不住这么多东西，特别是几天不用，很多都忘记了，因此准备就数学公式的Latex编辑方式做一个整理，以方便自己和读者今后使用。  分数 平方    算式 LaTeX     $\frac{7x+5}{1+y^2}$ \frac{7x+5}{1+y^2}   $\dfrac{7x+5}{1+y^2}$">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-11-20T07:56:33.803Z">
+<meta property="og:updated_time" content="2018-11-20T07:14:49.981Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MathJax 支持的 LaTeX 总结">
 <meta name="twitter:description" content="简要介绍因为要使用MarkDown中使用LaTeX编辑数学公式然后在文档、网页中使用，但是自己总是记不住这么多东西，特别是几天不用，很多都忘记了，因此准备就数学公式的Latex编辑方式做一个整理，以方便自己和读者今后使用。  分数 平方    算式 LaTeX     $\frac{7x+5}{1+y^2}$ \frac{7x+5}{1+y^2}   $\dfrac{7x+5}{1+y^2}$">
@@ -185,7 +185,7 @@
     
   
 
-  <div class="container sidebar-position-right page-post-detail">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -406,7 +406,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-11-20 15:56:33" itemprop="dateModified" datetime="2018-11-20T15:56:33+08:00">2018-11-20</time>
+                <time title="修改时间：2018-11-20 15:14:49" itemprop="dateModified" datetime="2018-11-20T15:14:49+08:00">2018-11-20</time>
               
             
           </span>
@@ -1548,6 +1548,30 @@ k_0+k_1+\cdots=n}
        
     
     
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Ryan Li 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
 
     
 
@@ -1776,6 +1800,32 @@ k_0+k_1+\cdots=n}
           
 
           
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/RyanLiGod" title="GitHub &rarr; https://github.com/RyanLiGod" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:ryanligod@gmail.com" title="E-Mail &rarr; mailto:ryanligod@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
 
           
 
@@ -1855,6 +1905,8 @@ k_0+k_1+\cdots=n}
     
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
         
       </div>
     
@@ -2089,6 +2141,75 @@ k_0+k_1+\cdots=n}
   
 
   
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('复制成功')
+          else $(this).text('复制失败')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
 
   
 

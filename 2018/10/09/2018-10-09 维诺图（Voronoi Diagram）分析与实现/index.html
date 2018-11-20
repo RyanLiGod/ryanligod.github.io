@@ -87,14 +87,14 @@
 <meta property="og:site_name" content="Ryan Li God">
 <meta property="og:description" content="介绍  Voronoi图的定义 又叫泰森多边形或Dirichlet图，它是由一组由连接两邻点直线的垂直平分线组成的连续多边形组成。  Voronoi图的特点  每个V多边形内有一个生成元 每个V多边形内点到该生成元距离短于到其它生成元距离 多边形边界上的点到生成此边界的生成元距离相等 邻接图形的Voronoi多边形界线以原邻接界线作为子集。   Voronoi图的应用 在计算几何学科中的重要地位">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://pd4nbaja5.bkt.clouddn.com/2018-10-09-095902.png">
-<meta property="og:image" content="http://pd4nbaja5.bkt.clouddn.com/2018-10-09-100156.png">
-<meta property="og:image" content="http://pd4nbaja5.bkt.clouddn.com/2018-10-09-100243.png">
-<meta property="og:updated_time" content="2018-10-09T10:05:40.818Z">
+<meta property="og:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-10-09-095902.png">
+<meta property="og:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-10-09-100156.png">
+<meta property="og:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-10-09-100243.png">
+<meta property="og:updated_time" content="2018-11-20T05:55:40.112Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="维诺图（Voronoi Diagram）分析与实现">
 <meta name="twitter:description" content="介绍  Voronoi图的定义 又叫泰森多边形或Dirichlet图，它是由一组由连接两邻点直线的垂直平分线组成的连续多边形组成。  Voronoi图的特点  每个V多边形内有一个生成元 每个V多边形内点到该生成元距离短于到其它生成元距离 多边形边界上的点到生成此边界的生成元距离相等 邻接图形的Voronoi多边形界线以原邻接界线作为子集。   Voronoi图的应用 在计算几何学科中的重要地位">
-<meta name="twitter:image" content="http://pd4nbaja5.bkt.clouddn.com/2018-10-09-095902.png">
+<meta name="twitter:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-10-09-095902.png">
 
 
 
@@ -383,7 +383,7 @@
 <p>Voronoi图有着按距离划分邻近区域的普遍特性，应用范围广。生成V图的方法很多，常见的有分治法、扫描线算法和Delaunay三角剖分算法。</p>
 <h4 id="建立voronoi图方法和步骤"><a class="markdownIt-Anchor" href="#建立voronoi图方法和步骤"></a> 建立Voronoi图方法和步骤</h4>
 <p>本次实验采用的是Delaunay三角剖分算法。主要是指生成Voronoi图时先生成其对偶元Delaunay三角网，再找出三角网每一三角形的外接圆圆心，最后连接相邻三角形的外接圆圆心，形成以每一三角形顶点为生成元的多边形网。如下图所示。</p>
-<p><img src="http://pd4nbaja5.bkt.clouddn.com/2018-10-09-095902.png" alt=""></p>
+<p><img src="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-10-09-095902.png" alt=""></p>
 <p>建立Voronoi图算法的关键是对离散数据点合理地连成三角网，即构建Delaunay三角网。</p>
 <a id="more"></a>
 <p>建立Voronoi图的步骤为：</p>
@@ -410,13 +410,13 @@ Delaunay剖分是一种三角剖分的标准，实现它有多种算法。本次
 （3）根据优化准则对局部新形成的三角形进行优化。将形成的三角形放入Delaunay三角形链表。<br>
 （4）循环执行上述第2步，直到所有散点插入完毕。</p>
 <p>关键步骤2如下图所示：</p>
-<p><img src="http://pd4nbaja5.bkt.clouddn.com/2018-10-09-100156.png" alt=""></p>
+<p><img src="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-10-09-100156.png" alt=""></p>
 <p>步骤3的局部优化的准则指的是：<br>
 1.对新形成的三角形进行优化，将两个具有共同边的三角形合成一个多边形。<br>
 2.以最大空圆准则作检查，看其第四个顶点是否在三角形的外接圆之内。<br>
 3.如果在，修正对角线即将对角线对调，即完成局部优化过程的处理。</p>
 <p>LOP (Local Optimization Procedure)处理过程如下图所示：</p>
-<p><img src="http://pd4nbaja5.bkt.clouddn.com/2018-10-09-100243.png" alt=""></p>
+<p><img src="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-10-09-100243.png" alt=""></p>
 
       
     </div>

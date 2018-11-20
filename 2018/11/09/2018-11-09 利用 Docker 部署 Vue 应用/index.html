@@ -87,15 +87,15 @@
 <meta property="og:site_name" content="Ryan Li God">
 <meta property="og:description" content="前言 初步学习 Docker 以后，我将尝试使用 Docker 部署之前构建的 Vue.js 应用。在实际部署的时候采用的是 vue-cli-service 打包，用 Nginx 作为代理服务器。  打包 Vue 应用 首先在 Vue 项目路径利用 vue-cli-service 打包 Vue 应用： 1$ vue-cli-service build 这样在路径中会生成 dist 文件夹，里面的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://pd4nbaja5.bkt.clouddn.com/2018-11-09-112428.png">
-<meta property="og:image" content="http://pd4nbaja5.bkt.clouddn.com/2018-11-09-134645.png">
-<meta property="og:image" content="http://pd4nbaja5.bkt.clouddn.com/2018-11-09-135230.png">
-<meta property="og:image" content="http://pd4nbaja5.bkt.clouddn.com/2018-11-09-140434.png">
-<meta property="og:updated_time" content="2018-11-09T14:28:59.000Z">
+<meta property="og:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-11-09-112428.png">
+<meta property="og:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-11-09-134645.png">
+<meta property="og:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-11-09-135230.png">
+<meta property="og:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-11-09-140434.png">
+<meta property="og:updated_time" content="2018-11-20T05:55:40.112Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用 Docker 部署 Vue 应用">
 <meta name="twitter:description" content="前言 初步学习 Docker 以后，我将尝试使用 Docker 部署之前构建的 Vue.js 应用。在实际部署的时候采用的是 vue-cli-service 打包，用 Nginx 作为代理服务器。  打包 Vue 应用 首先在 Vue 项目路径利用 vue-cli-service 打包 Vue 应用： 1$ vue-cli-service build 这样在路径中会生成 dist 文件夹，里面的">
-<meta name="twitter:image" content="http://pd4nbaja5.bkt.clouddn.com/2018-11-09-112428.png">
+<meta name="twitter:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-11-09-112428.png">
 
 
 
@@ -391,21 +391,21 @@
 <code>-d</code> 的作用是后台运行</p>
 </blockquote>
 <p>在浏览器输入 <code>localhost:88</code> 即可看到已经运行的 Vue 应用：</p>
-<p><img src="http://pd4nbaja5.bkt.clouddn.com/2018-11-09-112428.png" alt="image-20181109192428410"></p>
+<p><img src="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-11-09-112428.png" alt="image-20181109192428410"></p>
 <h3 id="push-镜像到-docker-repository"><a class="markdownIt-Anchor" href="#push-镜像到-docker-repository"></a> Push 镜像到 Docker Repository</h3>
 <p>首先登录 <a href="https://cloud.docker.com/" target="_blank" rel="noopener">Docker Cloud</a> 创建和本地镜像名字一致的仓库，我这里就是 <code>ryanligod/graph-visulization</code> :</p>
-<p><img src="http://pd4nbaja5.bkt.clouddn.com/2018-11-09-134645.png" alt="image-20181109214643914"></p>
+<p><img src="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-11-09-134645.png" alt="image-20181109214643914"></p>
 <p>然后给本地镜像打上用户名和 tag：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker tag &lt;existing-image&gt; &lt;hub-user&gt;/&lt;repo-name&gt;[:&lt;tag&gt;]</span></span><br><span class="line"><span class="comment"># 这里的tag不指定就是latest。 </span></span><br><span class="line">$ docker tag graph-visulization ryanligod/graph-visulization:latest</span><br></pre></td></tr></table></figure>
 <p>最后 push 镜像：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 首先需要登录</span></span><br><span class="line">$ docker login</span><br><span class="line">Authenticating with existing credentials...</span><br><span class="line">Login Succeeded</span><br><span class="line"></span><br><span class="line"><span class="comment"># docker push &lt;hub-user&gt;/&lt;repo-name&gt;:&lt;tag&gt;</span></span><br><span class="line">$ docker push ryanligod/graph-visulization:latest</span><br></pre></td></tr></table></figure>
 <p>然后就可以在自己仓库中发现上传的镜像：</p>
-<p><img src="http://pd4nbaja5.bkt.clouddn.com/2018-11-09-135230.png" alt="image-20181109215229338"></p>
+<p><img src="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-11-09-135230.png" alt="image-20181109215229338"></p>
 <p>之后就可以使用 <code>docker pull</code> 拉取自己的镜像了：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker pull &lt;hub-user&gt;/&lt;repo-name&gt;:&lt;tag&gt;</span></span><br><span class="line">$ docker pull ryanligod/graph-visulization:latest</span><br></pre></td></tr></table></figure>
 <h3 id="通过-github-新提交自动部署"><a class="markdownIt-Anchor" href="#通过-github-新提交自动部署"></a> 通过 Github 新提交自动部署</h3>
 <p>Docker Cloud 和 DaoCloud 都支持通过监视 Github 仓库改动自动通过 Dockerfile 构建镜像，但是目前不想把 <code>dist</code> 文件夹也推送到 Github，所以暂时先不设置。</p>
-<p><img src="http://pd4nbaja5.bkt.clouddn.com/2018-11-09-140434.png" alt="image-20181109220432931"></p>
+<p><img src="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-11-09-140434.png" alt="image-20181109220432931"></p>
 <h1 id="构建小而牢固的容器镜像"><a class="markdownIt-Anchor" href="#构建小而牢固的容器镜像"></a> 构建小而牢固的容器镜像</h1>
 <p>减小镜像体积有两种方式：</p>
 <ol>

@@ -2,26 +2,24 @@
 
 
 
+
+
+
+
+
+
+
+
+
   
 
 
-<html class="theme-next mist use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" rel="stylesheet">
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
@@ -34,41 +32,8 @@
 
 
 
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="JavaScript,jQuery,Bootstrap," />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -79,23 +44,39 @@
 
 
 
-<meta name="description" content="前言 今天要做的是一个具有搜索功能的前端页面，通过调用 Solr 搜索的接口来实现搜索功能。其中为了解决跨域的问题，利用 Python 写了一个简单的 Flask 服务器来请求 Solr，而前端页面仅需请求 Flask 服务器。 之前用 Vue.js 搭建过一个数据可视化平台，本来今天的搜索只需在之前的项目中添加一个 Tab 就可以了，但是这次的要求是初学者比较容易理解和上手，所以这次我们选用了">
-<meta name="keywords" content="JavaScript,jQuery,Bootstrap">
-<meta property="og:type" content="article">
-<meta property="og:title" content="使用 jQuery 实现 Solr 搜索的前端页面展示">
-<meta property="og:url" content="https://ryanligod.github.io/2018/11/15/2018-11-15 使用 jQuery 实现 Solr 搜索的前端页面展示/index.html">
-<meta property="og:site_name" content="Ryan Li God">
-<meta property="og:description" content="前言 今天要做的是一个具有搜索功能的前端页面，通过调用 Solr 搜索的接口来实现搜索功能。其中为了解决跨域的问题，利用 Python 写了一个简单的 Flask 服务器来请求 Solr，而前端页面仅需请求 Flask 服务器。 之前用 Vue.js 搭建过一个数据可视化平台，本来今天的搜索只需在之前的项目中添加一个 Tab 就可以了，但是这次的要求是初学者比较容易理解和上手，所以这次我们选用了">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-11-15-132330.png">
-<meta property="og:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-11-15-091111.png">
-<meta property="og:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-11-15-102208.png">
-<meta property="og:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-11-15-095845.png">
-<meta property="og:updated_time" content="2018-11-20T05:55:40.111Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用 jQuery 实现 Solr 搜索的前端页面展示">
-<meta name="twitter:description" content="前言 今天要做的是一个具有搜索功能的前端页面，通过调用 Solr 搜索的接口来实现搜索功能。其中为了解决跨域的问题，利用 Python 写了一个简单的 Flask 服务器来请求 Solr，而前端页面仅需请求 Flask 服务器。 之前用 Vue.js 搭建过一个数据可视化平台，本来今天的搜索只需在之前的项目中添加一个 Tab 就可以了，但是这次的要求是初学者比较容易理解和上手，所以这次我们选用了">
-<meta name="twitter:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-11-15-132330.png">
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.ico?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.ico?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/apple-touch-icon.ico?v=6.5.0" color="#222">
+
+
+
+
+
+
 
 
 
@@ -104,32 +85,61 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
+    version: '6.5.0',
+    sidebar: {"position":"right","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
     tabs: true,
     motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
     algolia: {
       applicationID: '',
       apiKey: '',
       indexName: '',
       hits: {"per_page":10},
-      labels: {"input_placeholder":"搜索...","hits_empty":"没有找到任何搜索结果: ${query}","hits_stats":"找到 ${hits} 条结果（用时 ${time} ms）"}
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
 
 
-
-  <link rel="canonical" href="https://ryanligod.github.io/2018/11/15/2018-11-15 使用 jQuery 实现 Solr 搜索的前端页面展示/"/>
-
+  
 
 
 
+
+  <meta name="description" content="前言今天要做的是一个具有搜索功能的前端页面，通过调用 Solr 搜索的接口来实现搜索功能。其中为了解决跨域的问题，利用 Python 写了一个简单的 Flask 服务器来请求 Solr，而前端页面仅需请求 Flask 服务器。 之前用 Vue.js 搭建过一个数据可视化平台，本来今天的搜索只需在之前的项目中添加一个 Tab 就可以了，但是这次的要求是初学者比较容易理解和上手，所以这次我们选用了 j">
+<meta name="keywords" content="JavaScript,jQuery,Bootstrap">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 jQuery 实现 Solr 搜索的前端页面展示">
+<meta property="og:url" content="https://ryanligod.github.io/2018/11/15/2018-11-15 使用 jQuery 实现 Solr 搜索的前端页面展示/index.html">
+<meta property="og:site_name" content="Ryan Li God">
+<meta property="og:description" content="前言今天要做的是一个具有搜索功能的前端页面，通过调用 Solr 搜索的接口来实现搜索功能。其中为了解决跨域的问题，利用 Python 写了一个简单的 Flask 服务器来请求 Solr，而前端页面仅需请求 Flask 服务器。 之前用 Vue.js 搭建过一个数据可视化平台，本来今天的搜索只需在之前的项目中添加一个 Tab 就可以了，但是这次的要求是初学者比较容易理解和上手，所以这次我们选用了 j">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-11-15-132330.png">
+<meta property="og:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-11-15-091111.png">
+<meta property="og:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-11-15-102208.png">
+<meta property="og:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-11-15-095845.png">
+<meta property="og:updated_time" content="2018-11-20T05:55:40.111Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用 jQuery 实现 Solr 搜索的前端页面展示">
+<meta name="twitter:description" content="前言今天要做的是一个具有搜索功能的前端页面，通过调用 Solr 搜索的接口来实现搜索功能。其中为了解决跨域的问题，利用 Python 写了一个简单的 Flask 服务器来请求 Solr，而前端页面仅需请求 Flask 服务器。 之前用 Vue.js 搭建过一个数据可视化平台，本来今天的搜索只需在之前的项目中添加一个 Tab 就可以了，但是这次的要求是初学者比较容易理解和上手，所以这次我们选用了 j">
+<meta name="twitter:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-11-15-132330.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://ryanligod.github.io/2018/11/15/2018-11-15 使用 jQuery 实现 Solr 搜索的前端页面展示/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
 
   <title>使用 jQuery 实现 Solr 搜索的前端页面展示 | Ryan Li God</title>
   
@@ -138,50 +148,72 @@
 
 
 
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?078c1e1ad8b8dcf549f26b4ebc6eb18b";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
 
 
 
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
 
   
   
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">Ryan Li God</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
+    
       
-        <h1 class="site-subtitle" itemprop="description"></h1>
+        <h1 class="site-subtitle" itemprop="description">Hello World!</h1>
       
+    
   </div>
 
   <div class="site-nav-toggle">
-    <button>
+    <button aria-label="切换导航栏">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -189,55 +221,97 @@
   </div>
 </div>
 
-<nav class="site-nav">
-  
 
+
+<nav class="site-nav">
   
     <ul id="menu" class="menu">
       
         
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
       
+    
+
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
         
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
       
+    
+
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">31</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">9</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">40</span></a>
+
+  </li>
 
       
+      
     </ul>
+  
+
+  
+    
+
   
 
   
@@ -245,12 +319,20 @@
 
 
 
- </div>
+  
+
+
+
+</div>
     </header>
+
+    
+
 
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
+          
           <div id="content" class="content">
             
 
@@ -263,20 +345,22 @@
   
   
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://ryanligod.github.io/2018/11/15/2018-11-15 使用 jQuery 实现 Solr 搜索的前端页面展示/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ryan Li">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpeg">
+      <meta itemprop="description" content="Hello World.">
+      <meta itemprop="image" content="/images/avatar.jpeg">
     </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Ryan Li God">
     </span>
 
@@ -285,11 +369,19 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">使用 jQuery 实现 Solr 搜索的前端页面展示</h2>
+          <h2 class="post-title" itemprop="name headline">使用 jQuery 实现 Solr 搜索的前端页面展示
+              
+            
+          </h2>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -297,18 +389,35 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-15T16:17:28+08:00">
-                2018-11-15
-              </time>
+
+              
+                
+              
+
+              <time title="创建时间：2018-11-15 16:17:28" itemprop="dateCreated datePublished" datetime="2018-11-15T16:17:28+08:00">2018-11-15</time>
             
 
             
+              
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-11-20 13:55:40" itemprop="dateModified" datetime="2018-11-20T13:55:40+08:00">2018-11-20</time>
+              
             
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -319,11 +428,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
-                  </a>
-                </span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
 
                 
                 
@@ -343,7 +448,7 @@
                  <i class="fa fa-eye"></i>
                </span>
                
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
+                 <span class="post-meta-item-text">阅读次数：</span>
                
                  <span class="leancloud-visitors-count"></span>
              </span>
@@ -368,25 +473,20 @@
       
 
       
-        <h1 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h1>
-<p>今天要做的是一个具有搜索功能的前端页面，通过调用 Solr 搜索的接口来实现搜索功能。其中为了解决跨域的问题，利用 Python 写了一个简单的 Flask 服务器来请求 Solr，而前端页面仅需请求 Flask 服务器。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>今天要做的是一个具有搜索功能的前端页面，通过调用 Solr 搜索的接口来实现搜索功能。其中为了解决跨域的问题，利用 Python 写了一个简单的 Flask 服务器来请求 Solr，而前端页面仅需请求 Flask 服务器。</p>
 <p>之前用 Vue.js 搭建过一个数据可视化平台，本来今天的搜索只需在之前的项目中添加一个 Tab 就可以了，但是这次的要求是初学者比较容易理解和上手，所以这次我们选用了 <a href="https://jquery.com/" target="_blank" rel="noopener">jQuery</a> ，<a href="https://getbootstrap.com/" target="_blank" rel="noopener">Bootstrap 4</a> 来构建本次页面。</p>
-<h3 id="jquery-简化的-javascript"><a class="markdownIt-Anchor" href="#jquery-简化的-javascript"></a> jQuery —— 简化的 JavaScript</h3>
-<p>jQuery 曾经是最流行的 Web 前端 JavaScript 库，可是现在无论是国内还是国外他的使用率正在渐渐被其他的基于 <a href="https://www.cnblogs.com/iovec/p/7840228.html" target="_blank" rel="noopener">MVVM</a> 思想的  JavaScript 库（例如  Vue，React，Angular）所代替，随着浏览器厂商对 HTML5 规范统一遵循以及 ECMA6 在浏览器端的实现，jQuery 的使用率将会越来越低。</p>
-<p>jQuery 是使用选择器 <code>$</code> 选取 DOM（文档对象模型，可以理解成 HTML 中的元素）对象，对其进行赋值、取值、事件绑定等操作，其实和原生的 JavaScript 的区别只在于可以更方便的选取和操作 DOM 对象，而数据和界面是在一起的。比如需要获取 label 标签的内容：<code>$(&quot;lable&quot;).val();</code> ，它还是依赖 DOM 元素的值。</p>
+<h3 id="jQuery-——-简化的-JavaScript"><a href="#jQuery-——-简化的-JavaScript" class="headerlink" title="jQuery —— 简化的 JavaScript"></a>jQuery —— 简化的 JavaScript</h3><p>jQuery 曾经是最流行的 Web 前端 JavaScript 库，可是现在无论是国内还是国外他的使用率正在渐渐被其他的基于 <a href="https://www.cnblogs.com/iovec/p/7840228.html" target="_blank" rel="noopener">MVVM</a> 思想的  JavaScript 库（例如  Vue，React，Angular）所代替，随着浏览器厂商对 HTML5 规范统一遵循以及 ECMA6 在浏览器端的实现，jQuery 的使用率将会越来越低。</p>
+<p>jQuery 是使用选择器 <code>$</code> 选取 DOM（文档对象模型，可以理解成 HTML 中的元素）对象，对其进行赋值、取值、事件绑定等操作，其实和原生的 JavaScript 的区别只在于可以更方便的选取和操作 DOM 对象，而数据和界面是在一起的。比如需要获取 label 标签的内容：<code>$(&quot;lable&quot;).val();</code> ，它还是依赖 DOM 元素的值。 </p>
 <p>基本用法在 <a href="https://www.runoob.com/jquery/jquery-tutorial.html" target="_blank" rel="noopener">jQuery 教程 | 菜鸟教程</a>。</p>
 <a id="more"></a>
-<h3 id="bootstrap-4-组件样式库"><a class="markdownIt-Anchor" href="#bootstrap-4-组件样式库"></a> Bootstrap 4 —— 组件样式库</h3>
-<p>Bootstrap 是一个用于使用 HTML，CSS 和 JS 进行开发的开源工具包。曾经也是世界上最受欢迎的前端组件库，在网络上构建响应迅速，移动优先的项目。这次使用的是最新版的 Bootstrap 4 开发，使用 Bootstrap 4 可以非常便捷快速地构建美观的页面。Bootstrap 基于 jQuery，也就是说必须引入 jQuery 才可以使用 Bootstrap。需要注意的是 Bootstrap 的中文网已经停止更新了，最新的内容请到 <a href="https://getbootstrap.com/" target="_blank" rel="noopener">Bootstrap 英文官网</a> 查看。</p>
-<p><strong>Bootstrap 基本用法</strong></p>
+<h3 id="Bootstrap-4-——-组件样式库"><a href="#Bootstrap-4-——-组件样式库" class="headerlink" title="Bootstrap 4 —— 组件样式库"></a>Bootstrap 4 —— 组件样式库</h3><p>Bootstrap 是一个用于使用 HTML，CSS 和 JS 进行开发的开源工具包。曾经也是世界上最受欢迎的前端组件库，在网络上构建响应迅速，移动优先的项目。这次使用的是最新版的 Bootstrap 4 开发，使用 Bootstrap 4 可以非常便捷快速地构建美观的页面。Bootstrap 基于 jQuery，也就是说必须引入 jQuery 才可以使用 Bootstrap。需要注意的是 Bootstrap 的中文网已经停止更新了，最新的内容请到 <a href="https://getbootstrap.com/" target="_blank" rel="noopener">Bootstrap 英文官网</a> 查看。</p>
+<p><strong>Bootstrap 基本用法</strong> </p>
 <p>Bootstrap 的使用非常简单，首先在你的 HTML 文件中引入 Bootstrap 的 CSS ，JS 包：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"./lib/bootstrap-4.1.3-dist/css/bootstrap.css"</span> /&gt;</span></span><br><span class="line">...</span><br><span class="line"><span class="comment">&lt;!-- Bootstrap依赖jQuery，所以要把jQuery的js放在前面 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./lib/jquery-3.3.1.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./lib/bootstrap-4.1.3-dist/js/bootstrap.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>然后只需要在在 Bootstrap 文档里面找到与你需求相似的组件，就把他提供的 HTML 代码复制下来，再做一些修改就可以使用了。比如我要在页面上添加一个按钮，我们只需进入 <code>官网 - Documentation - Components - Buttons</code> ，找到合适的样式复制下来即可。下面是 Buttons 组件页面的截图，只需要拷贝图中的代码就可以直接获得 Bootstrap 的按钮样式。</p>
 <p><img src="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-11-15-132330.png" alt="image-20181115212330404"></p>
-<h3 id="iconfont-阿里巴巴矢量图片库"><a class="markdownIt-Anchor" href="#iconfont-阿里巴巴矢量图片库"></a> Iconfont —— 阿里巴巴矢量图片库</h3>
-<p><a href="http://www.iconfont.cn" target="_blank" rel="noopener">Iconfont</a> 中可以找到很多简约好用的矢量图供下载，这次我们使用了其中的搜索图标。</p>
-<h1 id="项目结构"><a class="markdownIt-Anchor" href="#项目结构"></a> 项目结构</h1>
-<p>为了更适用于初学者，本次没有使用例如 Yeoman 这样的脚手架构建项目，我们直接新建一个叫 <code>solr-web</code> 的文件夹，里面的内容如下：</p>
+<h3 id="Iconfont-——-阿里巴巴矢量图片库"><a href="#Iconfont-——-阿里巴巴矢量图片库" class="headerlink" title="Iconfont —— 阿里巴巴矢量图片库"></a>Iconfont —— 阿里巴巴矢量图片库</h3><p><a href="http://www.iconfont.cn" target="_blank" rel="noopener">Iconfont</a> 中可以找到很多简约好用的矢量图供下载，这次我们使用了其中的搜索图标。</p>
+<h1 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h1><p>为了更适用于初学者，本次没有使用例如 Yeoman 这样的脚手架构建项目，我们直接新建一个叫 <code>solr-web</code> 的文件夹，里面的内容如下：</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Solr-web</span><br><span class="line">├── css</span><br><span class="line">│   └── index.css</span><br><span class="line">├── js</span><br><span class="line">│   └── index.js</span><br><span class="line">├── img</span><br><span class="line">│   └── search-white.png</span><br><span class="line">├── lib</span><br><span class="line">│   ├── bootstrap-<span class="number">4.1</span>.<span class="number">3</span>-dist</span><br><span class="line">│   └── jquery-<span class="number">3.3</span>.<span class="number">1</span><span class="selector-class">.min</span><span class="selector-class">.js</span></span><br><span class="line">├── favicon.ico</span><br><span class="line">└── index.html</span><br></pre></td></tr></table></figure>
 <ul>
 <li><code>css</code> 文件夹下存放的是自己写的 CSS 文件。</li>
@@ -396,8 +496,7 @@
 <li><code>favicon.ico</code> 文件是浏览器标签页中显示的小图片。</li>
 <li><code>index.html</code> 主页面，本次只有一个页面，所以没有其他页面存放的文件夹。</li>
 </ul>
-<h1 id="编写页面"><a class="markdownIt-Anchor" href="#编写页面"></a> 编写页面</h1>
-<p>首先我们来看一下我们的目标页面结果是怎么样的：</p>
+<h1 id="编写页面"><a href="#编写页面" class="headerlink" title="编写页面"></a>编写页面</h1><p>首先我们来看一下我们的目标页面结果是怎么样的：</p>
 <p><img src="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-11-15-091111.png" alt="image-20181115171110815"></p>
 <p>在加上搜索结果以后的效果：</p>
 <p><img src="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-11-15-102208.png" alt="image-20181115182208456"></p>
@@ -429,25 +528,27 @@
 <p>这里基本上功能就已经都实现了，还有一些细节：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 页面刚开始隐藏搜索结果的部分</span></span><br><span class="line">$(<span class="string">"#resultSection"</span>).hide();</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">// 按下联想的词就直接搜索</span></span><br><span class="line">$(<span class="built_in">document</span>).on(<span class="string">"click"</span>, <span class="string">".list-group-item-action"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    searchPaper($(<span class="keyword">this</span>).text());</span><br><span class="line">    $(<span class="string">"#keyword"</span>).val($(<span class="keyword">this</span>).text());</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在按下enter键的时候就搜索</span></span><br><span class="line">$(<span class="built_in">document</span>).keyup(<span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (event.keyCode == <span class="number">13</span>) &#123;</span><br><span class="line">        searchPaper($(<span class="string">"#keyword"</span>).val());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>到这里功能基本就完整了，在下面的完整项目代码的部分对以上代码还会有一些完善。</p>
-<h1 id="完整项目代码"><a class="markdownIt-Anchor" href="#完整项目代码"></a> 完整项目代码</h1>
-<h3 id="indexhtml"><a class="markdownIt-Anchor" href="#indexhtml"></a> index.html</h3>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"zh"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1, shrink-to-fit=no"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Solr 论文搜索平台<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"shortcut icon"</span> <span class="attr">href</span>=<span class="string">"./favicon.ico"</span> <span class="attr">type</span>=<span class="string">"image/x-icon"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"./lib/bootstrap-4.1.3-dist/css/bootstrap.css"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"./css/index.css"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">header</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"collapse bg-dark"</span> <span class="attr">id</span>=<span class="string">"navbarHeader"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"row"</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-sm-8 col-md-7 py-4"</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">h4</span> <span class="attr">class</span>=<span class="string">"text-white"</span>&gt;</span>介绍<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"text-muted"</span>&gt;</span></span><br><span class="line">                            本搜索页面通过调用 Solr 搜索的接口来实现搜索功能。其中为了解决跨域的问题，</span><br><span class="line">                            利用 Python 写了一个简单的 Flask 服务器来请求 Solr，而前端页面仅需请求 Flask 服务器。</span><br><span class="line">                        <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-sm-4 offset-md-1 py-4"</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">h4</span> <span class="attr">class</span>=<span class="string">"text-white"</span>&gt;</span>资料<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"list-unstyled"</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">target</span>=<span class="string">"_blank"</span> <span class="attr">href</span>=<span class="string">"https://ryanligod.github.io/2018/11/15/2018-11-15%20%E4%BD%BF%E7%94%A8%20jQuery%20%E5%AE%9E%E7%8E%B0%20Solr%20%E6%90%9C%E7%B4%A2%E7%9A%84%E5%89%8D%E7%AB%AF%E9%A1%B5%E9%9D%A2%E5%B1%95%E7%A4%BA/"</span></span></span><br><span class="line"><span class="tag">                                    <span class="attr">class</span>=<span class="string">"text-white"</span>&gt;</span>本页面的讲解<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">target</span>=<span class="string">"_blank"</span> <span class="attr">href</span>=<span class="string">"https://github.com/RyanLiGod/Solr-web"</span> <span class="attr">class</span>=<span class="string">"text-white"</span>&gt;</span>本项目的 Github 地址<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">target</span>=<span class="string">"_blank"</span> <span class="attr">href</span>=<span class="string">"https://callmejiagu.github.io/categories/Solr/"</span> <span class="attr">class</span>=<span class="string">"text-white"</span>&gt;</span>Solr 讲解<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">target</span>=<span class="string">"_blank"</span> <span class="attr">href</span>=<span class="string">"https://getbootstrap.com/"</span> <span class="attr">class</span>=<span class="string">"text-white"</span>&gt;</span>Bootstrap 4<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">target</span>=<span class="string">"_blank"</span> <span class="attr">href</span>=<span class="string">"https://jquery.com/"</span> <span class="attr">class</span>=<span class="string">"text-white"</span>&gt;</span>jQuery<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"navbar navbar-dark bg-dark shadow-sm"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container d-flex justify-content-between"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">"navbar-brand align-items-center"</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"./img/search-white.png"</span> <span class="attr">width</span>=<span class="string">"30"</span> <span class="attr">height</span>=<span class="string">"30"</span> <span class="attr">class</span>=<span class="string">"d-inline-block align-top"</span> /&gt;</span></span><br><span class="line">                    移动互联实验室</span><br><span class="line">                <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"navbar-toggler"</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">data-toggle</span>=<span class="string">"collapse"</span> <span class="attr">data-target</span>=<span class="string">"#navbarHeader"</span> <span class="attr">aria-controls</span>=<span class="string">"navbarHeader"</span></span></span><br><span class="line"><span class="tag">                    <span class="attr">aria-expanded</span>=<span class="string">"false"</span> <span class="attr">aria-label</span>=<span class="string">"Toggle navigation"</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"navbar-toggler-icon"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">header</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">main</span> <span class="attr">role</span>=<span class="string">"main"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">section</span> <span class="attr">class</span>=<span class="string">"jumbotron text-center not-search"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">"jumbotron-heading"</span>&gt;</span>Solr 论文搜索平台<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"input-group mt-5 mb-3 position-relative"</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"keyword"</span> <span class="attr">class</span>=<span class="string">"form-control keyword-input"</span> <span class="attr">placeholder</span>=<span class="string">"请输入关键词"</span> <span class="attr">autocomplete</span>=<span class="string">"off"</span></span></span><br><span class="line"><span class="tag">                        <span class="attr">aria-describedby</span>=<span class="string">"button-addon2"</span> /&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"input-group-append"</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"searchPaper"</span> <span class="attr">class</span>=<span class="string">"btn btn-outline-secondary px-4"</span> <span class="attr">type</span>=<span class="string">"button"</span>&gt;</span>搜索<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"suggestList"</span> <span class="attr">class</span>=<span class="string">"list-group position-absolute"</span>&gt;</span></span><br><span class="line">                            <span class="comment">&lt;!-- 每一条结果将会用jQuery插入到这里 --&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"resultSection"</span> <span class="attr">class</span>=<span class="string">"py-5 bg-light"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"row"</span> <span class="attr">id</span>=<span class="string">"result"</span>&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!-- 每一条结果将会用jQuery插入到这里 --&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">main</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./lib/jquery-3.3.1.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./lib/bootstrap-4.1.3-dist/js/bootstrap.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./js/index.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="indexjs"><a class="markdownIt-Anchor" href="#indexjs"></a> index.js</h3>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 页面刚开始隐藏搜索结果的部分</span></span><br><span class="line">    $(<span class="string">"#resultSection"</span>).hide();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// id为searchPaper的按钮按下触发searchPaper()方法</span></span><br><span class="line">    $(<span class="string">"#searchPaper"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        keyword = $(<span class="string">"#keyword"</span>).val();</span><br><span class="line">        searchPaper(keyword);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// id为keyword的输入框内容改变触发getSuggest()方法</span></span><br><span class="line">    $(<span class="string">"#keyword"</span>).on(<span class="string">"input propertychange"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        getSuggest();</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 按下联想的词就直接搜索</span></span><br><span class="line">$(<span class="built_in">document</span>).on(<span class="string">"click"</span>, <span class="string">".list-group-item-action"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    searchPaper($(<span class="keyword">this</span>).text());</span><br><span class="line">    $(<span class="string">"#keyword"</span>).val($(<span class="keyword">this</span>).text());</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在按下enter键的时候就搜索</span></span><br><span class="line">$(<span class="built_in">document</span>).keyup(<span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (event.keyCode == <span class="number">13</span>) &#123;</span><br><span class="line">        searchPaper($(<span class="string">"#keyword"</span>).val());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">searchPaper</span>(<span class="params">key</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 首先清空result中的内容以便内容填入</span></span><br><span class="line">    $(<span class="string">"#result"</span>).empty();</span><br><span class="line">    $.getJSON(&#123;</span><br><span class="line">        url: <span class="string">"http://localhost:4000/search?key="</span> + key,</span><br><span class="line">        success: <span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</span><br><span class="line">            <span class="comment">// 获取返回的数据中我们需要的部分</span></span><br><span class="line">            res = result.response.docs;</span><br><span class="line">            <span class="comment">// 利用for插入每一个结果</span></span><br><span class="line">            <span class="keyword">if</span> (res.length) &#123;</span><br><span class="line">                <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; res.length; i++) &#123;</span><br><span class="line">                    <span class="comment">// 将返回的结果包装成HTML</span></span><br><span class="line">                    resultItem =</span><br><span class="line">                        <span class="string">`</span></span><br><span class="line"><span class="string">                        &lt;div class='col-md-12 mb-4'&gt;</span></span><br><span class="line"><span class="string">                            &lt;div class='card mb-12 shadow-sm'&gt;</span></span><br><span class="line"><span class="string">                                &lt;div class='card-body'&gt;</span></span><br><span class="line"><span class="string">                                    &lt;h5&gt;`</span> + res[i].name + <span class="string">` &lt;small style='margin-left: 10px'&gt;`</span> + res[i].author + <span class="string">`&lt;/small&gt; &lt;small style='margin-left: 10px'&gt;`</span> + res[i].year +  <span class="string">`&lt;/small&gt;&lt;/h5&gt;</span></span><br><span class="line"><span class="string">                                    &lt;p class='text-muted' style='margin-bottom: 0.5em'&gt;`</span> + res[i].unit + <span class="string">`&lt;/p&gt;</span></span><br><span class="line"><span class="string">                                    &lt;p class='card-text'&gt;`</span> + res[i].abstract + <span class="string">`&lt;/p&gt;</span></span><br><span class="line"><span class="string">                                &lt;/div&gt;</span></span><br><span class="line"><span class="string">                            &lt;/div&gt;</span></span><br><span class="line"><span class="string">                        &lt;/div&gt;</span></span><br><span class="line"><span class="string">                    `</span>;</span><br><span class="line">                    <span class="comment">// 插入HTML到result中</span></span><br><span class="line">                    $(<span class="string">"#result"</span>).append(resultItem);</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">                <span class="comment">// 搜索完以后让搜索框移上去，带有动画效果</span></span><br><span class="line">                $(<span class="string">"section.jumbotron"</span>).animate(&#123;</span><br><span class="line">                    margin: <span class="string">"0"</span></span><br><span class="line">                &#125;);</span><br><span class="line">                <span class="comment">// 显示搜索结果的部分</span></span><br><span class="line">                $(<span class="string">"#resultSection"</span>).show();</span><br><span class="line">                <span class="comment">// 清空输入联想</span></span><br><span class="line">                $(<span class="string">"#suggestList"</span>).empty();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getSuggest</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 首先清空suggestList中原来的内容以便内容填入</span></span><br><span class="line">    $(<span class="string">"#suggestList"</span>).empty();</span><br><span class="line">    <span class="comment">// 向服务器请求联想词</span></span><br><span class="line">    $.getJSON(&#123;</span><br><span class="line">        url: <span class="string">"http://localhost:4000/suggest?key="</span> + $(<span class="string">"#keyword"</span>).val(),</span><br><span class="line">        success: <span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</span><br><span class="line">            <span class="comment">// 获取返回的数据中我们需要的部分</span></span><br><span class="line">            res = result.suggest.mySuggester[$(<span class="string">"#keyword"</span>).val()];</span><br><span class="line">            <span class="keyword">if</span> (res.suggestions.length) &#123;</span><br><span class="line">                <span class="comment">// 利用for插入每一个结果</span></span><br><span class="line">                <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; res.suggestions.length; i++) &#123;</span><br><span class="line">                    <span class="comment">// 将返回的结果包装成HTML</span></span><br><span class="line">                    suggestItem =</span><br><span class="line">                        <span class="string">"&lt;a class='list-group-item list-group-item-action'&gt;"</span> + res.suggestions[i].term + <span class="string">"&lt;/a&gt;"</span>;</span><br><span class="line">                    <span class="comment">// 插入HTML到suggestList中</span></span><br><span class="line">                    $(<span class="string">"#suggestList"</span>).append(suggestItem);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="indexcss"><a class="markdownIt-Anchor" href="#indexcss"></a> index.css</h3>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-pseudo">:root</span> &#123;</span><br><span class="line">    <span class="attribute">--jumbotron-padding-y</span>: <span class="number">3rem</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.jumbotron</span> &#123;</span><br><span class="line">    <span class="attribute">padding-top</span>: <span class="built_in">var</span>(--jumbotron-padding-y);</span><br><span class="line">    <span class="attribute">padding-bottom</span>: <span class="built_in">var</span>(--jumbotron-padding-y);</span><br><span class="line">    <span class="attribute">margin-bottom</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#fff</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@<span class="keyword">media</span> (min-width: <span class="number">768px</span>) &#123;</span><br><span class="line">    <span class="selector-class">.jumbotron</span> &#123;</span><br><span class="line">        <span class="attribute">padding-top</span>: <span class="built_in">calc</span>(var(--jumbotron-padding-y) * <span class="number">2</span>);</span><br><span class="line">        <span class="attribute">padding-bottom</span>: <span class="built_in">calc</span>(var(--jumbotron-padding-y) * <span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.not-search</span> &#123;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">15vh</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.jumbotron-heading</span> &#123;</span><br><span class="line">    <span class="attribute">font-weight</span>: <span class="number">300</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.jumbotron</span> <span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">max-width</span>: <span class="number">40rem</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.keyword-input</span> &#123;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#resultSection</span> &#123;</span><br><span class="line">    <span class="attribute">min-height</span>: <span class="built_in">calc</span>(100vh - 56px - 342px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#suggestList</span> &#123;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">38px</span>;</span><br><span class="line">    <span class="attribute">z-index</span>: <span class="number">2</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="built_in">calc</span>(100% - 82px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.list-group-item</span> &#123;</span><br><span class="line">    <span class="attribute">cursor</span>: pointer;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.list-group-item</span><span class="selector-pseudo">:first-child</span> &#123;</span><br><span class="line">    <span class="attribute">border-top</span>: none;</span><br><span class="line">    <span class="attribute">border-top-left-radius</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">border-top-right-radius</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.list-group-item-action</span> &#123;</span><br><span class="line">    <span class="attribute">text-align</span>: left;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">6px</span> <span class="number">12px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="完整项目代码"><a href="#完整项目代码" class="headerlink" title="完整项目代码"></a>完整项目代码</h1><h3 id="index-html"><a href="#index-html" class="headerlink" title="index.html"></a>index.html</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"zh"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1, shrink-to-fit=no"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Solr 论文搜索平台<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"shortcut icon"</span> <span class="attr">href</span>=<span class="string">"./favicon.ico"</span> <span class="attr">type</span>=<span class="string">"image/x-icon"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"./lib/bootstrap-4.1.3-dist/css/bootstrap.css"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"./css/index.css"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">header</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"collapse bg-dark"</span> <span class="attr">id</span>=<span class="string">"navbarHeader"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"row"</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-sm-8 col-md-7 py-4"</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">h4</span> <span class="attr">class</span>=<span class="string">"text-white"</span>&gt;</span>介绍<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"text-muted"</span>&gt;</span></span><br><span class="line">                            本搜索页面通过调用 Solr 搜索的接口来实现搜索功能。其中为了解决跨域的问题，</span><br><span class="line">                            利用 Python 写了一个简单的 Flask 服务器来请求 Solr，而前端页面仅需请求 Flask 服务器。</span><br><span class="line">                        <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-sm-4 offset-md-1 py-4"</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">h4</span> <span class="attr">class</span>=<span class="string">"text-white"</span>&gt;</span>资料<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"list-unstyled"</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">target</span>=<span class="string">"_blank"</span> <span class="attr">href</span>=<span class="string">"https://ryanligod.github.io/2018/11/15/2018-11-15%20%E4%BD%BF%E7%94%A8%20jQuery%20%E5%AE%9E%E7%8E%B0%20Solr%20%E6%90%9C%E7%B4%A2%E7%9A%84%E5%89%8D%E7%AB%AF%E9%A1%B5%E9%9D%A2%E5%B1%95%E7%A4%BA/"</span></span></span><br><span class="line"><span class="tag">                                    <span class="attr">class</span>=<span class="string">"text-white"</span>&gt;</span>本页面的讲解<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">target</span>=<span class="string">"_blank"</span> <span class="attr">href</span>=<span class="string">"https://github.com/RyanLiGod/Solr-web"</span> <span class="attr">class</span>=<span class="string">"text-white"</span>&gt;</span>本项目的 Github 地址<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">target</span>=<span class="string">"_blank"</span> <span class="attr">href</span>=<span class="string">"https://callmejiagu.github.io/categories/Solr/"</span> <span class="attr">class</span>=<span class="string">"text-white"</span>&gt;</span>Solr 讲解<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">target</span>=<span class="string">"_blank"</span> <span class="attr">href</span>=<span class="string">"https://getbootstrap.com/"</span> <span class="attr">class</span>=<span class="string">"text-white"</span>&gt;</span>Bootstrap 4<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">target</span>=<span class="string">"_blank"</span> <span class="attr">href</span>=<span class="string">"https://jquery.com/"</span> <span class="attr">class</span>=<span class="string">"text-white"</span>&gt;</span>jQuery<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"navbar navbar-dark bg-dark shadow-sm"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container d-flex justify-content-between"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">"navbar-brand align-items-center"</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"./img/search-white.png"</span> <span class="attr">width</span>=<span class="string">"30"</span> <span class="attr">height</span>=<span class="string">"30"</span> <span class="attr">class</span>=<span class="string">"d-inline-block align-top"</span> /&gt;</span></span><br><span class="line">                    移动互联实验室</span><br><span class="line">                <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"navbar-toggler"</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">data-toggle</span>=<span class="string">"collapse"</span> <span class="attr">data-target</span>=<span class="string">"#navbarHeader"</span> <span class="attr">aria-controls</span>=<span class="string">"navbarHeader"</span></span></span><br><span class="line"><span class="tag">                    <span class="attr">aria-expanded</span>=<span class="string">"false"</span> <span class="attr">aria-label</span>=<span class="string">"Toggle navigation"</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"navbar-toggler-icon"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">header</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">main</span> <span class="attr">role</span>=<span class="string">"main"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">section</span> <span class="attr">class</span>=<span class="string">"jumbotron text-center not-search"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">"jumbotron-heading"</span>&gt;</span>Solr 论文搜索平台<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"input-group mt-5 mb-3 position-relative"</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"keyword"</span> <span class="attr">class</span>=<span class="string">"form-control keyword-input"</span> <span class="attr">placeholder</span>=<span class="string">"请输入关键词"</span> <span class="attr">autocomplete</span>=<span class="string">"off"</span></span></span><br><span class="line"><span class="tag">                        <span class="attr">aria-describedby</span>=<span class="string">"button-addon2"</span> /&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"input-group-append"</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"searchPaper"</span> <span class="attr">class</span>=<span class="string">"btn btn-outline-secondary px-4"</span> <span class="attr">type</span>=<span class="string">"button"</span>&gt;</span>搜索<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"suggestList"</span> <span class="attr">class</span>=<span class="string">"list-group position-absolute"</span>&gt;</span></span><br><span class="line">                            <span class="comment">&lt;!-- 每一条结果将会用jQuery插入到这里 --&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"resultSection"</span> <span class="attr">class</span>=<span class="string">"py-5 bg-light"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"row"</span> <span class="attr">id</span>=<span class="string">"result"</span>&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!-- 每一条结果将会用jQuery插入到这里 --&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">main</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./lib/jquery-3.3.1.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./lib/bootstrap-4.1.3-dist/js/bootstrap.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./js/index.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="index-js"><a href="#index-js" class="headerlink" title="index.js"></a>index.js</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 页面刚开始隐藏搜索结果的部分</span></span><br><span class="line">    $(<span class="string">"#resultSection"</span>).hide();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// id为searchPaper的按钮按下触发searchPaper()方法</span></span><br><span class="line">    $(<span class="string">"#searchPaper"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        keyword = $(<span class="string">"#keyword"</span>).val();</span><br><span class="line">        searchPaper(keyword);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// id为keyword的输入框内容改变触发getSuggest()方法</span></span><br><span class="line">    $(<span class="string">"#keyword"</span>).on(<span class="string">"input propertychange"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        getSuggest();</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 按下联想的词就直接搜索</span></span><br><span class="line">$(<span class="built_in">document</span>).on(<span class="string">"click"</span>, <span class="string">".list-group-item-action"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    searchPaper($(<span class="keyword">this</span>).text());</span><br><span class="line">    $(<span class="string">"#keyword"</span>).val($(<span class="keyword">this</span>).text());</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在按下enter键的时候就搜索</span></span><br><span class="line">$(<span class="built_in">document</span>).keyup(<span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (event.keyCode == <span class="number">13</span>) &#123;</span><br><span class="line">        searchPaper($(<span class="string">"#keyword"</span>).val());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">searchPaper</span>(<span class="params">key</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 首先清空result中的内容以便内容填入</span></span><br><span class="line">    $(<span class="string">"#result"</span>).empty();</span><br><span class="line">    $.getJSON(&#123;</span><br><span class="line">        url: <span class="string">"http://localhost:4000/search?key="</span> + key,</span><br><span class="line">        success: <span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</span><br><span class="line">            <span class="comment">// 获取返回的数据中我们需要的部分</span></span><br><span class="line">            res = result.response.docs;</span><br><span class="line">            <span class="comment">// 利用for插入每一个结果</span></span><br><span class="line">            <span class="keyword">if</span> (res.length) &#123;</span><br><span class="line">                <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; res.length; i++) &#123;</span><br><span class="line">                    <span class="comment">// 将返回的结果包装成HTML</span></span><br><span class="line">                    resultItem =</span><br><span class="line">                        <span class="string">`</span></span><br><span class="line"><span class="string">                        &lt;div class='col-md-12 mb-4'&gt;</span></span><br><span class="line"><span class="string">                            &lt;div class='card mb-12 shadow-sm'&gt;</span></span><br><span class="line"><span class="string">                                &lt;div class='card-body'&gt;</span></span><br><span class="line"><span class="string">                                    &lt;h5&gt;`</span> + res[i].name + <span class="string">` &lt;small style='margin-left: 10px'&gt;`</span> + res[i].author + <span class="string">`&lt;/small&gt; &lt;small style='margin-left: 10px'&gt;`</span> + res[i].year +  <span class="string">`&lt;/small&gt;&lt;/h5&gt;</span></span><br><span class="line"><span class="string">                                    &lt;p class='text-muted' style='margin-bottom: 0.5em'&gt;`</span> + res[i].unit + <span class="string">`&lt;/p&gt;</span></span><br><span class="line"><span class="string">                                    &lt;p class='card-text'&gt;`</span> + res[i].abstract + <span class="string">`&lt;/p&gt;</span></span><br><span class="line"><span class="string">                                &lt;/div&gt;</span></span><br><span class="line"><span class="string">                            &lt;/div&gt;</span></span><br><span class="line"><span class="string">                        &lt;/div&gt;</span></span><br><span class="line"><span class="string">                    `</span>;</span><br><span class="line">                    <span class="comment">// 插入HTML到result中</span></span><br><span class="line">                    $(<span class="string">"#result"</span>).append(resultItem);</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">                <span class="comment">// 搜索完以后让搜索框移上去，带有动画效果</span></span><br><span class="line">                $(<span class="string">"section.jumbotron"</span>).animate(&#123;</span><br><span class="line">                    margin: <span class="string">"0"</span></span><br><span class="line">                &#125;);</span><br><span class="line">                <span class="comment">// 显示搜索结果的部分</span></span><br><span class="line">                $(<span class="string">"#resultSection"</span>).show();</span><br><span class="line">                <span class="comment">// 清空输入联想</span></span><br><span class="line">                $(<span class="string">"#suggestList"</span>).empty();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getSuggest</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 首先清空suggestList中原来的内容以便内容填入</span></span><br><span class="line">    $(<span class="string">"#suggestList"</span>).empty();</span><br><span class="line">    <span class="comment">// 向服务器请求联想词</span></span><br><span class="line">    $.getJSON(&#123;</span><br><span class="line">        url: <span class="string">"http://localhost:4000/suggest?key="</span> + $(<span class="string">"#keyword"</span>).val(),</span><br><span class="line">        success: <span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</span><br><span class="line">            <span class="comment">// 获取返回的数据中我们需要的部分</span></span><br><span class="line">            res = result.suggest.mySuggester[$(<span class="string">"#keyword"</span>).val()];</span><br><span class="line">            <span class="keyword">if</span> (res.suggestions.length) &#123;</span><br><span class="line">                <span class="comment">// 利用for插入每一个结果</span></span><br><span class="line">                <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; res.suggestions.length; i++) &#123;</span><br><span class="line">                    <span class="comment">// 将返回的结果包装成HTML</span></span><br><span class="line">                    suggestItem =</span><br><span class="line">                        <span class="string">"&lt;a class='list-group-item list-group-item-action'&gt;"</span> + res.suggestions[i].term + <span class="string">"&lt;/a&gt;"</span>;</span><br><span class="line">                    <span class="comment">// 插入HTML到suggestList中</span></span><br><span class="line">                    $(<span class="string">"#suggestList"</span>).append(suggestItem);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="index-css"><a href="#index-css" class="headerlink" title="index.css"></a>index.css</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-pseudo">:root</span> &#123;</span><br><span class="line">    <span class="attribute">--jumbotron-padding-y</span>: <span class="number">3rem</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.jumbotron</span> &#123;</span><br><span class="line">    <span class="attribute">padding-top</span>: <span class="built_in">var</span>(--jumbotron-padding-y);</span><br><span class="line">    <span class="attribute">padding-bottom</span>: <span class="built_in">var</span>(--jumbotron-padding-y);</span><br><span class="line">    <span class="attribute">margin-bottom</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#fff</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@<span class="keyword">media</span> (min-width: <span class="number">768px</span>) &#123;</span><br><span class="line">    <span class="selector-class">.jumbotron</span> &#123;</span><br><span class="line">        <span class="attribute">padding-top</span>: <span class="built_in">calc</span>(var(--jumbotron-padding-y) * <span class="number">2</span>);</span><br><span class="line">        <span class="attribute">padding-bottom</span>: <span class="built_in">calc</span>(var(--jumbotron-padding-y) * <span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.not-search</span> &#123;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">15vh</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.jumbotron-heading</span> &#123;</span><br><span class="line">    <span class="attribute">font-weight</span>: <span class="number">300</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.jumbotron</span> <span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">max-width</span>: <span class="number">40rem</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.keyword-input</span> &#123;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#resultSection</span> &#123;</span><br><span class="line">    <span class="attribute">min-height</span>: <span class="built_in">calc</span>(100vh - 56px - 342px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#suggestList</span> &#123;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">38px</span>;</span><br><span class="line">    <span class="attribute">z-index</span>: <span class="number">2</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="built_in">calc</span>(100% - 82px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.list-group-item</span> &#123;</span><br><span class="line">    <span class="attribute">cursor</span>: pointer;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.list-group-item</span><span class="selector-pseudo">:first-child</span> &#123;</span><br><span class="line">    <span class="attribute">border-top</span>: none;</span><br><span class="line">    <span class="attribute">border-top-left-radius</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">border-top-right-radius</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.list-group-item-action</span> &#123;</span><br><span class="line">    <span class="attribute">text-align</span>: left;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">6px</span> <span class="number">12px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>顺便这里也贴一下 Flask 服务器的代码，如果 Solr 服务器和网页在同一个电脑启动，那就不需要通过 Flask 服务器这个媒介来解决跨域问题：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, make_response, request</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/search')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">search</span><span class="params">()</span>:</span></span><br><span class="line">    key = request.args.get(<span class="string">'key'</span>)</span><br><span class="line">    result = requests.get(<span class="string">'http://192.168.43.97:8983/solr/paper/select?q=%s&amp;wt=json&amp;indent=true'</span> % key)</span><br><span class="line">    rst = make_response(result.text)</span><br><span class="line">    rst.headers[<span class="string">'Access-Control-Allow-Origin'</span>] = <span class="string">'*'</span></span><br><span class="line">    <span class="keyword">return</span> rst</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/suggest')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">suggest</span><span class="params">()</span>:</span></span><br><span class="line">    key = request.args.get(<span class="string">'key'</span>)</span><br><span class="line">    result = requests.get(<span class="string">'http://192.168.43.97:8983/solr/namewords/suggest?q=%s&amp;wt=json&amp;indent=true'</span> % key)</span><br><span class="line">    rst = make_response(result.text)</span><br><span class="line">    rst.headers[<span class="string">'Access-Control-Allow-Origin'</span>] = <span class="string">'*'</span></span><br><span class="line">    <span class="keyword">return</span> rst</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    app.run(host=<span class="string">"localhost"</span>, port=<span class="number">4000</span>)</span><br></pre></td></tr></table></figure>
 <p>本项目 Github 地址 ：<a href="https://github.com/RyanLiGod/solr-web" target="_blank" rel="noopener">https://github.com/RyanLiGod/solr-web</a></p>
 
       
     </div>
+
+    
+
     
     
     
 
     
 
+    
+       
+    
     
 
     
@@ -501,17 +602,10 @@
   </article>
 
 
-
-    <div class="post-spread">
-      
-    </div>
   </div>
 
 
           </div>
-          
-
-
           
 
   
@@ -554,63 +648,147 @@
 
       <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image"
-                src="/uploads/avatar.jpeg"
-                alt="Ryan Li" />
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpeg" alt="Ryan Li">
             
               <p class="site-author-name" itemprop="name">Ryan Li</p>
-              <p class="site-description motion-element" itemprop="description"></p>
+              <p class="site-description motion-element" itemprop="description">Hello World.</p>
           </div>
 
-          <nav class="site-state motion-element">
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">40</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
 
-            
-              <div class="site-state-item site-state-posts">
               
-                <a href="/archives/">
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
               
-                  <span class="site-state-item-count">40</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
 
-            
               
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
               
-              <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
-                  <span class="site-state-item-count">9</span>
-                  <span class="site-state-item-name">分类</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">31</span>
-                  <span class="site-state-item-name">标签</span>
-                </a>
-              </div>
-            
-
-          </nav>
-
+            </nav>
           
 
           
 
           
+
           
 
           
           
 
+          
+            
+          
           
 
         </div>
@@ -626,7 +804,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"> 前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jquery-简化的-javascript"><span class="nav-number">1.0.1.</span> <span class="nav-text"> jQuery —— 简化的 JavaScript</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bootstrap-4-组件样式库"><span class="nav-number">1.0.2.</span> <span class="nav-text"> Bootstrap 4 —— 组件样式库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iconfont-阿里巴巴矢量图片库"><span class="nav-number">1.0.3.</span> <span class="nav-text"> Iconfont —— 阿里巴巴矢量图片库</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#项目结构"><span class="nav-number">2.</span> <span class="nav-text"> 项目结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编写页面"><span class="nav-number">3.</span> <span class="nav-text"> 编写页面</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#完整项目代码"><span class="nav-number">4.</span> <span class="nav-text"> 完整项目代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#indexhtml"><span class="nav-number">4.0.1.</span> <span class="nav-text"> index.html</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#indexjs"><span class="nav-number">4.0.2.</span> <span class="nav-text"> index.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#indexcss"><span class="nav-number">4.0.3.</span> <span class="nav-text"> index.css</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jQuery-——-简化的-JavaScript"><span class="nav-number">1.0.1.</span> <span class="nav-text">jQuery —— 简化的 JavaScript</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bootstrap-4-——-组件样式库"><span class="nav-number">1.0.2.</span> <span class="nav-text">Bootstrap 4 —— 组件样式库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Iconfont-——-阿里巴巴矢量图片库"><span class="nav-number">1.0.3.</span> <span class="nav-text">Iconfont —— 阿里巴巴矢量图片库</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#项目结构"><span class="nav-number">2.</span> <span class="nav-text">项目结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编写页面"><span class="nav-number">3.</span> <span class="nav-text">编写页面</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#完整项目代码"><span class="nav-number">4.</span> <span class="nav-text">完整项目代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#index-html"><span class="nav-number">4.0.1.</span> <span class="nav-text">index.html</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#index-js"><span class="nav-number">4.0.2.</span> <span class="nav-text">index.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#index-css"><span class="nav-number">4.0.3.</span> <span class="nav-text">index.css</span></a></li></ol></li></div>
             
 
           </div>
@@ -647,10 +825,12 @@
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
-  <span class="with-love">
+  <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Ryan Li</span>
+
+  
 
   
 </div>
@@ -671,6 +851,7 @@
 
 
 
+
         
       </div>
     </footer>
@@ -683,7 +864,10 @@
     
 
     
+	
+    
 
+    
   </div>
 
   
@@ -702,7 +886,11 @@
 
 
 
-  
+
+
+
+
+
 
 
 
@@ -722,16 +910,6 @@
 
   
   
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
     <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   
 
@@ -740,18 +918,13 @@
     <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
   
 
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
 
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
 
 
 
@@ -759,40 +932,27 @@
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
 
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
 
 
 
   
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
 
 
 
   
     <script type="text/javascript">
+      window.livereOptions = {
+        refer: '2018/11/15/2018-11-15 使用 jQuery 实现 Solr 搜索的前端页面展示/'
+      };
       (function(d, s) {
         var j, e = d.getElementsByTagName(s)[0];
         if (typeof LivereTower === 'function') { return; }
@@ -813,8 +973,6 @@
 
 
 
-
-
   
 
 
@@ -824,107 +982,61 @@
   
 
   
-  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
-  <script>AV.initialize("L71FAGlYbGy360uJzNBnyuLd-gzGzoHsz", "EkXnFcBGbM1Rt0hfAcUtDRUo");</script>
   <script>
-    function showTime(Counter) {
-      var query = new AV.Query(Counter);
-      var entries = [];
-      var $visitors = $(".leancloud_visitors");
-
-      $visitors.each(function () {
-        entries.push( $(this).attr("id").trim() );
-      });
-
-      query.containedIn('url', entries);
-      query.find()
-        .done(function (results) {
-          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
-
-          if (results.length === 0) {
-            $visitors.find(COUNT_CONTAINER_REF).text(0);
-            return;
-          }
-
-          for (var i = 0; i < results.length; i++) {
-            var item = results[i];
-            var url = item.get('url');
-            var time = item.get('time');
-            var element = document.getElementById(url);
-
-            $(element).find(COUNT_CONTAINER_REF).text(time);
-          }
-          for(var i = 0; i < entries.length; i++) {
-            var url = entries[i];
-            var element = document.getElementById(url);
-            var countSpan = $(element).find(COUNT_CONTAINER_REF);
-            if( countSpan.text() == '') {
-              countSpan.text(0);
-            }
-          }
-        })
-        .fail(function (object, error) {
-          console.log("Error: " + error.code + " " + error.message);
-        });
-    }
-
+    
     function addCount(Counter) {
       var $visitors = $(".leancloud_visitors");
       var url = $visitors.attr('id').trim();
       var title = $visitors.attr('data-flag-title').trim();
-      var query = new AV.Query(Counter);
 
-      query.equalTo("url", url);
-      query.find({
-        success: function(results) {
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
           if (results.length > 0) {
             var counter = results[0];
-            counter.fetchWhenSave(true);
-            counter.increment("time");
-            counter.save(null, {
-              success: function(counter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.get('time'));
-              },
-              error: function(counter, error) {
-                console.log('Failed to save Visitor num, with error message: ' + error.message);
-              }
-            });
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
           } else {
-            var newcounter = new Counter();
-            /* Set ACL */
-            var acl = new AV.ACL();
-            acl.setPublicReadAccess(true);
-            acl.setPublicWriteAccess(true);
-            newcounter.setACL(acl);
-            /* End Set ACL */
-            newcounter.set("title", title);
-            newcounter.set("url", url);
-            newcounter.set("time", 1);
-            newcounter.save(null, {
-              success: function(newcounter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-              },
-              error: function(newcounter, error) {
-                console.log('Failed to create');
-              }
-            });
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+            
           }
-        },
-        error: function(error) {
-          console.log('Error:' + error.code + " " + error.message);
-        }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
       });
     }
+    
 
     $(function() {
-      var Counter = AV.Object.extend("Counter");
-      if ($('.leancloud_visitors').length == 1) {
-        addCount(Counter);
-      } else if ($('.post-title-link').length > 1) {
-        showTime(Counter);
-      }
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "L71FAGlYbGy360uJzNBnyuLd-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "L71FAGlYbGy360uJzNBnyuLd-gzGzoHsz",
+                'X-LC-Key': "EkXnFcBGbM1Rt0hfAcUtDRUo",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
     });
   </script>
 
@@ -935,6 +1047,23 @@
   
 
   
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
   
 
   

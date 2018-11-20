@@ -2,26 +2,24 @@
 
 
 
+
+
+
+
+
+
+
+
+
   
 
 
-<html class="theme-next mist use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" rel="stylesheet">
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
@@ -34,41 +32,8 @@
 
 
 
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="大数据,Hadoop,Spark,RDD操作," />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -79,18 +44,39 @@
 
 
 
-<meta name="description" content="原文作者：翟开顺 首发：CSDN 本人仅为自己方便查阅做了摘抄，请支持原作者 原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428   键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey  reduceByKey 12345def reduceByKey(func: (V, V) =&amp;gt; V)">
-<meta name="keywords" content="大数据,Hadoop,Spark,RDD操作">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Spark RDD常用算子操作（六） 键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey">
-<meta property="og:url" content="https://ryanligod.github.io/2018/08/03/2018-08-03 Spark RDD（六） 键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey/index.html">
-<meta property="og:site_name" content="Ryan Li God">
-<meta property="og:description" content="原文作者：翟开顺 首发：CSDN 本人仅为自己方便查阅做了摘抄，请支持原作者 原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428   键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey  reduceByKey 12345def reduceByKey(func: (V, V) =&amp;gt; V)">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-12T10:58:25.090Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spark RDD常用算子操作（六） 键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey">
-<meta name="twitter:description" content="原文作者：翟开顺 首发：CSDN 本人仅为自己方便查阅做了摘抄，请支持原作者 原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428   键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey  reduceByKey 12345def reduceByKey(func: (V, V) =&amp;gt; V)">
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.ico?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.ico?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/apple-touch-icon.ico?v=6.5.0" color="#222">
+
+
+
+
+
+
 
 
 
@@ -99,32 +85,56 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
+    version: '6.5.0',
+    sidebar: {"position":"right","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
     tabs: true,
     motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
     algolia: {
       applicationID: '',
       apiKey: '',
       indexName: '',
       hits: {"per_page":10},
-      labels: {"input_placeholder":"搜索...","hits_empty":"没有找到任何搜索结果: ${query}","hits_stats":"找到 ${hits} 条结果（用时 ${time} ms）"}
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
 
 
-
-  <link rel="canonical" href="https://ryanligod.github.io/2018/08/03/2018-08-03 Spark RDD（六） 键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey/"/>
-
+  
 
 
 
+
+  <meta name="description" content="原文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428  键值对聚合操作reduceByKey，foldByKey，排序操作sortByKeyreduceByKey12345def reduceByKey(func: (V, V) =&amp;gt; V): RDD[(">
+<meta name="keywords" content="大数据,Hadoop,Spark,RDD操作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spark RDD常用算子操作（六） 键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey">
+<meta property="og:url" content="https://ryanligod.github.io/2018/08/03/2018-08-03 Spark RDD（六） 键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey/index.html">
+<meta property="og:site_name" content="Ryan Li God">
+<meta property="og:description" content="原文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428  键值对聚合操作reduceByKey，foldByKey，排序操作sortByKeyreduceByKey12345def reduceByKey(func: (V, V) =&amp;gt; V): RDD[(">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-08-12T10:58:25.090Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spark RDD常用算子操作（六） 键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey">
+<meta name="twitter:description" content="原文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428  键值对聚合操作reduceByKey，foldByKey，排序操作sortByKeyreduceByKey12345def reduceByKey(func: (V, V) =&amp;gt; V): RDD[(">
+
+
+
+
+
+
+  <link rel="canonical" href="https://ryanligod.github.io/2018/08/03/2018-08-03 Spark RDD（六） 键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
 
   <title>Spark RDD常用算子操作（六） 键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey | Ryan Li God</title>
   
@@ -133,50 +143,72 @@
 
 
 
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?078c1e1ad8b8dcf549f26b4ebc6eb18b";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
 
 
 
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
 
   
   
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">Ryan Li God</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
+    
       
-        <h1 class="site-subtitle" itemprop="description"></h1>
+        <h1 class="site-subtitle" itemprop="description">Hello World!</h1>
       
+    
   </div>
 
   <div class="site-nav-toggle">
-    <button>
+    <button aria-label="切换导航栏">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -184,55 +216,97 @@
   </div>
 </div>
 
-<nav class="site-nav">
-  
 
+
+<nav class="site-nav">
   
     <ul id="menu" class="menu">
       
         
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
       
+    
+
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
         
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
       
+    
+
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">31</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">9</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">40</span></a>
+
+  </li>
 
       
+      
     </ul>
+  
+
+  
+    
+
   
 
   
@@ -240,12 +314,20 @@
 
 
 
- </div>
+  
+
+
+
+</div>
     </header>
+
+    
+
 
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
+          
           <div id="content" class="content">
             
 
@@ -258,20 +340,22 @@
   
   
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://ryanligod.github.io/2018/08/03/2018-08-03 Spark RDD（六） 键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ryan Li">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpeg">
+      <meta itemprop="description" content="Hello World.">
+      <meta itemprop="image" content="/images/avatar.jpeg">
     </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Ryan Li God">
     </span>
 
@@ -280,11 +364,19 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Spark RDD常用算子操作（六） 键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey</h2>
+          <h2 class="post-title" itemprop="name headline">Spark RDD常用算子操作（六） 键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey
+              
+            
+          </h2>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -292,18 +384,35 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-03T21:26:50+08:00">
-                2018-08-03
-              </time>
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-03 21:26:50" itemprop="dateCreated datePublished" datetime="2018-08-03T21:26:50+08:00">2018-08-03</time>
             
 
             
+              
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-08-12 18:58:25" itemprop="dateModified" datetime="2018-08-12T18:58:25+08:00">2018-08-12</time>
+              
             
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -314,11 +423,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Spark/" itemprop="url" rel="index">
-                    <span itemprop="name">Spark</span>
-                  </a>
-                </span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Spark/" itemprop="url" rel="index"><span itemprop="name">Spark</span></a></span>
 
                 
                 
@@ -338,7 +443,7 @@
                  <i class="fa fa-eye"></i>
                </span>
                
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
+                 <span class="post-meta-item-text">阅读次数：</span>
                
                  <span class="leancloud-visitors-count"></span>
              </span>
@@ -364,54 +469,37 @@
 
       
         <blockquote>
-<p>原文作者：翟开顺<br>
-首发：CSDN<br>
-本人仅为自己方便查阅做了摘抄，请支持原作者<br>
-原文地址：<a href="https://blog.csdn.net/t1dmzks/article/details/72077428" target="_blank" rel="noopener">https://blog.csdn.net/t1dmzks/article/details/72077428</a></p>
+<p>原文作者：翟开顺<br>首发：CSDN<br>本人仅为自己方便查阅做了摘抄，请支持原作者<br>原文地址：<a href="https://blog.csdn.net/t1dmzks/article/details/72077428" target="_blank" rel="noopener">https://blog.csdn.net/t1dmzks/article/details/72077428</a></p>
 </blockquote>
-<h1 id="键值对聚合操作reducebykeyfoldbykey排序操作sortbykey"><a class="markdownIt-Anchor" href="#键值对聚合操作reducebykeyfoldbykey排序操作sortbykey"></a> 键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey</h1>
-<h2 id="reducebykey"><a class="markdownIt-Anchor" href="#reducebykey"></a> reduceByKey</h2>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reduceByKey</span></span>(func: (<span class="type">V</span>, <span class="type">V</span>) =&gt; <span class="type">V</span>): <span class="type">RDD</span>[(<span class="type">K</span>, <span class="type">V</span>)]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reduceByKey</span></span>(func: (<span class="type">V</span>, <span class="type">V</span>) =&gt; <span class="type">V</span>, numPartitions: <span class="type">Int</span>): <span class="type">RDD</span>[(<span class="type">K</span>, <span class="type">V</span>)]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reduceByKey</span></span>(partitioner: <span class="type">Partitioner</span>, func: (<span class="type">V</span>, <span class="type">V</span>) =&gt; <span class="type">V</span>): <span class="type">RDD</span>[(<span class="type">K</span>, <span class="type">V</span>)]</span><br></pre></td></tr></table></figure>
-<p>接收一个函数，按照相同的key进行reduce操作，类似于scala的reduce的操作<br>
-例如RDD {(1, 2), (3, 4), (3, 6)}进行reduce<br>
-<strong>scala版本</strong></p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">var</span> mapRDD = sc.parallelize(<span class="type">List</span>((<span class="number">1</span>,<span class="number">2</span>),(<span class="number">3</span>,<span class="number">4</span>),(<span class="number">3</span>,<span class="number">6</span>)))</span><br><span class="line">    <span class="keyword">var</span> reduceRDD = mapRDD.reduceByKey((x,y)=&gt;x+y)</span><br><span class="line">    reduceRDD.foreach(x=&gt;println(x))</span><br><span class="line">------输出---------</span><br><span class="line">(<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">(<span class="number">3</span>,<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
-<p>再举例<br>
-单词计数<br>
-F:\sparktest\sample.txt中的内容如下</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">aa bb cc aa aa aa <span class="selector-tag">dd</span> <span class="selector-tag">dd</span> ee ee ee ee </span><br><span class="line">ff aa bb zks</span><br><span class="line">ee kks</span><br><span class="line">ee  zz zks</span><br></pre></td></tr></table></figure>
-<p><strong>scala版本</strong></p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">val</span> lines = sc.textFile(<span class="string">"F:\\sparktest\\sample.txt"</span>)</span><br><span class="line">    <span class="keyword">val</span> wordsRDD = lines.flatMap(x=&gt;x.split(<span class="string">"\\s+"</span>)).map(x=&gt;(x,<span class="number">1</span>))</span><br><span class="line">    <span class="keyword">val</span> wordCountRDD = wordsRDD.reduceByKey((x,y)=&gt;x+y)</span><br><span class="line">    wordCountRDD.foreach(x=&gt;println(x))</span><br><span class="line">---------输出-----------</span><br><span class="line">(ee,<span class="number">6</span>)</span><br><span class="line">(aa,<span class="number">5</span>)</span><br><span class="line">(dd,<span class="number">2</span>)</span><br><span class="line">(zz,<span class="number">1</span>)</span><br><span class="line">(zks,<span class="number">2</span>)</span><br><span class="line">(kks,<span class="number">1</span>)</span><br><span class="line">(ff,<span class="number">1</span>)</span><br><span class="line">(bb,<span class="number">2</span>)</span><br><span class="line">(cc,<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<h1 id="键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey"><a href="#键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey" class="headerlink" title="键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey"></a>键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey</h1><h2 id="reduceByKey"><a href="#reduceByKey" class="headerlink" title="reduceByKey"></a>reduceByKey</h2><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reduceByKey</span></span>(func: (<span class="type">V</span>, <span class="type">V</span>) =&gt; <span class="type">V</span>): <span class="type">RDD</span>[(<span class="type">K</span>, <span class="type">V</span>)]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reduceByKey</span></span>(func: (<span class="type">V</span>, <span class="type">V</span>) =&gt; <span class="type">V</span>, numPartitions: <span class="type">Int</span>): <span class="type">RDD</span>[(<span class="type">K</span>, <span class="type">V</span>)]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reduceByKey</span></span>(partitioner: <span class="type">Partitioner</span>, func: (<span class="type">V</span>, <span class="type">V</span>) =&gt; <span class="type">V</span>): <span class="type">RDD</span>[(<span class="type">K</span>, <span class="type">V</span>)]</span><br></pre></td></tr></table></figure>
+<p>接收一个函数，按照相同的key进行reduce操作，类似于scala的reduce的操作<br>例如RDD {(1, 2), (3, 4), (3, 6)}进行reduce<br><strong>scala版本</strong><br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">var</span> mapRDD = sc.parallelize(<span class="type">List</span>((<span class="number">1</span>,<span class="number">2</span>),(<span class="number">3</span>,<span class="number">4</span>),(<span class="number">3</span>,<span class="number">6</span>)))</span><br><span class="line">    <span class="keyword">var</span> reduceRDD = mapRDD.reduceByKey((x,y)=&gt;x+y)</span><br><span class="line">    reduceRDD.foreach(x=&gt;println(x))</span><br><span class="line">------输出---------</span><br><span class="line">(<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">(<span class="number">3</span>,<span class="number">10</span>)</span><br></pre></td></tr></table></figure></p>
+<p>再举例<br>单词计数<br>F:\sparktest\sample.txt中的内容如下<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">aa bb cc aa aa aa <span class="selector-tag">dd</span> <span class="selector-tag">dd</span> ee ee ee ee </span><br><span class="line">ff aa bb zks</span><br><span class="line">ee kks</span><br><span class="line">ee  zz zks</span><br></pre></td></tr></table></figure></p>
+<p><strong>scala版本</strong><br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">val</span> lines = sc.textFile(<span class="string">"F:\\sparktest\\sample.txt"</span>)</span><br><span class="line">    <span class="keyword">val</span> wordsRDD = lines.flatMap(x=&gt;x.split(<span class="string">"\\s+"</span>)).map(x=&gt;(x,<span class="number">1</span>))</span><br><span class="line">    <span class="keyword">val</span> wordCountRDD = wordsRDD.reduceByKey((x,y)=&gt;x+y)</span><br><span class="line">    wordCountRDD.foreach(x=&gt;println(x))</span><br><span class="line">---------输出-----------</span><br><span class="line">(ee,<span class="number">6</span>)</span><br><span class="line">(aa,<span class="number">5</span>)</span><br><span class="line">(dd,<span class="number">2</span>)</span><br><span class="line">(zz,<span class="number">1</span>)</span><br><span class="line">(zks,<span class="number">2</span>)</span><br><span class="line">(kks,<span class="number">1</span>)</span><br><span class="line">(ff,<span class="number">1</span>)</span><br><span class="line">(bb,<span class="number">2</span>)</span><br><span class="line">(cc,<span class="number">1</span>)</span><br></pre></td></tr></table></figure></p>
 <a id="more"></a>
 <p><strong>java版本</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"> JavaRDD&lt;String&gt; lines = sc.textFile(<span class="string">"F:\\sparktest\\sample.txt"</span>);</span><br><span class="line"></span><br><span class="line">        JavaPairRDD&lt;String, Integer&gt; wordPairRDD = lines.flatMapToPair(<span class="keyword">new</span> PairFlatMapFunction&lt;String, String, Integer&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> Iterable&lt;Tuple2&lt;String, Integer&gt;&gt; call(String s) <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">                ArrayList&lt;Tuple2&lt;String, Integer&gt;&gt; tpLists = <span class="keyword">new</span> ArrayList&lt;Tuple2&lt;String, Integer&gt;&gt;();</span><br><span class="line">                String[] split = s.split(<span class="string">"\\s+"</span>);</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;split.length ; i++) &#123;</span><br><span class="line">                    Tuple2 tp = <span class="keyword">new</span> Tuple2&lt;String,Integer&gt;(split[i], <span class="number">1</span>);</span><br><span class="line">                    tpLists.add(tp);</span><br><span class="line">                &#125;</span><br><span class="line">            <span class="keyword">return</span> tpLists;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        JavaPairRDD&lt;String, Integer&gt; wordCountRDD = wordPairRDD.reduceByKey(<span class="keyword">new</span> Function2&lt;Integer, Integer, Integer&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> Integer <span class="title">call</span><span class="params">(Integer i1, Integer i2)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> i1 + i2;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        Map&lt;String, Integer&gt; collectAsMap = wordCountRDD.collectAsMap();</span><br><span class="line">        <span class="keyword">for</span> (String key:collectAsMap.keySet()) &#123;</span><br><span class="line">            System.out.println(<span class="string">"("</span>+key+<span class="string">","</span>+collectAsMap.get(key)+<span class="string">")"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">----------输出-------------------------------</span><br><span class="line">(kks,<span class="number">1</span>)</span><br><span class="line">(ee,<span class="number">6</span>)</span><br><span class="line">(bb,<span class="number">2</span>)</span><br><span class="line">(zz,<span class="number">1</span>)</span><br><span class="line">(ff,<span class="number">1</span>)</span><br><span class="line">(cc,<span class="number">1</span>)</span><br><span class="line">(zks,<span class="number">2</span>)</span><br><span class="line">(dd,<span class="number">2</span>)</span><br><span class="line">(aa,<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
-<h2 id="foldbykey"><a class="markdownIt-Anchor" href="#foldbykey"></a> foldByKey</h2>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foldByKey</span></span>(zeroValue: <span class="type">V</span>)(func: (<span class="type">V</span>, <span class="type">V</span>) =&gt; <span class="type">V</span>): <span class="type">RDD</span>[(<span class="type">K</span>, <span class="type">V</span>)]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foldByKey</span></span>(zeroValue: <span class="type">V</span>, numPartitions: <span class="type">Int</span>)(func: (<span class="type">V</span>, <span class="type">V</span>) =&gt; <span class="type">V</span>): <span class="type">RDD</span>[(<span class="type">K</span>, <span class="type">V</span>)]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foldByKey</span></span>(zeroValue: <span class="type">V</span>, partitioner: <span class="type">Partitioner</span>)(func: (<span class="type">V</span>, <span class="type">V</span>) =&gt; <span class="type">V</span>): <span class="type">RDD</span>[(<span class="type">K</span>, <span class="type">V</span>)]</span><br></pre></td></tr></table></figure>
-<p>该函数用于RDD[K,V]根据K将V做折叠、合并处理，其中的参数zeroValue表示先根据映射函数将zeroValue应用于V,进行初始化V,再将映射函数应用于初始化后的V.<br>
-foldByKey可以参考我之前的<a href="http://blog.csdn.net/t1dmzks/article/details/69858060#t27" target="_blank" rel="noopener">scala的fold的介绍</a><br>
-与reduce不同的是 foldByKey开始折叠的第一个元素不是集合中的第一个元素，而是传入的一个元素<br>
-<a href="http://lxw1234.com/archives/2015/07/358.htm" target="_blank" rel="noopener">参考LXW的博客 scala的例子</a><br>
-<strong>直接看例子</strong></p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="keyword">var</span> rdd1 = sc.makeRDD(<span class="type">Array</span>((<span class="string">"A"</span>,<span class="number">0</span>),(<span class="string">"A"</span>,<span class="number">2</span>),(<span class="string">"B"</span>,<span class="number">1</span>),(<span class="string">"B"</span>,<span class="number">2</span>),(<span class="string">"C"</span>,<span class="number">1</span>)))</span><br><span class="line">scala&gt; rdd1.foldByKey(<span class="number">0</span>)(_+_).collect</span><br><span class="line">res75: <span class="type">Array</span>[(<span class="type">String</span>, <span class="type">Int</span>)] = <span class="type">Array</span>((<span class="type">A</span>,<span class="number">2</span>), (<span class="type">B</span>,<span class="number">3</span>), (<span class="type">C</span>,<span class="number">1</span>)) </span><br><span class="line"><span class="comment">//将rdd1中每个key对应的V进行累加，注意zeroValue=0,需要先初始化V,映射函数为+操</span></span><br><span class="line"><span class="comment">//作，比如("A",0), ("A",2)，先将zeroValue应用于每个V,得到：("A",0+0), ("A",2+0)，即：</span></span><br><span class="line"><span class="comment">//("A",0), ("A",2)，再将映射函数应用于初始化后的V，最后得到(A,0+2),即(A,2)</span></span><br></pre></td></tr></table></figure>
-<p><strong>再看：</strong></p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; rdd1.foldByKey(<span class="number">2</span>)(_+_).collect</span><br><span class="line">res76: <span class="type">Array</span>[(<span class="type">String</span>, <span class="type">Int</span>)] = <span class="type">Array</span>((<span class="type">A</span>,<span class="number">6</span>), (<span class="type">B</span>,<span class="number">7</span>), (<span class="type">C</span>,<span class="number">3</span>))</span><br><span class="line"><span class="comment">//先将zeroValue=2应用于每个V,得到：("A",0+2), ("A",2+2)，即：("A",2), ("A",4)，再将映射函</span></span><br><span class="line"><span class="comment">//数应用于初始化后的V，最后得到：(A,2+4)，即：(A,6)</span></span><br></pre></td></tr></table></figure>
-<p><strong>再看乘法操作：</strong></p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; rdd1.foldByKey(<span class="number">0</span>)(_*_).collect</span><br><span class="line">res77: <span class="type">Array</span>[(<span class="type">String</span>, <span class="type">Int</span>)] = <span class="type">Array</span>((<span class="type">A</span>,<span class="number">0</span>), (<span class="type">B</span>,<span class="number">0</span>), (<span class="type">C</span>,<span class="number">0</span>))</span><br><span class="line"><span class="comment">//先将zeroValue=0应用于每个V,注意，这次映射函数为乘法，得到：("A",0*0), ("A",2*0)，</span></span><br><span class="line"><span class="comment">//即：("A",0), ("A",0)，再将映射函//数应用于初始化后的V，最后得到：(A,0*0)，即：(A,0)</span></span><br><span class="line"><span class="comment">//其他K也一样，最终都得到了V=0</span></span><br><span class="line"></span><br><span class="line">scala&gt; rdd1.foldByKey(<span class="number">1</span>)(_*_).collect</span><br><span class="line">res78: <span class="type">Array</span>[(<span class="type">String</span>, <span class="type">Int</span>)] = <span class="type">Array</span>((<span class="type">A</span>,<span class="number">0</span>), (<span class="type">B</span>,<span class="number">2</span>), (<span class="type">C</span>,<span class="number">1</span>))</span><br><span class="line"><span class="comment">//映射函数为乘法时，需要将zeroValue设为1，才能得到我们想要的结果。</span></span><br></pre></td></tr></table></figure>
-<h2 id="sortbykey"><a class="markdownIt-Anchor" href="#sortbykey"></a> SortByKey</h2>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sortByKey</span></span>(ascending : scala.<span class="type">Boolean</span> = &#123; <span class="comment">/* compiled code */</span> &#125;, numPartitions : scala.<span class="type">Int</span> = &#123; <span class="comment">/* compiled code */</span> &#125;) : org.apache.spark.rdd.<span class="type">RDD</span>[scala.<span class="type">Tuple2</span>[<span class="type">K</span>, <span class="type">V</span>]] = &#123; <span class="comment">/* compiled code */</span> &#125;</span><br></pre></td></tr></table></figure>
-<p>SortByKey用于对pairRDD按照key进行排序，第一个参数可以设置true或者false，默认是true<br>
-<strong>scala例子</strong></p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="keyword">val</span> rdd = sc.parallelize(<span class="type">Array</span>((<span class="number">3</span>, <span class="number">4</span>),(<span class="number">1</span>, <span class="number">2</span>),(<span class="number">4</span>,<span class="number">4</span>),(<span class="number">2</span>,<span class="number">5</span>), (<span class="number">6</span>,<span class="number">5</span>), (<span class="number">5</span>, <span class="number">6</span>)))  </span><br><span class="line"></span><br><span class="line"><span class="comment">// sortByKey不是Action操作，只能算是转换操作</span></span><br><span class="line">scala&gt; rdd.sortByKey()</span><br><span class="line">res9: org.apache.spark.rdd.<span class="type">RDD</span>[(<span class="type">Int</span>, <span class="type">Int</span>)] = <span class="type">ShuffledRDD</span>[<span class="number">28</span>] at sortByKey at &lt;console&gt;:<span class="number">24</span> </span><br><span class="line"></span><br><span class="line"><span class="comment">//看看sortByKey后是什么类型</span></span><br><span class="line">scala&gt; rdd.sortByKey().collect() </span><br><span class="line">res10: <span class="type">Array</span>[(<span class="type">Int</span>, <span class="type">Int</span>)] = <span class="type">Array</span>((<span class="number">1</span>,<span class="number">2</span>), (<span class="number">2</span>,<span class="number">5</span>), (<span class="number">3</span>,<span class="number">4</span>), (<span class="number">4</span>,<span class="number">4</span>), (<span class="number">5</span>,<span class="number">6</span>), (<span class="number">6</span>,<span class="number">5</span>)) </span><br><span class="line"></span><br><span class="line"><span class="comment">//降序排序</span></span><br><span class="line">scala&gt; rdd.sortByKey(<span class="literal">false</span>).collect() </span><br><span class="line">res12: <span class="type">Array</span>[(<span class="type">Int</span>, <span class="type">Int</span>)] = <span class="type">Array</span>((<span class="number">6</span>,<span class="number">5</span>), (<span class="number">5</span>,<span class="number">6</span>), (<span class="number">4</span>,<span class="number">4</span>), (<span class="number">3</span>,<span class="number">4</span>), (<span class="number">2</span>,<span class="number">5</span>), (<span class="number">1</span>,<span class="number">2</span>))</span><br></pre></td></tr></table></figure>
+<h2 id="foldByKey"><a href="#foldByKey" class="headerlink" title="foldByKey"></a>foldByKey</h2><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foldByKey</span></span>(zeroValue: <span class="type">V</span>)(func: (<span class="type">V</span>, <span class="type">V</span>) =&gt; <span class="type">V</span>): <span class="type">RDD</span>[(<span class="type">K</span>, <span class="type">V</span>)]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foldByKey</span></span>(zeroValue: <span class="type">V</span>, numPartitions: <span class="type">Int</span>)(func: (<span class="type">V</span>, <span class="type">V</span>) =&gt; <span class="type">V</span>): <span class="type">RDD</span>[(<span class="type">K</span>, <span class="type">V</span>)]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foldByKey</span></span>(zeroValue: <span class="type">V</span>, partitioner: <span class="type">Partitioner</span>)(func: (<span class="type">V</span>, <span class="type">V</span>) =&gt; <span class="type">V</span>): <span class="type">RDD</span>[(<span class="type">K</span>, <span class="type">V</span>)]</span><br></pre></td></tr></table></figure>
+<p>该函数用于RDD[K,V]根据K将V做折叠、合并处理，其中的参数zeroValue表示先根据映射函数将zeroValue应用于V,进行初始化V,再将映射函数应用于初始化后的V.<br>foldByKey可以参考我之前的<a href="http://blog.csdn.net/t1dmzks/article/details/69858060#t27" target="_blank" rel="noopener">scala的fold的介绍</a><br>与reduce不同的是 foldByKey开始折叠的第一个元素不是集合中的第一个元素，而是传入的一个元素<br><a href="http://lxw1234.com/archives/2015/07/358.htm" target="_blank" rel="noopener">参考LXW的博客 scala的例子</a><br><strong>直接看例子</strong><br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="keyword">var</span> rdd1 = sc.makeRDD(<span class="type">Array</span>((<span class="string">"A"</span>,<span class="number">0</span>),(<span class="string">"A"</span>,<span class="number">2</span>),(<span class="string">"B"</span>,<span class="number">1</span>),(<span class="string">"B"</span>,<span class="number">2</span>),(<span class="string">"C"</span>,<span class="number">1</span>)))</span><br><span class="line">scala&gt; rdd1.foldByKey(<span class="number">0</span>)(_+_).collect</span><br><span class="line">res75: <span class="type">Array</span>[(<span class="type">String</span>, <span class="type">Int</span>)] = <span class="type">Array</span>((<span class="type">A</span>,<span class="number">2</span>), (<span class="type">B</span>,<span class="number">3</span>), (<span class="type">C</span>,<span class="number">1</span>)) </span><br><span class="line"><span class="comment">//将rdd1中每个key对应的V进行累加，注意zeroValue=0,需要先初始化V,映射函数为+操</span></span><br><span class="line"><span class="comment">//作，比如("A",0), ("A",2)，先将zeroValue应用于每个V,得到：("A",0+0), ("A",2+0)，即：</span></span><br><span class="line"><span class="comment">//("A",0), ("A",2)，再将映射函数应用于初始化后的V，最后得到(A,0+2),即(A,2)</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>再看：</strong><br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; rdd1.foldByKey(<span class="number">2</span>)(_+_).collect</span><br><span class="line">res76: <span class="type">Array</span>[(<span class="type">String</span>, <span class="type">Int</span>)] = <span class="type">Array</span>((<span class="type">A</span>,<span class="number">6</span>), (<span class="type">B</span>,<span class="number">7</span>), (<span class="type">C</span>,<span class="number">3</span>))</span><br><span class="line"><span class="comment">//先将zeroValue=2应用于每个V,得到：("A",0+2), ("A",2+2)，即：("A",2), ("A",4)，再将映射函</span></span><br><span class="line"><span class="comment">//数应用于初始化后的V，最后得到：(A,2+4)，即：(A,6)</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>再看乘法操作：</strong><br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; rdd1.foldByKey(<span class="number">0</span>)(_*_).collect</span><br><span class="line">res77: <span class="type">Array</span>[(<span class="type">String</span>, <span class="type">Int</span>)] = <span class="type">Array</span>((<span class="type">A</span>,<span class="number">0</span>), (<span class="type">B</span>,<span class="number">0</span>), (<span class="type">C</span>,<span class="number">0</span>))</span><br><span class="line"><span class="comment">//先将zeroValue=0应用于每个V,注意，这次映射函数为乘法，得到：("A",0*0), ("A",2*0)，</span></span><br><span class="line"><span class="comment">//即：("A",0), ("A",0)，再将映射函//数应用于初始化后的V，最后得到：(A,0*0)，即：(A,0)</span></span><br><span class="line"><span class="comment">//其他K也一样，最终都得到了V=0</span></span><br><span class="line"></span><br><span class="line">scala&gt; rdd1.foldByKey(<span class="number">1</span>)(_*_).collect</span><br><span class="line">res78: <span class="type">Array</span>[(<span class="type">String</span>, <span class="type">Int</span>)] = <span class="type">Array</span>((<span class="type">A</span>,<span class="number">0</span>), (<span class="type">B</span>,<span class="number">2</span>), (<span class="type">C</span>,<span class="number">1</span>))</span><br><span class="line"><span class="comment">//映射函数为乘法时，需要将zeroValue设为1，才能得到我们想要的结果。</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="SortByKey"><a href="#SortByKey" class="headerlink" title="SortByKey"></a>SortByKey</h2><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sortByKey</span></span>(ascending : scala.<span class="type">Boolean</span> = &#123; <span class="comment">/* compiled code */</span> &#125;, numPartitions : scala.<span class="type">Int</span> = &#123; <span class="comment">/* compiled code */</span> &#125;) : org.apache.spark.rdd.<span class="type">RDD</span>[scala.<span class="type">Tuple2</span>[<span class="type">K</span>, <span class="type">V</span>]] = &#123; <span class="comment">/* compiled code */</span> &#125;</span><br></pre></td></tr></table></figure>
+<p>SortByKey用于对pairRDD按照key进行排序，第一个参数可以设置true或者false，默认是true<br><strong>scala例子</strong><br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="keyword">val</span> rdd = sc.parallelize(<span class="type">Array</span>((<span class="number">3</span>, <span class="number">4</span>),(<span class="number">1</span>, <span class="number">2</span>),(<span class="number">4</span>,<span class="number">4</span>),(<span class="number">2</span>,<span class="number">5</span>), (<span class="number">6</span>,<span class="number">5</span>), (<span class="number">5</span>, <span class="number">6</span>)))  </span><br><span class="line"></span><br><span class="line"><span class="comment">// sortByKey不是Action操作，只能算是转换操作</span></span><br><span class="line">scala&gt; rdd.sortByKey()</span><br><span class="line">res9: org.apache.spark.rdd.<span class="type">RDD</span>[(<span class="type">Int</span>, <span class="type">Int</span>)] = <span class="type">ShuffledRDD</span>[<span class="number">28</span>] at sortByKey at &lt;console&gt;:<span class="number">24</span> </span><br><span class="line"></span><br><span class="line"><span class="comment">//看看sortByKey后是什么类型</span></span><br><span class="line">scala&gt; rdd.sortByKey().collect() </span><br><span class="line">res10: <span class="type">Array</span>[(<span class="type">Int</span>, <span class="type">Int</span>)] = <span class="type">Array</span>((<span class="number">1</span>,<span class="number">2</span>), (<span class="number">2</span>,<span class="number">5</span>), (<span class="number">3</span>,<span class="number">4</span>), (<span class="number">4</span>,<span class="number">4</span>), (<span class="number">5</span>,<span class="number">6</span>), (<span class="number">6</span>,<span class="number">5</span>)) </span><br><span class="line"></span><br><span class="line"><span class="comment">//降序排序</span></span><br><span class="line">scala&gt; rdd.sortByKey(<span class="literal">false</span>).collect() </span><br><span class="line">res12: <span class="type">Array</span>[(<span class="type">Int</span>, <span class="type">Int</span>)] = <span class="type">Array</span>((<span class="number">6</span>,<span class="number">5</span>), (<span class="number">5</span>,<span class="number">6</span>), (<span class="number">4</span>,<span class="number">4</span>), (<span class="number">3</span>,<span class="number">4</span>), (<span class="number">2</span>,<span class="number">5</span>), (<span class="number">1</span>,<span class="number">2</span>))</span><br></pre></td></tr></table></figure></p>
 <p>java例子也是一样的，这里就不写了</p>
 
       
     </div>
+
+    
+
     
     
     
 
     
 
+    
+       
+    
     
 
     
@@ -467,17 +555,10 @@ foldByKey可以参考我之前的<a href="http://blog.csdn.net/t1dmzks/article/d
   </article>
 
 
-
-    <div class="post-spread">
-      
-    </div>
   </div>
 
 
           </div>
-          
-
-
           
 
   
@@ -520,63 +601,147 @@ foldByKey可以参考我之前的<a href="http://blog.csdn.net/t1dmzks/article/d
 
       <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image"
-                src="/uploads/avatar.jpeg"
-                alt="Ryan Li" />
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpeg" alt="Ryan Li">
             
               <p class="site-author-name" itemprop="name">Ryan Li</p>
-              <p class="site-description motion-element" itemprop="description"></p>
+              <p class="site-description motion-element" itemprop="description">Hello World.</p>
           </div>
 
-          <nav class="site-state motion-element">
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">40</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
 
-            
-              <div class="site-state-item site-state-posts">
               
-                <a href="/archives/">
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
               
-                  <span class="site-state-item-count">40</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
 
-            
               
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
               
-              <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
-                  <span class="site-state-item-count">9</span>
-                  <span class="site-state-item-name">分类</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">31</span>
-                  <span class="site-state-item-name">标签</span>
-                </a>
-              </div>
-            
-
-          </nav>
-
+            </nav>
           
 
           
 
           
+
           
 
           
           
 
+          
+            
+          
           
 
         </div>
@@ -592,7 +757,7 @@ foldByKey可以参考我之前的<a href="http://blog.csdn.net/t1dmzks/article/d
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#键值对聚合操作reducebykeyfoldbykey排序操作sortbykey"><span class="nav-number">1.</span> <span class="nav-text"> 键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#reducebykey"><span class="nav-number">1.1.</span> <span class="nav-text"> reduceByKey</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#foldbykey"><span class="nav-number">1.2.</span> <span class="nav-text"> foldByKey</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sortbykey"><span class="nav-number">1.3.</span> <span class="nav-text"> SortByKey</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey"><span class="nav-number">1.</span> <span class="nav-text">键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#reduceByKey"><span class="nav-number">1.1.</span> <span class="nav-text">reduceByKey</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#foldByKey"><span class="nav-number">1.2.</span> <span class="nav-text">foldByKey</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SortByKey"><span class="nav-number">1.3.</span> <span class="nav-text">SortByKey</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -613,10 +778,12 @@ foldByKey可以参考我之前的<a href="http://blog.csdn.net/t1dmzks/article/d
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
-  <span class="with-love">
+  <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Ryan Li</span>
+
+  
 
   
 </div>
@@ -637,6 +804,7 @@ foldByKey可以参考我之前的<a href="http://blog.csdn.net/t1dmzks/article/d
 
 
 
+
         
       </div>
     </footer>
@@ -649,7 +817,10 @@ foldByKey可以参考我之前的<a href="http://blog.csdn.net/t1dmzks/article/d
     
 
     
+	
+    
 
+    
   </div>
 
   
@@ -668,7 +839,11 @@ foldByKey可以参考我之前的<a href="http://blog.csdn.net/t1dmzks/article/d
 
 
 
-  
+
+
+
+
+
 
 
 
@@ -688,16 +863,6 @@ foldByKey可以参考我之前的<a href="http://blog.csdn.net/t1dmzks/article/d
 
   
   
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
     <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   
 
@@ -706,18 +871,13 @@ foldByKey可以参考我之前的<a href="http://blog.csdn.net/t1dmzks/article/d
     <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
   
 
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
 
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
 
 
 
@@ -725,40 +885,27 @@ foldByKey可以参考我之前的<a href="http://blog.csdn.net/t1dmzks/article/d
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
 
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
 
 
 
   
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
 
 
 
   
     <script type="text/javascript">
+      window.livereOptions = {
+        refer: '2018/08/03/2018-08-03 Spark RDD（六） 键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey/'
+      };
       (function(d, s) {
         var j, e = d.getElementsByTagName(s)[0];
         if (typeof LivereTower === 'function') { return; }
@@ -779,8 +926,6 @@ foldByKey可以参考我之前的<a href="http://blog.csdn.net/t1dmzks/article/d
 
 
 
-
-
   
 
 
@@ -790,107 +935,61 @@ foldByKey可以参考我之前的<a href="http://blog.csdn.net/t1dmzks/article/d
   
 
   
-  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
-  <script>AV.initialize("L71FAGlYbGy360uJzNBnyuLd-gzGzoHsz", "EkXnFcBGbM1Rt0hfAcUtDRUo");</script>
   <script>
-    function showTime(Counter) {
-      var query = new AV.Query(Counter);
-      var entries = [];
-      var $visitors = $(".leancloud_visitors");
-
-      $visitors.each(function () {
-        entries.push( $(this).attr("id").trim() );
-      });
-
-      query.containedIn('url', entries);
-      query.find()
-        .done(function (results) {
-          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
-
-          if (results.length === 0) {
-            $visitors.find(COUNT_CONTAINER_REF).text(0);
-            return;
-          }
-
-          for (var i = 0; i < results.length; i++) {
-            var item = results[i];
-            var url = item.get('url');
-            var time = item.get('time');
-            var element = document.getElementById(url);
-
-            $(element).find(COUNT_CONTAINER_REF).text(time);
-          }
-          for(var i = 0; i < entries.length; i++) {
-            var url = entries[i];
-            var element = document.getElementById(url);
-            var countSpan = $(element).find(COUNT_CONTAINER_REF);
-            if( countSpan.text() == '') {
-              countSpan.text(0);
-            }
-          }
-        })
-        .fail(function (object, error) {
-          console.log("Error: " + error.code + " " + error.message);
-        });
-    }
-
+    
     function addCount(Counter) {
       var $visitors = $(".leancloud_visitors");
       var url = $visitors.attr('id').trim();
       var title = $visitors.attr('data-flag-title').trim();
-      var query = new AV.Query(Counter);
 
-      query.equalTo("url", url);
-      query.find({
-        success: function(results) {
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
           if (results.length > 0) {
             var counter = results[0];
-            counter.fetchWhenSave(true);
-            counter.increment("time");
-            counter.save(null, {
-              success: function(counter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.get('time'));
-              },
-              error: function(counter, error) {
-                console.log('Failed to save Visitor num, with error message: ' + error.message);
-              }
-            });
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
           } else {
-            var newcounter = new Counter();
-            /* Set ACL */
-            var acl = new AV.ACL();
-            acl.setPublicReadAccess(true);
-            acl.setPublicWriteAccess(true);
-            newcounter.setACL(acl);
-            /* End Set ACL */
-            newcounter.set("title", title);
-            newcounter.set("url", url);
-            newcounter.set("time", 1);
-            newcounter.save(null, {
-              success: function(newcounter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-              },
-              error: function(newcounter, error) {
-                console.log('Failed to create');
-              }
-            });
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+            
           }
-        },
-        error: function(error) {
-          console.log('Error:' + error.code + " " + error.message);
-        }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
       });
     }
+    
 
     $(function() {
-      var Counter = AV.Object.extend("Counter");
-      if ($('.leancloud_visitors').length == 1) {
-        addCount(Counter);
-      } else if ($('.post-title-link').length > 1) {
-        showTime(Counter);
-      }
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "L71FAGlYbGy360uJzNBnyuLd-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "L71FAGlYbGy360uJzNBnyuLd-gzGzoHsz",
+                'X-LC-Key': "EkXnFcBGbM1Rt0hfAcUtDRUo",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
     });
   </script>
 
@@ -901,6 +1000,23 @@ foldByKey可以参考我之前的<a href="http://blog.csdn.net/t1dmzks/article/d
   
 
   
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
   
 
   

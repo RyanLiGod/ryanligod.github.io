@@ -2,26 +2,24 @@
 
 
 
+
+
+
+
+
+
+
+
+
   
 
 
-<html class="theme-next mist use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" rel="stylesheet">
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
@@ -34,41 +32,8 @@
 
 
 
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="Docker," />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -79,18 +44,39 @@
 
 
 
-<meta name="description" content="Dockerfile 介绍 Dockerfile 是由一系列命令和参数构成的脚本，这些命令应用于基础镜像并最终创建一个新的镜像。它们简化了从头到尾的流程并极大的简化了部署工作。Dockerfile 从 FROM 命令开始，紧接着跟随者各种方法，命令和参数。其产出为一个新的可以用于创建容器的镜像。  Dockerfile 语法 Dockerfile语法由两部分构成，注释 和 命令 + 参数 ： 1">
-<meta name="keywords" content="Docker">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Docker 之 Dockerfile">
-<meta property="og:url" content="https://ryanligod.github.io/2018/11/09/2018-11-09 Docker 之 Dockerfile/index.html">
-<meta property="og:site_name" content="Ryan Li God">
-<meta property="og:description" content="Dockerfile 介绍 Dockerfile 是由一系列命令和参数构成的脚本，这些命令应用于基础镜像并最终创建一个新的镜像。它们简化了从头到尾的流程并极大的简化了部署工作。Dockerfile 从 FROM 命令开始，紧接着跟随者各种方法，命令和参数。其产出为一个新的可以用于创建容器的镜像。  Dockerfile 语法 Dockerfile语法由两部分构成，注释 和 命令 + 参数 ： 1">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-13T02:09:02.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Docker 之 Dockerfile">
-<meta name="twitter:description" content="Dockerfile 介绍 Dockerfile 是由一系列命令和参数构成的脚本，这些命令应用于基础镜像并最终创建一个新的镜像。它们简化了从头到尾的流程并极大的简化了部署工作。Dockerfile 从 FROM 命令开始，紧接着跟随者各种方法，命令和参数。其产出为一个新的可以用于创建容器的镜像。  Dockerfile 语法 Dockerfile语法由两部分构成，注释 和 命令 + 参数 ： 1">
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.ico?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.ico?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/apple-touch-icon.ico?v=6.5.0" color="#222">
+
+
+
+
+
+
 
 
 
@@ -99,32 +85,56 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
+    version: '6.5.0',
+    sidebar: {"position":"right","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
     tabs: true,
     motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
     algolia: {
       applicationID: '',
       apiKey: '',
       indexName: '',
       hits: {"per_page":10},
-      labels: {"input_placeholder":"搜索...","hits_empty":"没有找到任何搜索结果: ${query}","hits_stats":"找到 ${hits} 条结果（用时 ${time} ms）"}
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
 
 
-
-  <link rel="canonical" href="https://ryanligod.github.io/2018/11/09/2018-11-09 Docker 之 Dockerfile/"/>
-
+  
 
 
 
+
+  <meta name="description" content="Dockerfile 介绍Dockerfile 是由一系列命令和参数构成的脚本，这些命令应用于基础镜像并最终创建一个新的镜像。它们简化了从头到尾的流程并极大的简化了部署工作。Dockerfile 从 FROM 命令开始，紧接着跟随者各种方法，命令和参数。其产出为一个新的可以用于创建容器的镜像。 Dockerfile 语法Dockerfile语法由两部分构成，注释 和 命令 + 参数 ： 12# L">
+<meta name="keywords" content="Docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker 之 Dockerfile">
+<meta property="og:url" content="https://ryanligod.github.io/2018/11/09/2018-11-09 Docker 之 Dockerfile/index.html">
+<meta property="og:site_name" content="Ryan Li God">
+<meta property="og:description" content="Dockerfile 介绍Dockerfile 是由一系列命令和参数构成的脚本，这些命令应用于基础镜像并最终创建一个新的镜像。它们简化了从头到尾的流程并极大的简化了部署工作。Dockerfile 从 FROM 命令开始，紧接着跟随者各种方法，命令和参数。其产出为一个新的可以用于创建容器的镜像。 Dockerfile 语法Dockerfile语法由两部分构成，注释 和 命令 + 参数 ： 12# L">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-11-13T02:09:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Docker 之 Dockerfile">
+<meta name="twitter:description" content="Dockerfile 介绍Dockerfile 是由一系列命令和参数构成的脚本，这些命令应用于基础镜像并最终创建一个新的镜像。它们简化了从头到尾的流程并极大的简化了部署工作。Dockerfile 从 FROM 命令开始，紧接着跟随者各种方法，命令和参数。其产出为一个新的可以用于创建容器的镜像。 Dockerfile 语法Dockerfile语法由两部分构成，注释 和 命令 + 参数 ： 12# L">
+
+
+
+
+
+
+  <link rel="canonical" href="https://ryanligod.github.io/2018/11/09/2018-11-09 Docker 之 Dockerfile/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
 
   <title>Docker 之 Dockerfile | Ryan Li God</title>
   
@@ -133,50 +143,72 @@
 
 
 
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?078c1e1ad8b8dcf549f26b4ebc6eb18b";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
 
 
 
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
 
   
   
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">Ryan Li God</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
+    
       
-        <h1 class="site-subtitle" itemprop="description"></h1>
+        <h1 class="site-subtitle" itemprop="description">Hello World!</h1>
       
+    
   </div>
 
   <div class="site-nav-toggle">
-    <button>
+    <button aria-label="切换导航栏">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -184,55 +216,97 @@
   </div>
 </div>
 
-<nav class="site-nav">
-  
 
+
+<nav class="site-nav">
   
     <ul id="menu" class="menu">
       
         
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
       
+    
+
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
         
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
       
+    
+
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">31</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">9</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">40</span></a>
+
+  </li>
 
       
+      
     </ul>
+  
+
+  
+    
+
   
 
   
@@ -240,12 +314,20 @@
 
 
 
- </div>
+  
+
+
+
+</div>
     </header>
+
+    
+
 
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
+          
           <div id="content" class="content">
             
 
@@ -258,20 +340,22 @@
   
   
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://ryanligod.github.io/2018/11/09/2018-11-09 Docker 之 Dockerfile/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ryan Li">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpeg">
+      <meta itemprop="description" content="Hello World.">
+      <meta itemprop="image" content="/images/avatar.jpeg">
     </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Ryan Li God">
     </span>
 
@@ -280,11 +364,19 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Docker 之 Dockerfile</h2>
+          <h2 class="post-title" itemprop="name headline">Docker 之 Dockerfile
+              
+            
+          </h2>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -292,18 +384,35 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-09T18:19:21+08:00">
-                2018-11-09
-              </time>
+
+              
+                
+              
+
+              <time title="创建时间：2018-11-09 18:19:21" itemprop="dateCreated datePublished" datetime="2018-11-09T18:19:21+08:00">2018-11-09</time>
             
 
             
+              
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-11-13 10:09:02" itemprop="dateModified" datetime="2018-11-13T10:09:02+08:00">2018-11-13</time>
+              
             
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -314,11 +423,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Docker/" itemprop="url" rel="index">
-                    <span itemprop="name">Docker</span>
-                  </a>
-                </span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Docker/" itemprop="url" rel="index"><span itemprop="name">Docker</span></a></span>
 
                 
                 
@@ -338,7 +443,7 @@
                  <i class="fa fa-eye"></i>
                </span>
                
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
+                 <span class="post-meta-item-text">阅读次数：</span>
                
                  <span class="leancloud-visitors-count"></span>
              </span>
@@ -363,24 +468,18 @@
       
 
       
-        <h1 id="dockerfile-介绍"><a class="markdownIt-Anchor" href="#dockerfile-介绍"></a> Dockerfile 介绍</h1>
-<p>Dockerfile 是由一系列命令和参数构成的脚本，这些命令应用于基础镜像并最终创建一个新的镜像。它们简化了从头到尾的流程并极大的简化了部署工作。Dockerfile 从 FROM 命令开始，紧接着跟随者各种方法，命令和参数。其产出为一个新的可以用于创建容器的镜像。</p>
-<h1 id="dockerfile-语法"><a class="markdownIt-Anchor" href="#dockerfile-语法"></a> Dockerfile 语法</h1>
-<p>Dockerfile语法由两部分构成，<code>注释</code> 和 <code>命令 + 参数</code> ：</p>
+        <h1 id="Dockerfile-介绍"><a href="#Dockerfile-介绍" class="headerlink" title="Dockerfile 介绍"></a>Dockerfile 介绍</h1><p>Dockerfile 是由一系列命令和参数构成的脚本，这些命令应用于基础镜像并最终创建一个新的镜像。它们简化了从头到尾的流程并极大的简化了部署工作。Dockerfile 从 FROM 命令开始，紧接着跟随者各种方法，命令和参数。其产出为一个新的可以用于创建容器的镜像。</p>
+<h1 id="Dockerfile-语法"><a href="#Dockerfile-语法" class="headerlink" title="Dockerfile 语法"></a>Dockerfile 语法</h1><p>Dockerfile语法由两部分构成，<code>注释</code> 和 <code>命令 + 参数</code> ：</p>
 <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Line blocks used for commenting</span></span><br><span class="line">command argument argument ..</span><br></pre></td></tr></table></figure>
 <p>一个简单的例子：</p>
 <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Print "Hello docker!"</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"Hello docker!"</span></span></span><br></pre></td></tr></table></figure>
 <a id="more"></a>
-<h3 id="dockerfile-命令"><a class="markdownIt-Anchor" href="#dockerfile-命令"></a> Dockerfile 命令</h3>
-<p>Dockerfile 有十几条命令可用于构建镜像，下文将简略介绍这些命令。</p>
-<h3 id="from"><a class="markdownIt-Anchor" href="#from"></a> <code>FROM</code></h3>
-<p><code>FROM</code> 命令可能是最重要的 Dockerfile 命令。该命令定义了使用哪个基础镜像启动构建流程。基础镜像可以为任意镜像。如果基础镜像没有被发现，Docker 将试图从 Docker image index 来查找该镜像。<code>FROM</code> 命令必须是Dockerfile 的首个命令。</p>
+<h3 id="Dockerfile-命令"><a href="#Dockerfile-命令" class="headerlink" title="Dockerfile 命令"></a>Dockerfile 命令</h3><p>Dockerfile 有十几条命令可用于构建镜像，下文将简略介绍这些命令。</p>
+<h3 id="FROM"><a href="#FROM" class="headerlink" title="FROM"></a><code>FROM</code></h3><p><code>FROM</code> 命令可能是最重要的 Dockerfile 命令。该命令定义了使用哪个基础镜像启动构建流程。基础镜像可以为任意镜像。如果基础镜像没有被发现，Docker 将试图从 Docker image index 来查找该镜像。<code>FROM</code> 命令必须是Dockerfile 的首个命令。</p>
 <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Usage: FROM [image name]</span></span><br><span class="line"><span class="keyword">FROM</span> nginx:alpine</span><br></pre></td></tr></table></figure>
-<h3 id="env"><a class="markdownIt-Anchor" href="#env"></a> <code>env</code></h3>
-<p><code>ENV</code> 命令用于设置环境变量。这些变量以 <code>key=value</code> 的形式存在，并可以在容器内被脚本或者程序调用。这个机制给在容器中运行应用带来了极大的便利。</p>
+<h3 id="env"><a href="#env" class="headerlink" title="env"></a><code>env</code></h3><p><code>ENV</code> 命令用于设置环境变量。这些变量以 <code>key=value</code> 的形式存在，并可以在容器内被脚本或者程序调用。这个机制给在容器中运行应用带来了极大的便利。</p>
  <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Usage: ENV key value</span></span><br><span class="line"><span class="keyword">ENV</span> SERVER_WORKS <span class="number">4</span></span><br></pre></td></tr></table></figure>
-<h3 id="add"><a class="markdownIt-Anchor" href="#add"></a> <code>ADD</code></h3>
-<p><code>ADD</code> 命令有两个参数，源和目标。它的基本作用是从源系统的文件系统上复制文件到目标容器的文件系统。如果源是一个 URL，那该 URL 的内容将被下载并复制到容器中。</p>
+<h3 id="ADD"><a href="#ADD" class="headerlink" title="ADD"></a><code>ADD</code></h3><p><code>ADD</code> 命令有两个参数，源和目标。它的基本作用是从源系统的文件系统上复制文件到目标容器的文件系统。如果源是一个 URL，那该 URL 的内容将被下载并复制到容器中。</p>
 <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Usage: ADD [source directory or URL] [destination directory]</span></span><br><span class="line"><span class="keyword">ADD</span><span class="bash"> /my_app_folder /destination_folder</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <ol>
@@ -390,48 +489,44 @@
 <li>如果源文件是个归档文件（压缩文件），则 Docker 会自动帮解压。</li>
 </ol>
 </blockquote>
-<h3 id="copy"><a class="markdownIt-Anchor" href="#copy"></a> <code>copy</code></h3>
-<p><code>COPY</code> 指令和 <code>ADD</code> 指令功能和使用方式类似。只是 <code>COPY</code> 指令不会做自动解压工作。</p>
-<h3 id="run"><a class="markdownIt-Anchor" href="#run"></a> <code>RUN</code></h3>
-<p><code>RUN</code> 命令是 Dockerfile 执行命令的核心部分。它接受命令作为参数并用于创建镜像。不像 <code>CMD</code> 命令，<code>RUN</code> 命令用于创建镜像（在之前 commit 的层之上形成新的层）。</p>
+<h3 id="copy"><a href="#copy" class="headerlink" title="copy"></a><code>copy</code></h3><p><code>COPY</code> 指令和 <code>ADD</code> 指令功能和使用方式类似。只是 <code>COPY</code> 指令不会做自动解压工作。</p>
+<h3 id="RUN"><a href="#RUN" class="headerlink" title="RUN"></a><code>RUN</code></h3><p><code>RUN</code> 命令是 Dockerfile 执行命令的核心部分。它接受命令作为参数并用于创建镜像。不像 <code>CMD</code> 命令，<code>RUN</code> 命令用于创建镜像（在之前 commit 的层之上形成新的层）。</p>
 <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Usage: RUN [command]</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> npm install</span></span><br></pre></td></tr></table></figure>
-<h3 id="cmd"><a class="markdownIt-Anchor" href="#cmd"></a> <code>CMD</code></h3>
-<p>和 <code>RUN</code> 命令相似，<code>CMD</code> 可以用于执行特定的命令。和 <code>RUN</code> 不同的是，这些命令不是在镜像构建的过程中执行的，而是在<strong>用镜像构建容器后</strong>被调用。只能有一个 <code>CMD</code> 指令，如果有多个 <code>CMD</code> 指令则以最后一个为准。</p>
+<h3 id="CMD"><a href="#CMD" class="headerlink" title="CMD"></a><code>CMD</code></h3><p>和 <code>RUN</code> 命令相似，<code>CMD</code> 可以用于执行特定的命令。和 <code>RUN</code> 不同的是，这些命令不是在镜像构建的过程中执行的，而是在<strong>用镜像构建容器后</strong>被调用。只能有一个 <code>CMD</code> 指令，如果有多个 <code>CMD</code> 指令则以最后一个为准。</p>
 <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Usage 1: CMD application "argument", "argument", ..</span></span><br><span class="line"><span class="keyword">CMD</span><span class="bash"> <span class="string">"echo"</span> <span class="string">"Hello docker!"</span></span></span><br></pre></td></tr></table></figure>
-<h3 id="entrypoint"><a class="markdownIt-Anchor" href="#entrypoint"></a> <code>ENTRYPOINT</code></h3>
-<p>配置容器启动后执行的命令，只有在执行 <code>docker run</code> 命令启动容器时才会起作用，并且不可被 <code>docker run</code> 提供的参数覆盖。每个 Dockerfile 中只能有一个  <code>ENTRYPOINT</code> ，当指定多个时，只有最后一个起效。<code>ENTRYPOINT</code> 帮助你配置一个容器使之可执行化，如果你结合 <code>CMD</code> 命令和 <code>ENTRYPOINT</code> 命令，你可以从 <code>CMD</code> 命令中移除 “application” 而仅仅保留参数，参数将传递给 <code>ENTRYPOINT</code> 命令。</p>
+<h3 id="ENTRYPOINT"><a href="#ENTRYPOINT" class="headerlink" title="ENTRYPOINT"></a><code>ENTRYPOINT</code></h3><p>配置容器启动后执行的命令，只有在执行 <code>docker run</code> 命令启动容器时才会起作用，并且不可被 <code>docker run</code> 提供的参数覆盖。每个 Dockerfile 中只能有一个  <code>ENTRYPOINT</code> ，当指定多个时，只有最后一个起效。<code>ENTRYPOINT</code> 帮助你配置一个容器使之可执行化，如果你结合 <code>CMD</code> 命令和 <code>ENTRYPOINT</code> 命令，你可以从 <code>CMD</code> 命令中移除 “application” 而仅仅保留参数，参数将传递给 <code>ENTRYPOINT</code> 命令。</p>
 <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Usage: ENTRYPOINT application "argument", "argument", ..</span></span><br><span class="line"><span class="comment"># Remember: arguments are optional. They can be provided by CMD</span></span><br><span class="line"><span class="comment"># or during the creation of a container.</span></span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="bash"> <span class="built_in">echo</span></span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash"><span class="comment"># Usage example with CMD:</span></span></span><br><span class="line"><span class="bash"><span class="comment"># Arguments set with CMD can be overridden during *run*</span></span></span><br><span class="line"><span class="bash">CMD <span class="string">"Hello docker!"</span></span></span><br><span class="line"><span class="bash">ENTRYPOINT <span class="built_in">echo</span></span></span><br></pre></td></tr></table></figure>
-<h3 id="expose"><a class="markdownIt-Anchor" href="#expose"></a> <code>EXPOSE</code></h3>
-<p><code>EXPOSE</code> 用来指定端口，使容器内的应用可以通过端口和外界交互。</p>
+<h3 id="EXPOSE"><a href="#EXPOSE" class="headerlink" title="EXPOSE"></a><code>EXPOSE</code></h3><p><code>EXPOSE</code> 用来指定端口，使容器内的应用可以通过端口和外界交互。</p>
 <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Usage: EXPOSE [port]</span></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">8080</span></span><br></pre></td></tr></table></figure>
-<h3 id="user"><a class="markdownIt-Anchor" href="#user"></a> <code>USER</code></h3>
-<p><code>USER</code> 命令用于设置运行容器的 UID。</p>
+<h3 id="USER"><a href="#USER" class="headerlink" title="USER"></a><code>USER</code></h3><p> <code>USER</code> 命令用于设置运行容器的 UID。</p>
 <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Usage: USER [UID]</span></span><br><span class="line"><span class="keyword">USER</span> <span class="number">751</span></span><br></pre></td></tr></table></figure>
-<h3 id="volume"><a class="markdownIt-Anchor" href="#volume"></a> <code>VOLUME</code></h3>
-<p><code>VOLUME</code> 命令用于让你的容器访问宿主机上的目录。</p>
+<h3 id="VOLUME"><a href="#VOLUME" class="headerlink" title="VOLUME"></a><code>VOLUME</code></h3><p><code>VOLUME</code> 命令用于让你的容器访问宿主机上的目录。</p>
 <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Usage: VOLUME ["/dir_1", "/dir_2" ..]</span></span><br><span class="line"><span class="keyword">VOLUME</span><span class="bash"> [<span class="string">"/my_files"</span>]</span></span><br></pre></td></tr></table></figure>
-<h3 id="workdir"><a class="markdownIt-Anchor" href="#workdir"></a> <code>WORKDIR</code></h3>
-<p><code>WORKDIR</code> 命令用于设置 <code>CMD</code> 指明的命令的运行目录。</p>
+<h3 id="WORKDIR"><a href="#WORKDIR" class="headerlink" title="WORKDIR"></a><code>WORKDIR</code></h3><p><code>WORKDIR</code> 命令用于设置 <code>CMD</code> 指明的命令的运行目录。</p>
 <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Usage: WORKDIR /path</span></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> ~/</span></span><br></pre></td></tr></table></figure>
-<h1 id="完整-dockerfile-示例"><a class="markdownIt-Anchor" href="#完整-dockerfile-示例"></a> 完整 Dockerfile 示例</h1>
-<p>这是一个构建 Node.js 应用的 Dockerfile：</p>
+<h1 id="完整-Dockerfile-示例"><a href="#完整-Dockerfile-示例" class="headerlink" title="完整 Dockerfile 示例"></a>完整 Dockerfile 示例</h1><p>这是一个构建 Node.js 应用的 Dockerfile：</p>
 <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> node:<span class="number">8.9</span>-alpine</span><br><span class="line"><span class="keyword">ENV</span> NODE_ENV production</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> /usr/src/app</span></span><br><span class="line"><span class="bash">COPY [<span class="string">"package.json"</span>, <span class="string">"package-lock.json*"</span>, <span class="string">"npm-shrinkwrap.json*"</span>, <span class="string">"./"</span>]</span></span><br><span class="line"><span class="bash">RUN npm install --production --silent &amp;&amp; mv node_modules ../</span></span><br><span class="line"><span class="bash">COPY . .</span></span><br><span class="line"><span class="bash">EXPOSE 3000</span></span><br><span class="line"><span class="bash">CMD npm start</span></span><br></pre></td></tr></table></figure>
 <p>这是一个构建 Python 应用的 Dockerfile：</p>
 <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Python support can be specified down to the minor or micro version</span></span><br><span class="line"><span class="comment"># (e.g. 3.6 or 3.6.3).</span></span><br><span class="line"><span class="comment"># OS Support also exists for jessie &amp; stretch (slim and full).</span></span><br><span class="line"><span class="comment"># See https://hub.docker.com/r/library/python/ for all supported Python</span></span><br><span class="line"><span class="comment"># tags from Docker Hub.</span></span><br><span class="line"><span class="keyword">FROM</span> python:alpine</span><br><span class="line"></span><br><span class="line"><span class="comment"># If you prefer miniconda:</span></span><br><span class="line"><span class="comment">#FROM continuumio/miniconda3</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">LABEL</span><span class="bash"> Name=hnsw_test Version=0.0.1</span></span><br><span class="line"><span class="bash">EXPOSE 3000</span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash">WORKDIR /app</span></span><br><span class="line"><span class="bash">ADD . /app</span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash"><span class="comment"># Using pip:</span></span></span><br><span class="line"><span class="bash">RUN python3 -m pip install -r requirements.txt</span></span><br><span class="line"><span class="bash">CMD [<span class="string">"python3"</span>, <span class="string">"-m"</span>, <span class="string">"hnsw_test"</span>]</span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash"><span class="comment"># Using pipenv:</span></span></span><br><span class="line"><span class="bash"><span class="comment">#RUN python3 -m pip install pipenv</span></span></span><br><span class="line"><span class="bash"><span class="comment">#RUN pipenv install --ignore-pipfile</span></span></span><br><span class="line"><span class="bash"><span class="comment">#CMD ["pipenv", "run", "python3", "-m", "hnsw_test"]</span></span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash"><span class="comment"># Using miniconda (make sure to replace 'myenv' w/ your environment name):</span></span></span><br><span class="line"><span class="bash"><span class="comment">#RUN conda env create -f environment.yml</span></span></span><br><span class="line"><span class="bash"><span class="comment">#CMD /bin/bash -c "source activate myenv &amp;&amp; python3 -m hnsw_test"</span></span></span><br></pre></td></tr></table></figure>
-<h1 id="如何使用-dockerfile"><a class="markdownIt-Anchor" href="#如何使用-dockerfile"></a> 如何使用 Dockerfile</h1>
-<p>在 Dockerfile 文件的路径下运行（注意 <code>.</code> 不能忘记）：</p>
+<h1 id="如何使用-Dockerfile"><a href="#如何使用-Dockerfile" class="headerlink" title="如何使用 Dockerfile"></a>如何使用 Dockerfile</h1><p>在 Dockerfile 文件的路径下运行（注意 <code>.</code> 不能忘记）：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Build an image using the Dockerfile at current location</span></span><br><span class="line"><span class="comment"># Example: sudo docker build -t [name] .</span></span><br><span class="line">$ docker build -t docker-vue-alpine .</span><br></pre></td></tr></table></figure>
 <p>运行所构建的镜像：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -p 88:80 -d docker-vue-alpine</span><br></pre></td></tr></table></figure>
 
       
     </div>
+
+    
+
     
     
     
 
     
 
+    
+       
+    
     
 
     
@@ -481,17 +576,10 @@
   </article>
 
 
-
-    <div class="post-spread">
-      
-    </div>
   </div>
 
 
           </div>
-          
-
-
           
 
   
@@ -534,63 +622,147 @@
 
       <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image"
-                src="/uploads/avatar.jpeg"
-                alt="Ryan Li" />
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpeg" alt="Ryan Li">
             
               <p class="site-author-name" itemprop="name">Ryan Li</p>
-              <p class="site-description motion-element" itemprop="description"></p>
+              <p class="site-description motion-element" itemprop="description">Hello World.</p>
           </div>
 
-          <nav class="site-state motion-element">
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">40</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
 
-            
-              <div class="site-state-item site-state-posts">
               
-                <a href="/archives/">
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
               
-                  <span class="site-state-item-count">40</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
 
-            
               
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
               
-              <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
-                  <span class="site-state-item-count">9</span>
-                  <span class="site-state-item-name">分类</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">31</span>
-                  <span class="site-state-item-name">标签</span>
-                </a>
-              </div>
-            
-
-          </nav>
-
+            </nav>
           
 
           
 
           
+
           
 
           
           
 
+          
+            
+          
           
 
         </div>
@@ -606,7 +778,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#dockerfile-介绍"><span class="nav-number">1.</span> <span class="nav-text"> Dockerfile 介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dockerfile-语法"><span class="nav-number">2.</span> <span class="nav-text"> Dockerfile 语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dockerfile-命令"><span class="nav-number">2.0.1.</span> <span class="nav-text"> Dockerfile 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#from"><span class="nav-number">2.0.2.</span> <span class="nav-text"> FROM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#env"><span class="nav-number">2.0.3.</span> <span class="nav-text"> env</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#add"><span class="nav-number">2.0.4.</span> <span class="nav-text"> ADD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#copy"><span class="nav-number">2.0.5.</span> <span class="nav-text"> copy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#run"><span class="nav-number">2.0.6.</span> <span class="nav-text"> RUN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cmd"><span class="nav-number">2.0.7.</span> <span class="nav-text"> CMD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#entrypoint"><span class="nav-number">2.0.8.</span> <span class="nav-text"> ENTRYPOINT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#expose"><span class="nav-number">2.0.9.</span> <span class="nav-text"> EXPOSE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#user"><span class="nav-number">2.0.10.</span> <span class="nav-text"> USER</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#volume"><span class="nav-number">2.0.11.</span> <span class="nav-text"> VOLUME</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#workdir"><span class="nav-number">2.0.12.</span> <span class="nav-text"> WORKDIR</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#完整-dockerfile-示例"><span class="nav-number">3.</span> <span class="nav-text"> 完整 Dockerfile 示例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何使用-dockerfile"><span class="nav-number">4.</span> <span class="nav-text"> 如何使用 Dockerfile</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Dockerfile-介绍"><span class="nav-number">1.</span> <span class="nav-text">Dockerfile 介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dockerfile-语法"><span class="nav-number">2.</span> <span class="nav-text">Dockerfile 语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Dockerfile-命令"><span class="nav-number">2.0.1.</span> <span class="nav-text">Dockerfile 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FROM"><span class="nav-number">2.0.2.</span> <span class="nav-text">FROM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#env"><span class="nav-number">2.0.3.</span> <span class="nav-text">env</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ADD"><span class="nav-number">2.0.4.</span> <span class="nav-text">ADD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#copy"><span class="nav-number">2.0.5.</span> <span class="nav-text">copy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RUN"><span class="nav-number">2.0.6.</span> <span class="nav-text">RUN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CMD"><span class="nav-number">2.0.7.</span> <span class="nav-text">CMD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ENTRYPOINT"><span class="nav-number">2.0.8.</span> <span class="nav-text">ENTRYPOINT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EXPOSE"><span class="nav-number">2.0.9.</span> <span class="nav-text">EXPOSE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#USER"><span class="nav-number">2.0.10.</span> <span class="nav-text">USER</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VOLUME"><span class="nav-number">2.0.11.</span> <span class="nav-text">VOLUME</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WORKDIR"><span class="nav-number">2.0.12.</span> <span class="nav-text">WORKDIR</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#完整-Dockerfile-示例"><span class="nav-number">3.</span> <span class="nav-text">完整 Dockerfile 示例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何使用-Dockerfile"><span class="nav-number">4.</span> <span class="nav-text">如何使用 Dockerfile</span></a></li></div>
             
 
           </div>
@@ -627,10 +799,12 @@
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
-  <span class="with-love">
+  <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Ryan Li</span>
+
+  
 
   
 </div>
@@ -651,6 +825,7 @@
 
 
 
+
         
       </div>
     </footer>
@@ -663,7 +838,10 @@
     
 
     
+	
+    
 
+    
   </div>
 
   
@@ -682,7 +860,11 @@
 
 
 
-  
+
+
+
+
+
 
 
 
@@ -702,16 +884,6 @@
 
   
   
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
     <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   
 
@@ -720,18 +892,13 @@
     <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
   
 
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
 
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
 
 
 
@@ -739,40 +906,27 @@
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
 
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
 
 
 
   
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
 
 
 
   
     <script type="text/javascript">
+      window.livereOptions = {
+        refer: '2018/11/09/2018-11-09 Docker 之 Dockerfile/'
+      };
       (function(d, s) {
         var j, e = d.getElementsByTagName(s)[0];
         if (typeof LivereTower === 'function') { return; }
@@ -793,8 +947,6 @@
 
 
 
-
-
   
 
 
@@ -804,107 +956,61 @@
   
 
   
-  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
-  <script>AV.initialize("L71FAGlYbGy360uJzNBnyuLd-gzGzoHsz", "EkXnFcBGbM1Rt0hfAcUtDRUo");</script>
   <script>
-    function showTime(Counter) {
-      var query = new AV.Query(Counter);
-      var entries = [];
-      var $visitors = $(".leancloud_visitors");
-
-      $visitors.each(function () {
-        entries.push( $(this).attr("id").trim() );
-      });
-
-      query.containedIn('url', entries);
-      query.find()
-        .done(function (results) {
-          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
-
-          if (results.length === 0) {
-            $visitors.find(COUNT_CONTAINER_REF).text(0);
-            return;
-          }
-
-          for (var i = 0; i < results.length; i++) {
-            var item = results[i];
-            var url = item.get('url');
-            var time = item.get('time');
-            var element = document.getElementById(url);
-
-            $(element).find(COUNT_CONTAINER_REF).text(time);
-          }
-          for(var i = 0; i < entries.length; i++) {
-            var url = entries[i];
-            var element = document.getElementById(url);
-            var countSpan = $(element).find(COUNT_CONTAINER_REF);
-            if( countSpan.text() == '') {
-              countSpan.text(0);
-            }
-          }
-        })
-        .fail(function (object, error) {
-          console.log("Error: " + error.code + " " + error.message);
-        });
-    }
-
+    
     function addCount(Counter) {
       var $visitors = $(".leancloud_visitors");
       var url = $visitors.attr('id').trim();
       var title = $visitors.attr('data-flag-title').trim();
-      var query = new AV.Query(Counter);
 
-      query.equalTo("url", url);
-      query.find({
-        success: function(results) {
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
           if (results.length > 0) {
             var counter = results[0];
-            counter.fetchWhenSave(true);
-            counter.increment("time");
-            counter.save(null, {
-              success: function(counter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.get('time'));
-              },
-              error: function(counter, error) {
-                console.log('Failed to save Visitor num, with error message: ' + error.message);
-              }
-            });
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
           } else {
-            var newcounter = new Counter();
-            /* Set ACL */
-            var acl = new AV.ACL();
-            acl.setPublicReadAccess(true);
-            acl.setPublicWriteAccess(true);
-            newcounter.setACL(acl);
-            /* End Set ACL */
-            newcounter.set("title", title);
-            newcounter.set("url", url);
-            newcounter.set("time", 1);
-            newcounter.save(null, {
-              success: function(newcounter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-              },
-              error: function(newcounter, error) {
-                console.log('Failed to create');
-              }
-            });
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+            
           }
-        },
-        error: function(error) {
-          console.log('Error:' + error.code + " " + error.message);
-        }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
       });
     }
+    
 
     $(function() {
-      var Counter = AV.Object.extend("Counter");
-      if ($('.leancloud_visitors').length == 1) {
-        addCount(Counter);
-      } else if ($('.post-title-link').length > 1) {
-        showTime(Counter);
-      }
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "L71FAGlYbGy360uJzNBnyuLd-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "L71FAGlYbGy360uJzNBnyuLd-gzGzoHsz",
+                'X-LC-Key': "EkXnFcBGbM1Rt0hfAcUtDRUo",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
     });
   </script>
 
@@ -915,6 +1021,23 @@
   
 
   
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
   
 
   

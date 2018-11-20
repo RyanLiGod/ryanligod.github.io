@@ -2,26 +2,24 @@
 
 
 
+
+
+
+
+
+
+
+
+
   
 
 
-<html class="theme-next mist use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" rel="stylesheet">
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
@@ -34,41 +32,8 @@
 
 
 
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="大数据,Hadoop,Spark," />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -79,18 +44,39 @@
 
 
 
-<meta name="description" content="安装hadoop包   下载好hadoop-2.4.1.tar.gz，使用SFTP工具上传到CentOS的/usr/local目录下   将hadoop包进行解压缩： tar -zxvf hadoop-2.4.1.tar.gz   对hadoop目录进行重命名： mv hadoop-2.4.1 hadoop   配置hadoop相关环境变量 vi .bashrc export HADOOP_HO">
-<meta name="keywords" content="大数据,Hadoop,Spark">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Spark学习笔记（二）：Hadoop 2.4.1集群搭建">
-<meta property="og:url" content="https://ryanligod.github.io/2018/07/31/2018-07-31 Hadoop2-4-1集群搭建/index.html">
-<meta property="og:site_name" content="Ryan Li God">
-<meta property="og:description" content="安装hadoop包   下载好hadoop-2.4.1.tar.gz，使用SFTP工具上传到CentOS的/usr/local目录下   将hadoop包进行解压缩： tar -zxvf hadoop-2.4.1.tar.gz   对hadoop目录进行重命名： mv hadoop-2.4.1 hadoop   配置hadoop相关环境变量 vi .bashrc export HADOOP_HO">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-23T09:59:16.220Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spark学习笔记（二）：Hadoop 2.4.1集群搭建">
-<meta name="twitter:description" content="安装hadoop包   下载好hadoop-2.4.1.tar.gz，使用SFTP工具上传到CentOS的/usr/local目录下   将hadoop包进行解压缩： tar -zxvf hadoop-2.4.1.tar.gz   对hadoop目录进行重命名： mv hadoop-2.4.1 hadoop   配置hadoop相关环境变量 vi .bashrc export HADOOP_HO">
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.ico?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.ico?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/apple-touch-icon.ico?v=6.5.0" color="#222">
+
+
+
+
+
+
 
 
 
@@ -99,32 +85,56 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
+    version: '6.5.0',
+    sidebar: {"position":"right","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
     tabs: true,
     motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
     algolia: {
       applicationID: '',
       apiKey: '',
       indexName: '',
       hits: {"per_page":10},
-      labels: {"input_placeholder":"搜索...","hits_empty":"没有找到任何搜索结果: ${query}","hits_stats":"找到 ${hits} 条结果（用时 ${time} ms）"}
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
 
 
-
-  <link rel="canonical" href="https://ryanligod.github.io/2018/07/31/2018-07-31 Hadoop2-4-1集群搭建/"/>
-
+  
 
 
 
+
+  <meta name="description" content="安装hadoop包 下载好hadoop-2.4.1.tar.gz，使用SFTP工具上传到CentOS的/usr/local目录下 将hadoop包进行解压缩： tar -zxvf hadoop-2.4.1.tar.gz 对hadoop目录进行重命名： mv hadoop-2.4.1 hadoop 配置hadoop相关环境变量 vi .bashrc export HADOOP_HOME=/usr/l">
+<meta name="keywords" content="大数据,Hadoop,Spark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spark学习笔记（二）：Hadoop 2.4.1集群搭建">
+<meta property="og:url" content="https://ryanligod.github.io/2018/07/31/2018-07-31 Hadoop2-4-1集群搭建/index.html">
+<meta property="og:site_name" content="Ryan Li God">
+<meta property="og:description" content="安装hadoop包 下载好hadoop-2.4.1.tar.gz，使用SFTP工具上传到CentOS的/usr/local目录下 将hadoop包进行解压缩： tar -zxvf hadoop-2.4.1.tar.gz 对hadoop目录进行重命名： mv hadoop-2.4.1 hadoop 配置hadoop相关环境变量 vi .bashrc export HADOOP_HOME=/usr/l">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-08-23T09:59:16.220Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spark学习笔记（二）：Hadoop 2.4.1集群搭建">
+<meta name="twitter:description" content="安装hadoop包 下载好hadoop-2.4.1.tar.gz，使用SFTP工具上传到CentOS的/usr/local目录下 将hadoop包进行解压缩： tar -zxvf hadoop-2.4.1.tar.gz 对hadoop目录进行重命名： mv hadoop-2.4.1 hadoop 配置hadoop相关环境变量 vi .bashrc export HADOOP_HOME=/usr/l">
+
+
+
+
+
+
+  <link rel="canonical" href="https://ryanligod.github.io/2018/07/31/2018-07-31 Hadoop2-4-1集群搭建/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
 
   <title>Spark学习笔记（二）：Hadoop 2.4.1集群搭建 | Ryan Li God</title>
   
@@ -133,50 +143,72 @@
 
 
 
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?078c1e1ad8b8dcf549f26b4ebc6eb18b";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
 
 
 
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
 
   
   
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">Ryan Li God</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
+    
       
-        <h1 class="site-subtitle" itemprop="description"></h1>
+        <h1 class="site-subtitle" itemprop="description">Hello World!</h1>
       
+    
   </div>
 
   <div class="site-nav-toggle">
-    <button>
+    <button aria-label="切换导航栏">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -184,55 +216,97 @@
   </div>
 </div>
 
-<nav class="site-nav">
-  
 
+
+<nav class="site-nav">
   
     <ul id="menu" class="menu">
       
         
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
       
+    
+
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
         
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
       
+    
+
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">31</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">9</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">40</span></a>
+
+  </li>
 
       
+      
     </ul>
+  
+
+  
+    
+
   
 
   
@@ -240,12 +314,20 @@
 
 
 
- </div>
+  
+
+
+
+</div>
     </header>
+
+    
+
 
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
+          
           <div id="content" class="content">
             
 
@@ -258,20 +340,22 @@
   
   
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://ryanligod.github.io/2018/07/31/2018-07-31 Hadoop2-4-1集群搭建/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ryan Li">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpeg">
+      <meta itemprop="description" content="Hello World.">
+      <meta itemprop="image" content="/images/avatar.jpeg">
     </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Ryan Li God">
     </span>
 
@@ -280,11 +364,19 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Spark学习笔记（二）：Hadoop 2.4.1集群搭建</h2>
+          <h2 class="post-title" itemprop="name headline">Spark学习笔记（二）：Hadoop 2.4.1集群搭建
+              
+            
+          </h2>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -292,18 +384,35 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-31T13:32:07+08:00">
-                2018-07-31
-              </time>
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-31 13:32:07" itemprop="dateCreated datePublished" datetime="2018-07-31T13:32:07+08:00">2018-07-31</time>
             
 
             
+              
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-08-23 17:59:16" itemprop="dateModified" datetime="2018-08-23T17:59:16+08:00">2018-08-23</time>
+              
             
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -314,11 +423,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Spark/" itemprop="url" rel="index">
-                    <span itemprop="name">Spark</span>
-                  </a>
-                </span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Spark/" itemprop="url" rel="index"><span itemprop="name">Spark</span></a></span>
 
                 
                 
@@ -338,7 +443,7 @@
                  <i class="fa fa-eye"></i>
                </span>
                
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
+                 <span class="post-meta-item-text">阅读次数：</span>
                
                  <span class="leancloud-visitors-count"></span>
              </span>
@@ -363,37 +468,20 @@
       
 
       
-        <h2 id="安装hadoop包"><a class="markdownIt-Anchor" href="#安装hadoop包"></a> 安装hadoop包</h2>
-<ol>
-<li>
-<p>下载好hadoop-2.4.1.tar.gz，使用SFTP工具上传到CentOS的/usr/local目录下</p>
-</li>
-<li>
-<p>将hadoop包进行解压缩：<br>
-tar -zxvf hadoop-2.4.1.tar.gz</p>
-</li>
-<li>
-<p>对hadoop目录进行重命名：<br>
-mv hadoop-2.4.1 hadoop</p>
-</li>
-<li>
-<p>配置hadoop相关环境变量<br>
-vi .bashrc<br>
-export HADOOP_HOME=/usr/local/hadoop<br>
-export PATH=<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>H</mi><mi>A</mi><mi>D</mi><mi>O</mi><mi>O</mi><msub><mi>P</mi><mi>H</mi></msub><mi>O</mi><mi>M</mi><mi>E</mi><mi mathvariant="normal">/</mi><mi>b</mi><mi>i</mi><mi>n</mi><mo>:</mo></mrow><annotation encoding="application/x-tex">HADOOP_HOME/bin:</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.08125em;">H</span><span class="mord mathit">A</span><span class="mord mathit" style="margin-right:0.02778em;">D</span><span class="mord mathit" style="margin-right:0.02778em;">O</span><span class="mord mathit" style="margin-right:0.02778em;">O</span><span class="mord"><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight" style="margin-right:0.08125em;">H</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span><span class="mord mathit" style="margin-right:0.02778em;">O</span><span class="mord mathit" style="margin-right:0.10903em;">M</span><span class="mord mathit" style="margin-right:0.05764em;">E</span><span class="mord">/</span><span class="mord mathit">b</span><span class="mord mathit">i</span><span class="mord mathit">n</span><span class="mord rule" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span></span></span></span>HADOOP_HOME/sbin</p>
-<p>source .bashrc</p>
+        <h2 id="安装hadoop包"><a href="#安装hadoop包" class="headerlink" title="安装hadoop包"></a>安装hadoop包</h2><ol>
+<li>下载好hadoop-2.4.1.tar.gz，使用SFTP工具上传到CentOS的/usr/local目录下</li>
+<li>将hadoop包进行解压缩：<br> tar -zxvf hadoop-2.4.1.tar.gz</li>
+<li>对hadoop目录进行重命名：<br> mv hadoop-2.4.1 hadoop</li>
+<li><p>配置hadoop相关环境变量<br> vi .bashrc<br> export HADOOP_HOME=/usr/local/hadoop<br> export PATH=$HADOOP_HOME/bin:$HADOOP_HOME/sbin</p>
+<p> source .bashrc</p>
+<a id="more"></a>
 </li>
 </ol>
-<a id="more"></a>
-<h2 id="配置hadoop"><a class="markdownIt-Anchor" href="#配置hadoop"></a> 配置Hadoop</h2>
-<h3 id="修改core-sitexml"><a class="markdownIt-Anchor" href="#修改core-sitexml"></a> 修改core-site.xml</h3>
-<pre><code>&lt;property&gt;
+<h2 id="配置Hadoop"><a href="#配置Hadoop" class="headerlink" title="配置Hadoop"></a>配置Hadoop</h2><h3 id="修改core-site-xml"><a href="#修改core-site-xml" class="headerlink" title="修改core-site.xml"></a>修改core-site.xml</h3><pre><code>&lt;property&gt;
   &lt;name&gt;fs.default.name&lt;/name&gt;
   &lt;value&gt;hdfs://spark1:9000&lt;/value&gt;
 &lt;/property&gt;
-</code></pre>
-<h3 id="修改hdfs-sitexml"><a class="markdownIt-Anchor" href="#修改hdfs-sitexml"></a> 修改hdfs-site.xml</h3>
-<pre><code>&lt;property&gt;
+</code></pre><h3 id="修改hdfs-site-xml"><a href="#修改hdfs-site-xml" class="headerlink" title="修改hdfs-site.xml"></a>修改hdfs-site.xml</h3><pre><code>&lt;property&gt;
   &lt;name&gt;dfs.name.dir&lt;/name&gt;
   &lt;value&gt;/usr/local/data/namenode&lt;/value&gt;
 &lt;/property&gt;
@@ -409,15 +497,11 @@ export PATH=<span class="katex"><span class="katex-mathml"><math><semantics><mro
   &lt;name&gt;dfs.replication&lt;/name&gt;
   &lt;value&gt;3&lt;/value&gt;
 &lt;/property&gt;
-</code></pre>
-<h3 id="修改mapred-sitexml"><a class="markdownIt-Anchor" href="#修改mapred-sitexml"></a> 修改mapred-site.xml</h3>
-<pre><code>&lt;property&gt;
+</code></pre><h3 id="修改mapred-site-xml"><a href="#修改mapred-site-xml" class="headerlink" title="修改mapred-site.xml"></a>修改mapred-site.xml</h3><pre><code>&lt;property&gt;
   &lt;name&gt;mapreduce.framework.name&lt;/name&gt;
   &lt;value&gt;yarn&lt;/value&gt;
 &lt;/property&gt;
-</code></pre>
-<h3 id="修改yarn-sitexml"><a class="markdownIt-Anchor" href="#修改yarn-sitexml"></a> 修改yarn-site.xml</h3>
-<pre><code>&lt;property&gt;
+</code></pre><h3 id="修改yarn-site-xml"><a href="#修改yarn-site-xml" class="headerlink" title="修改yarn-site.xml"></a>修改yarn-site.xml</h3><pre><code>&lt;property&gt;
   &lt;name&gt;yarn.resourcemanager.hostname&lt;/name&gt;
   &lt;value&gt;spark1&lt;/value&gt;
 &lt;/property&gt;
@@ -425,47 +509,38 @@ export PATH=<span class="katex"><span class="katex-mathml"><math><semantics><mro
   &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;
   &lt;value&gt;mapreduce_shuffle&lt;/value&gt;
 &lt;/property&gt;
-</code></pre>
-<h3 id="修改slaves文件"><a class="markdownIt-Anchor" href="#修改slaves文件"></a> 修改slaves文件</h3>
-<pre><code>spark1
+</code></pre><h3 id="修改slaves文件"><a href="#修改slaves文件" class="headerlink" title="修改slaves文件"></a>修改slaves文件</h3><pre><code>spark1
 spark2
 spark3
-</code></pre>
-<h3 id="在另外两台机器上搭建hadoop"><a class="markdownIt-Anchor" href="#在另外两台机器上搭建hadoop"></a> 在另外两台机器上搭建hadoop</h3>
-<ol>
+</code></pre><h3 id="在另外两台机器上搭建hadoop"><a href="#在另外两台机器上搭建hadoop" class="headerlink" title="在另外两台机器上搭建hadoop"></a>在另外两台机器上搭建hadoop</h3><ol>
 <li>使用如上配置在另外两台机器上搭建hadoop，可以使用scp命令将spark1上面的hadoop安装包和.bashrc配置文件都拷贝过去</li>
 <li>要记得对.bashrc文件进行source，以让它生效</li>
 <li>记得在spark2和spark3的/usr/local目录下创建data目录</li>
 </ol>
-<h2 id="启动hdfs集群"><a class="markdownIt-Anchor" href="#启动hdfs集群"></a> 启动hdfs集群</h2>
-<ol>
-<li>格式化namenode：在spark1上执行以下命令(不要执行多次，不然会导致datanode的ID不一致，以后都只要直接第二步):<br>
-hdfs namenode -format</li>
-<li>启动hdfs集群：<br>
-<a href="http://start-dfs.sh" target="_blank" rel="noopener">start-dfs.sh</a></li>
-<li>验证启动是否成功：jps、50070端口<br>
-spark1：namenode、datanode、secondarynamenode<br>
-spark2：datanode<br>
-spark3：datanode</li>
+<h2 id="启动hdfs集群"><a href="#启动hdfs集群" class="headerlink" title="启动hdfs集群"></a>启动hdfs集群</h2><ol>
+<li>格式化namenode：在spark1上执行以下命令(不要执行多次，不然会导致datanode的ID不一致，以后都只要直接第二步):<br> hdfs namenode -format</li>
+<li>启动hdfs集群：<br> start-dfs.sh</li>
+<li>验证启动是否成功：jps、50070端口<br>spark1：namenode、datanode、secondarynamenode<br>spark2：datanode<br>spark3：datanode</li>
 </ol>
-<h2 id="启动yarn集群"><a class="markdownIt-Anchor" href="#启动yarn集群"></a> 启动yarn集群</h2>
-<ol>
-<li>启动yarn集群：<br>
-/usr/local/hadoop/sbin/start-yarn.sh</li>
-<li>验证启动是否成功：jps、8088端口<br>
-spark1：resourcemanager、nodemanager<br>
-spark2：nodemanager<br>
-spark3：nodemanager</li>
+<h2 id="启动yarn集群"><a href="#启动yarn集群" class="headerlink" title="启动yarn集群"></a>启动yarn集群</h2><ol>
+<li>启动yarn集群：<br> /usr/local/hadoop/sbin/start-yarn.sh</li>
+<li>验证启动是否成功：jps、8088端口<br>spark1：resourcemanager、nodemanager<br>spark2：nodemanager<br>spark3：nodemanager</li>
 </ol>
 
       
     </div>
+
+    
+
     
     
     
 
     
 
+    
+       
+    
     
 
     
@@ -519,17 +594,10 @@ spark3：nodemanager</li>
   </article>
 
 
-
-    <div class="post-spread">
-      
-    </div>
   </div>
 
 
           </div>
-          
-
-
           
 
   
@@ -572,63 +640,147 @@ spark3：nodemanager</li>
 
       <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image"
-                src="/uploads/avatar.jpeg"
-                alt="Ryan Li" />
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpeg" alt="Ryan Li">
             
               <p class="site-author-name" itemprop="name">Ryan Li</p>
-              <p class="site-description motion-element" itemprop="description"></p>
+              <p class="site-description motion-element" itemprop="description">Hello World.</p>
           </div>
 
-          <nav class="site-state motion-element">
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">40</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
 
-            
-              <div class="site-state-item site-state-posts">
               
-                <a href="/archives/">
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
               
-                  <span class="site-state-item-count">40</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
 
-            
               
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
               
-              <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
-                  <span class="site-state-item-count">9</span>
-                  <span class="site-state-item-name">分类</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">31</span>
-                  <span class="site-state-item-name">标签</span>
-                </a>
-              </div>
-            
-
-          </nav>
-
+            </nav>
           
 
           
 
           
+
           
 
           
           
 
+          
+            
+          
           
 
         </div>
@@ -644,7 +796,7 @@ spark3：nodemanager</li>
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装hadoop包"><span class="nav-number">1.</span> <span class="nav-text"> 安装hadoop包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置hadoop"><span class="nav-number">2.</span> <span class="nav-text"> 配置Hadoop</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改core-sitexml"><span class="nav-number">2.1.</span> <span class="nav-text"> 修改core-site.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改hdfs-sitexml"><span class="nav-number">2.2.</span> <span class="nav-text"> 修改hdfs-site.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改mapred-sitexml"><span class="nav-number">2.3.</span> <span class="nav-text"> 修改mapred-site.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改yarn-sitexml"><span class="nav-number">2.4.</span> <span class="nav-text"> 修改yarn-site.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改slaves文件"><span class="nav-number">2.5.</span> <span class="nav-text"> 修改slaves文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在另外两台机器上搭建hadoop"><span class="nav-number">2.6.</span> <span class="nav-text"> 在另外两台机器上搭建hadoop</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动hdfs集群"><span class="nav-number">3.</span> <span class="nav-text"> 启动hdfs集群</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动yarn集群"><span class="nav-number">4.</span> <span class="nav-text"> 启动yarn集群</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装hadoop包"><span class="nav-number">1.</span> <span class="nav-text">安装hadoop包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置Hadoop"><span class="nav-number">2.</span> <span class="nav-text">配置Hadoop</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改core-site-xml"><span class="nav-number">2.1.</span> <span class="nav-text">修改core-site.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改hdfs-site-xml"><span class="nav-number">2.2.</span> <span class="nav-text">修改hdfs-site.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改mapred-site-xml"><span class="nav-number">2.3.</span> <span class="nav-text">修改mapred-site.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改yarn-site-xml"><span class="nav-number">2.4.</span> <span class="nav-text">修改yarn-site.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改slaves文件"><span class="nav-number">2.5.</span> <span class="nav-text">修改slaves文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在另外两台机器上搭建hadoop"><span class="nav-number">2.6.</span> <span class="nav-text">在另外两台机器上搭建hadoop</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动hdfs集群"><span class="nav-number">3.</span> <span class="nav-text">启动hdfs集群</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动yarn集群"><span class="nav-number">4.</span> <span class="nav-text">启动yarn集群</span></a></li></ol></div>
             
 
           </div>
@@ -665,10 +817,12 @@ spark3：nodemanager</li>
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
-  <span class="with-love">
+  <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Ryan Li</span>
+
+  
 
   
 </div>
@@ -689,6 +843,7 @@ spark3：nodemanager</li>
 
 
 
+
         
       </div>
     </footer>
@@ -701,7 +856,10 @@ spark3：nodemanager</li>
     
 
     
+	
+    
 
+    
   </div>
 
   
@@ -720,7 +878,11 @@ spark3：nodemanager</li>
 
 
 
-  
+
+
+
+
+
 
 
 
@@ -740,16 +902,6 @@ spark3：nodemanager</li>
 
   
   
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
     <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   
 
@@ -758,18 +910,13 @@ spark3：nodemanager</li>
     <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
   
 
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
 
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
 
 
 
@@ -777,40 +924,27 @@ spark3：nodemanager</li>
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
 
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
 
 
 
   
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
 
 
 
   
     <script type="text/javascript">
+      window.livereOptions = {
+        refer: '2018/07/31/2018-07-31 Hadoop2-4-1集群搭建/'
+      };
       (function(d, s) {
         var j, e = d.getElementsByTagName(s)[0];
         if (typeof LivereTower === 'function') { return; }
@@ -831,8 +965,6 @@ spark3：nodemanager</li>
 
 
 
-
-
   
 
 
@@ -842,107 +974,61 @@ spark3：nodemanager</li>
   
 
   
-  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
-  <script>AV.initialize("L71FAGlYbGy360uJzNBnyuLd-gzGzoHsz", "EkXnFcBGbM1Rt0hfAcUtDRUo");</script>
   <script>
-    function showTime(Counter) {
-      var query = new AV.Query(Counter);
-      var entries = [];
-      var $visitors = $(".leancloud_visitors");
-
-      $visitors.each(function () {
-        entries.push( $(this).attr("id").trim() );
-      });
-
-      query.containedIn('url', entries);
-      query.find()
-        .done(function (results) {
-          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
-
-          if (results.length === 0) {
-            $visitors.find(COUNT_CONTAINER_REF).text(0);
-            return;
-          }
-
-          for (var i = 0; i < results.length; i++) {
-            var item = results[i];
-            var url = item.get('url');
-            var time = item.get('time');
-            var element = document.getElementById(url);
-
-            $(element).find(COUNT_CONTAINER_REF).text(time);
-          }
-          for(var i = 0; i < entries.length; i++) {
-            var url = entries[i];
-            var element = document.getElementById(url);
-            var countSpan = $(element).find(COUNT_CONTAINER_REF);
-            if( countSpan.text() == '') {
-              countSpan.text(0);
-            }
-          }
-        })
-        .fail(function (object, error) {
-          console.log("Error: " + error.code + " " + error.message);
-        });
-    }
-
+    
     function addCount(Counter) {
       var $visitors = $(".leancloud_visitors");
       var url = $visitors.attr('id').trim();
       var title = $visitors.attr('data-flag-title').trim();
-      var query = new AV.Query(Counter);
 
-      query.equalTo("url", url);
-      query.find({
-        success: function(results) {
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
           if (results.length > 0) {
             var counter = results[0];
-            counter.fetchWhenSave(true);
-            counter.increment("time");
-            counter.save(null, {
-              success: function(counter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.get('time'));
-              },
-              error: function(counter, error) {
-                console.log('Failed to save Visitor num, with error message: ' + error.message);
-              }
-            });
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
           } else {
-            var newcounter = new Counter();
-            /* Set ACL */
-            var acl = new AV.ACL();
-            acl.setPublicReadAccess(true);
-            acl.setPublicWriteAccess(true);
-            newcounter.setACL(acl);
-            /* End Set ACL */
-            newcounter.set("title", title);
-            newcounter.set("url", url);
-            newcounter.set("time", 1);
-            newcounter.save(null, {
-              success: function(newcounter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-              },
-              error: function(newcounter, error) {
-                console.log('Failed to create');
-              }
-            });
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+            
           }
-        },
-        error: function(error) {
-          console.log('Error:' + error.code + " " + error.message);
-        }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
       });
     }
+    
 
     $(function() {
-      var Counter = AV.Object.extend("Counter");
-      if ($('.leancloud_visitors').length == 1) {
-        addCount(Counter);
-      } else if ($('.post-title-link').length > 1) {
-        showTime(Counter);
-      }
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "L71FAGlYbGy360uJzNBnyuLd-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "L71FAGlYbGy360uJzNBnyuLd-gzGzoHsz",
+                'X-LC-Key': "EkXnFcBGbM1Rt0hfAcUtDRUo",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
     });
   </script>
 
@@ -953,6 +1039,23 @@ spark3：nodemanager</li>
   
 
   
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
   
 
   

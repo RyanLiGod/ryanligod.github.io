@@ -117,7 +117,10 @@
 <meta property="og:description" content="前言实验室一直在用到推荐系统，其中最重要的一部分就是利用近似最近邻算法（ANN）在大量论文/专利/项目中找到最相似的的论文/专利/项目进行推荐。 之前的 ANN 算法一直是 gensim 中使用的 Annoy。但是鉴于基于图的 HNSW 在 ANN Benchmarks 中的优异表现，需要对其进行学习并且进行一定修改，最后应用到推荐系统中。 KNN 和 ANN k-Nearest Neighbor">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-11-27-085755.png">
-<meta property="og:updated_time" content="2018-11-27T09:26:48.603Z">
+<meta property="og:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-11-27-095340.png">
+<meta property="og:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-11-27-095313.png">
+<meta property="og:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-11-27-095235.png">
+<meta property="og:updated_time" content="2018-11-27T09:54:40.386Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="近似最近邻算法 HNSW 学习笔记">
 <meta name="twitter:description" content="前言实验室一直在用到推荐系统，其中最重要的一部分就是利用近似最近邻算法（ANN）在大量论文/专利/项目中找到最相似的的论文/专利/项目进行推荐。 之前的 ANN 算法一直是 gensim 中使用的 Annoy。但是鉴于基于图的 HNSW 在 ANN Benchmarks 中的优异表现，需要对其进行学习并且进行一定修改，最后应用到推荐系统中。 KNN 和 ANN k-Nearest Neighbor">
@@ -401,7 +404,7 @@
                 
               
 
-              <time title="创建时间：2018-11-27 16:39:29 / 修改时间：17:26:48" itemprop="dateCreated datePublished" datetime="2018-11-27T16:39:29+08:00">2018-11-27</time>
+              <time title="创建时间：2018-11-27 16:39:29 / 修改时间：17:54:40" itemprop="dateCreated datePublished" datetime="2018-11-27T16:39:29+08:00">2018-11-27</time>
             
 
             
@@ -473,15 +476,15 @@
 <h2 id="KNN-和-ANN"><a href="#KNN-和-ANN" class="headerlink" title="KNN 和 ANN"></a>KNN 和 ANN</h2><ul>
 <li><p>k-Nearest Neighbor, KNN</p>
 <ul>
-<li><p>K最近邻算法，可用作聚类、回归等</p>
+<li><p>K最近邻算法，可用作聚类、回归等。</p>
 <p><img src="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-11-27-085755.png" alt="image-20181127165755013"></p>
 </li>
 </ul>
 </li>
 <li><p>Approximate nearest neighbor, ANN</p>
 <ul>
-<li>目前在高维度度量空间中没有有效精确 NNS 的方法。这背后的原因在于维度的“诅咒” 。为了避免维数的诅咒，减少对 kNN 问题解决方案的要求，使其近似（ANN），精度允许的条件下通过牺牲准确率来换取比暴力搜索要快的多的搜索速度</li>
-<li>ANN 应用：推荐系统</li>
+<li>目前在高维度度量空间中没有有效精确 NNS 的方法。这背后的原因在于维度的“诅咒” 。为了避免维数的诅咒，减少对 kNN 问题解决方案的要求，使其近似（ANN），精度允许的条件下通过牺牲准确率来换取比暴力搜索要快的多的搜索速度。</li>
+<li>ANN 应用：推荐系统。</li>
 </ul>
 </li>
 </ul>
@@ -494,10 +497,10 @@
 </ol>
 <h1 id="HNSW"><a href="#HNSW" class="headerlink" title="HNSW"></a>HNSW</h1><p>分层的可导航小世界（Hierarchical Navigable Small World, HNSW）。</p>
 <h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><ul>
-<li>一种基于图的数据结构</li>
+<li>一种基于图的数据结构。</li>
 <li>使用贪婪搜索算法的变体进行ANN搜索，每次选择最接近查询的未访问的相邻元素时，它都会从元素到另一个元素地遍历整个图，直到达到停止条件。</li>
 </ul>
-<h2 id="Delaunay-三角剖分"><a href="#Delaunay-三角剖分" class="headerlink" title="Delaunay 三角剖分"></a>Delaunay 三角剖分</h2><p>Delaunay 三角剖分（Delaunay triangulation）是学习 HNSW 的预备知识，我之前有学习过：。HNSW 的生成的索引在最后的形式将会是近似的 Delaunay 图，只是由于 HNSW 具有 <strong>可导航（Navigable）</strong>的属性，最后生成的图在搜索时会具有一些长边（Long-range edges）来进行快速逼近目标点。</p>
+<h2 id="Delaunay-三角剖分"><a href="#Delaunay-三角剖分" class="headerlink" title="Delaunay 三角剖分"></a>Delaunay 三角剖分</h2><p>Delaunay 三角剖分（Delaunay triangulation）是学习 HNSW 的预备知识，具体见我之前有学习过的：<a href="https://www.ryanligod.com/2018/10/09/2018-10-09%20%E7%BB%B4%E8%AF%BA%E5%9B%BE%EF%BC%88Voronoi%20Diagram%EF%BC%89%E5%88%86%E6%9E%90%E4%B8%8E%E5%AE%9E%E7%8E%B0/">Voronoi 图和 Delaunay 三角剖分</a>。HNSW 的生成的索引在最后的形式将会是近似的 Delaunay 图，只是由于 HNSW 具有 <strong>可导航（Navigable）</strong>的属性，最后生成的图在搜索时会具有一些长边（Long-range edges）来进行快速逼近目标点。</p>
 <ul>
 <li>Delaunay 边<ul>
 <li>存在一个圆经过 $a, b$ 两点，圆内（注意是圆内，圆上最多三点共圆）不含点集 $V$ 中任何其他的点，这一特性又称空圆特性。</li>
@@ -508,6 +511,29 @@
 </ul>
 </li>
 </ul>
+<p><img src="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-11-27-095340.png" alt="image-20181127175339583"></p>
+<h2 id="NSW-主要思想"><a href="#NSW-主要思想" class="headerlink" title="NSW 主要思想"></a>NSW 主要思想</h2><p>要理解 Hierarchical NSW，要先理解 NSW，即没有分层的可导航小世界的结构。</p>
+<p>对于每个新的传入元素，我们从结构中找到其最近邻居的集合（近似的 Delaunay 图）。该集合连接到元素。随着越来越多的元素被插入到结构中，以前用作短距离边现在变成长距离边，形成可导航的小世界。</p>
+<p><img src="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-11-27-095313.png" alt="image-20181127175313140"></p>
+<p>圆（顶点）是度量空间中的数据，黑边是近似的 Delaunay 图，红边是用于对数缩放的长距离边。箭头显示从入口点到查询的贪心算法的示例路径（显示为绿色）。</p>
+<p>图中的边有两个不同的目的：</p>
+<ol>
+<li>Short-range edges，用作贪婪搜索算法所需的近似 Delaunay 图。</li>
+<li>Long-range edges，用于贪婪搜索的对数缩放。负责构造图形的可导航小世界（NSW）属性。</li>
+</ol>
+<h3 id="NSW-中的贪婪搜索"><a href="#NSW-中的贪婪搜索" class="headerlink" title="NSW 中的贪婪搜索"></a>NSW 中的贪婪搜索</h3><ol>
+<li>算法计算从查询 $q$ 到当前顶点的朋友列表的每个顶点的距离，然后选择具有最小距离的顶点。</li>
+<li>如果查询与所选顶点之间的距离小于查询与当前元素之间的距离，则算法移动到所选顶点，并且它变为新的当前顶点。</li>
+<li>算法在达到局部最小值时停止：一个顶点，其朋友列表不包含比顶点本身更接近查询的顶点</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">K-NNSearch(object q, integer: m, k)</span><br><span class="line">TreeSet [object] tempRes, candidates, visitedSet, result </span><br><span class="line"><span class="comment">// 进行m次循环，避免随机性</span></span><br><span class="line"><span class="keyword">for</span> (i←<span class="number">0</span>; i &lt; m; i++) <span class="keyword">do</span>:</span><br><span class="line">	put random entry point in candidates</span><br><span class="line">	tempRes←null</span><br><span class="line">	repeat:</span><br><span class="line">		<span class="comment">// 利用上述提到的贪婪搜索算法找到距离q最近的点c</span></span><br><span class="line">		get element c closest from candidatesto q</span><br><span class="line">		remove c from candidates</span><br><span class="line">		<span class="comment">// 判断结束条件</span></span><br><span class="line">		<span class="keyword">if</span> c is further than k-th element from result than</span><br><span class="line">			<span class="keyword">break</span> repeat</span><br><span class="line">		<span class="comment">// 更新后选择列表</span></span><br><span class="line">		<span class="keyword">for</span> every element e from friends of c <span class="keyword">do</span>:</span><br><span class="line">			<span class="keyword">if</span> e is <span class="keyword">not</span> in visitedSet than</span><br><span class="line">				add e to visitedSet, candidates, tempRes</span><br><span class="line"></span><br><span class="line">	end repeat</span><br><span class="line">	<span class="comment">// 汇总结果</span></span><br><span class="line">	add objects from tempRes to result </span><br><span class="line">end <span class="keyword">for</span> </span><br><span class="line"><span class="keyword">return</span> best k elements from result</span><br></pre></td></tr></table></figure>
+<h2 id="Hierarchical-Navigable-Small-World-HNSW"><a href="#Hierarchical-Navigable-Small-World-HNSW" class="headerlink" title="Hierarchical Navigable Small World (HNSW)"></a>Hierarchical Navigable Small World (HNSW)</h2><ul>
+<li>该算法贪婪地遍历来自上层的元素，直到达到局部最小值。</li>
+<li>之后，搜索切换到较低层（具有较短 link），从元素重新开始，该元素是前一层中的局部最小值，并且该过程重复。</li>
+<li>通过采用层状结构，将边按特征半径进行分层，从而将 NSW 的计算复杂度由多重对数（Polylogarithmic）复杂度降到了对数（logarithmic）复杂度。</li>
+</ul>
+<p><img src="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-11-27-095235.png" alt="image-20181127175235414"></p>
+<p>HNSW 的具体源码实现现在还在学习中。</p>
 
       
     </div>
@@ -820,7 +846,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#KNN-和-ANN"><span class="nav-number">1.1.</span> <span class="nav-text">KNN 和 ANN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ANN-方法分类"><span class="nav-number">1.2.</span> <span class="nav-text">ANN 方法分类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HNSW"><span class="nav-number">2.</span> <span class="nav-text">HNSW</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#特点"><span class="nav-number">2.1.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Delaunay-三角剖分"><span class="nav-number">2.2.</span> <span class="nav-text">Delaunay 三角剖分</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#KNN-和-ANN"><span class="nav-number">1.1.</span> <span class="nav-text">KNN 和 ANN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ANN-方法分类"><span class="nav-number">1.2.</span> <span class="nav-text">ANN 方法分类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HNSW"><span class="nav-number">2.</span> <span class="nav-text">HNSW</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#特点"><span class="nav-number">2.1.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Delaunay-三角剖分"><span class="nav-number">2.2.</span> <span class="nav-text">Delaunay 三角剖分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NSW-主要思想"><span class="nav-number">2.3.</span> <span class="nav-text">NSW 主要思想</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NSW-中的贪婪搜索"><span class="nav-number">2.3.1.</span> <span class="nav-text">NSW 中的贪婪搜索</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hierarchical-Navigable-Small-World-HNSW"><span class="nav-number">2.4.</span> <span class="nav-text">Hierarchical Navigable Small World (HNSW)</span></a></li></ol></li></ol></div>
             
 
           </div>

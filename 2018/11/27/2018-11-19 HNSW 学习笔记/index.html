@@ -108,24 +108,27 @@
 
 
 
-  <meta name="description" content="Hello World.">
-<meta name="keywords" content="Ryan Li">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Ryan Li God">
-<meta property="og:url" content="https://www.ryanligod.com/archives/index.html">
+  <meta name="description" content="前言实验室一直在用到推荐系统，其中最重要的一部分就是利用近似最近邻算法（ANN）在大量论文/专利/项目中找到最相似的的论文/专利/项目进行推荐。 之前的 ANN 算法一直是 gensim 中使用的 Annoy。但是鉴于基于图的 HNSW 在 ANN Benchmarks 中的优异表现，需要对其进行学习并且进行一定修改，最后应用到推荐系统中。 KNN 和 ANN k-Nearest Neighbor">
+<meta name="keywords" content="推荐系统,算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="近似最近邻算法 HNSW 学习笔记">
+<meta property="og:url" content="https://www.ryanligod.com/2018/11/27/2018-11-19 HNSW 学习笔记/index.html">
 <meta property="og:site_name" content="Ryan Li God">
-<meta property="og:description" content="Hello World.">
+<meta property="og:description" content="前言实验室一直在用到推荐系统，其中最重要的一部分就是利用近似最近邻算法（ANN）在大量论文/专利/项目中找到最相似的的论文/专利/项目进行推荐。 之前的 ANN 算法一直是 gensim 中使用的 Annoy。但是鉴于基于图的 HNSW 在 ANN Benchmarks 中的优异表现，需要对其进行学习并且进行一定修改，最后应用到推荐系统中。 KNN 和 ANN k-Nearest Neighbor">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-11-27-085755.png">
+<meta property="og:updated_time" content="2018-11-27T09:26:48.603Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ryan Li God">
-<meta name="twitter:description" content="Hello World.">
+<meta name="twitter:title" content="近似最近邻算法 HNSW 学习笔记">
+<meta name="twitter:description" content="前言实验室一直在用到推荐系统，其中最重要的一部分就是利用近似最近邻算法（ANN）在大量论文/专利/项目中找到最相似的的论文/专利/项目进行推荐。 之前的 ANN 算法一直是 gensim 中使用的 Annoy。但是鉴于基于图的 HNSW 在 ANN Benchmarks 中的优异表现，需要对其进行学习并且进行一定修改，最后应用到推荐系统中。 KNN 和 ANN k-Nearest Neighbor">
+<meta name="twitter:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-11-27-085755.png">
 
 
 
 
 
 
-  <link rel="canonical" href="https://www.ryanligod.com/archives/">
+  <link rel="canonical" href="https://www.ryanligod.com/2018/11/27/2018-11-19 HNSW 学习笔记/">
 
 
 
@@ -135,7 +138,7 @@
   };
 </script>
 
-  <title>归档 | Ryan Li God</title>
+  <title>近似最近邻算法 HNSW 学习笔记 | Ryan Li God</title>
   
 
 
@@ -194,7 +197,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -292,7 +295,7 @@
         
         
           
-          <li class="menu-item menu-item-archives menu-item-active">
+          <li class="menu-item menu-item-archives">
 
     
     
@@ -315,25 +318,6 @@
 
   
     
-
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
 
   
 
@@ -359,396 +343,271 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
 
-      
-      <span class="archive-page-counter">
-        
-        
-         
-        
-        还行! 目前共计 41 篇日志。 继续努力。
-      </span>
-      
+  
 
-      
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/11/27/2018-11-19 HNSW 学习笔记/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan Li">
+      <meta itemprop="description" content="Hello World.">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ryan Li God">
+    </span>
+
+    
+      <header class="post-header">
 
         
         
+          <h2 class="post-title" itemprop="name headline">近似最近邻算法 HNSW 学习笔记
+              
+            
+          </h2>
         
 
-        
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-11-27 16:39:29 / 修改时间：17:26:48" itemprop="dateCreated datePublished" datetime="2018-11-27T16:39:29+08:00">2018-11-27</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
           
-          <div class="collection-title">
-            <h2 class="archive-year" id="archive-year-2018">2018</h2>
-          </div>
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/2018/11/27/2018-11-19 HNSW 学习笔记/" itemprop="url">
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
               
-                <span itemprop="name">近似最近邻算法 HNSW 学习笔记</span>
+                <span class="post-meta-item-text">分类于</span>
               
-            </a>
-        
-      </h3>
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-11-27T16:39:29+08:00" content="2018-11-27">
-          11-27
-        </time>
-      </div>
+                
+                
+              
+            </span>
+          
 
-    </header>
-  </article>
+          
+            
+          
 
+          
+          
+             <span id="/2018/11/27/2018-11-19 HNSW 学习笔记/" class="leancloud_visitors" data-flag-title="近似最近邻算法 HNSW 学习笔记">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/2018/11/19/2018-11-19 算法学习—错排问题/" itemprop="url">
-              
-                <span itemprop="name">算法学习——错排问题</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-11-19T15:21:20+08:00" content="2018-11-19">
-          11-19
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/2018/11/15/2018-11-15 使用 jQuery 实现 Solr 搜索的前端页面展示/" itemprop="url">
-              
-                <span itemprop="name">使用 jQuery 实现 Solr 搜索的前端页面展示</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-11-15T16:17:28+08:00" content="2018-11-15">
-          11-15
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>实验室一直在用到推荐系统，其中最重要的一部分就是利用近似最近邻算法（ANN）在大量论文/专利/项目中找到最相似的的论文/专利/项目进行推荐。</p>
+<p>之前的 ANN 算法一直是 gensim 中使用的 Annoy。但是鉴于基于图的 HNSW 在 <a href="http://ann-benchmarks.com/" target="_blank" rel="noopener">ANN Benchmarks</a> 中的优异表现，需要对其进行学习并且进行一定修改，最后应用到推荐系统中。</p>
+<h2 id="KNN-和-ANN"><a href="#KNN-和-ANN" class="headerlink" title="KNN 和 ANN"></a>KNN 和 ANN</h2><ul>
+<li><p>k-Nearest Neighbor, KNN</p>
+<ul>
+<li><p>K最近邻算法，可用作聚类、回归等</p>
+<p><img src="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-11-27-085755.png" alt="image-20181127165755013"></p>
+</li>
+</ul>
+</li>
+<li><p>Approximate nearest neighbor, ANN</p>
+<ul>
+<li>目前在高维度度量空间中没有有效精确 NNS 的方法。这背后的原因在于维度的“诅咒” 。为了避免维数的诅咒，减少对 kNN 问题解决方案的要求，使其近似（ANN），精度允许的条件下通过牺牲准确率来换取比暴力搜索要快的多的搜索速度</li>
+<li>ANN 应用：推荐系统</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<h2 id="ANN-方法分类"><a href="#ANN-方法分类" class="headerlink" title="ANN 方法分类"></a>ANN 方法分类</h2><ol>
+<li>树方法，如 KD-tree</li>
+<li>哈希方法，如 Local Sensitive Hashing (LSH)</li>
+<li>矢量量化方法，如 Product Quantization (PQ)</li>
+<li>近邻图方法，如 Hierarchical Navigable Small World (HNSW)</li>
+</ol>
+<h1 id="HNSW"><a href="#HNSW" class="headerlink" title="HNSW"></a>HNSW</h1><p>分层的可导航小世界（Hierarchical Navigable Small World, HNSW）。</p>
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><ul>
+<li>一种基于图的数据结构</li>
+<li>使用贪婪搜索算法的变体进行ANN搜索，每次选择最接近查询的未访问的相邻元素时，它都会从元素到另一个元素地遍历整个图，直到达到停止条件。</li>
+</ul>
+<h2 id="Delaunay-三角剖分"><a href="#Delaunay-三角剖分" class="headerlink" title="Delaunay 三角剖分"></a>Delaunay 三角剖分</h2><p>Delaunay 三角剖分（Delaunay triangulation）是学习 HNSW 的预备知识，我之前有学习过：。HNSW 的生成的索引在最后的形式将会是近似的 Delaunay 图，只是由于 HNSW 具有 <strong>可导航（Navigable）</strong>的属性，最后生成的图在搜索时会具有一些长边（Long-range edges）来进行快速逼近目标点。</p>
+<ul>
+<li>Delaunay 边<ul>
+<li>存在一个圆经过 $a, b$ 两点，圆内（注意是圆内，圆上最多三点共圆）不含点集 $V$ 中任何其他的点，这一特性又称空圆特性。</li>
+</ul>
+</li>
+<li>Delaunay 三角剖分<ul>
+<li>如果点集 $V$ 的一个三角剖分 $T$ 只包含 Delaunay 边，那么该三角剖分称为 Delaunay 三角剖分。</li>
+</ul>
+</li>
+</ul>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/2018/11/09/2018-11-09 利用 Docker 部署 Vue 应用/" itemprop="url">
-              
-                <span itemprop="name">利用 Docker 部署 Vue 应用</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-11-09T20:30:21+08:00" content="2018-11-09">
-          11-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/2018/11/09/2018-11-09 Docker 之 Dockerfile/" itemprop="url">
-              
-                <span itemprop="name">Docker 之 Dockerfile</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-11-09T18:19:21+08:00" content="2018-11-09">
-          11-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/2018/11/09/2018-11-09 Docker 入门/" itemprop="url">
-              
-                <span itemprop="name">Docker 入门</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-11-09T17:05:46+08:00" content="2018-11-09">
-          11-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/2018/11/08/2018-11-08 C++ 中的 using 简单总结/" itemprop="url">
-              
-                <span itemprop="name">C++ 中的 using 简单总结</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-11-08T16:33:59+08:00" content="2018-11-08">
-          11-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/2018/11/08/2018-11-08 ShadowsocksX 更新 PAC 方法/" itemprop="url">
-              
-                <span itemprop="name">ShadowsocksX 更新 PAC 方法</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-11-08T10:20:55+08:00" content="2018-11-08">
-          11-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/2018/10/31/2018-10-31 Vue.js 入门—Vue CLI，Vue Router/" itemprop="url">
-              
-                <span itemprop="name">Vue.js 入门——Vue CLI，Vue Router，axios，iView，ECharts</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-10-31T12:52:26+08:00" content="2018-10-31">
-          10-31
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/2018/10/29/2018-10-29 pybind11 入门/" itemprop="url">
-              
-                <span itemprop="name">python 调用 C++ 之 pybind11入门（macOS）</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-10-29T15:04:18+08:00" content="2018-10-29">
-          10-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Ryan Li 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/推荐系统/" rel="tag"># 推荐系统</a>
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/19/2018-11-19 算法学习—错排问题/" rel="next" title="算法学习——错排问题">
+                <i class="fa fa-chevron-left"></i> 算法学习——错排问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/5/">5</a><a class="extend next" rel="next" href="/archives/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
+  </article>
 
 
+  </div>
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zODgwNi8xNTMzNA=="></div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -769,8 +628,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -943,6 +811,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#KNN-和-ANN"><span class="nav-number">1.1.</span> <span class="nav-text">KNN 和 ANN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ANN-方法分类"><span class="nav-number">1.2.</span> <span class="nav-text">ANN 方法分类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HNSW"><span class="nav-number">2.</span> <span class="nav-text">HNSW</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#特点"><span class="nav-number">2.1.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Delaunay-三角剖分"><span class="nav-number">2.2.</span> <span class="nav-text">Delaunay 三角剖分</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -1066,6 +950,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
 
   
 
@@ -1078,6 +966,20 @@
 
 
 
+  
+    <script type="text/javascript">
+      window.livereOptions = {
+        refer: '2018/11/27/2018-11-19 HNSW 学习笔记/'
+      };
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 
@@ -1100,43 +1002,37 @@
   
   <script>
     
-    function showTime(Counter) {
-      var entries = [];
+    function addCount(Counter) {
       var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
 
-      $visitors.each(function () {
-        entries.push( $(this).attr("id").trim() );
-      });
-
-      Counter('get', '/classes/Counter', { where: JSON.stringify({ url: { "$in": entries } }) })
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
         .done(function ({ results }) {
-          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
-
-          if (results.length === 0) {
-            $visitors.find(COUNT_CONTAINER_REF).text(0);
-            return;
-          }
-
-          for (var i = 0; i < results.length; i++) {
-            var item = results[i];
-            var url = item.url;
-            var time = item.time;
-            var element = document.getElementById(url);
-
-            $(element).find(COUNT_CONTAINER_REF).text(time);
-          }
-          for(var i = 0; i < entries.length; i++) {
-            var url = entries[i];
-            var element = document.getElementById(url);
-            var countSpan = $(element).find(COUNT_CONTAINER_REF);
-            if( countSpan.text() == '') {
-              countSpan.text(0);
-            }
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+            
           }
         })
-        .fail(function ({ responseJSON }) {
-          console.log("LeanCloud Counter Error: " + responseJSON.code + " " + responseJSON.error);
-        });
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
     }
     
 
@@ -1156,9 +1052,7 @@
             });
           };
           
-          if ($('.post-title-link').length >= 1) {
-            showTime(Counter);
-          }
+          addCount(Counter);
           
         })
     });
@@ -1178,6 +1072,30 @@
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
   
 
 

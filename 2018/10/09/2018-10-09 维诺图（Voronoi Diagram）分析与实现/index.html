@@ -108,21 +108,21 @@
 
 
 
-  <meta name="description" content="介绍Voronoi图的定义又叫泰森多边形或Dirichlet图，它是由一组由连接两邻点直线的垂直平分线组成的连续多边形组成。 Voronoi图的特点 每个V多边形内有一个生成元 每个V多边形内点到该生成元距离短于到其它生成元距离 多边形边界上的点到生成此边界的生成元距离相等 邻接图形的Voronoi多边形界线以原邻接界线作为子集。  Voronoi图的应用在计算几何学科中的重要地位，由于其根据点集">
-<meta name="keywords" content="学习笔记,机器学习,推荐系统">
+  <meta name="description" content="介绍Voronoi 图的定义又叫泰森多边形或 Dirichlet 图，它是由一组由连接两邻点直线的垂直平分线组成的连续多边形组成。 Voronoi 图的特点 每个V多边形内有一个生成元 每个V多边形内点到该生成元距离短于到其它生成元距离 多边形边界上的点到生成此边界的生成元距离相等 邻接图形的 Voronoi 多边形界线以原邻接界线作为子集。  Voronoi 图的应用在计算几何学科中的重要地位，">
+<meta name="keywords" content="机器学习,推荐系统">
 <meta property="og:type" content="article">
-<meta property="og:title" content="维诺图（Voronoi Diagram）分析与实现">
+<meta property="og:title" content="Voronoi 图和 Delaunay 三角剖分">
 <meta property="og:url" content="https://www.ryanligod.com/2018/10/09/2018-10-09 维诺图（Voronoi Diagram）分析与实现/index.html">
 <meta property="og:site_name" content="Ryan Li God">
-<meta property="og:description" content="介绍Voronoi图的定义又叫泰森多边形或Dirichlet图，它是由一组由连接两邻点直线的垂直平分线组成的连续多边形组成。 Voronoi图的特点 每个V多边形内有一个生成元 每个V多边形内点到该生成元距离短于到其它生成元距离 多边形边界上的点到生成此边界的生成元距离相等 邻接图形的Voronoi多边形界线以原邻接界线作为子集。  Voronoi图的应用在计算几何学科中的重要地位，由于其根据点集">
+<meta property="og:description" content="介绍Voronoi 图的定义又叫泰森多边形或 Dirichlet 图，它是由一组由连接两邻点直线的垂直平分线组成的连续多边形组成。 Voronoi 图的特点 每个V多边形内有一个生成元 每个V多边形内点到该生成元距离短于到其它生成元距离 多边形边界上的点到生成此边界的生成元距离相等 邻接图形的 Voronoi 多边形界线以原邻接界线作为子集。  Voronoi 图的应用在计算几何学科中的重要地位，">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-10-09-095902.png">
 <meta property="og:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-10-09-100156.png">
 <meta property="og:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-10-09-100243.png">
-<meta property="og:updated_time" content="2018-11-20T05:55:40.112Z">
+<meta property="og:updated_time" content="2018-11-27T09:30:46.626Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="维诺图（Voronoi Diagram）分析与实现">
-<meta name="twitter:description" content="介绍Voronoi图的定义又叫泰森多边形或Dirichlet图，它是由一组由连接两邻点直线的垂直平分线组成的连续多边形组成。 Voronoi图的特点 每个V多边形内有一个生成元 每个V多边形内点到该生成元距离短于到其它生成元距离 多边形边界上的点到生成此边界的生成元距离相等 邻接图形的Voronoi多边形界线以原邻接界线作为子集。  Voronoi图的应用在计算几何学科中的重要地位，由于其根据点集">
+<meta name="twitter:title" content="Voronoi 图和 Delaunay 三角剖分">
+<meta name="twitter:description" content="介绍Voronoi 图的定义又叫泰森多边形或 Dirichlet 图，它是由一组由连接两邻点直线的垂直平分线组成的连续多边形组成。 Voronoi 图的特点 每个V多边形内有一个生成元 每个V多边形内点到该生成元距离短于到其它生成元距离 多边形边界上的点到生成此边界的生成元距离相等 邻接图形的 Voronoi 多边形界线以原邻接界线作为子集。  Voronoi 图的应用在计算几何学科中的重要地位，">
 <meta name="twitter:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-10-09-095902.png">
 
 
@@ -140,7 +140,7 @@
   };
 </script>
 
-  <title>维诺图（Voronoi Diagram）分析与实现 | Ryan Li God</title>
+  <title>Voronoi 图和 Delaunay 三角剖分 | Ryan Li God</title>
   
 
 
@@ -271,7 +271,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">31</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">30</span></a>
 
   </li>
         
@@ -309,7 +309,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">40</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">41</span></a>
 
   </li>
 
@@ -378,7 +378,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">维诺图（Voronoi Diagram）分析与实现
+          <h2 class="post-title" itemprop="name headline">Voronoi 图和 Delaunay 三角剖分
               
             
           </h2>
@@ -420,7 +420,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-11-20 13:55:40" itemprop="dateModified" datetime="2018-11-20T13:55:40+08:00">2018-11-20</time>
+                <time title="修改时间：2018-11-27 17:30:46" itemprop="dateModified" datetime="2018-11-27T17:30:46+08:00">2018-11-27</time>
               
             
           </span>
@@ -451,7 +451,7 @@
 
           
           
-             <span id="/2018/10/09/2018-10-09 维诺图（Voronoi Diagram）分析与实现/" class="leancloud_visitors" data-flag-title="维诺图（Voronoi Diagram）分析与实现">
+             <span id="/2018/10/09/2018-10-09 维诺图（Voronoi Diagram）分析与实现/" class="leancloud_visitors" data-flag-title="Voronoi 图和 Delaunay 三角剖分">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -482,32 +482,32 @@
       
 
       
-        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><h4 id="Voronoi图的定义"><a href="#Voronoi图的定义" class="headerlink" title="Voronoi图的定义"></a>Voronoi图的定义</h4><p>又叫泰森多边形或Dirichlet图，它是由一组由连接两邻点直线的垂直平分线组成的连续多边形组成。</p>
-<h4 id="Voronoi图的特点"><a href="#Voronoi图的特点" class="headerlink" title="Voronoi图的特点"></a>Voronoi图的特点</h4><ol>
+        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><h4 id="Voronoi-图的定义"><a href="#Voronoi-图的定义" class="headerlink" title="Voronoi 图的定义"></a>Voronoi 图的定义</h4><p>又叫泰森多边形或 Dirichlet 图，它是由一组由连接两邻点直线的垂直平分线组成的连续多边形组成。</p>
+<h4 id="Voronoi-图的特点"><a href="#Voronoi-图的特点" class="headerlink" title="Voronoi 图的特点"></a>Voronoi 图的特点</h4><ol>
 <li>每个V多边形内有一个生成元</li>
 <li>每个V多边形内点到该生成元距离短于到其它生成元距离</li>
 <li>多边形边界上的点到生成此边界的生成元距离相等</li>
-<li>邻接图形的Voronoi多边形界线以原邻接界线作为子集。</li>
+<li>邻接图形的 Voronoi 多边形界线以原邻接界线作为子集。</li>
 </ol>
-<h4 id="Voronoi图的应用"><a href="#Voronoi图的应用" class="headerlink" title="Voronoi图的应用"></a>Voronoi图的应用</h4><p>在计算几何学科中的重要地位，由于其根据点集划分的区域到点的距离最近的特点，其在地理学、气象学、结晶学、航天、核物理学、机器人等领域具有广泛的应用。如在障碍物点集中，规避障碍寻找最佳路径。</p>
-<h2 id="算法分析"><a href="#算法分析" class="headerlink" title="算法分析"></a>算法分析</h2><p>Voronoi图有着按距离划分邻近区域的普遍特性，应用范围广。生成V图的方法很多，常见的有分治法、扫描线算法和Delaunay三角剖分算法。</p>
-<h4 id="建立Voronoi图方法和步骤"><a href="#建立Voronoi图方法和步骤" class="headerlink" title="建立Voronoi图方法和步骤"></a>建立Voronoi图方法和步骤</h4><p>本次实验采用的是Delaunay三角剖分算法。主要是指生成Voronoi图时先生成其对偶元Delaunay三角网，再找出三角网每一三角形的外接圆圆心，最后连接相邻三角形的外接圆圆心，形成以每一三角形顶点为生成元的多边形网。如下图所示。</p>
+<h4 id="Voronoi-图的应用"><a href="#Voronoi-图的应用" class="headerlink" title="Voronoi 图的应用"></a>Voronoi 图的应用</h4><p>在计算几何学科中的重要地位，由于其根据点集划分的区域到点的距离最近的特点，其在地理学、气象学、结晶学、航天、核物理学、机器人等领域具有广泛的应用。如在障碍物点集中，规避障碍寻找最佳路径。</p>
+<h2 id="算法分析"><a href="#算法分析" class="headerlink" title="算法分析"></a>算法分析</h2><p>Voronoi 图有着按距离划分邻近区域的普遍特性，应用范围广。生成V图的方法很多，常见的有分治法、扫描线算法和 Delaunay 三角剖分算法。</p>
+<h4 id="建立-Voronoi-图方法和步骤"><a href="#建立-Voronoi-图方法和步骤" class="headerlink" title="建立 Voronoi 图方法和步骤"></a>建立 Voronoi 图方法和步骤</h4><p>本次实验采用的是 Delaunay 三角剖分算法。主要是指生成 Voronoi 图时先生成其对偶元 Delaunay 三角网，再找出三角网每一三角形的外接圆圆心，最后连接相邻三角形的外接圆圆心，形成以每一三角形顶点为生成元的多边形网。如下图所示。</p>
 <p><img src="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-10-09-095902.png" alt=""></p>
-<p>建立Voronoi图算法的关键是对离散数据点合理地连成三角网，即构建Delaunay三角网。 </p>
+<p>建立 Voronoi 图算法的关键是对离散数据点合理地连成三角网，即构建 Delaunay 三角网。 </p>
 <a id="more"></a>
-<p>建立Voronoi图的步骤为： </p>
+<p>建立 Voronoi 图的步骤为： </p>
 <ol>
-<li>离散点自动构建三角网，即构建Delaunay三角网。对离散点和形成的三角形编号，记录每个三角形是由哪三个离散点构成的。 </li>
+<li>离散点自动构建三角网，即构建 Delaunay 三角网。对离散点和形成的三角形编号，记录每个三角形是由哪三个离散点构成的。 </li>
 <li>计算每个三角形的外接圆圆心，并记录之。 </li>
-<li>遍历三角形链表，寻找与当前三角形pTri三边共边的相邻三角形TriA，TriB和TriC。</li>
+<li>遍历三角形链表，寻找与当前三角形 pTri 三边共边的相邻三角形 TriA，TriB 和 TriC。</li>
 <li>如果找到，则把寻找到的三角形的外心与pTri的外心连接，存入维诺边链表中。如果找不到，则求出最外边的中垂线射线存入维诺边链表中。 </li>
 <li>遍历结束，所有维诺边被找到，根据边画出维诺图。</li>
 </ol>
-<h4 id="Delaunay三角网的生成"><a href="#Delaunay三角网的生成" class="headerlink" title="Delaunay三角网的生成"></a>Delaunay三角网的生成</h4><p>建立Voronoi图的关键是Delaunay三角网的生成。Delaunay三角网的特性：<br>（1）空圆性，任一三角形外接圆内部不包含其他点。<br>（2）最接近：以最近临的三点形成三角形，且各线段(三角形的边)皆不相交。<br>（3）唯一性：不论从区域何处开始构建，最终都将得到一致的结果。<br>（4）最优性：任意两个相邻三角形形成的凸四边形的对角线如果可以互换的话，那么两个三角形六个内角中最小的角度不会变大。<br>（5）最规则：如果将三角网中的每个三角形的最小角进行升序排列，则Delaunay三角网的排列得到的数值最大。<br>（6）区域性：新增、删除、移动某一个顶点时只会影响临近的三角形。<br>（7）具有凸多边形的外壳：三角网最外层的边界形成一个凸多边形的外壳。<br>Delaunay剖分是一种三角剖分的标准，实现它有多种算法。本次采用Bowyer-Watson算法，算法的基本步骤是：<br>（1）构造一个超级三角形，包含所有散点，放入三角形链表。<br>（2）将点集中的散点依次插入，在三角形链表中找出其外接圆包含<br>插入点的三角形（称为该点的影响三角形），删除影响三角形的公共边，将插入点同影响三角形的全部顶点连接起来，从而完成一个点在Delaunay三角形链表中的插入。<br>（3）根据优化准则对局部新形成的三角形进行优化。将形成的三角形放入Delaunay三角形链表。<br>（4）循环执行上述第2步，直到所有散点插入完毕。</p>
-<p>关键步骤2如下图所示： </p>
+<h4 id="Delaunay-三角网的生成"><a href="#Delaunay-三角网的生成" class="headerlink" title="Delaunay 三角网的生成"></a>Delaunay 三角网的生成</h4><p>建立 Voronoi 图的关键是 Delaunay 三角网的生成。Delaunay 三角网的特性：<br>（1）空圆性，任一三角形外接圆内部不包含其他点。<br>（2）最接近：以最近临的三点形成三角形，且各线段（三角形的边）皆不相交。<br>（3）唯一性：不论从区域何处开始构建，最终都将得到一致的结果。<br>（4）最优性：任意两个相邻三角形形成的凸四边形的对角线如果可以互换的话，那么两个三角形六个内角中最小的角度不会变大。<br>（5）最规则：如果将三角网中的每个三角形的最小角进行升序排列，则 Delaunay 三角网的排列得到的数值最大。<br>（6）区域性：新增、删除、移动某一个顶点时只会影响临近的三角形。<br>（7）具有凸多边形的外壳：三角网最外层的边界形成一个凸多边形的外壳。<br>Delaunay 剖分是一种三角剖分的标准，实现它有多种算法。本次采用 Bowyer-Watson 算法，算法的基本步骤是：<br>（1）构造一个超级三角形，包含所有散点，放入三角形链表。<br>（2）将点集中的散点依次插入，在三角形链表中找出其外接圆包含<br>插入点的三角形（称为该点的影响三角形），删除影响三角形的公共边，将插入点同影响三角形的全部顶点连接起来，从而完成一个点在 Delaunay 三角形链表中的插入。<br>（3）根据优化准则对局部新形成的三角形进行优化。将形成的三角形放入 Delaunay 三角形链表。<br>（4）循环执行上述第 2 步，直到所有散点插入完毕。</p>
+<p>关键步骤 2 如下图所示： </p>
 <p><img src="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-10-09-100156.png" alt=""></p>
 <p>步骤3的局部优化的准则指的是：<br>1.对新形成的三角形进行优化，将两个具有共同边的三角形合成一个多边形。<br>2.以最大空圆准则作检查，看其第四个顶点是否在三角形的外接圆之内。<br>3.如果在，修正对角线即将对角线对调，即完成局部优化过程的处理。</p>
-<p>LOP (Local Optimization Procedure)处理过程如下图所示：</p>
+<p>LOP (Local Optimization Procedure) 处理过程如下图所示：</p>
 <p><img src="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-10-09-100243.png" alt=""></p>
 
       
@@ -555,8 +555,6 @@
     <footer class="post-footer">
       
         <div class="post-tags">
-          
-            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
           
             <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
           
@@ -662,7 +660,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">40</span>
+                    <span class="site-state-item-count">41</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -766,9 +764,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-count">30</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -829,7 +825,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Voronoi图的定义"><span class="nav-number">1.0.1.</span> <span class="nav-text">Voronoi图的定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Voronoi图的特点"><span class="nav-number">1.0.2.</span> <span class="nav-text">Voronoi图的特点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Voronoi图的应用"><span class="nav-number">1.0.3.</span> <span class="nav-text">Voronoi图的应用</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#算法分析"><span class="nav-number">2.</span> <span class="nav-text">算法分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#建立Voronoi图方法和步骤"><span class="nav-number">2.0.1.</span> <span class="nav-text">建立Voronoi图方法和步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Delaunay三角网的生成"><span class="nav-number">2.0.2.</span> <span class="nav-text">Delaunay三角网的生成</span></a></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Voronoi-图的定义"><span class="nav-number">1.0.1.</span> <span class="nav-text">Voronoi 图的定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Voronoi-图的特点"><span class="nav-number">1.0.2.</span> <span class="nav-text">Voronoi 图的特点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Voronoi-图的应用"><span class="nav-number">1.0.3.</span> <span class="nav-text">Voronoi 图的应用</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#算法分析"><span class="nav-number">2.</span> <span class="nav-text">算法分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#建立-Voronoi-图方法和步骤"><span class="nav-number">2.0.1.</span> <span class="nav-text">建立 Voronoi 图方法和步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Delaunay-三角网的生成"><span class="nav-number">2.0.2.</span> <span class="nav-text">Delaunay 三角网的生成</span></a></li></ol></li></div>
             
 
           </div>

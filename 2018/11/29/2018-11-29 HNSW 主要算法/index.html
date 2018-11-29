@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="google-site-verification" content="cZeP3x5JObpg9HCS3K6TIR79PkNCztQLnFJ6LhyD9vI">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.ico?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.ico?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/apple-touch-icon.ico?v=6.5.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="前言近期在研究近似最近邻算法 HNSW 的源码和论文，这里结合论文中的伪代码做一下 HNSW 主要的几个算法的解读，这将对读懂源码十分有帮助。本文介绍以下算法：  $\tt INSERT(\it hnsw, q, M, M_{max}, efConstruction, m_L \tt)$ : 新元素 $q$ 插入算法。 $\tt SEARCH\ LAYER(\it q, ep, ef, l_c \">
+<meta name="keywords" content="推荐系统,算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="近似最近邻算法 HNSW 学习笔记（二） 主要算法伪代码分析">
+<meta property="og:url" content="https://www.ryanligod.com/2018/11/29/2018-11-29 HNSW 主要算法/index.html">
+<meta property="og:site_name" content="Ryan Li God">
+<meta property="og:description" content="前言近期在研究近似最近邻算法 HNSW 的源码和论文，这里结合论文中的伪代码做一下 HNSW 主要的几个算法的解读，这将对读懂源码十分有帮助。本文介绍以下算法：  $\tt INSERT(\it hnsw, q, M, M_{max}, efConstruction, m_L \tt)$ : 新元素 $q$ 插入算法。 $\tt SEARCH\ LAYER(\it q, ep, ef, l_c \">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-11-29T12:34:01.408Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="近似最近邻算法 HNSW 学习笔记（二） 主要算法伪代码分析">
+<meta name="twitter:description" content="前言近期在研究近似最近邻算法 HNSW 的源码和论文，这里结合论文中的伪代码做一下 HNSW 主要的几个算法的解读，这将对读懂源码十分有帮助。本文介绍以下算法：  $\tt INSERT(\it hnsw, q, M, M_{max}, efConstruction, m_L \tt)$ : 新元素 $q$ 插入算法。 $\tt SEARCH\ LAYER(\it q, ep, ef, l_c \">
+
+
+
+
+
+
+  <link rel="canonical" href="https://www.ryanligod.com/2018/11/29/2018-11-29 HNSW 主要算法/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>近似最近邻算法 HNSW 学习笔记（二） 主要算法伪代码分析 | Ryan Li God</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?71dc7c48c1cade58b78bec378294d4a4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ryan Li God</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">Hello World!</h1>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">30</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">9</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">42</span></a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/11/29/2018-11-29 HNSW 主要算法/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan Li">
+      <meta itemprop="description" content="Hello World.">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ryan Li God">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">近似最近邻算法 HNSW 学习笔记（二） 主要算法伪代码分析
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-11-29 15:28:19 / 修改时间：20:34:01" itemprop="dateCreated datePublished" datetime="2018-11-29T15:28:19+08:00">2018-11-29</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/11/29/2018-11-29 HNSW 主要算法/" class="leancloud_visitors" data-flag-title="近似最近邻算法 HNSW 学习笔记（二） 主要算法伪代码分析">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>近期在研究近似最近邻算法 HNSW 的源码和论文，这里结合论文中的伪代码做一下 HNSW 主要的几个算法的解读，这将对读懂源码十分有帮助。本文介绍以下算法：</p>
+<ul>
+<li>$\tt INSERT(\it hnsw, q, M, M_{max}, efConstruction, m_L \tt)$ : 新元素 $q$ 插入算法。</li>
+<li>$\tt SEARCH\ LAYER(\it q, ep, ef, l_c \tt)$ : 在第  $l_c$ 层查找距离 $q$ 最近邻的 $ef$ 个元素。</li>
+<li>$\tt SELECT\ NEIGHBORS\ SIMPLE( \it q, C, M \tt) $ : 在候选点集合 $C$ 中 选取距离 $q$ 最近邻的 $M$ 个元素。</li>
+<li>$\tt SELECT\ NEIGHBORS\ HEURISTIC(\it q, C, M, lc, extendCandidates, keepPrunedConnections \tt)$ : 探索式寻找最近邻。</li>
+<li>$\tt KNN\ SEARCH(\it hnsw, q, K, ef \tt)$ : 在 $hnsw$ 索引中查询距离 $q$ 最近邻的 $K$ 个元素。</li>
+</ul>
+<a id="more"></a>
+<h1 id="算法解释"><a href="#算法解释" class="headerlink" title="算法解释"></a>算法解释</h1><h2 id="算法一：插入算法"><a href="#算法一：插入算法" class="headerlink" title="算法一：插入算法"></a>算法一：插入算法</h2><p>$\tt INSERT(\it hnsw, q, M, M_{max}, efConstruction, m_L \tt)$ : 新元素 $q$ 插入算法。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">INSERT(hnsw, q, M, Mmax, efConstruction, mL)</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 输入</span></span><br><span class="line"><span class="comment"> * hnsw：q插入的目标图</span></span><br><span class="line"><span class="comment"> * q：插入的新元素</span></span><br><span class="line"><span class="comment"> * M：每个点需要与图中其他的点建立的连接数</span></span><br><span class="line"><span class="comment"> * Mmax：最大的连接数，超过则需要进行缩减（shrink）</span></span><br><span class="line"><span class="comment"> * efConstruction：动态候选元素集合大小</span></span><br><span class="line"><span class="comment"> * mL：选择q的层数时用到的标准化因子</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">Input: multilayer graph hnsw, <span class="keyword">new</span> element q, number of established connections M, maximum number of connections <span class="keyword">for</span> each element per layer Mmax, size of the dynamic candidate <span class="built_in">list</span> efConstruction, normalization factor <span class="keyword">for</span> level generation mL</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 输出：新的hnsw图</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">Output: update hnsw inserting element q</span><br><span class="line"></span><br><span class="line">W ← ∅  <span class="comment">// W：现在发现的最近邻元素集合</span></span><br><span class="line">ep ← get enter point <span class="keyword">for</span> hnsw</span><br><span class="line">L ← level of ep</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * unif(0..1)是取0到1之中的随机数</span></span><br><span class="line"><span class="comment"> * 根据mL获取新元素q的层数l</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">l ← ⌊-ln(unif(<span class="number">0.</span><span class="number">.1</span>))∙mL⌋</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 自顶层向q的层数l逼近搜索，一直到l+1,每层寻找当前层q最近邻的1个点</span></span><br><span class="line"><span class="comment"> * 找到所有层中最近的一个点作为q插入到l层的入口点</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">for</span> lc ← L … l+<span class="number">1</span></span><br><span class="line">    W ← SEARCH_LAYER(q, ep, ef=<span class="number">1</span>, lc)</span><br><span class="line">    ep ← get the nearest element from W to q</span><br><span class="line"><span class="comment">// 自l层向底层逼近搜索,每层寻找当前层q最近邻的efConstruction个点赋值到集合W</span></span><br><span class="line"><span class="keyword">for</span> lc ← min(L, l) … <span class="number">0</span></span><br><span class="line">    W ← SEARCH_LAYER(q, ep, efConstruction, lc)</span><br><span class="line">    <span class="comment">// 在W中选择q最近邻的M个点作为neighbors双向连接起来</span></span><br><span class="line">    neighbors ← SELECT_NEIGHBORS(q, W, M, lc)</span><br><span class="line">    add bidirectional connectionts from neighbors to q at layer lc</span><br><span class="line">    <span class="comment">// 检查每个neighbors的连接数，如果大于Mmax，则需要缩减连接到最近邻的Mmax个</span></span><br><span class="line">    <span class="keyword">for</span> each e ∈ neighbors</span><br><span class="line">        eConn ← neighbourhood(e) at layer lc</span><br><span class="line">        <span class="keyword">if</span> │eConn│ &gt; Mmax</span><br><span class="line">            eNewConn ← SELECT_NEIGHBORS(e, eConn, Mmax, lc)</span><br><span class="line">            <span class="built_in">set</span> neighbourhood(e) at layer lc to eNewConn</span><br><span class="line">    ep ← W</span><br><span class="line"><span class="keyword">if</span> l &gt; L</span><br><span class="line">    <span class="built_in">set</span> enter point <span class="keyword">for</span> hnsw to q</span><br></pre></td></tr></table></figure>
+<h2 id="算法二：搜索当前层的最近邻"><a href="#算法二：搜索当前层的最近邻" class="headerlink" title="算法二：搜索当前层的最近邻"></a>算法二：搜索当前层的最近邻</h2><p>$\tt SEARCH\ LAYER(\it q, ep, ef, l_c \tt)$ : 在第  $l_c$ 层查找距离 $q$ 最近邻的 $ef$ 个元素。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">SEARCH_LAYER(q, ep, ef, lc)</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 输入</span></span><br><span class="line"><span class="comment"> * q：插入的新元素</span></span><br><span class="line"><span class="comment"> * ep：进入点 enter point</span></span><br><span class="line"><span class="comment"> * ef：需要返回的近邻数量</span></span><br><span class="line"><span class="comment"> * lc：层数</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">Input: query element q, enter point ep, number of nearest to q elements to <span class="keyword">return</span> ef, layer number lc</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 输出：q的ef个最近邻</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">Output: ef closest neighbors to q</span><br><span class="line"></span><br><span class="line">v ← ep  <span class="comment">// v：设置访问过的元素 visited elements</span></span><br><span class="line">C ← ep  <span class="comment">// C：设置候选元素 candidates</span></span><br><span class="line">W ← ep  <span class="comment">// W：现在发现的最近邻元素集合</span></span><br><span class="line"><span class="comment">// 遍历每一个候选元素，包括遍历过程中不断加入的元素</span></span><br><span class="line"><span class="keyword">while</span> │C│ &gt; <span class="number">0</span></span><br><span class="line">    <span class="comment">// 取出C中q的最近邻c</span></span><br><span class="line">    c ← extract nearest element from C to q</span><br><span class="line">    <span class="comment">// 取出W中q的最远点f</span></span><br><span class="line">    f ← get furthest element from W to q</span><br><span class="line">    <span class="keyword">if</span> distance(c, q) &gt; distance(f, q) </span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 当c比f距离q更近时，则将c的每一个邻居e都进行遍历</span></span><br><span class="line"><span class="comment">     * 如果e比w中距离q最远的f要更接近q，那就把e加入到W和候选元素C中</span></span><br><span class="line"><span class="comment">     * 由此会不断地遍历图，直至达到局部最佳状态，c的所有邻居没有距离更近的了或者所有邻居都已经被遍历了</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">for</span> each e ∈ neighbourhood(c) at layer lc</span><br><span class="line">        <span class="keyword">if</span> e ∉ v</span><br><span class="line">            v ← v ⋃ e</span><br><span class="line">            f ← get furthest element from W to q</span><br><span class="line">            <span class="keyword">if</span> distance(e, q) &lt; distance(f, q) <span class="keyword">or</span> │W│ &lt; ef</span><br><span class="line">                C ← C ⋃ e</span><br><span class="line">                W ← W ⋃ e</span><br><span class="line">                <span class="comment">// 保证返回的数目不大于ef</span></span><br><span class="line">                <span class="keyword">if</span> │W│ &gt; ef</span><br><span class="line">                    remove furthest element from W to q</span><br><span class="line"><span class="keyword">return</span> W</span><br></pre></td></tr></table></figure>
+<h2 id="算法三：截取集合中最近邻的M个结果"><a href="#算法三：截取集合中最近邻的M个结果" class="headerlink" title="算法三：截取集合中最近邻的M个结果"></a>算法三：截取集合中最近邻的M个结果</h2><p>$\tt SELECT\ NEIGHBORS\ SIMPLE( \it q, C, M \tt) $ : 在候选点集合 $C$ 中 选取距离 $q$ 最近邻的 $M$ 个元素。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">SELECT_NEIGHBORS_SIMPLE(q, C, M)</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 输入</span></span><br><span class="line"><span class="comment"> * q：查询的点</span></span><br><span class="line"><span class="comment"> * C：候选元素集合</span></span><br><span class="line"><span class="comment"> * M：需要返回的数目</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">Input: base element q, candidate elements C, number of neighbors to <span class="keyword">return</span> M</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 输出：M个q的最近邻</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">Output: M nearest elements to q</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> M nearest elements from C to q</span><br></pre></td></tr></table></figure>
+<h2 id="算法四：探索式寻找最近邻"><a href="#算法四：探索式寻找最近邻" class="headerlink" title="算法四：探索式寻找最近邻"></a>算法四：探索式寻找最近邻</h2><p>$\tt SELECT\ NEIGHBORS\ HEURISTIC(\it q, C, M, lc, extendCandidates, keepPrunedConnections \tt)$ : 探索式寻找最近邻。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">SELECT_NEIGHBORS_HEURISTIC(q, C, M, lc, extendCandidates, keepPrunedConnections)</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 输入</span></span><br><span class="line"><span class="comment"> * q：查询的点</span></span><br><span class="line"><span class="comment"> * C：候选元素集合</span></span><br><span class="line"><span class="comment"> * M：需要返回的数目</span></span><br><span class="line"><span class="comment"> * lc：层数</span></span><br><span class="line"><span class="comment"> * extendCandidates：指示是否扩展候选列表的标志</span></span><br><span class="line"><span class="comment"> * keepPrunedConnections：指示是否添加丢弃元素的标志</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">Input: base element q, candidate elements C, number of neighbors to <span class="keyword">return</span> M, layer number lc, flag indicating whether <span class="keyword">or</span> <span class="keyword">not</span> to extend candidate <span class="built_in">list</span> extendCandidates, flag indicating whether <span class="keyword">or</span> <span class="keyword">not</span> to add discarded elements keepPrunedConnections</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 输出：探索得到M个元素</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">Output: M elements selected by the heuristic</span><br><span class="line"></span><br><span class="line">R ← ∅ <span class="comment">// 记录结果</span></span><br><span class="line">W ← C  <span class="comment">// W：候选元素的队列</span></span><br><span class="line"><span class="keyword">if</span> extendCandidates  <span class="comment">// 通过邻居来扩充候选元素</span></span><br><span class="line">    <span class="keyword">for</span> each e ∈ C</span><br><span class="line">        <span class="keyword">for</span> each e_adj ∈ neighbourhood(e) at layer lc</span><br><span class="line">            <span class="keyword">if</span> e_adj ∉ W</span><br><span class="line">                W ← W ⋃ e_adj</span><br><span class="line">Wd ← ∅  <span class="comment">// 丢弃的候选元素的队列</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 候选元素队列不为空切结果数量少于M时，在W中选择q最近邻e</span></span><br><span class="line"><span class="comment"> * 如果e比R中的某个元素更接近q，就把e加入到R中，否则就把e加入Wd（丢弃）</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">while</span> │W│ &gt; <span class="number">0</span> <span class="keyword">and</span> │R│ &lt; M</span><br><span class="line">    e ← extract nearest element from W to q</span><br><span class="line">    <span class="keyword">if</span> e is closer to q compared to any element from R</span><br><span class="line">        R ← R ⋃ e</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        Wd ← Wd ⋃ e</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 如果设置keepPrunedConnections为true，且R不满足M个，那就在丢弃队列中挑选最近邻填满R为M个</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">if</span> keepPrunedConnections</span><br><span class="line">    <span class="keyword">while</span> │Wd│ &gt; <span class="number">0</span> <span class="keyword">and</span> │R│ &lt; M</span><br><span class="line">        R ← R ⋃ extract nearest element from Wd to q</span><br><span class="line"><span class="keyword">return</span> R</span><br></pre></td></tr></table></figure>
+<h2 id="算法五：KNN-查询"><a href="#算法五：KNN-查询" class="headerlink" title="算法五：KNN 查询"></a>算法五：KNN 查询</h2><p>$\tt KNN\ SEARCH(\it hnsw, q, K, ef \tt)$ : 在 $hnsw$ 索引中查询距离 $q$ 最近邻的 $K$ 个元素。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">K-NN-SEARCH(hnsw, q, K, ef)</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 输入</span></span><br><span class="line"><span class="comment"> * hnsw：q插入的目标图</span></span><br><span class="line"><span class="comment"> * q：查询元素</span></span><br><span class="line"><span class="comment"> * K：返回的近邻数量</span></span><br><span class="line"><span class="comment"> * ef：动态候选元素集合大小</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">Input: multilayer graph hnsw, query element q, number of nearest neighbors to <span class="keyword">return</span> K, size of the dynamic candidate <span class="built_in">list</span> ef</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 输出：q的K个最近邻元素</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">Output: K nearest elements to q</span><br><span class="line"></span><br><span class="line">W ← ∅  <span class="comment">// W：现在发现的最近邻元素集合</span></span><br><span class="line">ep ← get enter point <span class="keyword">for</span> hnsw</span><br><span class="line">L ← level of ep</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 自顶层向倒数第2层逼近搜索,每层寻找当前层q最近邻的1个点赋值到集合W</span></span><br><span class="line"><span class="comment"> * 取W中最接近q的点作为底层的入口点，以便时搜索的时间成本最低</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">for</span> lc ← L … <span class="number">1</span></span><br><span class="line">    W ← SEARCH_LAYER(q, ep, ef=<span class="number">1</span>, lc)</span><br><span class="line">    ep ← get nearest element from W to q</span><br><span class="line"><span class="comment">// 从上一层得到的ep点开始搜索底层获得ef个q的最近邻</span></span><br><span class="line">W ← SEARCH_LAYER(q, ep, ef, lc=<span class="number">0</span>)</span><br><span class="line"><span class="keyword">return</span> K nearest elements from W to q</span><br></pre></td></tr></table></figure>
+<h1 id="尾巴"><a href="#尾巴" class="headerlink" title="尾巴"></a>尾巴</h1><p>HNSW 的性能目前来说是十分优秀的，读懂其中的原理，然后能够对源码进行一定的改进是十分有价值的。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Ryan Li 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/推荐系统/" rel="tag"># 推荐系统</a>
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/27/2018-11-27 HNSW 介绍/" rel="next" title="近似最近邻算法 HNSW 学习笔记（一）介绍">
+                <i class="fa fa-chevron-left"></i> 近似最近邻算法 HNSW 学习笔记（一）介绍
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zODgwNi8xNTMzNA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpeg" alt="Ryan Li">
+            
+              <p class="site-author-name" itemprop="name">Ryan Li</p>
+              <p class="site-description motion-element" itemprop="description">Hello World.</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">42</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">30</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/RyanLiGod" title="GitHub &rarr; https://github.com/RyanLiGod" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:ryanligod@gmail.com" title="E-Mail &rarr; mailto:ryanligod@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法解释"><span class="nav-number">2.</span> <span class="nav-text">算法解释</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法一：插入算法"><span class="nav-number">2.1.</span> <span class="nav-text">算法一：插入算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法二：搜索当前层的最近邻"><span class="nav-number">2.2.</span> <span class="nav-text">算法二：搜索当前层的最近邻</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法三：截取集合中最近邻的M个结果"><span class="nav-number">2.3.</span> <span class="nav-text">算法三：截取集合中最近邻的M个结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法四：探索式寻找最近邻"><span class="nav-number">2.4.</span> <span class="nav-text">算法四：探索式寻找最近邻</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法五：KNN-查询"><span class="nav-number">2.5.</span> <span class="nav-text">算法五：KNN 查询</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#尾巴"><span class="nav-number">3.</span> <span class="nav-text">尾巴</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ryan Li</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+    <script type="text/javascript">
+      window.livereOptions = {
+        refer: '2018/11/29/2018-11-29 HNSW 主要算法/'
+      };
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "L71FAGlYbGy360uJzNBnyuLd-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "L71FAGlYbGy360uJzNBnyuLd-gzGzoHsz",
+                'X-LC-Key': "EkXnFcBGbM1Rt0hfAcUtDRUo",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('复制成功')
+          else $(this).text('复制失败')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+  
+
+</body>
+</html>

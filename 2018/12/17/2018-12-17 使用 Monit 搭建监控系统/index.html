@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="google-site-verification" content="cZeP3x5JObpg9HCS3K6TIR79PkNCztQLnFJ6LhyD9vI">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.ico?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.ico?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/apple-touch-icon.ico?v=6.5.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="前言近期服务器不太稳定，于是需要找一些工具检测服务器状态，避免服务挂掉。这里介绍一些服务器检测工具 Monit 的使用。 安装在 Monit官网 下载安装包，我这里推荐服务器是 CentOS 7，选择 linux-x64 版本。可以在服务器直接下载，我这里本地电脑下载好以后使用 Transmit 传到服务器。 在服务器中我放在了 /data 路径下，因为关于推荐的文件都放在这里，把监控服务放这里比">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 Monit 搭建 Linux 监控系统">
+<meta property="og:url" content="https://www.ryanligod.com/2018/12/17/2018-12-17 使用 Monit 搭建监控系统/index.html">
+<meta property="og:site_name" content="Ryan Li God">
+<meta property="og:description" content="前言近期服务器不太稳定，于是需要找一些工具检测服务器状态，避免服务挂掉。这里介绍一些服务器检测工具 Monit 的使用。 安装在 Monit官网 下载安装包，我这里推荐服务器是 CentOS 7，选择 linux-x64 版本。可以在服务器直接下载，我这里本地电脑下载好以后使用 Transmit 传到服务器。 在服务器中我放在了 /data 路径下，因为关于推荐的文件都放在这里，把监控服务放这里比">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-12-17-092834.png">
+<meta property="og:updated_time" content="2018-12-17T09:32:44.004Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用 Monit 搭建 Linux 监控系统">
+<meta name="twitter:description" content="前言近期服务器不太稳定，于是需要找一些工具检测服务器状态，避免服务挂掉。这里介绍一些服务器检测工具 Monit 的使用。 安装在 Monit官网 下载安装包，我这里推荐服务器是 CentOS 7，选择 linux-x64 版本。可以在服务器直接下载，我这里本地电脑下载好以后使用 Transmit 传到服务器。 在服务器中我放在了 /data 路径下，因为关于推荐的文件都放在这里，把监控服务放这里比">
+<meta name="twitter:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-12-17-092834.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://www.ryanligod.com/2018/12/17/2018-12-17 使用 Monit 搭建监控系统/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>使用 Monit 搭建 Linux 监控系统 | Ryan Li God</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?71dc7c48c1cade58b78bec378294d4a4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ryan Li God</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">Hello World!</h1>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">31</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">10</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">43</span></a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/12/17/2018-12-17 使用 Monit 搭建监控系统/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan Li">
+      <meta itemprop="description" content="Hello World.">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ryan Li God">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">使用 Monit 搭建 Linux 监控系统
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-12-17 16:46:56 / 修改时间：17:32:44" itemprop="dateCreated datePublished" datetime="2018-12-17T16:46:56+08:00">2018-12-17</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/12/17/2018-12-17 使用 Monit 搭建监控系统/" class="leancloud_visitors" data-flag-title="使用 Monit 搭建 Linux 监控系统">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>近期服务器不太稳定，于是需要找一些工具检测服务器状态，避免服务挂掉。这里介绍一些服务器检测工具 Monit 的使用。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在 <a href="https://mmonit.com/monit/" target="_blank" rel="noopener">Monit官网</a> 下载安装包，我这里推荐服务器是 CentOS 7，选择 linux-x64 版本。可以在服务器直接下载，我这里本地电脑下载好以后使用 Transmit 传到服务器。</p>
+<p>在服务器中我放在了 <code>/data</code> 路径下，因为关于推荐的文件都放在这里，把监控服务放这里比较好管理。解压文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -zvxf monit-5.25.2-linux-x64.tar.gz</span><br><span class="line">mv monit-5.25.2 monit</span><br></pre></td></tr></table></figure>
+<p>这时候就可以使用了。</p>
+<a id="more"></a>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h3 id="配置-monitrc"><a href="#配置-monitrc" class="headerlink" title="配置 monitrc"></a>配置 monitrc</h3><p>首先要配置 <code>monit/conf/monitrc</code> 文件，修改成以下内容，注意这里没有配置邮件发送服务，因为邮件发送需要配置 SMTP Server，暂时不需要就没配置了。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">###############################################################################</span></span><br><span class="line"><span class="comment">## Monit control file</span></span><br><span class="line"><span class="comment">###############################################################################</span></span><br><span class="line"><span class="comment">##</span></span><br><span class="line"><span class="comment">## Comments begin with a '#' and extend through the end of the line. Keywords</span></span><br><span class="line"><span class="comment">## are case insensitive. All path's MUST BE FULLY QUALIFIED, starting with '/'.</span></span><br><span class="line"><span class="comment">##</span></span><br><span class="line"><span class="comment">## Below you will find examples of some frequently used statements. For</span></span><br><span class="line"><span class="comment">## information about the control file and a complete list of statements and</span></span><br><span class="line"><span class="comment">## options, please have a look in the Monit manual.</span></span><br><span class="line"><span class="comment">##</span></span><br><span class="line"><span class="comment">##</span></span><br><span class="line"><span class="comment">###############################################################################</span></span><br><span class="line"><span class="comment">## Global section</span></span><br><span class="line"><span class="comment">###############################################################################</span></span><br><span class="line"><span class="comment">##</span></span><br><span class="line"><span class="comment">## Start Monit in the background (run as a daemon):</span></span><br><span class="line"><span class="comment">## 间隔60秒检查服务</span></span><br><span class="line"><span class="built_in">set</span> daemon  60              <span class="comment"># check services at 30 seconds intervals</span></span><br><span class="line"><span class="comment">#   with start delay 240    # optional: delay the first check by 4-minutes (by</span></span><br><span class="line"><span class="comment">#                           # default Monit check immediately after Monit start)</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">## Set syslog logging. If you want to log to a standalone log file instead,</span></span><br><span class="line"><span class="comment">## specify the full path to the log file</span></span><br><span class="line"><span class="comment">## 设置日志地址</span></span><br><span class="line"><span class="built_in">set</span> <span class="built_in">log</span> /data/monit/logs</span><br><span class="line"></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">## Set the location of the Monit lock file which stores the process id of the</span></span><br><span class="line"><span class="comment">## running Monit instance. By default this file is stored in $HOME/.monit.pid</span></span><br><span class="line"><span class="comment">## 设置monit的启动端口</span></span><br><span class="line"><span class="built_in">set</span> pidfile /data/monit/var/monit.pid</span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">## Set the location of the Monit id file which stores the unique id for the</span></span><br><span class="line"><span class="comment">## Monit instance. The id is generated and stored on first Monit start. By</span></span><br><span class="line"><span class="comment">## default the file is placed in $HOME/.monit.id.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># set idfile /data/monit/var/.monit.id</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">## Set the location of the Monit state file which saves monitoring states</span></span><br><span class="line"><span class="comment">## on each cycle. By default the file is placed in $HOME/.monit.state. If</span></span><br><span class="line"><span class="comment">## the state file is stored on a persistent filesystem, Monit will recover</span></span><br><span class="line"><span class="comment">## the monitoring state across reboots. If it is on temporary filesystem, the</span></span><br><span class="line"><span class="comment">## state will be lost on reboot which may be convenient in some situations.</span></span><br><span class="line"><span class="comment">## 设置monit状态地址</span></span><br><span class="line"><span class="built_in">set</span> statefile /data/monit/var/.monit.state</span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## Set limits for various tests. The following example shows the default values:</span></span><br><span class="line"><span class="comment">##</span></span><br><span class="line"><span class="comment"># set limits &#123;</span></span><br><span class="line"><span class="comment">#     programOutput:     512 B,      # check program's output truncate limit</span></span><br><span class="line"><span class="comment">#     sendExpectBuffer:  256 B,      # limit for send/expect protocol test</span></span><br><span class="line"><span class="comment">#     fileContentBuffer: 512 B,      # limit for file content test</span></span><br><span class="line"><span class="comment">#     httpContentBuffer: 1 MB,       # limit for HTTP content test</span></span><br><span class="line"><span class="comment">#     networkTimeout:    5 seconds   # timeout for network I/O</span></span><br><span class="line"><span class="comment">#     programTimeout:    300 seconds # timeout for check program</span></span><br><span class="line"><span class="comment">#     stopTimeout:       30 seconds  # timeout for service stop</span></span><br><span class="line"><span class="comment">#     startTimeout:      30 seconds  # timeout for service start</span></span><br><span class="line"><span class="comment">#     restartTimeout:    30 seconds  # timeout for service restart</span></span><br><span class="line"><span class="comment"># &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## Set global SSL options (just most common options showed, see manual for</span></span><br><span class="line"><span class="comment">## full list).</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># set ssl &#123;</span></span><br><span class="line"><span class="comment">#     verify     : enable, # verify SSL certificates (disabled by default but STRONGLY RECOMMENDED)</span></span><br><span class="line"><span class="comment">#     selfsigned : allow   # allow self signed SSL certificates (reject by default)</span></span><br><span class="line"><span class="comment"># &#125;</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">## Set the list of mail servers for alert delivery. Multiple servers may be</span></span><br><span class="line"><span class="comment">## specified using a comma separator. If the first mail server fails, Monit</span></span><br><span class="line"><span class="comment"># will use the second mail server in the list and so on. By default Monit uses</span></span><br><span class="line"><span class="comment"># port 25 - it is possible to override this with the PORT option.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># set mailserver mail.bar.baz,               # primary mailserver</span></span><br><span class="line"><span class="comment">#                backup.bar.baz port 10025,  # backup mailserver on port 10025</span></span><br><span class="line"><span class="comment">#                localhost                   # fallback relay</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">## By default Monit will drop alert events if no mail servers are available.</span></span><br><span class="line"><span class="comment">## If you want to keep the alerts for later delivery retry, you can use the</span></span><br><span class="line"><span class="comment">## EVENTQUEUE statement. The base directory where undelivered alerts will be</span></span><br><span class="line"><span class="comment">## stored is specified by the BASEDIR option. You can limit the queue size</span></span><br><span class="line"><span class="comment">## by using the SLOTS option (if omitted, the queue is limited by space</span></span><br><span class="line"><span class="comment">## available in the back end filesystem).</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># set eventqueue</span></span><br><span class="line"><span class="comment">#     basedir /var/monit  # set the base directory where events will be stored</span></span><br><span class="line"><span class="comment">#     slots 100           # optionally limit the queue size</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">## Send status and events to M/Monit (for more informations about M/Monit</span></span><br><span class="line"><span class="comment">## see https://mmonit.com/). By default Monit registers credentials with</span></span><br><span class="line"><span class="comment">## M/Monit so M/Monit can smoothly communicate back to Monit and you don't</span></span><br><span class="line"><span class="comment">## have to register Monit credentials manually in M/Monit. It is possible to</span></span><br><span class="line"><span class="comment">## disable credential registration using the commented out option below.</span></span><br><span class="line"><span class="comment">## Though, if safety is a concern we recommend instead using https when</span></span><br><span class="line"><span class="comment">## communicating with M/Monit and send credentials encrypted. The password</span></span><br><span class="line"><span class="comment">## should be URL encoded if it contains URL-significant characters like</span></span><br><span class="line"><span class="comment">## ":", "?", "@". Default timeout is 5 seconds, you can customize it by</span></span><br><span class="line"><span class="comment">## adding the timeout option.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># set mmonit http://monit:monit@192.168.1.10:8080/collector</span></span><br><span class="line"><span class="comment">#     # with timeout 30 seconds              # Default timeout is 5 seconds</span></span><br><span class="line"><span class="comment">#     # and register without credentials     # Don't register credentials</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">## Monit by default uses the following format for alerts if the mail-format</span></span><br><span class="line"><span class="comment">## statement is missing::</span></span><br><span class="line"><span class="comment">## --8&lt;--</span></span><br><span class="line"><span class="comment">## set mail-format &#123;</span></span><br><span class="line"><span class="comment">##   from:    Monit &lt;monit@$HOST&gt;</span></span><br><span class="line"><span class="comment">##   subject: monit alert --  $EVENT $SERVICE</span></span><br><span class="line"><span class="comment">##   message: $EVENT Service $SERVICE</span></span><br><span class="line"><span class="comment">##                 Date:        $DATE</span></span><br><span class="line"><span class="comment">##                 Action:      $ACTION</span></span><br><span class="line"><span class="comment">##                 Host:        $HOST</span></span><br><span class="line"><span class="comment">##                 Description: $DESCRIPTION</span></span><br><span class="line"><span class="comment">##</span></span><br><span class="line"><span class="comment">##            Your faithful employee,</span></span><br><span class="line"><span class="comment">##            Monit</span></span><br><span class="line"><span class="comment">## &#125;</span></span><br><span class="line"><span class="comment">## --8&lt;--</span></span><br><span class="line"><span class="comment">##</span></span><br><span class="line"><span class="comment">## You can override this message format or parts of it, such as subject</span></span><br><span class="line"><span class="comment">## or sender using the MAIL-FORMAT statement. Macros such as $DATE, etc.</span></span><br><span class="line"><span class="comment">## are expanded at runtime. For example, to override the sender, use:</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># set mail-format &#123; from: monit@foo.bar &#125;</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">## You can set alert recipients whom will receive alerts if/when a</span></span><br><span class="line"><span class="comment">## service defined in this file has errors. Alerts may be restricted on</span></span><br><span class="line"><span class="comment">## events by using a filter as in the second example below.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># set alert sysadm@foo.bar                       # receive all alerts</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">## Do not alert when Monit starts, stops or performs a user initiated action.</span></span><br><span class="line"><span class="comment">## This filter is recommended to avoid getting alerts for trivial cases.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># set alert your-name@your.domain not on &#123; instance, action &#125;</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">## Monit has an embedded HTTP interface which can be used to view status of</span></span><br><span class="line"><span class="comment">## services monitored and manage services from a web interface. The HTTP</span></span><br><span class="line"><span class="comment">## interface is also required if you want to issue Monit commands from the</span></span><br><span class="line"><span class="comment">## command line, such as 'monit status' or 'monit restart service' The reason</span></span><br><span class="line"><span class="comment">## for this is that the Monit client uses the HTTP interface to send these</span></span><br><span class="line"><span class="comment">## commands to a running Monit daemon. See the Monit Wiki if you want to</span></span><br><span class="line"><span class="comment">## enable SSL for the HTTP interface.</span></span><br><span class="line"><span class="comment">## 设置web监控，使用localhost的话我们的监控就没有意义了</span></span><br><span class="line"><span class="built_in">set</span> httpd port 2812 and</span><br><span class="line">    use address 202.107.204.55  <span class="comment"># only accept connection from localhost (drop if you use M/Monit)</span></span><br><span class="line">    allow 0.0.0.0/0.0.0.0        <span class="comment"># allow localhost to connect to the server and</span></span><br><span class="line">    allow admin:monit      <span class="comment"># require user 'admin' with password 'monit'</span></span><br><span class="line">    <span class="comment">#with ssl &#123;            # enable SSL/TLS and set path to server certificate</span></span><br><span class="line">    <span class="comment">#    pemfile: /etc/ssl/certs/monit.pem</span></span><br><span class="line">    <span class="comment">#&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">###############################################################################</span></span><br><span class="line"><span class="comment">## Services</span></span><br><span class="line"><span class="comment">###############################################################################</span></span><br><span class="line"><span class="comment">##</span></span><br><span class="line"><span class="comment">## Check general system resources such as load average, cpu and memory</span></span><br><span class="line"><span class="comment">## usage. Each test specifies a resource, conditions and the action to be</span></span><br><span class="line"><span class="comment">## performed should a test fail.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#  check system $HOST</span></span><br><span class="line"><span class="comment">#    if loadavg (1min) &gt; 4 then alert</span></span><br><span class="line"><span class="comment">#    if loadavg (5min) &gt; 2 then alert</span></span><br><span class="line"><span class="comment">#    if cpu usage &gt; 95% for 10 cycles then alert</span></span><br><span class="line"><span class="comment">#    if memory usage &gt; 75% then alert</span></span><br><span class="line"><span class="comment">#    if swap usage &gt; 25% then alert</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">## Check if a file exists, checksum, permissions, uid and gid. In addition</span></span><br><span class="line"><span class="comment">## to alert recipients in the global section, customized alert can be sent to</span></span><br><span class="line"><span class="comment">## additional recipients by specifying a local alert handler. The service may</span></span><br><span class="line"><span class="comment">## be grouped using the GROUP option. More than one group can be specified by</span></span><br><span class="line"><span class="comment">## repeating the 'group name' statement.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#  check file apache_bin with path /usr/local/apache/bin/httpd</span></span><br><span class="line"><span class="comment">#    if failed checksum and</span></span><br><span class="line"><span class="comment">#       expect the sum 8f7f419955cefa0b33a2ba316cba3659 then unmonitor</span></span><br><span class="line"><span class="comment">#    if failed permission 755 then unmonitor</span></span><br><span class="line"><span class="comment">#    if failed uid "root" then unmonitor</span></span><br><span class="line"><span class="comment">#    if failed gid "root" then unmonitor</span></span><br><span class="line"><span class="comment">#    alert security@foo.bar on &#123;</span></span><br><span class="line"><span class="comment">#           checksum, permission, uid, gid, unmonitor</span></span><br><span class="line"><span class="comment">#        &#125; with the mail-format &#123; subject: Alarm! &#125;</span></span><br><span class="line"><span class="comment">#    group server</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">## Check that a process is running, in this case Apache, and that it respond</span></span><br><span class="line"><span class="comment">## to HTTP and HTTPS requests. Check its resource usage such as cpu and memory,</span></span><br><span class="line"><span class="comment">## and number of children. If the process is not running, Monit will restart</span></span><br><span class="line"><span class="comment">## it by default. In case the service is restarted very often and the</span></span><br><span class="line"><span class="comment">## problem remains, it is possible to disable monitoring using the TIMEOUT</span></span><br><span class="line"><span class="comment">## statement. This service depends on another service (apache_bin) which</span></span><br><span class="line"><span class="comment">## is defined above.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#  check process apache with pidfile /usr/local/apache/logs/httpd.pid</span></span><br><span class="line"><span class="comment">#    start program = "/etc/init.d/httpd start" with timeout 60 seconds</span></span><br><span class="line"><span class="comment">#    stop program  = "/etc/init.d/httpd stop"</span></span><br><span class="line"><span class="comment">#    if cpu &gt; 60% for 2 cycles then alert</span></span><br><span class="line"><span class="comment">#    if cpu &gt; 80% for 5 cycles then restart</span></span><br><span class="line"><span class="comment">#    if totalmem &gt; 200.0 MB for 5 cycles then restart</span></span><br><span class="line"><span class="comment">#    if children &gt; 250 then restart</span></span><br><span class="line"><span class="comment">#    if disk read &gt; 500 kb/s for 10 cycles then alert</span></span><br><span class="line"><span class="comment">#    if disk write &gt; 500 kb/s for 10 cycles then alert</span></span><br><span class="line"><span class="comment">#    if failed host www.tildeslash.com port 80 protocol http and request "/somefile.html" then restart</span></span><br><span class="line"><span class="comment">#    if failed port 443 protocol https with timeout 15 seconds then restart</span></span><br><span class="line"><span class="comment">#    if 3 restarts within 5 cycles then unmonitor</span></span><br><span class="line"><span class="comment">#    depends on apache_bin</span></span><br><span class="line"><span class="comment">#    group server</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">## Check filesystem permissions, uid, gid, space usage, inode usage and disk I/O.</span></span><br><span class="line"><span class="comment">## Other services, such as databases, may depend on this resource and an automatically</span></span><br><span class="line"><span class="comment">## graceful stop may be cascaded to them before the filesystem will become full and data</span></span><br><span class="line"><span class="comment">## lost.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#  check filesystem datafs with path /dev/sdb1</span></span><br><span class="line"><span class="comment">#    start program  = "/bin/mount /data"</span></span><br><span class="line"><span class="comment">#    stop program  = "/bin/umount /data"</span></span><br><span class="line"><span class="comment">#    if failed permission 660 then unmonitor</span></span><br><span class="line"><span class="comment">#    if failed uid "root" then unmonitor</span></span><br><span class="line"><span class="comment">#    if failed gid "disk" then unmonitor</span></span><br><span class="line"><span class="comment">#    if space usage &gt; 80% for 5 times within 15 cycles then alert</span></span><br><span class="line"><span class="comment">#    if space usage &gt; 99% then stop</span></span><br><span class="line"><span class="comment">#    if inode usage &gt; 30000 then alert</span></span><br><span class="line"><span class="comment">#    if inode usage &gt; 99% then stop</span></span><br><span class="line"><span class="comment">#    if read rate &gt; 1 MB/s for 5 cycles then alert</span></span><br><span class="line"><span class="comment">#    if read rate &gt; 500 operations/s for 5 cycles then alert</span></span><br><span class="line"><span class="comment">#    if write rate &gt; 1 MB/s for 5 cycles then alert</span></span><br><span class="line"><span class="comment">#    if write rate &gt; 500 operations/s for 5 cycles then alert</span></span><br><span class="line"><span class="comment">#    if service time &gt; 10 milliseconds for 3 times within 5 cycles then alert</span></span><br><span class="line"><span class="comment">#    group server</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">## Check a file's timestamp. In this example, we test if a file is older</span></span><br><span class="line"><span class="comment">## than 15 minutes and assume something is wrong if its not updated. Also,</span></span><br><span class="line"><span class="comment">## if the file size exceed a given limit, execute a script</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#  check file database with path /data/mydatabase.db</span></span><br><span class="line"><span class="comment">#    if failed permission 700 then alert</span></span><br><span class="line"><span class="comment">#    if failed uid "data" then alert</span></span><br><span class="line"><span class="comment">#    if failed gid "data" then alert</span></span><br><span class="line"><span class="comment">#    if timestamp &gt; 15 minutes then alert</span></span><br><span class="line"><span class="comment">#    if size &gt; 100 MB then exec "/my/cleanup/script" as uid dba and gid dba</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">## Check directory permission, uid and gid.  An event is triggered if the</span></span><br><span class="line"><span class="comment">## directory does not belong to the user with uid 0 and gid 0.  In addition,</span></span><br><span class="line"><span class="comment">## the permissions have to match the octal description of 755 (see chmod(1)).</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#  check directory bin with path /bin</span></span><br><span class="line"><span class="comment">#    if failed permission 755 then unmonitor</span></span><br><span class="line"><span class="comment">#    if failed uid 0 then unmonitor</span></span><br><span class="line"><span class="comment">#    if failed gid 0 then unmonitor</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">## Check a remote host availability by issuing a ping test and check the</span></span><br><span class="line"><span class="comment">## content of a response from a web server. Up to three pings are sent and</span></span><br><span class="line"><span class="comment">## connection to a port and an application level network check is performed.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#  check host myserver with address 192.168.1.1</span></span><br><span class="line"><span class="comment">#    if failed ping then alert</span></span><br><span class="line"><span class="comment">#    if failed port 3306 protocol mysql with timeout 15 seconds then alert</span></span><br><span class="line"><span class="comment">#    if failed port 80 protocol http</span></span><br><span class="line"><span class="comment">#       and request /some/path with content = "a string"</span></span><br><span class="line"><span class="comment">#    then alert</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">## Check a network link status (up/down), link capacity changes, saturation</span></span><br><span class="line"><span class="comment">## and bandwidth usage.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#  check network public with interface eth0</span></span><br><span class="line"><span class="comment">#    if failed link then alert</span></span><br><span class="line"><span class="comment">#    if changed link then alert</span></span><br><span class="line"><span class="comment">#    if saturation &gt; 90% then alert</span></span><br><span class="line"><span class="comment">#    if download &gt; 10 MB/s then alert</span></span><br><span class="line"><span class="comment">#    if total uploaded &gt; 1 GB in last hour then alert</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">## Check custom program status output.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#  check program myscript with path /usr/local/bin/myscript.sh</span></span><br><span class="line"><span class="comment">#    if status != 0 then alert</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">###############################################################################</span></span><br><span class="line"><span class="comment">## Includes</span></span><br><span class="line"><span class="comment">###############################################################################</span></span><br><span class="line"><span class="comment">##</span></span><br><span class="line"><span class="comment">## It is possible to include additional configuration parts from other files or</span></span><br><span class="line"><span class="comment">## directories.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#  include /etc/monit.d/*</span></span><br><span class="line"><span class="comment">#  include的文件就是我们添加的监控项目，新建monit/conf/sys目录，在下面添加conf文件</span></span><br><span class="line">include /data/monit/conf/sys/*.conf</span><br></pre></td></tr></table></figure>
+<h3 id="配置监控进程"><a href="#配置监控进程" class="headerlink" title="配置监控进程"></a>配置监控进程</h3><p>详细的配置方法在 Monit 的手册 <a href="https://mmonit.com/monit/documentation/monit.html#Service-checks" target="_blank" rel="noopener">配置方法</a> 里面可以找到，这里有两个例子：</p>
+<ol>
+<li><p><code>monit/conf/sys/mount.conf</code> </p>
+<p>如果系统中没有挂载 <code>/dev/sdb</code> ，那就执行挂载命令。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># mount.conf</span></span><br><span class="line">check filesystem data with path /dev/sdb</span><br><span class="line">       <span class="keyword">if</span> does not exist <span class="keyword">then</span> <span class="built_in">exec</span> <span class="string">"/bin/mount /dev/sdb /data"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>monit/conf/sys/recommender.conf</code> </p>
+<p>如果没有名为 <code>python server.py</code> 的进程，那就启动。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># recommender.conf</span></span><br><span class="line">check process recommender with MATCHING <span class="string">"python server.py"</span></span><br><span class="line">    <span class="keyword">if</span> does not exist <span class="keyword">then</span> <span class="built_in">exec</span> <span class="string">"/usr/bin/nohup python /data/Recommender/src_tornado/server/server.py &amp;"</span></span><br><span class="line">    <span class="keyword">if</span> changed pid <span class="keyword">then</span> alert</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="启动和关闭"><a href="#启动和关闭" class="headerlink" title="启动和关闭"></a>启动和关闭</h1><p>这里有几个常用的脚本，放在 Monit 根目录下，即和 bin 同级的目录，注意这里的文件需要使用 <code>chmod</code> 赋予运行权限。</p>
+<h3 id="start-sh（启动）"><a href="#start-sh（启动）" class="headerlink" title="start.sh（启动）"></a>start.sh（启动）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">pwd</span>=$(<span class="built_in">cd</span> `dirname <span class="variable">$0</span>`; <span class="built_in">pwd</span>)</span><br><span class="line"><span class="variable">$pwd</span>/bin/monit -c <span class="variable">$pwd</span>/conf/monitrc</span><br></pre></td></tr></table></figure>
+<h3 id="stop-sh（关闭）"><a href="#stop-sh（关闭）" class="headerlink" title="stop.sh（关闭）"></a>stop.sh（关闭）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#bin/monit -c /data/server/monit/conf/monitrc quit</span></span><br><span class="line"><span class="built_in">kill</span> -9 `ps -ef | grep monit/bin/monit | grep -v <span class="string">"grep"</span> | awk <span class="string">'&#123;print $2&#125;'</span> `</span><br></pre></td></tr></table></figure>
+<h3 id="restart-sh（重启）"><a href="#restart-sh（重启）" class="headerlink" title="restart.sh（重启）"></a>restart.sh（重启）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">kill</span> -9 `ps -ef | grep monit/bin/monit | grep -v <span class="string">"grep"</span> | awk <span class="string">'&#123;print $2&#125;'</span> `</span><br><span class="line">sleep 3</span><br><span class="line"><span class="built_in">pwd</span>=$(<span class="built_in">cd</span> `dirname <span class="variable">$0</span>`; <span class="built_in">pwd</span>)</span><br><span class="line"><span class="variable">$pwd</span>/bin/monit -c <span class="variable">$pwd</span>/conf/monitrc</span><br></pre></td></tr></table></figure>
+<h1 id="监控界面"><a href="#监控界面" class="headerlink" title="监控界面"></a>监控界面</h1><p>启动以后就可以通过浏览器访问了，我这里配置了 <code>http://localhost:1235/</code> 就是目标服务器的 2812 端口。通过浏览器访问：</p>
+<p><img src="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-12-17-092834.png" alt="image-20181217172834307"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这里仅提到了 Monit 的基础使用，进阶使用还需研究官方文档。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Ryan Li 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/29/2018-11-29 HNSW 主要算法/" rel="next" title="近似最近邻算法 HNSW 学习笔记（二） 主要算法伪代码分析">
+                <i class="fa fa-chevron-left"></i> 近似最近邻算法 HNSW 学习笔记（二） 主要算法伪代码分析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zODgwNi8xNTMzNA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpeg" alt="Ryan Li">
+            
+              <p class="site-author-name" itemprop="name">Ryan Li</p>
+              <p class="site-description motion-element" itemprop="description">Hello World.</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">43</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/RyanLiGod" title="GitHub &rarr; https://github.com/RyanLiGod" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:ryanligod@gmail.com" title="E-Mail &rarr; mailto:ryanligod@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置"><span class="nav-number">3.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置-monitrc"><span class="nav-number">3.0.1.</span> <span class="nav-text">配置 monitrc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置监控进程"><span class="nav-number">3.0.2.</span> <span class="nav-text">配置监控进程</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#启动和关闭"><span class="nav-number">4.</span> <span class="nav-text">启动和关闭</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#start-sh（启动）"><span class="nav-number">4.0.1.</span> <span class="nav-text">start.sh（启动）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stop-sh（关闭）"><span class="nav-number">4.0.2.</span> <span class="nav-text">stop.sh（关闭）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#restart-sh（重启）"><span class="nav-number">4.0.3.</span> <span class="nav-text">restart.sh（重启）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#监控界面"><span class="nav-number">5.</span> <span class="nav-text">监控界面</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ryan Li</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+    <script type="text/javascript">
+      window.livereOptions = {
+        refer: '2018/12/17/2018-12-17 使用 Monit 搭建监控系统/'
+      };
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1}))
+                .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function () {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "L71FAGlYbGy360uJzNBnyuLd-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "L71FAGlYbGy360uJzNBnyuLd-gzGzoHsz",
+                'X-LC-Key': "EkXnFcBGbM1Rt0hfAcUtDRUo",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('复制成功')
+          else $(this).text('复制失败')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+  
+
+</body>
+</html>

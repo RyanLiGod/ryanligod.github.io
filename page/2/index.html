@@ -268,7 +268,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">31</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">32</span></a>
 
   </li>
         
@@ -287,7 +287,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">10</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">11</span></a>
 
   </li>
         
@@ -306,7 +306,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">43</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">45</span></a>
 
   </li>
 
@@ -342,6 +342,387 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/11/08/2018-11-08 C++ 中的 using 简单总结/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan Li">
+      <meta itemprop="description" content="Hello World.">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ryan Li God">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/11/08/2018-11-08 C++ 中的 using 简单总结/" class="post-title-link" itemprop="https://www.ryanligod.com/page/2/index.html">C++ 中的 using 简单总结</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-11-08 16:33:59 / 修改时间：17:02:52" itemprop="dateCreated datePublished" datetime="2018-11-08T16:33:59+08:00">2018-11-08</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/11/08/2018-11-08 C++ 中的 using 简单总结/" class="leancloud_visitors" data-flag-title="C++ 中的 using 简单总结">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="1-命名空间"><a href="#1-命名空间" class="headerlink" title="1. 命名空间"></a>1. 命名空间</h2><p>该用法能直接在程序中使用 using 后所跟的命名空间的元素，而不用每次要使用时指定命名空间。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="2-定义别名"><a href="#2-定义别名" class="headerlink" title="2. 定义别名"></a>2. 定义别名</h2><p>给某一类型定义别名，和 typedef 作用一样。</p>
+<blockquote>
+<p>using 类型别名 = 原类型;</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> uint = <span class="keyword">unsigned</span> <span class="keyword">int</span>;</span><br><span class="line">uint i = <span class="number">0</span>;  <span class="comment">// 相当于unsigned int;</span></span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/11/08/2018-11-08 C++ 中的 using 简单总结/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/11/08/2018-11-08 ShadowsocksX 更新 PAC 方法/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan Li">
+      <meta itemprop="description" content="Hello World.">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ryan Li God">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/11/08/2018-11-08 ShadowsocksX 更新 PAC 方法/" class="post-title-link" itemprop="https://www.ryanligod.com/page/2/index.html">ShadowsocksX 更新 PAC 方法</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-11-08 10:20:55" itemprop="dateCreated datePublished" datetime="2018-11-08T10:20:55+08:00">2018-11-08</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-11-09 15:08:01" itemprop="dateModified" datetime="2018-11-09T15:08:01+08:00">2018-11-09</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/工具/" itemprop="url" rel="index"><span itemprop="name">工具</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/11/08/2018-11-08 ShadowsocksX 更新 PAC 方法/" class="leancloud_visitors" data-flag-title="ShadowsocksX 更新 PAC 方法">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="更新方法"><a href="#更新方法" class="headerlink" title="更新方法"></a>更新方法</h3><p>手动下载 gfwlist.txt, 转成 PAC 所用的 gfwlist.js 之后放到默认存放位置。</p>
+<ol>
+<li><p>获取 gfwlist.txt， 最新地址 <a href="https://github.com/gfwlist/gfwlist：" target="_blank" rel="noopener">https://github.com/gfwlist/gfwlist：</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> wget https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装 gfwlist2pac，注意这里需要 python 2.7 的环境，我这里使用 conda 切换到 python 2.7 的环境：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">source</span> activate py27</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> pip install gfwlist2pac</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>转换 PAC：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> gfwlist2pac -i gfwlist.txt -f gfwlist.js -p <span class="string">"SOCKS5 127.0.0.1:1080;"</span> --precise</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>拷贝新生成的 gfwlist.js 到 ShadowsocksX PAC 目录（macOS）：</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cp gfwlist.js ~/.ShadowsocksX/</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -578,7 +959,7 @@
           <h2 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/10/29/2018-10-29 pybind11 入门/" class="post-title-link" itemprop="https://www.ryanligod.com/page/2/index.html">python 调用 C++ 之 pybind11入门（macOS）</a>
+                <a href="/2018/10/29/2018-10-29 pybind11 入门/" class="post-title-link" itemprop="https://www.ryanligod.com/page/2/index.html">Python 调用 C++ 之 pybind11入门（macOS）</a>
               
             
           </h2>
@@ -620,7 +1001,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-11-08 10:24:27" itemprop="dateModified" datetime="2018-11-08T10:24:27+08:00">2018-11-08</time>
+                <time title="修改时间：2019-03-21 11:00:50" itemprop="dateModified" datetime="2019-03-21T11:00:50+08:00">2019-03-21</time>
               
             
           </span>
@@ -637,7 +1018,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
 
                 
                 
@@ -651,7 +1032,7 @@
 
           
           
-             <span id="/2018/10/29/2018-10-29 pybind11 入门/" class="leancloud_visitors" data-flag-title="python 调用 C++ 之 pybind11入门（macOS）">
+             <span id="/2018/10/29/2018-10-29 pybind11 入门/" class="leancloud_visitors" data-flag-title="Python 调用 C++ 之 pybind11入门（macOS）">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -683,16 +1064,16 @@
 
       
         
-          <h2 id="pybind11简介与环境安装"><a href="#pybind11简介与环境安装" class="headerlink" title="pybind11简介与环境安装"></a>pybind11简介与环境安装</h2><p>pybind11 是一个轻量级的只包含头文件的库，它主要是用来在已有的 C++ 代码的基础上做扩展，它的语法和目标非常像 Boost.Python，但 Boost.Python 为了兼容现有的基本所有的 C++ 编译器而变得非常复杂和庞大，而因此付出的代价是很多晦涩的模板技巧以及很多不必要的对旧版编译器的支持。Pybind11 摒弃了这些支持，它只支持 python 2.7 以上以及 C++ 11 以上的编译器，使得它比 Boost.Python 更加简洁高效。 </p>
+          <h2 id="pybind11-简介与环境安装"><a href="#pybind11-简介与环境安装" class="headerlink" title="pybind11 简介与环境安装"></a>pybind11 简介与环境安装</h2><p>pybind11 是一个轻量级的只包含头文件的库，它主要是用来在已有的 C++ 代码的基础上做扩展，它的语法和目标非常像 Boost.Python，但 Boost.Python 为了兼容现有的基本所有的 C++ 编译器而变得非常复杂和庞大，而因此付出的代价是很多晦涩的模板技巧以及很多不必要的对旧版编译器的支持。Pybind11 摒弃了这些支持，它只支持 python 2.7 以上以及 C++ 11 以上的编译器，使得它比 Boost.Python 更加简洁高效。 </p>
 <p>为了使用pybind11，我们需要支持 C++ 11 标准的编译器（GCC 4.8以上）以及 python 2.7 以上的版本，还需要下载 <a href="https://cmake.org/cmake-tutorial/" target="_blank" rel="noopener">CMake</a> (macOS中只需要 <code>brew install cmake</code> )，有了这些以后：</p>
 <ol>
 <li>从 pybind11 github网址：<a href="https://github.com/pybind/pybind11" target="_blank" rel="noopener">https://github.com/pybind/pybind11</a> 上下载源码。</li>
 <li>CMake 工程之前，要先安装pytest <code>pip install pytest</code>，否则会出错。</li>
 <li>用 <code>CMake</code> 编译并运行测试用例：</li>
 </ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mkdir build</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> build</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> cmake ..</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> make check -j 4</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> mkdir build</span><br><span class="line"><span class="meta">$</span> cd build</span><br><span class="line"><span class="meta">$</span> cmake ..</span><br><span class="line"><span class="meta">$</span> make check -j 4</span><br></pre></td></tr></table></figure>
 <p>最后一行命令会编译并且运行 tests，如果所有测试用例都通过了，说明安装成功了。</p>
-<h2 id="python调用C"><a href="#python调用C" class="headerlink" title="python调用C++"></a>python调用C++</h2><p>下载编译好 pybind11 之后，我们就可以开始对着官方的<a href="http://pybind11.readthedocs.io/en/stable/index.html" target="_blank" rel="noopener">pybind11 Tutorial</a>进行学习了，详细的入门教程及语法请参考官方文档，这里，我们简单演示下如何编写供python调用的C++模块。</p>
+<h2 id="Python-调用C"><a href="#Python-调用C" class="headerlink" title="Python 调用C++"></a>Python 调用C++</h2><p>下载编译好 pybind11 之后，我们就可以开始对着官方的<a href="http://pybind11.readthedocs.io/en/stable/index.html" target="_blank" rel="noopener">pybind11 Tutorial</a>进行学习了，详细的入门教程及语法请参考官方文档，这里，我们简单演示下如何编写供python调用的C++模块。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -1988,403 +2369,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/08/11/2018-08-11 吴恩达ML（四） 正则化/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan Li">
-      <meta itemprop="description" content="Hello World.">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ryan Li God">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/08/11/2018-08-11 吴恩达ML（四） 正则化/" class="post-title-link" itemprop="https://www.ryanligod.com/page/2/index.html">吴恩达机器学习笔记（四） 正则化</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-08-11 01:23:57" itemprop="dateCreated datePublished" datetime="2018-08-11T01:23:57+08:00">2018-08-11</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-11-27 16:47:49" itemprop="dateModified" datetime="2018-11-27T16:47:49+08:00">2018-11-27</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/08/11/2018-08-11 吴恩达ML（四） 正则化/" class="leancloud_visitors" data-flag-title="吴恩达机器学习笔记（四） 正则化">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="过拟合问题-Overfitting"><a href="#过拟合问题-Overfitting" class="headerlink" title="过拟合问题 Overfitting"></a>过拟合问题 Overfitting</h1><p>欠拟合 underfitting (high bias 高偏差)<br>过拟合 overfitting (high variance 高方差)</p>
-<p><img src="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-08-10-122840.png" alt="image-20180810222840351"></p>
-<p><img src="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-08-10-123105.png" alt="image-20180810223105167"></p>
-<h3 id="解决的办法"><a href="#解决的办法" class="headerlink" title="解决的办法"></a>解决的办法</h3><ol>
-<li><strong>减少特征的数量</strong><ul>
-<li>手动选择保留哪些特征</li>
-<li>模型选择算法</li>
-</ul>
-</li>
-<li><strong>正则化 Regularization</strong><ul>
-<li>保留所有特征，但是减少量级或者参数 $\theta$ 的大小</li>
-<li>当特征非常多的时候依旧非常有效，每一个特征都会对预测 $y$ 产生影响</li>
-</ul>
-</li>
-</ol>
-<h1 id="代价函数"><a href="#代价函数" class="headerlink" title="代价函数"></a>代价函数</h1><p><img src="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-08-10-124048.png" alt="image-20180810224047865"></p>
-<p><strong>解决办法的思想</strong><br>在 $\theta_3$ 和 $\theta_4$ 中增加惩罚，增加一个很大的数与之相乘，这样要最小化代价函数，最后 $\theta_3$ 和 $\theta_4$ 会变得非常小（接近于0），这样最后的结果得到了依旧类似于一个二次函数</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/08/11/2018-08-11 吴恩达ML（四） 正则化/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-         
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/08/10/2018-08-10 吴恩达ML（三）Logistic 回归/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan Li">
-      <meta itemprop="description" content="Hello World.">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ryan Li God">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/08/10/2018-08-10 吴恩达ML（三）Logistic 回归/" class="post-title-link" itemprop="https://www.ryanligod.com/page/2/index.html">吴恩达机器学习笔记（三） Logistic 回归</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-08-10 03:26:50" itemprop="dateCreated datePublished" datetime="2018-08-10T03:26:50+08:00">2018-08-10</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-11-27 16:47:55" itemprop="dateModified" datetime="2018-11-27T16:47:55+08:00">2018-11-27</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/08/10/2018-08-10 吴恩达ML（三）Logistic 回归/" class="leancloud_visitors" data-flag-title="吴恩达机器学习笔记（三） Logistic 回归">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="分类-Classfication"><a href="#分类-Classfication" class="headerlink" title="分类 Classfication"></a>分类 Classfication</h1><p>$y \in \{1,0\}$<br>0:  “Negative Class”<br>1:  “Positive Class”</p>
-<h1 id="逻辑回归"><a href="#逻辑回归" class="headerlink" title="逻辑回归"></a>逻辑回归</h1><p>逻辑回归是一种分类方法<br><strong>Logistic Regression Model</strong><br>Want  $ 0 \leq h_\theta(x) \leq 1$<br>$h_\theta(x)=g(\theta^Tx)$<br>其中  $g(z)=\dfrac{1}{1+e^{-z}}$  ，称作<strong>Sigmoid函数</strong>或<strong>Logistic函数</strong></p>
-<p><img src="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-08-09-150915.png" alt="image-20180810010915319"></p>
-<p>$h_\theta(x)=P(y=1|x;\theta)$</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/08/10/2018-08-10 吴恩达ML（三）Logistic 回归/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-         
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2434,7 +2418,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">43</span>
+                    <span class="site-state-item-count">45</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2446,6 +2430,8 @@
                 <div class="site-state-item site-state-categories">
                   <a href="/categories/index.html">
                     
+                    
+                      
                     
                       
                     
@@ -2479,6 +2465,8 @@
                 <div class="site-state-item site-state-tags">
                   <a href="/tags/index.html">
                     
+                    
+                      
                     
                       
                     
@@ -2607,7 +2595,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
@@ -2849,11 +2837,11 @@
       
     
       
+    
+      
+    
+      
         
-      
-    
-      
-    
       
     
       

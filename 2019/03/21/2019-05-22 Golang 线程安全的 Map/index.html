@@ -118,7 +118,7 @@
 <meta property="og:description" content="前言最近在使用 Golang 实现 HNSW 算法的多属性支持，在其中用到的 map 结构。然后 Map 并不是线程安全的，使用多线程的话在新版本的 Golang 中会直接出现 panic。 sync.Map 这个数据结构是线程安全的，它填补了 Map 线程不安全的缺陷，不过最好只在需要的情况下使用。它一般用于并发模型中对同一类 map 结构体的读写，或其他适用于 sync.Map 的情况。 关于">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2019-05-22-100239.png">
-<meta property="og:updated_time" content="2019-05-22T10:03:50.789Z">
+<meta property="og:updated_time" content="2019-05-22T11:24:38.295Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Golang 线程安全的 sync.Map">
 <meta name="twitter:description" content="前言最近在使用 Golang 实现 HNSW 算法的多属性支持，在其中用到的 map 结构。然后 Map 并不是线程安全的，使用多线程的话在新版本的 Golang 中会直接出现 panic。 sync.Map 这个数据结构是线程安全的，它填补了 Map 线程不安全的缺陷，不过最好只在需要的情况下使用。它一般用于并发模型中对同一类 map 结构体的读写，或其他适用于 sync.Map 的情况。 关于">
@@ -419,7 +419,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-05-22 18:03:50" itemprop="dateModified" datetime="2019-05-22T18:03:50+08:00">2019-05-22</time>
+                <time title="修改时间：2019-05-22 19:24:38" itemprop="dateModified" datetime="2019-05-22T19:24:38+08:00">2019-05-22</time>
               
             
           </span>
@@ -491,6 +491,7 @@
 <li><code>Range</code>   遍历所有的 key，value</li>
 <li><code>Delete</code>   删除 key，及其 value</li>
 </ol>
+<a id="more"></a>
 <h4 id="Store-key-value-interface"><a href="#Store-key-value-interface" class="headerlink" title="Store(key, value interface{})"></a>Store(key, value interface{})</h4><blockquote>
 <p>说明： 存储一个设置的键值。</p>
 </blockquote>

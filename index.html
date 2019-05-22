@@ -420,7 +420,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-05-22 18:03:50" itemprop="dateModified" datetime="2019-05-22T18:03:50+08:00">2019-05-22</time>
+                <time title="修改时间：2019-05-22 19:24:38" itemprop="dateModified" datetime="2019-05-22T19:24:38+08:00">2019-05-22</time>
               
             
           </span>
@@ -483,8 +483,7 @@
 
       
         
-          
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近在使用 Golang 实现 HNSW 算法的多属性支持，在其中用到的 map 结构。然后 Map 并不是线程安全的，使用多线程的话在新版本的 Golang 中会直接出现 panic。</p>
+          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近在使用 Golang 实现 HNSW 算法的多属性支持，在其中用到的 map 结构。然后 Map 并不是线程安全的，使用多线程的话在新版本的 Golang 中会直接出现 panic。</p>
 <p>sync.Map 这个数据结构是线程安全的，它填补了 Map 线程不安全的缺陷，不过最好只在需要的情况下使用。它一般用于并发模型中对同一类 map 结构体的读写，或其他适用于 sync.Map 的情况。</p>
 <p>关于 sync.Map 的源码解析文章：<a href="https://segmentfault.com/a/1190000010294041" target="_blank" rel="noopener">Go 1.9 sync.Map揭秘</a></p>
 <h1 id="sync-Map使用方法"><a href="#sync-Map使用方法" class="headerlink" title="sync.Map使用方法"></a>sync.Map使用方法</h1><ol>
@@ -494,31 +493,15 @@
 <li><code>Range</code>   遍历所有的 key，value</li>
 <li><code>Delete</code>   删除 key，及其 value</li>
 </ol>
-<h4 id="Store-key-value-interface"><a href="#Store-key-value-interface" class="headerlink" title="Store(key, value interface{})"></a>Store(key, value interface{})</h4><blockquote>
-<p>说明： 存储一个设置的键值。</p>
-</blockquote>
-<h4 id="LoadOrStore-key-value-interface-actual-interface-loaded-bool"><a href="#LoadOrStore-key-value-interface-actual-interface-loaded-bool" class="headerlink" title="LoadOrStore(key, value interface{}) (actual interface{}, loaded bool)"></a>LoadOrStore(key, value interface{}) (actual interface{}, loaded bool)</h4><blockquote>
-<p>说明： 返回键的现有值(如果存在)，否则存储并返回给定的值，如果是读取则返回true，如果是存储返回false。</p>
-</blockquote>
-<h4 id="Load-key-interface-value-interface-ok-bool"><a href="#Load-key-interface-value-interface-ok-bool" class="headerlink" title="Load(key interface{}) (value interface{}, ok bool)"></a>Load(key interface{}) (value interface{}, ok bool)</h4><blockquote>
-<p>说明： 读取存储在map中的值，如果没有值，则返回nil。OK的结果表示是否在map中找到值。</p>
-</blockquote>
-<h4 id="Delete-key-interface"><a href="#Delete-key-interface" class="headerlink" title="Delete(key interface{})"></a>Delete(key interface{})</h4><blockquote>
-<p>说明： 删除键对应的值。</p>
-</blockquote>
-<h4 id="Range-f-func-key-value-interface-bool"><a href="#Range-f-func-key-value-interface-bool" class="headerlink" title="Range(f func(key, value interface{}) bool)"></a>Range(f func(key, value interface{}) bool)</h4><blockquote>
-<p>说明： 循环读取map中的值。</p>
-</blockquote>
-<h4 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下"></a>代码如下</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"sync"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> m sync.Map</span><br><span class="line"></span><br><span class="line">	<span class="comment">//Store</span></span><br><span class="line">	m.Store(<span class="number">1</span>, <span class="string">"a"</span>)</span><br><span class="line">	m.Store(<span class="number">2</span>, <span class="string">"b"</span>)</span><br><span class="line"></span><br><span class="line">	<span class="comment">//LoadOrStore</span></span><br><span class="line">	<span class="comment">//若key不存在，则存入key和value，返回false和输入的value</span></span><br><span class="line">	v, ok := m.LoadOrStore(<span class="string">"1"</span>, <span class="string">"aaa"</span>)</span><br><span class="line">	fmt.Println(ok, v) <span class="comment">//false aaa</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//若key已存在，则返回true和key对应的value，不会修改原来的value</span></span><br><span class="line">	v, ok = m.LoadOrStore(<span class="number">1</span>, <span class="string">"aaa"</span>)</span><br><span class="line">	fmt.Println(ok, v) <span class="comment">//false aaa</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//Load</span></span><br><span class="line">	v, ok = m.Load(<span class="number">1</span>)</span><br><span class="line">	<span class="keyword">if</span> ok &#123;</span><br><span class="line">		fmt.Println(<span class="string">"it's an existing key,value is "</span>, v)</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"it's an unknown key"</span>)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//Range</span></span><br><span class="line">	<span class="comment">//遍历sync.Map, 要求输入一个func作为参数</span></span><br><span class="line">	f := <span class="function"><span class="keyword">func</span><span class="params">(k, v <span class="keyword">interface</span>&#123;&#125;)</span> <span class="title">bool</span></span> &#123;</span><br><span class="line">		<span class="comment">//这个函数的入参、出参的类型都已经固定，不能修改</span></span><br><span class="line">		<span class="comment">//可以在函数体内编写自己的代码，调用map中的k,v</span></span><br><span class="line"></span><br><span class="line">		fmt.Println(k, v)</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">	&#125;</span><br><span class="line">	m.Range(f)</span><br><span class="line"></span><br><span class="line">	<span class="comment">//Delete</span></span><br><span class="line">	m.Delete(<span class="number">1</span>)</span><br><span class="line">	fmt.Println(m.Load(<span class="number">1</span>))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// false aaa</span></span><br><span class="line"><span class="comment">// true a</span></span><br><span class="line"><span class="comment">// it's an existing key,value is  a</span></span><br><span class="line"><span class="comment">// 1 a</span></span><br><span class="line"><span class="comment">// 2 b</span></span><br><span class="line"><span class="comment">// 1 aaa</span></span><br><span class="line"><span class="comment">// &lt;nil&gt; false</span></span><br></pre></td></tr></table></figure>
-<h1 id="sync-RWMutex-Map"><a href="#sync-RWMutex-Map" class="headerlink" title="sync.RWMutex+Map"></a>sync.RWMutex+Map</h1><p>利用传统的 sync.RWMutex+Map 实现并发安全的 Map：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> rwmap = <span class="keyword">struct</span>&#123;</span><br><span class="line">    sync.RWMutex</span><br><span class="line">    m <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">string</span></span><br><span class="line">&#125;&#123;m: <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]sring)&#125;</span><br></pre></td></tr></table></figure>
-<p>读数据时候，读锁锁定：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rwmap.RLock()</span><br><span class="line">value:= rwmap.m[<span class="string">"key"</span>]</span><br><span class="line">rwmap.RUnlock()</span><br><span class="line">fmt.Println(<span class="string">"key:"</span>, value)</span><br></pre></td></tr></table></figure>
-<p>写数据的时候，写锁锁定：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rwmap.Lock()</span><br><span class="line">rwmap.m[<span class="string">"key"</span>]=<span class="string">"value"</span></span><br><span class="line">rwmap.Unlock()</span><br></pre></td></tr></table></figure>
-<h1 id="两种-Map-性能对比"><a href="#两种-Map-性能对比" class="headerlink" title="两种 Map 性能对比"></a>两种 Map 性能对比</h1><p><img src="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2019-05-22-100239.png" alt="image-20190522180238496"></p>
-
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/03/21/2019-05-22 Golang 线程安全的 Map/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
         
       
     </div>

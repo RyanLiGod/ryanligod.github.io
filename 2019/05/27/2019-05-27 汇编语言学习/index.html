@@ -128,7 +128,7 @@
 <meta property="og:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2019-05-27-111647.jpg">
 <meta property="og:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2019-05-27-111709.png">
 <meta property="og:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2019-05-27-111953.png">
-<meta property="og:updated_time" content="2019-05-27T11:25:05.998Z">
+<meta property="og:updated_time" content="2019-05-27T11:27:31.700Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="汇编语言学习">
 <meta name="twitter:description" content="img {     max-height: 400px !important;   }     学习自阮一峰的网络日志：汇编语言入门教程  前言学习编程其实就是学高级语言，即那些为人类设计的计算机语言。但是，计算机不理解高级语言，必须通过编译器转成二进制代码，才能运行。学会高级语言，并不等于理解计算机实际的运行步骤。计算机真正能够理解的是低级语言，它专门用来控制硬件。汇编语言就是低级语言，直">
@@ -412,7 +412,7 @@
                 
               
 
-              <time title="创建时间：2019-05-27 18:42:24 / 修改时间：19:25:05" itemprop="dateCreated datePublished" datetime="2019-05-27T18:42:24+08:00">2019-05-27</time>
+              <time title="创建时间：2019-05-27 18:42:24 / 修改时间：19:27:31" itemprop="dateCreated datePublished" datetime="2019-05-27T18:42:24+08:00">2019-05-27</time>
             
 
             
@@ -530,7 +530,7 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   <span class="keyword">int</span> a = <span class="number">2</span>;</span><br><span class="line">   <span class="keyword">int</span> b = <span class="number">3</span>;</span><br><span class="line">   <span class="keyword">return</span> add_a_and_b(a, b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>上面代码中，<code>main</code> 函数内部调用了 <code>add_a_and_b</code> 函数。执行到这一行的时候，系统也会为 <code>add_a_and_b</code> 新建一个帧，用来储存它的内部变量。也就是说，此时同时存在两个帧： <code>main</code> 和 <code>add_a_and_b</code> 。一般来说，调用栈有多少层，就有多少帧。</p>
 <p><img src="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2019-05-27-111509.png" alt="image-20190527191508699"></p>
-<p>等到<code>add_a_and_b</code>运行结束，它的帧就会被回收，系统会回到函数<code>main</code>刚才中断执行的地方，继续往下执行。通过这种机制，就实现了函数的层层调用，并且每一层都能使用自己的本地变量。</p>
+<p>等到 <code>add_a_and_b</code> 运行结束，它的帧就会被回收，系统会回到函数 <code>main</code> 刚才中断执行的地方，继续往下执行。通过这种机制，就实现了函数的层层调用，并且每一层都能使用自己的本地变量。</p>
 <p>所有的帧都存放在 Stack，由于帧是一层层叠加的，所以 Stack 叫做栈。生成新的帧，叫做”入栈”，英文是 push；栈的回收叫做”出栈”，英文是 pop。Stack 的特点就是，最晚入栈的帧最早出栈（因为最内层的函数调用，最先结束运行），这就叫做”后进先出”的数据结构。每一次函数执行结束，就自动释放一个帧，所有函数执行结束，整个 Stack 就都释放了。</p>
 <p><img src="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2019-05-27-111606.jpg" alt=""></p>
 <p><img src="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2019-05-27-111647.jpg" alt=""></p>

@@ -117,7 +117,7 @@
 <meta property="og:site_name" content="Ryan Li God">
 <meta property="og:description" content="前言最近在用 C 语言写一个自己的编程语言，准备做成类似易语言的中文语言。其中有将中文文字转为拼音的需求，但是 C 语言中比较难做到，如果要自己实现要做一个比较大的字典，显然不切合实际，正好 Go 语言中有这样的一个库可以做到：github.com/mozillazg/go-pinyin。所以打算用 C 调用 Go 进行实现。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-12T13:56:38.689Z">
+<meta property="og:updated_time" content="2019-06-12T14:26:26.020Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C 调用 Go 实录">
 <meta name="twitter:description" content="前言最近在用 C 语言写一个自己的编程语言，准备做成类似易语言的中文语言。其中有将中文文字转为拼音的需求，但是 C 语言中比较难做到，如果要自己实现要做一个比较大的字典，显然不切合实际，正好 Go 语言中有这样的一个库可以做到：github.com/mozillazg/go-pinyin。所以打算用 C 调用 Go 进行实现。">
@@ -400,7 +400,7 @@
                 
               
 
-              <time title="创建时间：2019-06-12 20:57:48 / 修改时间：21:56:38" itemprop="dateCreated datePublished" datetime="2019-06-12T20:57:48+08:00">2019-06-12</time>
+              <time title="创建时间：2019-06-12 20:57:48 / 修改时间：22:26:26" itemprop="dateCreated datePublished" datetime="2019-06-12T20:57:48+08:00">2019-06-12</time>
             
 
             
@@ -498,6 +498,12 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">panic: runtime error: cgo result has Go pointer</span><br></pre></td></tr></table></figure>
 <p>应该把 Go 的 <code>string</code> 类型转换成 C 语言的 <code>*C.char</code> 类型。更改 convertPinyin.go 的代码如下：</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"C"</span></span><br><span class="line">	<span class="string">"unicode"</span></span><br><span class="line"></span><br><span class="line">	<span class="string">"github.com/mozillazg/go-pinyin"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">//export convertPinyin</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">convertPinyin</span><span class="params">(value <span class="keyword">string</span>)</span> *<span class="title">C</span>.<span class="title">char</span></span> &#123;</span><br><span class="line">	stringSlice := []<span class="keyword">rune</span>(value)</span><br><span class="line">	convertedCode := <span class="string">""</span></span><br><span class="line">	<span class="comment">// Support Chinese words in quotation</span></span><br><span class="line">	quotationFlag := <span class="literal">false</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="built_in">len</span>(stringSlice); i++ &#123;</span><br><span class="line">		ch := <span class="keyword">string</span>(stringSlice[i])</span><br><span class="line">		<span class="keyword">if</span> ch == <span class="string">"\""</span> &#123;</span><br><span class="line">			quotationFlag = !quotationFlag</span><br><span class="line">			convertedCode += ch</span><br><span class="line">			<span class="keyword">continue</span></span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> quotationFlag == <span class="literal">true</span> &#123;</span><br><span class="line">			convertedCode += ch</span><br><span class="line">			<span class="keyword">continue</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> unicode.Is(unicode.Scripts[<span class="string">"Han"</span>], stringSlice[i]) &#123;</span><br><span class="line">			convertedCode += pinyin.LazyConvert(ch, <span class="literal">nil</span>)[<span class="number">0</span>]</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			convertedCode += ch</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> C.CString(convertedCode)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>还遇到其他问题：</p>
+<ul>
+<li>提示 <code>can&#39;t load package: package .: build constraints exclude all Go files in</code> ，需要先设置 <code>go env</code> ：<code>set CGO_ENABLED=1</code></li>
+<li>有一种情况需要在 32 位情况下编译，修改 GOARCH：<code>set GOARCH=386</code></li>
+</ul>
+<p>这里有个不错的文章：<a href="https://ejin66.github.io/2018/09/15/go-to-so-android.html" target="_blank" rel="noopener">https://ejin66.github.io/2018/09/15/go-to-so-android.html</a></p>
 
       
     </div>

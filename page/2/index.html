@@ -268,7 +268,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">33</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">34</span></a>
 
   </li>
         
@@ -306,7 +306,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">47</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">48</span></a>
 
   </li>
 
@@ -342,6 +342,198 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/11/09/2018-11-09 利用 Docker 部署 Vue 应用/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan Li">
+      <meta itemprop="description" content="Hello World.">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ryan Li God">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/11/09/2018-11-09 利用 Docker 部署 Vue 应用/" class="post-title-link" itemprop="https://www.ryanligod.com/page/2/index.html">利用 Docker 部署 Vue 应用</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-11-09 20:30:21" itemprop="dateCreated datePublished" datetime="2018-11-09T20:30:21+08:00">2018-11-09</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-11-20 13:55:40" itemprop="dateModified" datetime="2018-11-20T13:55:40+08:00">2018-11-20</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Docker/" itemprop="url" rel="index"><span itemprop="name">Docker</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/11/09/2018-11-09 利用 Docker 部署 Vue 应用/" class="leancloud_visitors" data-flag-title="利用 Docker 部署 Vue 应用">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>初步学习 Docker 以后，我将尝试使用 Docker 部署之前构建的 Vue.js 应用。在实际部署的时候采用的是 <code>vue-cli-service</code> 打包，用 Nginx 作为代理服务器。</p>
+<h1 id="打包-Vue-应用"><a href="#打包-Vue-应用" class="headerlink" title="打包 Vue 应用"></a>打包 Vue 应用</h1><p>首先在 Vue 项目路径利用 <code>vue-cli-service</code> 打包 Vue 应用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vue-cli-service build</span><br></pre></td></tr></table></figure>
+<p>这样在路径中会生成 <code>dist</code> 文件夹，里面的文件经过了压缩和混淆，可以加快项目运行速度并且保护代码不被轻易拷贝。</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/11/09/2018-11-09 利用 Docker 部署 Vue 应用/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -2107,265 +2299,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/08/29/2018-08-29 MathJax 支持的 LaTeX 总结/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan Li">
-      <meta itemprop="description" content="Hello World.">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ryan Li God">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/08/29/2018-08-29 MathJax 支持的 LaTeX 总结/" class="post-title-link" itemprop="https://www.ryanligod.com/page/2/index.html">MathJax 支持的 LaTeX 总结</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-08-29 21:25:35" itemprop="dateCreated datePublished" datetime="2018-08-29T21:25:35+08:00">2018-08-29</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-11-29 15:49:04" itemprop="dateModified" datetime="2018-11-29T15:49:04+08:00">2018-11-29</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Markdown/" itemprop="url" rel="index"><span itemprop="name">Markdown</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/08/29/2018-08-29 MathJax 支持的 LaTeX 总结/" class="leancloud_visitors" data-flag-title="MathJax 支持的 LaTeX 总结">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p><strong>简要介绍</strong><br>因为要使用MarkDown中使用LaTeX编辑数学公式然后在文档、网页中使用，但是自己总是记不住这么多东西，特别是几天不用，很多都忘记了，因此准备就数学公式的Latex编辑方式做一个整理，以方便自己和读者今后使用。</p>
-</blockquote>
-<h5 id="分数-平方"><a href="#分数-平方" class="headerlink" title="分数 平方"></a>分数 平方</h5><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>算式</th>
-<th>LaTeX</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>$\frac{7x+5}{1+y^2}$</td>
-<td>\frac{7x+5}{1+y^2}</td>
-</tr>
-<tr>
-<td>$\dfrac{7x+5}{1+y^2}$</td>
-<td>\dfrac{7x+5}{1+y^2}</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h5 id="下标"><a href="#下标" class="headerlink" title="下标"></a>下标</h5><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>算式</th>
-<th>LaTeX</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>$z=z_l$</td>
-<td>z=z_l</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h5 id="省略号"><a href="#省略号" class="headerlink" title="省略号"></a>省略号</h5><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>算式</th>
-<th>LaTeX</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>$\cdots$</td>
-<td>\cdots</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h5 id="行间公式（使用两个-包含公式可以独立一行）"><a href="#行间公式（使用两个-包含公式可以独立一行）" class="headerlink" title="行间公式（使用两个$包含公式可以独立一行）"></a>行间公式（使用两个$包含公式可以独立一行）</h5><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>算式</th>
-<th>LaTeX</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>$\frac{d}{dx}e^{ax}=ae^{ax} \quad \sum_{i=1}^{n}{(X_i - \overline{X})^2}$</td>
-<td>\frac{d}{dx}e\^{ax}=ae\^{ax} <strong>\quad</strong> \sum_{i=1}^{n}{(X_i - \overline{X})^2}</td>
-</tr>
-</tbody>
-</table>
-</div>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/08/29/2018-08-29 MathJax 支持的 LaTeX 总结/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-         
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2415,7 +2348,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">47</span>
+                    <span class="site-state-item-count">48</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2531,7 +2464,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">33</span>
+                      
+                    
+                    <span class="site-state-item-count">34</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2846,9 +2781,9 @@
       
     
       
-        
-      
     
+      
+        
       
     
       

@@ -109,25 +109,25 @@
 
 
 
-  <meta name="description" content="本文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428  创建键值对RDD mapToPair flatMapToPairmapToPair举例，在F:\sparktest\sample.txt 文件的内容如下1234aa bb cc aa aa aa dd d">
-<meta name="keywords" content="大数据,Hadoop,Spark,RDD操作">
+  <meta name="description" content="前言最近在用 C 语言写一个自己的编程语言，准备做成类似易语言的中文语言。其中有将中文文字转为拼音的需求，但是 C 语言中比较难做到，如果要自己实现要做一个比较大的字典，显然不切合实际，正好 Go 语言中有这样的一个库可以做到：github.com/mozillazg/go-pinyin。所以打算用 C 调用 Go 进行实现。">
+<meta name="keywords" content="Golang,C">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Spark RDD常用算子操作（四） 创建键值对RDD mapToPair flatMapToPair">
-<meta property="og:url" content="https://www.ryanligod.com/2018/08/03/2018-08-03 Spark RDD（四） 创建键值对RDD mapToPair flatMapToPair/index.html">
+<meta property="og:title" content="C 调用 Go 实录">
+<meta property="og:url" content="https://www.ryanligod.com/2019/06/12/2019-06-12 C 调用 Go 实录/index.html">
 <meta property="og:site_name" content="Ryan Li God">
-<meta property="og:description" content="本文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428  创建键值对RDD mapToPair flatMapToPairmapToPair举例，在F:\sparktest\sample.txt 文件的内容如下1234aa bb cc aa aa aa dd d">
+<meta property="og:description" content="前言最近在用 C 语言写一个自己的编程语言，准备做成类似易语言的中文语言。其中有将中文文字转为拼音的需求，但是 C 语言中比较难做到，如果要自己实现要做一个比较大的字典，显然不切合实际，正好 Go 语言中有这样的一个库可以做到：github.com/mozillazg/go-pinyin。所以打算用 C 调用 Go 进行实现。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-08-12T10:58:56.650Z">
+<meta property="og:updated_time" content="2019-06-12T13:17:46.683Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spark RDD常用算子操作（四） 创建键值对RDD mapToPair flatMapToPair">
-<meta name="twitter:description" content="本文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428  创建键值对RDD mapToPair flatMapToPairmapToPair举例，在F:\sparktest\sample.txt 文件的内容如下1234aa bb cc aa aa aa dd d">
+<meta name="twitter:title" content="C 调用 Go 实录">
+<meta name="twitter:description" content="前言最近在用 C 语言写一个自己的编程语言，准备做成类似易语言的中文语言。其中有将中文文字转为拼音的需求，但是 C 语言中比较难做到，如果要自己实现要做一个比较大的字典，显然不切合实际，正好 Go 语言中有这样的一个库可以做到：github.com/mozillazg/go-pinyin。所以打算用 C 调用 Go 进行实现。">
 
 
 
 
 
 
-  <link rel="canonical" href="https://www.ryanligod.com/2018/08/03/2018-08-03 Spark RDD（四） 创建键值对RDD mapToPair flatMapToPair/">
+  <link rel="canonical" href="https://www.ryanligod.com/2019/06/12/2019-06-12 C 调用 Go 实录/">
 
 
 
@@ -137,7 +137,7 @@
   };
 </script>
 
-  <title>Spark RDD常用算子操作（四） 创建键值对RDD mapToPair flatMapToPair | Ryan Li God</title>
+  <title>C 调用 Go 实录 | Ryan Li God</title>
   
 
 
@@ -358,7 +358,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/08/03/2018-08-03 Spark RDD（四） 创建键值对RDD mapToPair flatMapToPair/">
+    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2019/06/12/2019-06-12 C 调用 Go 实录/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ryan Li">
@@ -375,7 +375,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Spark RDD常用算子操作（四） 创建键值对RDD mapToPair flatMapToPair
+          <h2 class="post-title" itemprop="name headline">C 调用 Go 实录
               
             
           </h2>
@@ -400,24 +400,12 @@
                 
               
 
-              <time title="创建时间：2018-08-03 21:24:50" itemprop="dateCreated datePublished" datetime="2018-08-03T21:24:50+08:00">2018-08-03</time>
+              <time title="创建时间：2019-06-12 20:57:48 / 修改时间：21:17:46" itemprop="dateCreated datePublished" datetime="2019-06-12T20:57:48+08:00">2019-06-12</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-08-12 18:58:56" itemprop="dateModified" datetime="2018-08-12T18:58:56+08:00">2018-08-12</time>
               
             
           </span>
@@ -434,7 +422,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Spark/" itemprop="url" rel="index"><span itemprop="name">Spark</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Golang/" itemprop="url" rel="index"><span itemprop="name">Golang</span></a></span>
 
                 
                 
@@ -448,7 +436,7 @@
 
           
           
-             <span id="/2018/08/03/2018-08-03 Spark RDD（四） 创建键值对RDD mapToPair flatMapToPair/" class="leancloud_visitors" data-flag-title="Spark RDD常用算子操作（四） 创建键值对RDD mapToPair flatMapToPair">
+             <span id="/2019/06/12/2019-06-12 C 调用 Go 实录/" class="leancloud_visitors" data-flag-title="C 调用 Go 实录">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -479,16 +467,33 @@
       
 
       
-        <blockquote>
-<p>本文作者：翟开顺<br>首发：CSDN<br>本人仅为自己方便查阅做了摘抄，请支持原作者<br>原文地址：<a href="https://blog.csdn.net/t1dmzks/article/details/72077428" target="_blank" rel="noopener">https://blog.csdn.net/t1dmzks/article/details/72077428</a></p>
-</blockquote>
-<h1 id="创建键值对RDD-mapToPair-flatMapToPair"><a href="#创建键值对RDD-mapToPair-flatMapToPair" class="headerlink" title="创建键值对RDD mapToPair flatMapToPair"></a>创建键值对RDD mapToPair flatMapToPair</h1><h2 id="mapToPair"><a href="#mapToPair" class="headerlink" title="mapToPair"></a>mapToPair</h2><p>举例，在F:\sparktest\sample.txt 文件的内容如下<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">aa bb cc aa aa aa <span class="selector-tag">dd</span> <span class="selector-tag">dd</span> ee ee ee ee </span><br><span class="line">ff aa bb zks</span><br><span class="line">ee kks</span><br><span class="line">ee  zz zks</span><br></pre></td></tr></table></figure></p>
-<p>将每一行的第一个单词作为键，1 作为value创建pairRDD<br><strong>scala版本</strong><br>scala是没有mapToPair函数的，scala版本只需要map就可以了<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="keyword">val</span> lines = sc.textFile(<span class="string">"F:\\sparktest\\sample.txt"</span>)</span><br><span class="line"></span><br><span class="line">scala&gt; <span class="keyword">val</span> pairs = lines.map(x =&gt; (x.split(<span class="string">"\\s+"</span>)(<span class="number">0</span>), <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">scala&gt; pairs.collect</span><br><span class="line">res0: <span class="type">Array</span>[(<span class="type">String</span>, <span class="type">Int</span>)] = <span class="type">Array</span>((aa,<span class="number">1</span>), (ff,<span class="number">1</span>), (ee,<span class="number">1</span>), (ee,<span class="number">1</span>))</span><br></pre></td></tr></table></figure></p>
-<p><strong>java版本</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">JavaRDD&lt;String&gt; lines = sc.textFile(<span class="string">"F:\\sparktest\\sample.txt"</span>);</span><br><span class="line"><span class="comment">//输入的是一个string的字符串，输出的是一个(String, Integer) 的map</span></span><br><span class="line">JavaPairRDD&lt;String, Integer&gt; pairRDD = lines.mapToPair(<span class="keyword">new</span> PairFunction&lt;String, String, Integer&gt;() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Tuple2&lt;String, Integer&gt; <span class="title">call</span><span class="params">(String s)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Tuple2&lt;String, Integer&gt;(s.split(<span class="string">"\\s+"</span>)[<span class="number">0</span>], <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近在用 C 语言写一个自己的编程语言，准备做成类似易语言的中文语言。其中有将中文文字转为拼音的需求，但是 C 语言中比较难做到，如果要自己实现要做一个比较大的字典，显然不切合实际，正好 Go 语言中有这样的一个库可以做到：<a href="https://github.com/mozillazg/go-pinyin" target="_blank" rel="noopener">github.com/mozillazg/go-pinyin</a>。所以打算用 C 调用 Go 进行实现。</p>
 <a id="more"></a>
-<h2 id="flatMapToPair"><a href="#flatMapToPair" class="headerlink" title="flatMapToPair"></a>flatMapToPair</h2><p>类似于xxx连接 mapToPair是一对一，一个元素返回一个元素，而flatMapToPair可以一个元素返回多个，相当于先flatMap,在mapToPair<br>例子: 将每一个单词都分成键为<br><strong>scala版本</strong><br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> lines = sc.textFile(<span class="string">"F:\\sparktest\\sample.txt"</span>)</span><br><span class="line"><span class="keyword">val</span> flatRDD = lines.flatMap(x =&gt; (x.split(<span class="string">"\\s+"</span>)))</span><br><span class="line"><span class="keyword">val</span> pairs = flatRDD.map(x=&gt;(x,<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">scala&gt; pairs.collect</span><br><span class="line">res1: <span class="type">Array</span>[(<span class="type">String</span>, <span class="type">Int</span>)] = <span class="type">Array</span>((aa,<span class="number">1</span>), (bb,<span class="number">1</span>), (cc,<span class="number">1</span>), (aa,<span class="number">1</span>), (aa,<span class="number">1</span>), (aa,<span class="number">1</span>), (dd,<span class="number">1</span>), (dd,<span class="number">1</span>), (ee,<span class="number">1</span>), (ee,<span class="number">1</span>), (ee,<span class="number">1</span>), (ee,<span class="number">1</span>), (ff,<span class="number">1</span>), (aa,<span class="number">1</span>), (bb,<span class="number">1</span>), (zks,<span class="number">1</span>), (ee,<span class="number">1</span>), (kks,<span class="number">1</span>), (ee,<span class="number">1</span>), (zz,<span class="number">1</span>), (zks,<span class="number">1</span>))</span><br></pre></td></tr></table></figure></p>
-<p><strong>java版本 spark2.0以下</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">JavaPairRDD&lt;String, Integer&gt; wordPairRDD = lines.flatMapToPair(<span class="keyword">new</span> PairFlatMapFunction&lt;String, String, Integer&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> Iterable&lt;Tuple2&lt;String, Integer&gt;&gt; call(String s) <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">                ArrayList&lt;Tuple2&lt;String, Integer&gt;&gt; tpLists = <span class="keyword">new</span> ArrayList&lt;Tuple2&lt;String, Integer&gt;&gt;();</span><br><span class="line">                String[] split = s.split(<span class="string">"\\s+"</span>);</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;split.length ; i++) &#123;</span><br><span class="line">                    Tuple2 tp = <span class="keyword">new</span> Tuple2&lt;String,Integer&gt;(split[i], <span class="number">1</span>);</span><br><span class="line">                    tpLists.add(tp);</span><br><span class="line">                &#125;</span><br><span class="line">            <span class="keyword">return</span> tpLists;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure></p>
-<p><strong>java版本 spark2.0以上</strong><br>主要是iterator和iteratable的一些区别<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">JavaPairRDD&lt;String, Integer&gt; wordPairRDD = lines.flatMapToPair(<span class="keyword">new</span> PairFlatMapFunction&lt;String, String, Integer&gt;() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Iterator&lt;Tuple2&lt;String, Integer&gt;&gt; call(String s) <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        ArrayList&lt;Tuple2&lt;String, Integer&gt;&gt; tpLists = <span class="keyword">new</span> ArrayList&lt;Tuple2&lt;String, Integer&gt;&gt;();</span><br><span class="line">        String[] split = s.split(<span class="string">"\\s+"</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;split.length ; i++) &#123;</span><br><span class="line">            Tuple2 tp = <span class="keyword">new</span> Tuple2&lt;String,Integer&gt;(split[i], <span class="number">1</span>);</span><br><span class="line">            tpLists.add(tp);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> tpLists.iterator();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h1 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h1><h3 id="Golang-代码"><a href="#Golang-代码" class="headerlink" title="Golang 代码"></a>Golang 代码</h3><p>convertPinyin.go</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"C"</span></span><br><span class="line">	<span class="string">"unicode"</span></span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line">	<span class="string">"github.com/mozillazg/go-pinyin"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">//export convertPinyin</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">convertPinyin</span><span class="params">(value <span class="keyword">string</span>)</span> <span class="title">string</span></span> &#123;</span><br><span class="line">	stringSlice := []<span class="keyword">rune</span>(value)</span><br><span class="line">	convertedCode := <span class="string">""</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="built_in">len</span>(stringSlice); i++ &#123;</span><br><span class="line">		ch := <span class="keyword">string</span>(stringSlice[i])</span><br><span class="line">		<span class="keyword">if</span> unicode.Is(unicode.Scripts[<span class="string">"Han"</span>], stringSlice[i]) &#123;</span><br><span class="line">			convertedCode += pinyin.LazyConvert(ch, <span class="literal">nil</span>)[<span class="number">0</span>]</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			convertedCode += ch</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> convertedCode</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个方法实现了将中文部分转换成拼音字符串返回。</p>
+<h3 id="编译运行以及遇到的问题"><a href="#编译运行以及遇到的问题" class="headerlink" title="编译运行以及遇到的问题"></a>编译运行以及遇到的问题</h3><p>我的编译器代码为 <code>ry.c</code> ，首先将 GO 的代码编译成 <code>convertPinyin.so</code> 和 <code>convertPinyin.h</code> 文件。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go build -buildmode=c-shared -o convertPinyin.so convertPinyin.go</span><br></pre></td></tr></table></figure>
+<p>在 C 语言的代码中引入：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"convertPinyin.h"</span></span></span><br></pre></td></tr></table></figure>
+<p>然后进行编译，最初编译命令如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -o ry ry.c</span><br></pre></td></tr></table></figure>
+<p>这里遇到第一个问题：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">undefined reference to <span class="string">'convertPinyin'</span></span><br></pre></td></tr></table></figure>
+<p>出现的原因是链接时缺少相关的库文件，这里有详细解读：<a href="https://blog.csdn.net/stpeace/article/details/73302833" target="_blank" rel="noopener">“undefined reference to” 问题汇总及解决方法</a>。</p>
+<p>于是更改命令为：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -o ry ry.c convertPinyin.so</span><br></pre></td></tr></table></figure>
+<p>成功了。于是我使用 <code>./ry hello.ry</code> 来运行编译我的 Rylang 语言，出现第二个错误：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./ry: error <span class="keyword">while</span> loading shared libraries: convertPinyin.so: cannot open shared object file: No such file or directory</span><br></pre></td></tr></table></figure>
+<p>文件明明存在但是却找不到是由于当前目录并不在查找范围内，因此显示无法找到。解决方法：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> LD_LIBRARY_PATH=<span class="variable">$LD_LIBRARY_PATH</span>:.</span><br></pre></td></tr></table></figure>
+<p>最后的 <code>.</code> 表示把当前目录加入到动态链接库查找的目录中去重新运行成功！</p>
+<p>上述方法设置是临时的 另外一种方法：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi /etc/ld.so.conf</span><br></pre></td></tr></table></figure>
+<p>添加库路径 如 <code>./</code> （表示当前目录）<br>添加保存后</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ldconfig</span><br></pre></td></tr></table></figure>
+<p>完整的命令如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">go build -buildmode=c-shared -o convertPinyin.so convertPinyin.go</span><br><span class="line">gcc -o ry ry.c convertPinyin.so</span><br><span class="line"><span class="built_in">export</span> LD_LIBRARY_PATH=<span class="variable">$LD_LIBRARY_PATH</span>:.</span><br><span class="line">./ry hello.ry</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -536,13 +541,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/大数据/" rel="tag"># 大数据</a>
+            <a href="/tags/Golang/" rel="tag"># Golang</a>
           
-            <a href="/tags/Hadoop/" rel="tag"># Hadoop</a>
-          
-            <a href="/tags/Spark/" rel="tag"># Spark</a>
-          
-            <a href="/tags/RDD操作/" rel="tag"># RDD操作</a>
+            <a href="/tags/C/" rel="tag"># C</a>
           
         </div>
       
@@ -555,8 +556,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/03/2018-08-03 Spark RDD（三） distinct，union，intersection，subtract，cartesian/" rel="next" title="Spark RDD常用算子操作（三） distinct，union，intersection，subtract，cartesian">
-                <i class="fa fa-chevron-left"></i> Spark RDD常用算子操作（三） distinct，union，intersection，subtract，cartesian
+              <a href="/2019/05/27/2019-05-27 汇编语言学习/" rel="next" title="汇编语言学习">
+                <i class="fa fa-chevron-left"></i> 汇编语言学习
               </a>
             
           </div>
@@ -564,10 +565,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/08/03/2018-08-03 Spark RDD（五） 键值对聚合操作 combineByKey/" rel="prev" title="Spark RDD常用算子操作（五） 键值对聚合操作 combineByKey">
-                Spark RDD常用算子操作（五） 键值对聚合操作 combineByKey <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -823,7 +820,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#创建键值对RDD-mapToPair-flatMapToPair"><span class="nav-number">1.</span> <span class="nav-text">创建键值对RDD mapToPair flatMapToPair</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#mapToPair"><span class="nav-number">1.1.</span> <span class="nav-text">mapToPair</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flatMapToPair"><span class="nav-number">1.2.</span> <span class="nav-text">flatMapToPair</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实现过程"><span class="nav-number">2.</span> <span class="nav-text">实现过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Golang-代码"><span class="nav-number">2.0.1.</span> <span class="nav-text">Golang 代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译运行以及遇到的问题"><span class="nav-number">2.0.2.</span> <span class="nav-text">编译运行以及遇到的问题</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -972,7 +969,7 @@
   
     <script type="text/javascript">
       window.livereOptions = {
-        refer: '2018/08/03/2018-08-03 Spark RDD（四） 创建键值对RDD mapToPair flatMapToPair/'
+        refer: '2019/06/12/2019-06-12 C 调用 Go 实录/'
       };
       (function(d, s) {
         var j, e = d.getElementsByTagName(s)[0];

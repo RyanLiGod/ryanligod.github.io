@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="google-site-verification" content="cZeP3x5JObpg9HCS3K6TIR79PkNCztQLnFJ6LhyD9vI">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.ico?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.ico?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/apple-touch-icon.ico?v=6.5.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="本文编译器构建部分启发自 rswier/c4 和 lotabout/write-a-C-interpreter，其中有博客内容和代码的借鉴。  前言什么是词法分析器简而言之，词法分析器用于对源码字符串做预处理，以减少语法分析器的复杂程度。 词法分析器以源码字符串为输入，输出为标记流（token stream），即一连串的标记，每个标记通常包括： (token, token value) 即标记本">
+<meta name="keywords" content="编译器,自创语言Rylang">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自创 Rylang 语言以及编译器构建（二）词法分析器">
+<meta property="og:url" content="https://www.ryanligod.com/2019/06/14/2019-06-13 编译器构建（二）词法分析器/index.html">
+<meta property="og:site_name" content="Ryan Li God">
+<meta property="og:description" content="本文编译器构建部分启发自 rswier/c4 和 lotabout/write-a-C-interpreter，其中有博客内容和代码的借鉴。  前言什么是词法分析器简而言之，词法分析器用于对源码字符串做预处理，以减少语法分析器的复杂程度。 词法分析器以源码字符串为输入，输出为标记流（token stream），即一连串的标记，每个标记通常包括： (token, token value) 即标记本">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-06-13T12:23:41.958Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="自创 Rylang 语言以及编译器构建（二）词法分析器">
+<meta name="twitter:description" content="本文编译器构建部分启发自 rswier/c4 和 lotabout/write-a-C-interpreter，其中有博客内容和代码的借鉴。  前言什么是词法分析器简而言之，词法分析器用于对源码字符串做预处理，以减少语法分析器的复杂程度。 词法分析器以源码字符串为输入，输出为标记流（token stream），即一连串的标记，每个标记通常包括： (token, token value) 即标记本">
+
+
+
+
+
+
+  <link rel="canonical" href="https://www.ryanligod.com/2019/06/14/2019-06-13 编译器构建（二）词法分析器/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>自创 Rylang 语言以及编译器构建（二）词法分析器 | Ryan Li God</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?71dc7c48c1cade58b78bec378294d4a4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ryan Li God</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">Hello World!</h1>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">37</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">14</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">51</span></a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2019/06/14/2019-06-13 编译器构建（二）词法分析器/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan Li">
+      <meta itemprop="description" content="Hello World.">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ryan Li God">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">自创 Rylang 语言以及编译器构建（二）词法分析器
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-06-14 15:36:27" itemprop="dateCreated datePublished" datetime="2019-06-14T15:36:27+08:00">2019-06-14</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-06-13 20:23:41" itemprop="dateModified" datetime="2019-06-13T20:23:41+08:00">2019-06-13</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/编译器/" itemprop="url" rel="index"><span itemprop="name">编译器</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/06/14/2019-06-13 编译器构建（二）词法分析器/" class="leancloud_visitors" data-flag-title="自创 Rylang 语言以及编译器构建（二）词法分析器">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>本文编译器构建部分启发自 <a href="https://github.com/rswier/c4" target="_blank" rel="noopener">rswier/c4</a> 和 <a href="https://github.com/lotabout/write-a-C-interpreter" target="_blank" rel="noopener">lotabout/write-a-C-interpreter</a>，其中有博客内容和代码的借鉴。</p>
+</blockquote>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><h2 id="什么是词法分析器"><a href="#什么是词法分析器" class="headerlink" title="什么是词法分析器"></a>什么是词法分析器</h2><p>简而言之，词法分析器用于对源码字符串做预处理，以减少语法分析器的复杂程度。</p>
+<p>词法分析器以源码字符串为输入，输出为标记流（token stream），即一连串的标记，每个标记通常包括： <code>(token, token value)</code> 即标记本身和标记的值。例如，源码中若包含一个数字 <code>&#39;998&#39;</code> ，词法分析器将输出 <code>(Number, 998)</code>，即（数字，998）。再例如：</p>
+<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2</span> + <span class="number">3</span> * (<span class="number">4</span> - <span class="number">5</span>)</span><br><span class="line">=&gt;</span><br><span class="line">(Number, <span class="number">2</span>) Add (Number, <span class="number">3</span>) Multiply <span class="built_in">Left</span>-Bracket (Number, <span class="number">4</span>) Subtract (Number, <span class="number">5</span>) <span class="built_in">Right</span>-Bracket</span><br></pre></td></tr></table></figure>
+<p>通过词法分析器的预处理，语法分析器的复杂度会大大降低，这点在后面的语法分析器我们就能体会。</p>
+<h2 id="词法分析器与编译器"><a href="#词法分析器与编译器" class="headerlink" title="词法分析器与编译器"></a>词法分析器与编译器</h2><p>要是深入词法分析器，你就会发现，它的本质上也是编译器。我们的编译器是以标记流为输入，输出汇编代码，而词法分析器则是以源码字符串为输入，输出标记流。</p>
+<figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">                   <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>                      <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span></span><br><span class="line"><span class="literal">-</span><span class="literal">-</span> <span class="comment">source</span> <span class="comment">code</span> <span class="literal">-</span><span class="literal">-</span>&gt; <span class="comment">|</span> <span class="comment">lexer</span> <span class="comment">|</span> <span class="literal">-</span><span class="literal">-</span>&gt; <span class="comment">token</span> <span class="comment">stream</span> <span class="literal">-</span><span class="literal">-</span>&gt; <span class="comment">|</span> <span class="comment">parser</span> <span class="comment">|</span> <span class="literal">-</span><span class="literal">-</span>&gt; <span class="comment">assembly</span></span><br><span class="line"><span class="comment"></span>                   <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>                      <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span></span><br></pre></td></tr></table></figure>
+<p>在这个前提下，我们可以这样认为：直接从源代码编译成汇编代码是很困难的，因为输入的字符串比较难处理。所以我们先编写一个较为简单的编译器（词法分析器）来将字符串转换成标记流，而标记流对于语法分析器而言就容易处理得多了。</p>
+<h1 id="词法分析器的实现"><a href="#词法分析器的实现" class="headerlink" title="词法分析器的实现"></a>词法分析器的实现</h1><h3 id="支持的标记"><a href="#支持的标记" class="headerlink" title="支持的标记"></a>支持的标记</h3><p>在全局中添加如下定义：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// tokens and classes (operators last and in precedence order)</span></span><br><span class="line"><span class="keyword">enum</span> &#123;</span><br><span class="line">  Num = <span class="number">128</span>, Fun, Sys, Glo, Loc, Id,</span><br><span class="line">  Char, Else, Enum, If, Int, Return, Sizeof, While,</span><br><span class="line">  Assign, Cond, Lor, Lan, Or, Xor, And, Eq, Ne, Lt, Gt, Le, Ge, Shl, Shr, Add, Sub, Mul, Div, Mod, Inc, Dec, Brak</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>解读如下：</p>
+<ul>
+<li><code>Fun</code> : 方法</li>
+<li><code>Sys</code> : 系统指令</li>
+<li><code>Glo</code> : 全局变量</li>
+<li><code>Loc</code> : 局部变量</li>
+<li><code>Id</code> : 标识符（变量）</li>
+<li><code>Assign</code> :  <code>=</code></li>
+<li><code>Cond</code> : <code>?</code></li>
+<li><code>Lor</code> : <code>||</code></li>
+<li><code>Or</code> : <code>|</code> 按位或</li>
+<li><code>Lan</code> : <code>&amp;&amp;</code></li>
+<li><code>And</code> : <code>&amp;</code> 按位与</li>
+<li><code>Xor</code> : <code>^</code></li>
+<li><code>Eq</code> : <code>==</code></li>
+<li><code>Ne</code> : <code>!=</code></li>
+<li><code>Lt</code> : <code>&lt;</code></li>
+<li><code>Gt</code> : <code>&gt;</code></li>
+<li><code>Le</code> : <code>&lt;=</code></li>
+<li><code>Ge</code> : <code>&gt;=</code></li>
+<li><code>Shl</code> : <code>&lt;&lt;</code></li>
+<li><code>Shr</code> : <code>&gt;&gt;</code></li>
+<li><code>Sub</code> : <code>-</code></li>
+<li><code>Mul</code> : <code>*</code> 乘法</li>
+<li><code>Div</code> : <code>/</code> 除法</li>
+<li><code>Mod</code> : <code>%</code> 求余</li>
+<li><code>Inc</code> : <code>++</code> </li>
+<li><code>Dec</code> : <code>--</code></li>
+<li><code>Brak</code> : <code>[</code></li>
+</ul>
+<p>所以这里我们会有这样的印象，一个标记（token）可能包含多个字符，且多数情况下如此。而词法分析器能减小语法分析复杂度的原因，正是因为它相当于通过一定的编码（更多的标记）来压缩了源码字符串。</p>
+<p>当然，上面这些标记是有顺序的，跟它们在 C 语言中的优先级有关，如 <code>*(Mul)</code> 的优先级就要高于 <code>+(Add)</code>。它们的具体使用在后面的语法分析中会提到。</p>
+<p>最后要注意的是还有一些字符，它们自己就构成了标记，如右方括号 <code>]</code> 或波浪号 <code>~</code> 等。我们不另外处理它们的原因是：</p>
+<ol>
+<li>它们是单字符的，即并不是多个字符共同构成标记（如 <code>==</code> 需要两个字符）；</li>
+<li>它们不涉及优先级关系。</li>
+</ol>
+<h3 id="词法分析器的框架"><a href="#词法分析器的框架" class="headerlink" title="词法分析器的框架"></a>词法分析器的框架</h3><p>即 <code>next()</code> 函数的主体：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> *last_pos;</span><br><span class="line">    <span class="keyword">int</span> hash;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (token = *src) &#123;</span><br><span class="line">        ++src;</span><br><span class="line">        <span class="comment">// parse token here</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里的一个问题是，为什么要用 <code>while</code> 循环呢？这就涉及到编译器（记得我们说过词法分析器也是某种意义上的编译器）的一个问题：如何处理错误？</p>
+<p>对词法分析器而言，若碰到了一个我们不认识的字符该怎么处理？一般处理的方法有两种：</p>
+<ol>
+<li>指出错误发生的位置，并退出整个程序</li>
+<li>指出错误发生的位置，跳过当前错误并继续编译</li>
+</ol>
+<p>这个 <code>while</code> 循环的作用就是跳过这些我们不识别的字符，我们同时还用它来处理空白字符。我们知道，C 语言中空格是用来作为分隔用的，并不作为语法的一部分。因此在实现中我们将它作为“不识别”的字符，这个 <code>while</code> 循环可以用来跳过它。</p>
+<h3 id="换行符"><a href="#换行符" class="headerlink" title="换行符"></a>换行符</h3><p>换行符和空格类似，但有一点不同，每次遇到换行符，我们需要将当前的行号加一：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// parse token here</span></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (token == <span class="string">'\n'</span>) &#123;</span><br><span class="line">    ++line;</span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<h3 id="宏定义"><a href="#宏定义" class="headerlink" title="宏定义"></a>宏定义</h3><p>C 语言的宏定义以字符 <code>#</code> 开头，如 <code># include &lt;stdio.h&gt;</code>。我们的编译器并不支持宏定义，所以直接跳过它们。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (token == <span class="string">'#'</span>) &#123;</span><br><span class="line">    <span class="comment">// skip macro, because we will not support it</span></span><br><span class="line">    <span class="keyword">while</span> (*src != <span class="number">0</span> &amp;&amp; *src != <span class="string">'\n'</span>) &#123;</span><br><span class="line">        src++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="标识符与符号表"><a href="#标识符与符号表" class="headerlink" title="标识符与符号表"></a>标识符与符号表</h3><p>标识符（identifier）可以理解为变量名。对于语法分析而言，我们并不关心一个变量具体叫什么名字，而只关心这个变量名代表的唯一标识。例如 <code>int a;</code> 定义了变量 <code>a</code>，而之后的语句 <code>a = 10</code>，我们需要知道这两个 <code>a</code> 指向的是同一个变量。</p>
+<p>基于这个理由，词法分析器会把扫描到的标识符全都保存到一张表中，遇到新的标识符就去查这张表，如果标识符已经存在，就返回它的唯一标识。</p>
+<p>那么我们怎么表示标识符呢？如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">identifier</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> token;</span><br><span class="line">    <span class="keyword">int</span> hash;</span><br><span class="line">    <span class="keyword">char</span> * name;</span><br><span class="line">    <span class="keyword">int</span> <span class="class"><span class="keyword">class</span>;</span></span><br><span class="line">    <span class="keyword">int</span> type;</span><br><span class="line">    <span class="keyword">int</span> value;</span><br><span class="line">    <span class="keyword">int</span> Bclass;</span><br><span class="line">    <span class="keyword">int</span> Btype;</span><br><span class="line">    <span class="keyword">int</span> Bvalue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里解释一下具体的含义：</p>
+<ol>
+<li><code>token</code>：该标识符返回的标记，理论上所有的变量返回的标记都应该是 <code>Id</code>，但实际上由于我们还将在符号表中加入关键字如 <code>if</code>, <code>while</code> 等，它们都有对应的标 记。</li>
+<li><code>hash</code>：顾名思义，就是这个标识符的哈希值，用于标识符的快速比较。</li>
+<li><code>name</code>：存放标识符本身的字符串。</li>
+<li><code>class</code>：该标识符的类别，如方法，数字，全局变量或局部变量等。</li>
+<li><code>type</code>：标识符的类型，即如果它是个变量，变量是 <code>int</code> 型、<code>char</code> 型还是指针型。</li>
+<li><code>value</code>：存放这个标识符的值，如标识符是函数，刚存放函数的地址。</li>
+<li><code>BXXXX</code>：C 语言中标识符可以是全局的也可以是局部的，当局部标识符的名字与全局标识符相同时，用作保存全局标识符的信息。</li>
+</ol>
+<p>由上可以看出，我们实现的词法分析器与传统意义上的词法分析器不太相同。传统意义上的符号表只需要知道标识符的唯一标识即可，而我们还存放了一些只有语法分析器才会得到的信息，如 <code>type</code> 。</p>
+<p>由于我们的目标是能自举，而我们定义的语法不支持 <code>struct</code>，故而使用下列方式。</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Symbol table:</span><br><span class="line"><span class="params">----</span>+<span class="params">-----</span>+<span class="params">----</span>+<span class="params">----</span>+<span class="params">----</span>+<span class="params">-----</span>+<span class="params">-----</span>+<span class="params">-----</span>+<span class="params">------</span>+<span class="params">------</span>+<span class="params">----</span></span><br><span class="line"> <span class="string">..</span> |token|hash|name|type|class|value|btype|bclass|bvalue| <span class="string">..</span></span><br><span class="line"><span class="params">----</span>+<span class="params">-----</span>+<span class="params">----</span>+<span class="params">----</span>+<span class="params">----</span>+<span class="params">-----</span>+<span class="params">-----</span>+<span class="params">-----</span>+<span class="params">------</span>+<span class="params">------</span>+<span class="params">----</span></span><br><span class="line">    |&lt;<span class="params">---</span>       one single identifier                <span class="params">---</span>&gt;|</span><br></pre></td></tr></table></figure>
+<p>即用一个整型数组来保存相关的ID信息。每个ID占用数组中的9个空间，分析标识符的相关代码如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> token_val;                <span class="comment">// value of current token (mainly for number)</span></span><br><span class="line"><span class="keyword">int</span> *current_id,              <span class="comment">// current parsed ID</span></span><br><span class="line">    *symbols;                 <span class="comment">// symbol table</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// fields of identifier</span></span><br><span class="line"><span class="keyword">enum</span> &#123;Token, Hash, Name, Type, Class, Value, BType, BClass, BValue, IdSize&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> ((token &gt;= <span class="string">'a'</span> &amp;&amp; token &lt;= <span class="string">'z'</span>) || (token &gt;= <span class="string">'A'</span> &amp;&amp; token &lt;= <span class="string">'Z'</span>) || (token == <span class="string">'_'</span>)) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// parse identifier</span></span><br><span class="line">            last_pos = src - <span class="number">1</span>;</span><br><span class="line">            hash = token;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> ((*src &gt;= <span class="string">'a'</span> &amp;&amp; *src &lt;= <span class="string">'z'</span>) || (*src &gt;= <span class="string">'A'</span> &amp;&amp; *src &lt;= <span class="string">'Z'</span>) || (*src &gt;= <span class="string">'0'</span> &amp;&amp; *src &lt;= <span class="string">'9'</span>) || (*src == <span class="string">'_'</span>)) &#123;</span><br><span class="line">                hash = hash * <span class="number">147</span> + *src;</span><br><span class="line">                src++;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// look for existing identifier, linear search</span></span><br><span class="line">            current_id = symbols;</span><br><span class="line">            <span class="keyword">while</span> (current_id[Token]) &#123;</span><br><span class="line">                <span class="keyword">if</span> (current_id[Hash] == hash &amp;&amp; !<span class="built_in">memcmp</span>((<span class="keyword">char</span> *)current_id[Name], last_pos, src - last_pos)) &#123;</span><br><span class="line">                    <span class="comment">//found one, return</span></span><br><span class="line">                    token = current_id[Token];</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                current_id = current_id + IdSize;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            <span class="comment">// store new ID</span></span><br><span class="line">            current_id[Name] = (<span class="keyword">int</span>)last_pos;</span><br><span class="line">            current_id[Hash] = hash;</span><br><span class="line">            token = current_id[Token] = Id;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>查找已有标识符的方法是线性查找 <code>symbols</code> 表。</p>
+<h3 id="数字"><a href="#数字" class="headerlink" title="数字"></a>数字</h3><p>数字中较为复杂的一点是需要支持十进制、十六进制及八进制。逻辑也较为直接，可能唯一不好理解的是获取十六进制的值相关的代码。</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">token_val = token_val * <span class="number">16</span> + (<span class="name">token</span> &amp; <span class="number">15</span>) + (<span class="name">token</span> &gt;= 'A' ? <span class="number">9</span> : <span class="number">0</span>)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p>这里要注意的是在ASCII码中，字符<code>a</code>对应的十六进制值是 <code>61</code>, <code>A</code>是<code>41</code>，故通过 <code>(token &amp; 15)</code> 可以得到个位数的值。其它就不多说了，这里这样写的目的是装B（其实是抄 c4 的源代码的）。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (token &gt;= <span class="string">'0'</span> &amp;&amp; token &lt;= <span class="string">'9'</span>) &#123;</span><br><span class="line">            <span class="comment">// parse number, three kinds: dec(123) hex(0x123) oct(017)</span></span><br><span class="line">            token_val = token - <span class="string">'0'</span>;</span><br><span class="line">            <span class="keyword">if</span> (token_val &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="comment">// dec, starts with [1-9]</span></span><br><span class="line">                <span class="keyword">while</span> (*src &gt;= <span class="string">'0'</span> &amp;&amp; *src &lt;= <span class="string">'9'</span>) &#123;</span><br><span class="line">                    token_val = token_val*<span class="number">10</span> + *src++ - <span class="string">'0'</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// starts with number 0</span></span><br><span class="line">                <span class="keyword">if</span> (*src == <span class="string">'x'</span> || *src == <span class="string">'X'</span>) &#123;</span><br><span class="line">                    <span class="comment">//hex</span></span><br><span class="line">                    token = *++src;</span><br><span class="line">                    <span class="keyword">while</span> ((token &gt;= <span class="string">'0'</span> &amp;&amp; token &lt;= <span class="string">'9'</span>) || (token &gt;= <span class="string">'a'</span> &amp;&amp; token &lt;= <span class="string">'f'</span>) || (token &gt;= <span class="string">'A'</span> &amp;&amp; token &lt;= <span class="string">'F'</span>)) &#123;</span><br><span class="line">                        token_val = token_val * <span class="number">16</span> + (token &amp; <span class="number">15</span>) + (token &gt;= <span class="string">'A'</span> ? <span class="number">9</span> : <span class="number">0</span>);</span><br><span class="line">                        token = *++src;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="comment">// oct</span></span><br><span class="line">                    <span class="keyword">while</span> (*src &gt;= <span class="string">'0'</span> &amp;&amp; *src &lt;= <span class="string">'7'</span>) &#123;</span><br><span class="line">                        token_val = token_val*<span class="number">8</span> + *src++ - <span class="string">'0'</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            token = Num;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>在分析时，如果分析到字符串，我们需要将它存放到前一篇文章中说的 <code>data</code> 段中。然后返回它在 <code>data</code>段中的地址。另一个特殊的地方是我们需要支持转义符。例如用 <code>\n</code> 表示换行符。由于本编译器的目的是达到自己编译自己，所以代码中并没有支持除 <code>\n</code> 的转义符，如 <code>\t</code>, <code>\r</code> 等，但仍支持 <code>\a</code> 表示字符 <code>a</code> 的语法，如 <code>\&quot;</code> 表示 <code>&quot;</code>。</p>
+<p>在分析时，我们将同时分析单个字符如 <code>&#39;a&#39;</code> 和字符串如 <code>&quot;a string&quot;</code>。若得到的是单个字符，我们以 <code>Num</code> 的形式返回。相关代码如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (token == <span class="string">'"'</span> || token == <span class="string">'\''</span>) &#123;</span><br><span class="line">            <span class="comment">// parse string literal, currently, the only supported escape</span></span><br><span class="line">            <span class="comment">// character is '\n', store the string literal into data.</span></span><br><span class="line">            last_pos = data;</span><br><span class="line">            <span class="keyword">while</span> (*src != <span class="number">0</span> &amp;&amp; *src != token) &#123;</span><br><span class="line">                token_val = *src++;</span><br><span class="line">                <span class="keyword">if</span> (token_val == <span class="string">'\\'</span>) &#123;</span><br><span class="line">                    <span class="comment">// escape character</span></span><br><span class="line">                    token_val = *src++;</span><br><span class="line">                    <span class="keyword">if</span> (token_val == <span class="string">'n'</span>) &#123;</span><br><span class="line">                        token_val = <span class="string">'\n'</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (token == <span class="string">'"'</span>) &#123;</span><br><span class="line">                    *data++ = token_val;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            src++;</span><br><span class="line">            <span class="comment">// if it is a single character, return Num token</span></span><br><span class="line">            <span class="keyword">if</span> (token == <span class="string">'"'</span>) &#123;</span><br><span class="line">                token_val = (<span class="keyword">int</span>)last_pos;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                token = Num;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><p>在我们的 C 语言中，只支持 <code>//</code> 类型的注释，不支持 <code>/* comments */</code> 的注释。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (token == <span class="string">'/'</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (*src == <span class="string">'/'</span>) &#123;</span><br><span class="line">                <span class="comment">// skip comments</span></span><br><span class="line">                <span class="keyword">while</span> (*src != <span class="number">0</span> &amp;&amp; *src != <span class="string">'\n'</span>) &#123;</span><br><span class="line">                    ++src;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// divide operator</span></span><br><span class="line">                token = Div;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里我们要额外介绍 <code>lookahead</code> 的概念，即提前看多个字符。上述代码中我们看到，除了跳过注释，我们还可能返回除号 <code>/(Div)</code> 标记。</p>
+<p>提前看字符的原理是：有一个或多个标记是以同样的字符开头的（如本小节中的注释与除号），因此只凭当前的字符我们并无法确定具体应该解释成哪一个标记，所以只能再向前查看字符，如本例需向前查看一个字符，若是 <code>/</code> 则说明是注释，反之则是除号。</p>
+<p>我们之前说过，词法分析器本质上也是编译器，其实提前看字符的概念也存在于编译器，只是这时就是提前看k个“标记”而不是“字符”了。平时听到的 <code>LL(k)</code> 中的 <code>k</code> 就是需要向前看的标记的个数了。</p>
+<p>另外，我们用词法分析器将源码转换成标记流，能减小语法分析复杂度，原因之一就是减少了语法分析器需要“向前看”的字符个数。</p>
+<h3 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h3><p>其它的标记的解析就相对容易一些了，我们直接贴上代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (token == <span class="string">'='</span>) &#123;</span><br><span class="line">            <span class="comment">// parse '==' and '='</span></span><br><span class="line">            <span class="keyword">if</span> (*src == <span class="string">'='</span>) &#123;</span><br><span class="line">                src ++;</span><br><span class="line">                token = Eq;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                token = Assign;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (token == <span class="string">'+'</span>) &#123;</span><br><span class="line">            <span class="comment">// parse '+' and '++'</span></span><br><span class="line">            <span class="keyword">if</span> (*src == <span class="string">'+'</span>) &#123;</span><br><span class="line">                src ++;</span><br><span class="line">                token = Inc;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                token = Add;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (token == <span class="string">'-'</span>) &#123;</span><br><span class="line">            <span class="comment">// parse '-' and '--'</span></span><br><span class="line">            <span class="keyword">if</span> (*src == <span class="string">'-'</span>) &#123;</span><br><span class="line">                src ++;</span><br><span class="line">                token = Dec;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                token = Sub;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (token == <span class="string">'!'</span>) &#123;</span><br><span class="line">            <span class="comment">// parse '!='</span></span><br><span class="line">            <span class="keyword">if</span> (*src == <span class="string">'='</span>) &#123;</span><br><span class="line">                src++;</span><br><span class="line">                token = Ne;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (token == <span class="string">'&lt;'</span>) &#123;</span><br><span class="line">            <span class="comment">// parse '&lt;=', '&lt;&lt;' or '&lt;'</span></span><br><span class="line">            <span class="keyword">if</span> (*src == <span class="string">'='</span>) &#123;</span><br><span class="line">                src ++;</span><br><span class="line">                token = Le;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (*src == <span class="string">'&lt;'</span>) &#123;</span><br><span class="line">                src ++;</span><br><span class="line">                token = Shl;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                token = Lt;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (token == <span class="string">'&gt;'</span>) &#123;</span><br><span class="line">            <span class="comment">// parse '&gt;=', '&gt;&gt;' or '&gt;'</span></span><br><span class="line">            <span class="keyword">if</span> (*src == <span class="string">'='</span>) &#123;</span><br><span class="line">                src ++;</span><br><span class="line">                token = Ge;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (*src == <span class="string">'&gt;'</span>) &#123;</span><br><span class="line">                src ++;</span><br><span class="line">                token = Shr;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                token = Gt;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (token == <span class="string">'|'</span>) &#123;</span><br><span class="line">            <span class="comment">// parse '|' or '||'</span></span><br><span class="line">            <span class="keyword">if</span> (*src == <span class="string">'|'</span>) &#123;</span><br><span class="line">                src ++;</span><br><span class="line">                token = Lor;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                token = Or;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (token == <span class="string">'&amp;'</span>) &#123;</span><br><span class="line">            <span class="comment">// parse '&amp;' and '&amp;&amp;'</span></span><br><span class="line">            <span class="keyword">if</span> (*src == <span class="string">'&amp;'</span>) &#123;</span><br><span class="line">                src ++;</span><br><span class="line">                token = Lan;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                token = And;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (token == <span class="string">'^'</span>) &#123;</span><br><span class="line">            token = Xor;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (token == <span class="string">'%'</span>) &#123;</span><br><span class="line">            token = Mod;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (token == <span class="string">'*'</span>) &#123;</span><br><span class="line">            token = Mul;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (token == <span class="string">'['</span>) &#123;</span><br><span class="line">            token = Brak;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (token == <span class="string">'?'</span>) &#123;</span><br><span class="line">            token = Cond;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (token == <span class="string">'~'</span> || token == <span class="string">';'</span> || token == <span class="string">'&#123;'</span> || token == <span class="string">'&#125;'</span> || token == <span class="string">'('</span> || token == <span class="string">')'</span> || token == <span class="string">']'</span> || token == <span class="string">','</span> || token == <span class="string">':'</span>) &#123;</span><br><span class="line">            <span class="comment">// directly return the character as token;</span></span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>代码较多，但主要逻辑就是向前看一个字符来确定真正的标记。</p>
+<h3 id="关键字与内置函数"><a href="#关键字与内置函数" class="headerlink" title="关键字与内置函数"></a>关键字与内置函数</h3><p>虽然上面写完了词法分析器，但还有一个问题需要考虑，那就是“关键字”，例如 <code>if</code>, <code>while</code>, <code>return</code> 等。它们不能被作为普通的标识符，因为有特殊的含义。</p>
+<p>一般有两种处理方法：</p>
+<ol>
+<li>词法分析器中直接解析这些关键字。</li>
+<li>在语法分析前将关键字提前加入符号表。</li>
+</ol>
+<p>这里我们就采用第二种方法，将它们加入符号表，并提前为它们赋予必要的信息（还记得前面说的标识符 <code>Token</code> 字段吗？）。这样当源代码中出现关键字时，它们会被解析成标识符，但由于符号表中已经有了相关的信息，我们就能知道它们是特殊的关键字。</p>
+<p>内置函数的行为也和关键字类似，不同的只是赋值的信息，在<code>main</code>函数中进行初始化如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// types of variable/function</span></span><br><span class="line"><span class="keyword">enum</span> &#123; CHAR, INT, PTR &#125;;</span><br><span class="line"><span class="keyword">int</span> *idmain;                  <span class="comment">// the `main` function</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    src = <span class="string">"char else enum if int return sizeof while "</span></span><br><span class="line">          <span class="string">"open read close printf malloc memset memcmp exit void main"</span>;</span><br><span class="line"></span><br><span class="line">     <span class="comment">// add keywords to symbol table</span></span><br><span class="line">    i = Char;</span><br><span class="line">    <span class="keyword">while</span> (i &lt;= While) &#123;</span><br><span class="line">        next();</span><br><span class="line">        current_id[Token] = i++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// add library to symbol table</span></span><br><span class="line">    i = OPEN;</span><br><span class="line">    <span class="keyword">while</span> (i &lt;= EXIT) &#123;</span><br><span class="line">        next();</span><br><span class="line">        current_id[Class] = Sys;</span><br><span class="line">        current_id[Type] = INT;</span><br><span class="line">        current_id[Value] = i++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    next(); current_id[Token] = Char; <span class="comment">// handle void type</span></span><br><span class="line">    next(); idmain = current_id; <span class="comment">// keep track of main</span></span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line">    program();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Ryan Li 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/编译器/" rel="tag"># 编译器</a>
+          
+            <a href="/tags/自创语言Rylang/" rel="tag"># 自创语言Rylang</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/13/2019-06-13 编译器构建（一）虚拟机/" rel="next" title="自创 Rylang 语言以及编译器构建（一）虚拟机">
+                <i class="fa fa-chevron-left"></i> 自创 Rylang 语言以及编译器构建（一）虚拟机
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/22/2019-07-22 Git 多个提交的合并/" rel="prev" title="Git 多个提交的合并">
+                Git 多个提交的合并 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zODgwNi8xNTMzNA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpeg" alt="Ryan Li">
+            
+              <p class="site-author-name" itemprop="name">Ryan Li</p>
+              <p class="site-description motion-element" itemprop="description">Hello World.</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">51</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">37</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/RyanLiGod" title="GitHub &rarr; https://github.com/RyanLiGod" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:ryanligod@gmail.com" title="E-Mail &rarr; mailto:ryanligod@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是词法分析器"><span class="nav-number">1.1.</span> <span class="nav-text">什么是词法分析器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#词法分析器与编译器"><span class="nav-number">1.2.</span> <span class="nav-text">词法分析器与编译器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#词法分析器的实现"><span class="nav-number">2.</span> <span class="nav-text">词法分析器的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#支持的标记"><span class="nav-number">2.0.1.</span> <span class="nav-text">支持的标记</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#词法分析器的框架"><span class="nav-number">2.0.2.</span> <span class="nav-text">词法分析器的框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#换行符"><span class="nav-number">2.0.3.</span> <span class="nav-text">换行符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#宏定义"><span class="nav-number">2.0.4.</span> <span class="nav-text">宏定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标识符与符号表"><span class="nav-number">2.0.5.</span> <span class="nav-text">标识符与符号表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数字"><span class="nav-number">2.0.6.</span> <span class="nav-text">数字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串"><span class="nav-number">2.0.7.</span> <span class="nav-text">字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注释"><span class="nav-number">2.0.8.</span> <span class="nav-text">注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其它"><span class="nav-number">2.0.9.</span> <span class="nav-text">其它</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关键字与内置函数"><span class="nav-number">2.0.10.</span> <span class="nav-text">关键字与内置函数</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ryan Li</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+    <script type="text/javascript">
+      window.livereOptions = {
+        refer: '2019/06/14/2019-06-13 编译器构建（二）词法分析器/'
+      };
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1}))
+                .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function () {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "L71FAGlYbGy360uJzNBnyuLd-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "L71FAGlYbGy360uJzNBnyuLd-gzGzoHsz",
+                'X-LC-Key': "EkXnFcBGbM1Rt0hfAcUtDRUo",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('复制成功')
+          else $(this).text('复制失败')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+  
+
+</body>
+</html>

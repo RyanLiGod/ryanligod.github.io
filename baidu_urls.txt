@@ -1,2 +1,2 @@
-https://www.ryanligod.com/2019/06/12/2019-06-12 C 调用 Go 实录/
-https://www.ryanligod.com/2019/05/27/2019-05-27 汇编语言学习/
+https://www.ryanligod.com/2019/07/22/2019-07-22 Git 多个提交的合并/
+https://www.ryanligod.com/2019/06/14/2019-06-13 编译器构建（二）词法分析器/

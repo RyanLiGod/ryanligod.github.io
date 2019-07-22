@@ -268,7 +268,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">34</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">37</span></a>
 
   </li>
         
@@ -287,7 +287,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">12</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">14</span></a>
 
   </li>
         
@@ -306,7 +306,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">48</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">51</span></a>
 
   </li>
 
@@ -342,6 +342,590 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/08/03/2018-08-03 Spark RDD（十三） RDD 分区 HashPartitioner，RangePartitioner，自定义分区/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan Li">
+      <meta itemprop="description" content="Hello World.">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ryan Li God">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/08/03/2018-08-03 Spark RDD（十三） RDD 分区 HashPartitioner，RangePartitioner，自定义分区/" class="post-title-link" itemprop="https://www.ryanligod.com/page/4/index.html">Spark RDD常用算子操作（十三） RDD 分区 HashPartitioner，RangePartitioner，自定义分区</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-03 21:33:50" itemprop="dateCreated datePublished" datetime="2018-08-03T21:33:50+08:00">2018-08-03</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-08-12 18:58:45" itemprop="dateModified" datetime="2018-08-12T18:58:45+08:00">2018-08-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Spark/" itemprop="url" rel="index"><span itemprop="name">Spark</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/08/03/2018-08-03 Spark RDD（十三） RDD 分区 HashPartitioner，RangePartitioner，自定义分区/" class="leancloud_visitors" data-flag-title="Spark RDD常用算子操作（十三） RDD 分区 HashPartitioner，RangePartitioner，自定义分区">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>原文作者：翟开顺<br>首发：CSDN<br>本人仅为自己方便查阅做了摘抄，请支持原作者<br>原文地址：<a href="https://blog.csdn.net/t1dmzks/article/details/72077428" target="_blank" rel="noopener">https://blog.csdn.net/t1dmzks/article/details/72077428</a></p>
+</blockquote>
+<h1 id="RDD-分区-HashPartitioner，RangePartitioner，自定义分区"><a href="#RDD-分区-HashPartitioner，RangePartitioner，自定义分区" class="headerlink" title="RDD 分区 HashPartitioner，RangePartitioner，自定义分区"></a>RDD 分区 HashPartitioner，RangePartitioner，自定义分区</h1><p><strong>关键字:</strong> spark分区方式，java HashPartitioner分区，scala HashPartitioner分区， java RangePartitioner 分区，scala RangePartitioner分区， java 自定义分区，scala自定义分区</p>
+<h2 id="默认分区和HashPartitioner分区"><a href="#默认分区和HashPartitioner分区" class="headerlink" title="默认分区和HashPartitioner分区"></a>默认分区和HashPartitioner分区</h2><p>默认的分区就是HashPartition分区,默认分区不再介绍，下面介绍HashPartition的使用</p>
+<p>通过上一章 mapPartitionsWithIndex的例子，我们可以构建一个方法，用来查看RDD的分区<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mapPartIndexFunc</span></span>(i1:<span class="type">Int</span>,iter: <span class="type">Iterator</span>[(<span class="type">Int</span>,<span class="type">Int</span>)]):<span class="type">Iterator</span>[(<span class="type">Int</span>,(<span class="type">Int</span>,<span class="type">Int</span>))]=&#123;</span><br><span class="line">  <span class="keyword">var</span> res = <span class="type">List</span>[(<span class="type">Int</span>,(<span class="type">Int</span>,<span class="type">Int</span>))]()</span><br><span class="line">  <span class="keyword">while</span>(iter.hasNext)&#123;</span><br><span class="line">    <span class="keyword">var</span> next = iter.next()</span><br><span class="line">    res=res.::(i1,next)</span><br><span class="line">  &#125;</span><br><span class="line">  res.iterator</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">printRDDPart</span></span>(rdd:<span class="type">RDD</span>[(<span class="type">Int</span>,<span class="type">Int</span>)]): <span class="type">Unit</span> =&#123;</span><br><span class="line">  <span class="keyword">var</span> mapPartIndexRDDs = rdd.mapPartitionsWithIndex(mapPartIndexFunc)</span><br><span class="line">  mapPartIndexRDDs.foreach(println( _))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/08/03/2018-08-03 Spark RDD（十三） RDD 分区 HashPartitioner，RangePartitioner，自定义分区/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/08/03/2018-08-03 Spark RDD（十二） RDD 分区操作上mapPartitions, mapPartitionsWithIndex/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan Li">
+      <meta itemprop="description" content="Hello World.">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ryan Li God">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/08/03/2018-08-03 Spark RDD（十二） RDD 分区操作上mapPartitions, mapPartitionsWithIndex/" class="post-title-link" itemprop="https://www.ryanligod.com/page/4/index.html">Spark RDD常用算子操作（十二） RDD 分区操作上mapPartitions, mapPartitionsWithIndex</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-03 21:32:50" itemprop="dateCreated datePublished" datetime="2018-08-03T21:32:50+08:00">2018-08-03</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-08-12 18:58:41" itemprop="dateModified" datetime="2018-08-12T18:58:41+08:00">2018-08-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Spark/" itemprop="url" rel="index"><span itemprop="name">Spark</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/08/03/2018-08-03 Spark RDD（十二） RDD 分区操作上mapPartitions, mapPartitionsWithIndex/" class="leancloud_visitors" data-flag-title="Spark RDD常用算子操作（十二） RDD 分区操作上mapPartitions, mapPartitionsWithIndex">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>原文作者：翟开顺<br>首发：CSDN<br>本人仅为自己方便查阅做了摘抄，请支持原作者<br>原文地址：<a href="https://blog.csdn.net/t1dmzks/article/details/72077428" target="_blank" rel="noopener">https://blog.csdn.net/t1dmzks/article/details/72077428</a></p>
+</blockquote>
+<h1 id="RDD-分区操作上mapPartitions-mapPartitionsWithIndex"><a href="#RDD-分区操作上mapPartitions-mapPartitionsWithIndex" class="headerlink" title="RDD 分区操作上mapPartitions, mapPartitionsWithIndex"></a>RDD 分区操作上mapPartitions, mapPartitionsWithIndex</h1><h2 id="mapPartitions"><a href="#mapPartitions" class="headerlink" title="mapPartitions"></a>mapPartitions</h2><p>mapPartition可以倒过来理解，先partition，再把每个partition进行map函数，<br><strong>适用场景</strong><br>如果在映射的过程中需要频繁创建额外的对象，使用mapPartitions要比map高效的过。</p>
+<p>比如，将RDD中的所有数据通过JDBC连接写入数据库，如果使用map函数，可能要为每一个元素都创建一个connection，这样开销很大，如果使用mapPartitions，那么只需要针对每一个分区建立一个connection。 </p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/08/03/2018-08-03 Spark RDD（十二） RDD 分区操作上mapPartitions, mapPartitionsWithIndex/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/08/03/2018-08-03 Spark RDD（十一） RDD Action 保存操作saveAsTextFile,saveAsSequenceFile,saveAsObjectFile,saveAsHadoopFile 等/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan Li">
+      <meta itemprop="description" content="Hello World.">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ryan Li God">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/08/03/2018-08-03 Spark RDD（十一） RDD Action 保存操作saveAsTextFile,saveAsSequenceFile,saveAsObjectFile,saveAsHadoopFile 等/" class="post-title-link" itemprop="https://www.ryanligod.com/page/4/index.html">Spark RDD常用算子操作（十一） RDD Action 保存操作saveAsTextFile,saveAsSequenceFile,saveAsObjectFile,saveAsHadoopFile 等</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-03 21:31:50" itemprop="dateCreated datePublished" datetime="2018-08-03T21:31:50+08:00">2018-08-03</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-08-12 18:58:52" itemprop="dateModified" datetime="2018-08-12T18:58:52+08:00">2018-08-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Spark/" itemprop="url" rel="index"><span itemprop="name">Spark</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/08/03/2018-08-03 Spark RDD（十一） RDD Action 保存操作saveAsTextFile,saveAsSequenceFile,saveAsObjectFile,saveAsHadoopFile 等/" class="leancloud_visitors" data-flag-title="Spark RDD常用算子操作（十一） RDD Action 保存操作saveAsTextFile,saveAsSequenceFile,saveAsObjectFile,saveAsHadoopFile 等">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>原文作者：翟开顺<br>首发：CSDN<br>本人仅为自己方便查阅做了摘抄，请支持原作者<br>原文地址：<a href="https://blog.csdn.net/t1dmzks/article/details/72077428" target="_blank" rel="noopener">https://blog.csdn.net/t1dmzks/article/details/72077428</a></p>
+</blockquote>
+<h1 id="RDD-Action-保存操作"><a href="#RDD-Action-保存操作" class="headerlink" title="RDD Action 保存操作"></a>RDD Action 保存操作</h1><p><strong>关键字:Spark算子、Spark函数、Spark RDD行动Action、Spark RDD存储操作、saveAsTextFile、saveAsSequenceFile、saveAsObjectFile,saveAsHadoopFile、saveAsHadoopDataset,saveAsNewAPIHadoopFile、saveAsNewAPIHadoopDataset</strong></p>
+<h2 id="saveAsTextFile"><a href="#saveAsTextFile" class="headerlink" title="saveAsTextFile"></a>saveAsTextFile</h2><p>def saveAsTextFile(path: String): Unit</p>
+<p>def saveAsTextFile(path: String, codec: Class[_ &lt;: CompressionCodec]): Unit</p>
+<p>saveAsTextFile用于将RDD以文本文件的格式存储到文件系统中。</p>
+<p>codec参数可以指定压缩的类名。<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> rdd1 = sc.makeRDD(<span class="number">1</span> to <span class="number">10</span>,<span class="number">2</span>)</span><br><span class="line">scala&gt; rdd1.saveAsTextFile(<span class="string">"hdfs://cdh5/tmp/lxw1234.com/"</span>) <span class="comment">//保存到HDFS</span></span><br><span class="line">hadoop fs -ls /tmp/lxw1234.com</span><br><span class="line"><span class="type">Found</span> <span class="number">2</span> items</span><br><span class="line">-rw-r--r--   <span class="number">2</span> lxw1234 supergroup        <span class="number">0</span> <span class="number">2015</span><span class="number">-07</span><span class="number">-10</span> <span class="number">09</span>:<span class="number">15</span> /tmp/lxw1234.com/_SUCCESS</span><br><span class="line">-rw-r--r--   <span class="number">2</span> lxw1234 supergroup        <span class="number">21</span> <span class="number">2015</span><span class="number">-07</span><span class="number">-10</span> <span class="number">09</span>:<span class="number">15</span> /tmp/lxw1234.com/part<span class="number">-00000</span></span><br><span class="line"></span><br><span class="line">hadoop fs -cat /tmp/lxw1234.com/part<span class="number">-00000</span></span><br></pre></td></tr></table></figure></p>
+<p>注意：如果使用rdd1.saveAsTextFile(“file:///tmp/lxw1234.com”)将文件保存到本地文件系统，那么只会保存在Executor所在机器的本地目录。<br><strong>指定压缩格式保存</strong><br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">rdd1.saveAsTextFile(<span class="string">"hdfs://cdh5/tmp/lxw1234.com/"</span>,classOf[com.hadoop.compression.lzo.<span class="type">LzopCodec</span>])</span><br><span class="line"></span><br><span class="line">hadoop fs -ls /tmp/lxw1234.com</span><br><span class="line">-rw-r--r--   <span class="number">2</span> lxw1234 supergroup    <span class="number">0</span> <span class="number">2015</span><span class="number">-07</span><span class="number">-10</span> <span class="number">09</span>:<span class="number">20</span> /tmp/lxw1234.com/_SUCCESS</span><br><span class="line">-rw-r--r--   <span class="number">2</span> lxw1234 supergroup    <span class="number">71</span> <span class="number">2015</span><span class="number">-07</span><span class="number">-10</span> <span class="number">09</span>:<span class="number">20</span> /tmp/lxw1234.com/part<span class="number">-00000.</span>lzo</span><br><span class="line"></span><br><span class="line">hadoop fs -text /tmp/lxw1234.com/part<span class="number">-00000.</span>lzo</span><br></pre></td></tr></table></figure></p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/08/03/2018-08-03 Spark RDD（十一） RDD Action 保存操作saveAsTextFile,saveAsSequenceFile,saveAsObjectFile,saveAsHadoopFile 等/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -1702,607 +2286,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/08/03/2018-08-03 Spark RDD（三） distinct，union，intersection，subtract，cartesian/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan Li">
-      <meta itemprop="description" content="Hello World.">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ryan Li God">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/08/03/2018-08-03 Spark RDD（三） distinct，union，intersection，subtract，cartesian/" class="post-title-link" itemprop="https://www.ryanligod.com/page/4/index.html">Spark RDD常用算子操作（三） distinct，union，intersection，subtract，cartesian</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-08-03 21:23:50" itemprop="dateCreated datePublished" datetime="2018-08-03T21:23:50+08:00">2018-08-03</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-08-12 18:58:32" itemprop="dateModified" datetime="2018-08-12T18:58:32+08:00">2018-08-12</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Spark/" itemprop="url" rel="index"><span itemprop="name">Spark</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/08/03/2018-08-03 Spark RDD（三） distinct，union，intersection，subtract，cartesian/" class="leancloud_visitors" data-flag-title="Spark RDD常用算子操作（三） distinct，union，intersection，subtract，cartesian">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>原文作者：翟开顺<br>首发：CSDN<br>本人仅为自己方便查阅做了摘抄，请支持原作者<br>原文地址：<a href="https://blog.csdn.net/t1dmzks/article/details/72077428" target="_blank" rel="noopener">https://blog.csdn.net/t1dmzks/article/details/72077428</a></p>
-</blockquote>
-<h1 id="distinct，union，intersection，subtract，cartesian"><a href="#distinct，union，intersection，subtract，cartesian" class="headerlink" title="distinct，union，intersection，subtract，cartesian"></a>distinct，union，intersection，subtract，cartesian</h1><p><strong>spark伪集合</strong><br>尽管 RDD 本身不是严格意义上的集合，但它也支持许多数学上的集合操作，比如合并和相交操作, 下图展示了这四种操作 </p>
-<h2 id="distinct"><a href="#distinct" class="headerlink" title="distinct"></a>distinct</h2><p>distinct用于去重， 我们生成的RDD可能有重复的元素，使用distinct方法可以去掉重复的元素, 不过此方法涉及到混洗，操作开销很大<br><strong>scala版本</strong><br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="keyword">var</span> <span class="type">RDD1</span> = sc.parallelize(<span class="type">List</span>(<span class="string">"aa"</span>,<span class="string">"aa"</span>,<span class="string">"bb"</span>,<span class="string">"cc"</span>,<span class="string">"dd"</span>))</span><br><span class="line"></span><br><span class="line">scala&gt; <span class="type">RDD1</span>.collect</span><br><span class="line">res3: <span class="type">Array</span>[<span class="type">String</span>] = <span class="type">Array</span>(aa, aa, bb, cc, dd)</span><br><span class="line"></span><br><span class="line">scala&gt; <span class="keyword">var</span> distinctRDD = <span class="type">RDD1</span>.distinct</span><br><span class="line"></span><br><span class="line">scala&gt; distinctRDD.collect</span><br><span class="line">res5: <span class="type">Array</span>[<span class="type">String</span>] = <span class="type">Array</span>(aa, dd, bb, cc)</span><br></pre></td></tr></table></figure></p>
-<p><strong>java版本</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">    JavaRDD&lt;String&gt; RDD1 = sc.parallelize(Arrays.asList(<span class="string">"aa"</span>, <span class="string">"aa"</span>, <span class="string">"bb"</span>, <span class="string">"cc"</span>, <span class="string">"dd"</span>));</span><br><span class="line">    JavaRDD&lt;String&gt; distinctRDD = RDD1.distinct();</span><br><span class="line">    List&lt;String&gt; collect = distinctRDD.collect();</span><br><span class="line">    <span class="keyword">for</span> (String str:collect) &#123;</span><br><span class="line">        System.out.print(str+<span class="string">", "</span>);</span><br><span class="line">    &#125;</span><br><span class="line">---------输出----------</span><br><span class="line">aa, dd, bb, cc,</span><br></pre></td></tr></table></figure></p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/08/03/2018-08-03 Spark RDD（三） distinct，union，intersection，subtract，cartesian/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-         
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/08/03/2018-08-03 Spark RDD（二） filter,map,flatMap/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan Li">
-      <meta itemprop="description" content="Hello World.">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ryan Li God">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/08/03/2018-08-03 Spark RDD（二） filter,map,flatMap/" class="post-title-link" itemprop="https://www.ryanligod.com/page/4/index.html">Spark RDD常用算子操作（二） filter,map,flatMap</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-08-03 21:22:50" itemprop="dateCreated datePublished" datetime="2018-08-03T21:22:50+08:00">2018-08-03</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-08-12 18:58:11" itemprop="dateModified" datetime="2018-08-12T18:58:11+08:00">2018-08-12</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Spark/" itemprop="url" rel="index"><span itemprop="name">Spark</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/08/03/2018-08-03 Spark RDD（二） filter,map,flatMap/" class="leancloud_visitors" data-flag-title="Spark RDD常用算子操作（二） filter,map,flatMap">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>原文作者：翟开顺<br>首发：CSDN<br>本人仅为自己方便查阅做了摘抄，请支持原作者<br>原文地址：<a href="https://blog.csdn.net/t1dmzks/article/details/72077428" target="_blank" rel="noopener">https://blog.csdn.net/t1dmzks/article/details/72077428</a></p>
-</blockquote>
-<h1 id="filter-map-flatMap"><a href="#filter-map-flatMap" class="headerlink" title="filter,map,flatMap"></a>filter,map,flatMap</h1><h2 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h2><p>举例，在F:\sparktest\sample.txt 文件的内容如下<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">aa bb cc aa aa aa <span class="selector-tag">dd</span> <span class="selector-tag">dd</span> ee ee ee ee </span><br><span class="line">ff aa bb zks</span><br><span class="line">ee kks</span><br><span class="line">ee  zz zks</span><br></pre></td></tr></table></figure></p>
-<p>我要将包含zks的行的内容给找出来<br><strong>scala版本</strong><br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">val</span> lines = sc.textFile(<span class="string">"F:\\sparktest\\sample.txt"</span>).filter(line=&gt;line.contains(<span class="string">"zks"</span>))</span><br><span class="line">    <span class="comment">//打印内容</span></span><br><span class="line">    lines.collect().foreach(println(_));</span><br><span class="line">-------------输出------------------</span><br><span class="line">ff aa bb zks</span><br><span class="line">ee  zz zks</span><br></pre></td></tr></table></figure></p>
-<p><strong>java版本</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">        JavaRDD&lt;String&gt; lines = sc.textFile(<span class="string">"F:\\sparktest\\sample.txt"</span>);</span><br><span class="line">        JavaRDD&lt;String&gt; zksRDD = lines.filter(<span class="keyword">new</span> Function&lt;String, Boolean&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> Boolean <span class="title">call</span><span class="params">(String s)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> s.contains(<span class="string">"zks"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">//打印内容</span></span><br><span class="line">        List&lt;String&gt; zksCollect = zksRDD.collect();</span><br><span class="line">        <span class="keyword">for</span> (String str:zksCollect) &#123;</span><br><span class="line">            System.out.println(str);</span><br><span class="line">        &#125;</span><br><span class="line">----------------输出-------------------</span><br><span class="line">ff aa bb zks</span><br><span class="line">ee  zz zks</span><br></pre></td></tr></table></figure></p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/08/03/2018-08-03 Spark RDD（二） filter,map,flatMap/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-         
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/08/03/2018-08-03 Spark RDD（一） parallelize，makeRDD，textFile/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan Li">
-      <meta itemprop="description" content="Hello World.">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ryan Li God">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/08/03/2018-08-03 Spark RDD（一） parallelize，makeRDD，textFile/" class="post-title-link" itemprop="https://www.ryanligod.com/page/4/index.html">Spark RDD常用算子操作（一） parallelize，makeRDD，textFile</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-08-03 21:21:50" itemprop="dateCreated datePublished" datetime="2018-08-03T21:21:50+08:00">2018-08-03</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-08-29 17:04:38" itemprop="dateModified" datetime="2018-08-29T17:04:38+08:00">2018-08-29</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Spark/" itemprop="url" rel="index"><span itemprop="name">Spark</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/08/03/2018-08-03 Spark RDD（一） parallelize，makeRDD，textFile/" class="leancloud_visitors" data-flag-title="Spark RDD常用算子操作（一） parallelize，makeRDD，textFile">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>原文作者：翟开顺<br>首发：CSDN<br>本人仅为自己方便查阅做了摘抄，请支持原作者<br>原文地址：<a href="https://blog.csdn.net/t1dmzks/article/details/72077428" target="_blank" rel="noopener">https://blog.csdn.net/t1dmzks/article/details/72077428</a></p>
-</blockquote>
-<h1 id="parallelize，makeRDD，textFile"><a href="#parallelize，makeRDD，textFile" class="headerlink" title="parallelize，makeRDD，textFile"></a>parallelize，makeRDD，textFile</h1><h2 id="parallelize"><a href="#parallelize" class="headerlink" title="parallelize"></a>parallelize</h2><p>调用SparkContext 的 parallelize()，将一个存在的集合，变成一个RDD，这种方式试用于学习spark和做一些spark的测试</p>
-<p><strong>scala版本</strong><br>def parallelize[T](seq: Seq[T], numSlices: Int = defaultParallelism)(implicit arg0: ClassTag[T]): RDD[T] </p>
-<ul>
-<li>第一个参数一是一个 Seq集合 </li>
-<li>第二个参数是分区数 </li>
-<li>返回的是RDD[T]</li>
-</ul>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; sc.parallelize(<span class="type">List</span>(<span class="string">"shenzhen"</span>, <span class="string">"is a beautiful city"</span>))</span><br><span class="line">res1: org.apache.spark.rdd.<span class="type">RDD</span>[<span class="type">String</span>] = <span class="type">ParallelCollectionRDD</span>[<span class="number">1</span>] at parallelize at &lt;console&gt;:<span class="number">22</span></span><br></pre></td></tr></table></figure>
-<p><strong>java版本</strong><br>def parallelize[T](list : java.util.List[T], numSlices : scala.Int) : org.apache.spark.api.java.JavaRDD[T] = { /* compiled code */ } </p>
-<ul>
-<li>第一个参数是一个List集合 </li>
-<li>第二个参数是一个分区，可以默认 </li>
-<li>返回的是一个JavaRDD[T]<br>java版本只能接收List的集合</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JavaRDD&lt;String&gt; javaStringRDD = sc.parallelize(Arrays.asList(<span class="string">"shenzhen"</span>, <span class="string">"is a beautiful city"</span>));</span><br></pre></td></tr></table></figure>
-<h2 id="makeRDD"><a href="#makeRDD" class="headerlink" title="makeRDD"></a>makeRDD</h2><p>只有scala版本的才有makeRDD<br>def makeRDD[T](seq : scala.Seq[T], numSlices : scala.Int = { /* compiled code */ })<br>跟parallelize类似</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sc.makeRDD(<span class="type">List</span>(<span class="string">"shenzhen"</span>, <span class="string">"is a beautiful city"</span>))</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/08/03/2018-08-03 Spark RDD（一） parallelize，makeRDD，textFile/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-         
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2347,7 +2335,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">48</span>
+                    <span class="site-state-item-count">51</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2384,7 +2372,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">12</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2465,7 +2457,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">34</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">37</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

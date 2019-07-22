@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="google-site-verification" content="cZeP3x5JObpg9HCS3K6TIR79PkNCztQLnFJ6LhyD9vI">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.ico?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.ico?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/apple-touch-icon.ico?v=6.5.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="本文编译器构建部分启发自 rswier/c4 和 lotabout/write-a-C-interpreter，其中有博客内容和代码的借鉴。  前言最近看了一些汇编和计算机组成原理的内容，感觉还是兴趣满满，于是找了一些资料来支撑实现自己的编程语言，打算把这个语言设计成中文编写，初步先使用 C 语言的基本语法形式， struct 之类的也先不考虑，后面学多了看看能不能加点例如 GC 之类的内容。">
+<meta name="keywords" content="编译器,自创语言Rylang">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自创 Rylang 语言以及编译器构建（一）虚拟机">
+<meta property="og:url" content="https://www.ryanligod.com/2019/06/13/2019-06-13 编译器构建（一）虚拟机/index.html">
+<meta property="og:site_name" content="Ryan Li God">
+<meta property="og:description" content="本文编译器构建部分启发自 rswier/c4 和 lotabout/write-a-C-interpreter，其中有博客内容和代码的借鉴。  前言最近看了一些汇编和计算机组成原理的内容，感觉还是兴趣满满，于是找了一些资料来支撑实现自己的编程语言，打算把这个语言设计成中文编写，初步先使用 C 语言的基本语法形式， struct 之类的也先不考虑，后面学多了看看能不能加点例如 GC 之类的内容。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-06-13T05:06:59.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="自创 Rylang 语言以及编译器构建（一）虚拟机">
+<meta name="twitter:description" content="本文编译器构建部分启发自 rswier/c4 和 lotabout/write-a-C-interpreter，其中有博客内容和代码的借鉴。  前言最近看了一些汇编和计算机组成原理的内容，感觉还是兴趣满满，于是找了一些资料来支撑实现自己的编程语言，打算把这个语言设计成中文编写，初步先使用 C 语言的基本语法形式， struct 之类的也先不考虑，后面学多了看看能不能加点例如 GC 之类的内容。">
+
+
+
+
+
+
+  <link rel="canonical" href="https://www.ryanligod.com/2019/06/13/2019-06-13 编译器构建（一）虚拟机/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>自创 Rylang 语言以及编译器构建（一）虚拟机 | Ryan Li God</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?71dc7c48c1cade58b78bec378294d4a4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ryan Li God</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">Hello World!</h1>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">37</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">14</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">51</span></a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2019/06/13/2019-06-13 编译器构建（一）虚拟机/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan Li">
+      <meta itemprop="description" content="Hello World.">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ryan Li God">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">自创 Rylang 语言以及编译器构建（一）虚拟机
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-06-13 12:36:27 / 修改时间：13:06:59" itemprop="dateCreated datePublished" datetime="2019-06-13T12:36:27+08:00">2019-06-13</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/编译器/" itemprop="url" rel="index"><span itemprop="name">编译器</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/06/13/2019-06-13 编译器构建（一）虚拟机/" class="leancloud_visitors" data-flag-title="自创 Rylang 语言以及编译器构建（一）虚拟机">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>本文编译器构建部分启发自 <a href="https://github.com/rswier/c4" target="_blank" rel="noopener">rswier/c4</a> 和 <a href="https://github.com/lotabout/write-a-C-interpreter" target="_blank" rel="noopener">lotabout/write-a-C-interpreter</a>，其中有博客内容和代码的借鉴。</p>
+</blockquote>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近看了一些汇编和计算机组成原理的内容，感觉还是兴趣满满，于是找了一些资料来支撑实现自己的编程语言，打算把这个语言设计成中文编写，初步先使用 C 语言的基本语法形式， <code>struct</code> 之类的也先不考虑，后面学多了看看能不能加点例如 GC 之类的内容。</p>
+<h2 id="编译器的构建流程"><a href="#编译器的构建流程" class="headerlink" title="编译器的构建流程"></a>编译器的构建流程</h2><p>一般而言，编译器的编写分为 3 个步骤：</p>
+<ol>
+<li>词法分析器，用于将字符串转化成内部的表示结构。</li>
+<li>语法分析器，将词法分析得到的标记流（token）生成一棵语法树。</li>
+<li>目标代码的生成，将语法树转化成目标代码。</li>
+</ol>
+<a id="more"></a>
+<p>本文依照以下步骤来构建编译器：</p>
+<ol>
+<li>构建自己的虚拟机以及指令集。这后生成的目标代码便是指令集。</li>
+<li>构建词法分析器</li>
+<li>构建语法分析器</li>
+</ol>
+<h2 id="编译器框架"><a href="#编译器框架" class="headerlink" title="编译器框架"></a>编译器框架</h2><p>我们的编译器主要包括 4 个函数：</p>
+<ol>
+<li><code>next()</code> 用于词法分析，获取下一个标记，它将自动忽略空白字符。</li>
+<li><code>program()</code> 语法分析的入口，分析整个 C 语言程序。</li>
+<li><code>expression(level)</code> 用于解析一个表达式。</li>
+<li><code>eval()</code> 虚拟机的入口，用于解释目标代码。</li>
+</ol>
+<h1 id="虚拟机"><a href="#虚拟机" class="headerlink" title="虚拟机"></a>虚拟机</h1><h2 id="计算机的内部工作原理"><a href="#计算机的内部工作原理" class="headerlink" title="计算机的内部工作原理"></a>计算机的内部工作原理</h2><h3 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h3><ol>
+<li>代码段（text）用于存放代码（指令）。</li>
+<li>数据段（data）用于存放初始化了的数据，如<code>int i = 10;</code>，就需要存放到数据段中。</li>
+<li>未初始化数据段（bss）用于存放未初始化的数据，如 <code>int i[1000];</code>，因为不关心其中的真正数值，所以单独存放可以节省空间，减少程序的体积。</li>
+<li>栈（stack）用于处理函数调用相关的数据，如调用帧（calling frame）或是函数的局部变量等。</li>
+<li>堆（heap）用于为程序动态分配内存。</li>
+</ol>
+<p>它们在内存中的位置类似于下图：</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="code">+------------------+</span></span><br><span class="line">|    stack   |     |      high address</span><br><span class="line">|    ...     v     |</span><br><span class="line">|                  |</span><br><span class="line">|                  |</span><br><span class="line">|                  |</span><br><span class="line">|                  |</span><br><span class="line">|    ...     ^     |</span><br><span class="line">|    heap    |     |</span><br><span class="line"><span class="code">+------------------+</span></span><br><span class="line">| bss  segment     |</span><br><span class="line"><span class="code">+------------------+</span></span><br><span class="line">| data segment     |</span><br><span class="line"><span class="code">+------------------+</span></span><br><span class="line">| text segment     |      low address</span><br><span class="line"><span class="code">+------------------+</span></span><br></pre></td></tr></table></figure>
+<p>我们的虚拟机并不打算模拟完整的计算机，因此简单起见，我们只关心三个内容：代码段、数据段以及栈。其中的数据段我们只用来存放字符串，因为我们的编译器并不支持初始化变量，因此我们也不需要未初始化数据段。</p>
+<p>当用户的程序需要分配内存时，理论上我们的虚拟机需要维护一个堆用于内存分配，但实际实现上较为复杂且与编译无关，故我们引入一个指令<code>MSET</code>，使我们能直接使用编译器（解释器）中的内存。</p>
+<p>综上，我们需要首先在全局添加如下代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *text,            <span class="comment">// text segment</span></span><br><span class="line">    *old_text,        <span class="comment">// for dump text segment</span></span><br><span class="line">    *<span class="built_in">stack</span>;           <span class="comment">// stack</span></span><br><span class="line"><span class="keyword">char</span> *data;           <span class="comment">// data segment</span></span><br></pre></td></tr></table></figure>
+<p>注意这里的类型，虽然是<code>int</code>型，但理解起来应该作为无符号的整型，因为我们会在代码段（text）中存放如指针/内存地址的数据，它们就是无符号的。其中数据段（data）由于只存放字符串，所以是 <code>char *</code>型的。</p>
+<h3 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h3><p>计算机中的寄存器用于存放计算机的运行状态，真正的计算机中有许多不同种类的寄存器，但我们的虚拟机中只使用 4 个寄存器，分别如下：</p>
+<ol>
+<li><code>PC</code> 程序计数器，它存放的是一个内存地址，该地址中存放着 <strong>下一条</strong> 要执行的计算机指令。</li>
+<li><code>SP</code> 指针寄存器，永远指向当前的栈顶。注意的是由于栈是位于高地址并向低地址增长的，所以入栈时 <code>SP</code> 的值减小。</li>
+<li><code>BP</code> 基址指针。也是用于指向栈的某些位置，在调用函数时会使用到它。</li>
+<li><code>AX</code> 通用寄存器，我们的虚拟机中，它用于存放一条指令执行后的结果。</li>
+</ol>
+<h2 id="指令集"><a href="#指令集" class="headerlink" title="指令集"></a>指令集</h2><h3 id="MOV"><a href="#MOV" class="headerlink" title="MOV"></a>MOV</h3><p><code>MOV</code> 是所有指令中最基础的一个，它用于将数据放进寄存器或内存地址，有点类似于 C 语言中的赋值语句。x86 的 <code>MOV</code> 指令有两个参数，分别是源地址和目标地址：<code>MOV dest, source</code> （Intel 风格），表示将 <code>source</code> 的内容放在 <code>dest</code> 中，它们可以是一个数、寄存器或是一个内存地址。</p>
+<p>一方面，我们的虚拟机只有一个寄存器，另一方面，识别这些参数的类型（是数据还是地址）是比较困难的，因此我们将 <code>MOV</code> 指令拆分成 5 个指令，这些指令只接受一个参数，如下：</p>
+<ol>
+<li><code>IMM &lt;num&gt;</code> 将 <code>&lt;num&gt;</code> 放入寄存器 <code>ax</code> 中。</li>
+<li><code>LC</code> 将对应地址中的字符载入 <code>ax</code> 中，要求 <code>ax</code> 中存放地址。</li>
+<li><code>LI</code> 将对应地址中的整数载入 <code>ax</code> 中，要求 <code>ax</code> 中存放地址。</li>
+<li><code>SC</code> 将 <code>ax</code> 中的数据作为字符存放入地址中，要求栈顶存放地址。</li>
+<li><code>SI</code> 将 <code>ax</code> 中的数据作为整数存放入地址中，要求栈顶存放地址。</li>
+</ol>
+<p>你可能会觉得将一个指令变成了许多指令，整个系统就变得复杂了，但实际情况并非如此。首先是 x86 的 <code>MOV</code> 指令其实有许多变种，根据类型的不同有 <code>MOVB</code>, <code>MOVW</code> 等指令，我们这里的 <code>LC/SC</code> 和 <code>LI/SI</code> 就是对应字符型和整型的存取操作。</p>
+<p>在 <code>eval()</code> 函数中加入下列代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">eval</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> op, *tmp;</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (op == IMM)       &#123;ax = *pc++;&#125;  <span class="comment">// load immediate value to ax</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (op == LC)   &#123;ax = *(<span class="keyword">char</span> *)ax;&#125;  <span class="comment">// load character to ax, address in ax</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (op == LI)   &#123;ax = *(<span class="keyword">int</span> *)ax;&#125;  <span class="comment">// load integer to ax, address in ax</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (op == SC)   &#123;ax = *(<span class="keyword">char</span> *)*sp++ = ax;&#125;  <span class="comment">// save character to address, value in ax, address on stack</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (op == SI)   &#123;*(<span class="keyword">int</span> *)*sp++ = ax;&#125;  <span class="comment">// save integer to address, value in ax, address on stack</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中的 <code>*sp++</code> 的作用是退栈，相当于 <code>POP</code> 操作。</p>
+<p>这里要解释的一点是，为什么 <code>SI/SC</code> 指令中，地址存放在栈中，而 <code>LI/LC</code> 中，地址存放在 <code>ax</code> 中？原因是默认计算的结果是存放在 <code>ax</code> 中的，而地址通常是需要通过计算获得，所以执行 <code>LI/LC</code> 时直接从 <code>ax</code> 取值会更高效。另一点是我们的 <code>PUSH</code> 指令只能将 <code>ax</code> 的值放到栈上，而不能以值作为参数。</p>
+<h3 id="PUSH"><a href="#PUSH" class="headerlink" title="PUSH"></a>PUSH</h3><p>在 x86 中，<code>PUSH</code> 的作用是将值或寄存器，而在我们的虚拟机中，它的作用是将 <code>ax</code> 的值放入栈中。这样做的主要原因是为了简化虚拟机的实现，并且我们也只有一个寄存器 <code>ax</code> 。代码如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (op == PUSH) &#123;*--sp = ax;&#125;  <span class="comment">// push the value of ax onto the stack</span></span><br></pre></td></tr></table></figure>
+<h3 id="JMP"><a href="#JMP" class="headerlink" title="JMP"></a>JMP</h3><p><code>JMP&lt;addr&gt;</code> 是跳转指令，无条件地将当前的 <code>PC</code> 寄存器设置为指定的 <code>&lt;addr&gt;</code>，实现如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (op == JMP)  &#123;pc = (<span class="keyword">int</span> *)*pc;&#125;  <span class="comment">// jump to the address</span></span><br></pre></td></tr></table></figure>
+<h3 id="JZ-JNZ"><a href="#JZ-JNZ" class="headerlink" title="JZ/JNZ"></a>JZ/JNZ</h3><p>为了实现 <code>if</code> 语句，我们需要条件判断相关的指令。这里我们只实现两个最简单的条件判断，即结果（<code>ax</code>）为零或不为零情况下的跳转。</p>
+<p>实现如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (op == JZ)   &#123;pc = ax ? pc + <span class="number">1</span> : (<span class="keyword">int</span> *)*pc;&#125;  <span class="comment">// jump if ax is zero</span></span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (op == JNZ)  &#123;pc = ax ? (<span class="keyword">int</span> *)*pc : pc + <span class="number">1</span>;&#125;  <span class="comment">// jump if ax is zero</span></span><br></pre></td></tr></table></figure>
+<h3 id="子函数调用"><a href="#子函数调用" class="headerlink" title="子函数调用"></a>子函数调用</h3><p>这是汇编中最难理解的部分，所以合在一起说，要引入的命令有 <code>CALL</code>, <code>ENT</code>, <code>ADJ</code> 及 <code>LEV</code>。</p>
+<p>首先我们介绍 <code>CALL &lt;addr&gt;</code> 与 <code>RET</code> 指令，<code>CALL</code> 的作用是跳转到地址为 <code>&lt;addr&gt;</code> 的子函数，<code>RET</code> 则用于从子函数中返回。</p>
+<p>为什么不能直接使用 <code>JMP</code> 指令呢？原因是当我们从子函数中返回时，程序需要回到跳转之前的地方继续运行，这就需要事先将这个位置信息存储起来。反过来，子函数要返回时，就需要获取并恢复这个信息。因此实际中我们将 <code>PC</code> 保存在栈中。如下：</p>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (op == <span class="keyword">CALL</span>) &#123;*--sp = (<span class="built_in">int</span>)(pc+<span class="number">1</span>); pc = (<span class="built_in">int</span> *)*pc;&#125;           // <span class="keyword">call</span> <span class="function"><span class="keyword">subroutine</span></span></span><br><span class="line">//<span class="keyword">else</span> <span class="keyword">if</span> (op == RET)  &#123;pc = (<span class="built_in">int</span> *)*sp++;&#125;                              // <span class="keyword">return</span> from <span class="function"><span class="keyword">subroutine</span></span>;</span><br></pre></td></tr></table></figure>
+<p>这里我们把 <code>RET</code> 相关的内容注释了，是因为之后我们将用 <code>LEV</code> 指令来代替它。</p>
+<p>在实际调用函数时，不仅要考虑函数的地址，还要考虑如何传递参数和如何返回结果。这里我们约定，如果子函数有返回结果，那么就在返回时保存在 <code>ax</code> 中，它可以是一个值，也可以是一个地址。那么参数的传递呢？</p>
+<p>各种编程语言关于如何调用子函数有不同的约定，例如 C 语言的调用标准是：</p>
+<ol>
+<li>由调用者将参数入栈。</li>
+<li>调用结束时，由调用者将参数出栈。</li>
+<li>参数逆序入栈。</li>
+</ol>
+<p>事先声明一下，我们的编译器参数是顺序入栈的，下面的例子（C 语言调用标准）取自 <a href="https://en.wikipedia.org/wiki/X86_calling_conventions" target="_blank" rel="noopener">维基百科</a>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">callee</span><span class="params">(<span class="keyword">int</span>, <span class="keyword">int</span>, <span class="keyword">int</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">caller</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i, ret;</span><br><span class="line"></span><br><span class="line">	ret = callee(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line">	ret += <span class="number">5</span>;</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>会生成如下的 x86 汇编代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">caller:</span><br><span class="line">	; make new call frame</span><br><span class="line">	push    ebp</span><br><span class="line">	mov     ebp, esp</span><br><span class="line">  sub     1, esp       ; save stack for variable: i</span><br><span class="line">	; push call arguments</span><br><span class="line">	push    3</span><br><span class="line">	push    2</span><br><span class="line">	push    1</span><br><span class="line">	; call subroutine &apos;callee&apos;</span><br><span class="line">	call    callee</span><br><span class="line">	; remove arguments from frame</span><br><span class="line">	add     esp, 12</span><br><span class="line">	; use subroutine result</span><br><span class="line">	add     eax, 5</span><br><span class="line">	; restore old call frame</span><br><span class="line">  mov     esp, ebp</span><br><span class="line">	pop     ebp</span><br><span class="line">	; return</span><br><span class="line">	ret</span><br></pre></td></tr></table></figure>
+<p>上面这段代码在我们自己的虚拟机里会有几个问题：</p>
+<ol>
+<li><code>push ebp</code>，但我们的 <code>PUSH</code> 指令并无法指定寄存器。</li>
+<li><code>mov ebp, esp</code>，我们的 <code>MOV</code> 指令同样功能不足。</li>
+<li><code>add esp, 12</code>，也是一样的问题（尽管我们还没定义）。</li>
+</ol>
+<p>也就是说由于我们的指令过于简单（如只能操作<code>ax</code>寄存器），所以用上面提到的指令，我们连函数调用都无法实现。而我们又不希望扩充现有指令的功能，因为这样实现起来就会变得复杂，因此我们采用的方法是增加指令集。毕竟我们不是真正的计算机，增加指令会消耗许多资源。</p>
+<h3 id="ENT"><a href="#ENT" class="headerlink" title="ENT"></a>ENT</h3><p><code>ENT &lt;size&gt;</code> 指的是 <code>enter</code>，用于实现 <code>make new call frame</code>的功能，即保存当前的栈指针，同时在栈上保留一定的空间，用以存放局部变量。对应的汇编代码为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">; make new call frame</span><br><span class="line">push    ebp</span><br><span class="line">mov     ebp, esp</span><br><span class="line">sub     1, esp       ; save stack for variable: i</span><br></pre></td></tr></table></figure>
+<p>实现如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (op == ENT)  &#123;*--sp = (<span class="keyword">int</span>)bp; bp = sp; sp = sp - *pc++;&#125;  <span class="comment">// make new stack frame</span></span><br></pre></td></tr></table></figure>
+<h3 id="ADJ"><a href="#ADJ" class="headerlink" title="ADJ"></a>ADJ</h3><p><code>ADJ &lt;size&gt;</code> 用于实现 <code>remove arguments from frame</code>。在将调用子函数时压入栈中的数据清除，本质上是因为我们的 <code>ADD</code> 指令功能有限。对应的汇编代码为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">; remove arguments from frame</span><br><span class="line">add     esp, 12</span><br></pre></td></tr></table></figure>
+<p>实现如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (op == ADJ)  &#123;sp = sp + *pc++;&#125;  <span class="comment">// add esp, &lt;size&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="LEV"><a href="#LEV" class="headerlink" title="LEV"></a>LEV</h3><p>本质上这个指令并不是必需的，只是我们的指令集中并没有 <code>POP</code> 指令。并且三条指令写来比较麻烦且浪费空间，所以用一个指令代替。对应的汇编指令为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">; restore old call frame</span><br><span class="line">mov     esp, ebp</span><br><span class="line">pop     ebp</span><br><span class="line">; return</span><br><span class="line">ret</span><br></pre></td></tr></table></figure>
+<p>具体的实现如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (op == LEV)  &#123;sp = bp; bp = (<span class="keyword">int</span> *)*sp++; pc = (<span class="keyword">int</span> *)*sp++;&#125;  <span class="comment">// restore call frame and PC</span></span><br></pre></td></tr></table></figure>
+<p>注意的是，<code>LEV</code> 已经把 <code>RET</code> 的功能包含了，所以我们不再需要 <code>RET</code> 指令。</p>
+<h3 id="LEA"><a href="#LEA" class="headerlink" title="LEA"></a>LEA</h3><p>上面的一些指令解决了调用帧的问题，但还有一个问题是如何在子函数中获得传入的参数。这里我们首先要了解的是当参数调用时，栈中的调用帧是什么样的。我们依旧用上面的例子（只是现在用“顺序”调用参数）：</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">sub<span class="emphasis">_function(arg1, arg2, arg3);</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">|    ....       | high address</span></span><br><span class="line"><span class="emphasis">+---------------+</span></span><br><span class="line"><span class="emphasis">| arg: 1        |    new_</span>bp + 4</span><br><span class="line"><span class="code">+---------------+</span></span><br><span class="line">| arg: 2        |    new<span class="emphasis">_bp + 3</span></span><br><span class="line"><span class="emphasis">+---------------+</span></span><br><span class="line"><span class="emphasis">| arg: 3        |    new_</span>bp + 2</span><br><span class="line"><span class="code">+---------------+</span></span><br><span class="line">|return address |    new<span class="emphasis">_bp + 1</span></span><br><span class="line"><span class="emphasis">+---------------+</span></span><br><span class="line"><span class="emphasis">| old BP        | &lt;- new BP</span></span><br><span class="line"><span class="emphasis">+---------------+</span></span><br><span class="line"><span class="emphasis">| local var 1   |    new_</span>bp - 1</span><br><span class="line"><span class="code">+---------------+</span></span><br><span class="line">| local var 2   |    new<span class="emphasis">_bp - 2</span></span><br><span class="line"><span class="emphasis">+---------------+</span></span><br><span class="line"><span class="emphasis">|    ....       |  low address</span></span><br></pre></td></tr></table></figure>
+<p>所以为了获取第一个参数，我们需要得到 <code>new_bp + 4</code>，但就如上面的说，我们的 <code>ADD</code> 指令无法操作除 <code>ax</code> 外的寄存器，所以我们提供了一个新的指令：<code>LEA &lt;offset&gt;</code></p>
+<p>实现如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (op == LEA)  &#123;ax = (<span class="keyword">int</span>)(bp + *pc++);&#125;  <span class="comment">// load address for arguments.</span></span><br></pre></td></tr></table></figure>
+<p>以上就是我们为了实现函数调用需要的指令了。</p>
+<h3 id="运算符指令"><a href="#运算符指令" class="headerlink" title="运算符指令"></a>运算符指令</h3><p>我们为 C 语言中支持的运算符都提供对应汇编指令。每个运算符都是二元的，即有两个参数，第一个参数放在栈顶，第二个参数放在 <code>ax</code> 中。这个顺序要特别注意。因为像 <code>-</code>，<code>/</code> 之类的运算符是与参数顺序有关的。计算后会将栈顶的参数退栈，结果存放在寄存器 <code>ax</code> 中。因此计算结束后，两个参数都无法取得了（汇编的意义上，存在内存地址上就另当别论）。</p>
+<p>实现如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (op == OR)  ax = *sp++ | ax;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (op == XOR) ax = *sp++ ^ ax;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (op == AND) ax = *sp++ &amp; ax;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (op == EQ)  ax = *sp++ == ax;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (op == NE)  ax = *sp++ != ax;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (op == LT)  ax = *sp++ &lt; ax;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (op == LE)  ax = *sp++ &lt;= ax;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (op == GT)  ax = *sp++ &gt;  ax;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (op == GE)  ax = *sp++ &gt;= ax;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (op == SHL) ax = *sp++ &lt;&lt; ax;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (op == SHR) ax = *sp++ &gt;&gt; ax;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (op == ADD) ax = *sp++ + ax;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (op == SUB) ax = *sp++ - ax;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (op == MUL) ax = *sp++ * ax;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (op == DIV) ax = *sp++ / ax;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (op == MOD) ax = *sp++ % ax;</span><br></pre></td></tr></table></figure>
+<h3 id="内置函数"><a href="#内置函数" class="headerlink" title="内置函数"></a>内置函数</h3><p>写的程序要”有用“，除了核心的逻辑外还需要输入输出，例如 C 语言中我们经常使用的 <code>printf</code> 函数就是用于输出。但是 <code>printf</code> 函数的实现本身就十分复杂，如果我们的编译器要达到自举，就势必要实现 <code>printf</code> 之类的函数，但它又与编译器没有太大的联系，因此我们继续实现新的指令，从虚拟机的角度予以支持。</p>
+<p>编译器中我们需要用到的函数有：<code>exit</code>, <code>open</code>, <code>close</code>, <code>read</code>, <code>printf</code>, <code>malloc</code>, <code>memset</code> 及 <code>memcmp</code>。代码如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (op == EXIT) &#123; <span class="built_in">printf</span>(<span class="string">"exit(%d)"</span>, *sp); <span class="keyword">return</span> *sp;&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (op == OPEN) &#123; ax = open((<span class="keyword">char</span> *)sp[<span class="number">1</span>], sp[<span class="number">0</span>]); &#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (op == CLOS) &#123; ax = close(*sp);&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (op == READ) &#123; ax = read(sp[<span class="number">2</span>], (<span class="keyword">char</span> *)sp[<span class="number">1</span>], *sp); &#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (op == PRTF) &#123; tmp = sp + pc[<span class="number">1</span>]; ax = <span class="built_in">printf</span>((<span class="keyword">char</span> *)tmp[<span class="number">-1</span>], tmp[<span class="number">-2</span>], tmp[<span class="number">-3</span>], tmp[<span class="number">-4</span>], tmp[<span class="number">-5</span>], tmp[<span class="number">-6</span>]); &#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (op == MALC) &#123; ax = (<span class="keyword">int</span>)<span class="built_in">malloc</span>(*sp);&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (op == MSET) &#123; ax = (<span class="keyword">int</span>)<span class="built_in">memset</span>((<span class="keyword">char</span> *)sp[<span class="number">2</span>], sp[<span class="number">1</span>], *sp);&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (op == MCMP) &#123; ax = <span class="built_in">memcmp</span>((<span class="keyword">char</span> *)sp[<span class="number">2</span>], (<span class="keyword">char</span> *)sp[<span class="number">1</span>], *sp);&#125;</span><br></pre></td></tr></table></figure>
+<p>这里的原理是，我们的电脑上已经有了这些函数的实现，因此编译编译器时，这些函数的二进制代码就被编译进了我们的编译器，因此在我们的编译器/虚拟机上运行我们提供的这些指令时，这些函数就是可用的。换句话说就是不需要我们自己去实现了。</p>
+<p>最后再加上一个错误判断：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"unknown instruction:%d\n"</span>, op);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Ryan Li 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/编译器/" rel="tag"># 编译器</a>
+          
+            <a href="/tags/自创语言Rylang/" rel="tag"># 自创语言Rylang</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/12/2019-06-12 C 调用 Go 实录/" rel="next" title="C 调用 Go 生成动态链接库实录">
+                <i class="fa fa-chevron-left"></i> C 调用 Go 生成动态链接库实录
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/14/2019-06-13 编译器构建（二）词法分析器/" rel="prev" title="自创 Rylang 语言以及编译器构建（二）词法分析器">
+                自创 Rylang 语言以及编译器构建（二）词法分析器 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zODgwNi8xNTMzNA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpeg" alt="Ryan Li">
+            
+              <p class="site-author-name" itemprop="name">Ryan Li</p>
+              <p class="site-description motion-element" itemprop="description">Hello World.</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">51</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">37</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/RyanLiGod" title="GitHub &rarr; https://github.com/RyanLiGod" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:ryanligod@gmail.com" title="E-Mail &rarr; mailto:ryanligod@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#编译器的构建流程"><span class="nav-number">1.1.</span> <span class="nav-text">编译器的构建流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译器框架"><span class="nav-number">1.2.</span> <span class="nav-text">编译器框架</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#虚拟机"><span class="nav-number">2.</span> <span class="nav-text">虚拟机</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#计算机的内部工作原理"><span class="nav-number">2.1.</span> <span class="nav-text">计算机的内部工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内存"><span class="nav-number">2.1.1.</span> <span class="nav-text">内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#寄存器"><span class="nav-number">2.1.2.</span> <span class="nav-text">寄存器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指令集"><span class="nav-number">2.2.</span> <span class="nav-text">指令集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MOV"><span class="nav-number">2.2.1.</span> <span class="nav-text">MOV</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PUSH"><span class="nav-number">2.2.2.</span> <span class="nav-text">PUSH</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JMP"><span class="nav-number">2.2.3.</span> <span class="nav-text">JMP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JZ-JNZ"><span class="nav-number">2.2.4.</span> <span class="nav-text">JZ/JNZ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#子函数调用"><span class="nav-number">2.2.5.</span> <span class="nav-text">子函数调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ENT"><span class="nav-number">2.2.6.</span> <span class="nav-text">ENT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ADJ"><span class="nav-number">2.2.7.</span> <span class="nav-text">ADJ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LEV"><span class="nav-number">2.2.8.</span> <span class="nav-text">LEV</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LEA"><span class="nav-number">2.2.9.</span> <span class="nav-text">LEA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运算符指令"><span class="nav-number">2.2.10.</span> <span class="nav-text">运算符指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内置函数"><span class="nav-number">2.2.11.</span> <span class="nav-text">内置函数</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ryan Li</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+    <script type="text/javascript">
+      window.livereOptions = {
+        refer: '2019/06/13/2019-06-13 编译器构建（一）虚拟机/'
+      };
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1}))
+                .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function () {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "L71FAGlYbGy360uJzNBnyuLd-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "L71FAGlYbGy360uJzNBnyuLd-gzGzoHsz",
+                'X-LC-Key': "EkXnFcBGbM1Rt0hfAcUtDRUo",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('复制成功')
+          else $(this).text('复制失败')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+  
+
+</body>
+</html>

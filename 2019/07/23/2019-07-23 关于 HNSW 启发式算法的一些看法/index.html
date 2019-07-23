@@ -122,7 +122,7 @@
 <meta property="og:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2019-07-23-075352.png">
 <meta property="og:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2019-07-23-080127.png">
 <meta property="og:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2019-07-23-080557.png">
-<meta property="og:updated_time" content="2019-07-23T08:28:56.781Z">
+<meta property="og:updated_time" content="2019-07-23T08:42:18.739Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="近似最近邻算法 HNSW 学习笔记（三）对于启发式近邻选择算法的一些看法">
 <meta name="twitter:description" content="img {     max-height: 400px !important;   }   前言在 HNSW 中一大创新就是在选择连接的近邻时使用了启发式算法，在之后脱颖而出的近似最近邻算法 NSG 和 SSG （论文中提到是阿里巴巴正在使用的可用于十亿级别数据集的近似最近邻算法，表现出甚至优于 HNSW 的性能）中也采用了类似于其启发式的 RNG （不是那个 RNG 哦，顺便 LPL 加油">
@@ -406,7 +406,7 @@
                 
               
 
-              <time title="创建时间：2019-07-23 15:23:33 / 修改时间：16:28:56" itemprop="dateCreated datePublished" datetime="2019-07-23T15:23:33+08:00">2019-07-23</time>
+              <time title="创建时间：2019-07-23 15:23:33 / 修改时间：16:42:18" itemprop="dateCreated datePublished" datetime="2019-07-23T15:23:33+08:00">2019-07-23</time>
             
 
             
@@ -483,11 +483,11 @@
 <a id="more"></a>
 <p><strong>HNSW 文章：</strong></p>
 <ul>
-<li><p><a href="[https://www.ryanligod.com/2018/11/27/2018-11-27%20HNSW%20%E4%BB%8B%E7%BB%8D/](https://www.ryanligod.com/2018/11/27/2018-11-27 HNSW 介绍/">近似最近邻算法 HNSW 学习笔记（一）介绍</a>)</p>
+<li><p><a href="https://www.ryanligod.com/2018/11/27/2018-11-27 HNSW 介绍/" target="_blank">近似最近邻算法 HNSW 学习笔记（一）介绍</a></p>
 </li>
-<li><p><a href="[https://www.ryanligod.com/2018/11/29/2018-11-29%20HNSW%20%E4%B8%BB%E8%A6%81%E7%AE%97%E6%B3%95/](https://www.ryanligod.com/2018/11/29/2018-11-29 HNSW 主要算法/">近似最近邻算法 HNSW 学习笔记（二） 主要算法伪代码分析</a>)</p>
+<li><p><a href="https://www.ryanligod.com/2018/11/29/2018-11-29 HNSW 主要算法/" target="_blank">近似最近邻算法 HNSW 学习笔记（二） 主要算法伪代码分析</a></p>
 </li>
-<li><p><a href="[https://www.ryanligod.com/2019/07/23/2019-07-23%20关于%20HNSW%20启发式算法的一些看法/](https://www.ryanligod.com/2019/07/23/2019-07-23 关于 HNSW 启发式算法的一些看法/">近似最近邻算法 HNSW 学习笔记（三）对于启发式近邻选择算法的一些看法</a>)</p>
+<li><p><a href="https://www.ryanligod.com/2019/07/23/2019-07-23 关于 HNSW 启发式算法的一些看法/" target="_blank">近似最近邻算法 HNSW 学习笔记（三）对于启发式近邻选择算法的一些看法</a></p>
 </li>
 </ul>
 <h1 id="Heuristic-Select-启发式选择算法"><a href="#Heuristic-Select-启发式选择算法" class="headerlink" title="Heuristic Select 启发式选择算法"></a>Heuristic Select 启发式选择算法</h1><p>在 HNSW 中，<code>SEARCH-LAYER(q, ep, ef, lc)</code> 返回 <code>efConstruction</code> 个最近邻点，我们知道 <code>efConstruction</code> 的值是大于 <code>M</code> 的，那么怎么在这些点中选择 <code>M</code> 个来进行双向连接呢？这时候就有一个选择算法了。论文中提出了两种选择算法：</p>

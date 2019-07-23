@@ -110,14 +110,14 @@
 
 
   <meta name="description" content="前言近期在研究近似最近邻算法 HNSW 的源码和论文，这里结合论文中的伪代码做一下 HNSW 主要的几个算法的解读，这将对读懂源码十分有帮助。本文介绍以下算法：  $\tt INSERT(\it hnsw, q, M, M_{max}, efConstruction, m_L \tt)$ : 新元素 $q$ 插入算法。 $\tt SEARCH\ LAYER(\it q, ep, ef, l_c \">
-<meta name="keywords" content="推荐系统,算法">
+<meta name="keywords" content="推荐系统,算法,HNSW">
 <meta property="og:type" content="article">
 <meta property="og:title" content="近似最近邻算法 HNSW 学习笔记（二） 主要算法伪代码分析">
 <meta property="og:url" content="https://www.ryanligod.com/2018/11/29/2018-11-29 HNSW 主要算法/index.html">
 <meta property="og:site_name" content="Ryan Li God">
 <meta property="og:description" content="前言近期在研究近似最近邻算法 HNSW 的源码和论文，这里结合论文中的伪代码做一下 HNSW 主要的几个算法的解读，这将对读懂源码十分有帮助。本文介绍以下算法：  $\tt INSERT(\it hnsw, q, M, M_{max}, efConstruction, m_L \tt)$ : 新元素 $q$ 插入算法。 $\tt SEARCH\ LAYER(\it q, ep, ef, l_c \">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-15T12:14:27.310Z">
+<meta property="og:updated_time" content="2019-07-23T08:28:48.573Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="近似最近邻算法 HNSW 学习笔记（二） 主要算法伪代码分析">
 <meta name="twitter:description" content="前言近期在研究近似最近邻算法 HNSW 的源码和论文，这里结合论文中的伪代码做一下 HNSW 主要的几个算法的解读，这将对读懂源码十分有帮助。本文介绍以下算法：  $\tt INSERT(\it hnsw, q, M, M_{max}, efConstruction, m_L \tt)$ : 新元素 $q$ 插入算法。 $\tt SEARCH\ LAYER(\it q, ep, ef, l_c \">
@@ -268,7 +268,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">37</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">38</span></a>
 
   </li>
         
@@ -417,7 +417,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-03-15 20:14:27" itemprop="dateModified" datetime="2019-03-15T20:14:27+08:00">2019-03-15</time>
+                <time title="修改时间：2019-07-23 16:28:48" itemprop="dateModified" datetime="2019-07-23T16:28:48+08:00">2019-07-23</time>
               
             
           </span>
@@ -488,6 +488,15 @@
 <li>$\tt KNN\ SEARCH(\it hnsw, q, K, ef \tt)$ : 在 $hnsw$ 索引中查询距离 $q$ 最近邻的 $K$ 个元素。</li>
 </ul>
 <a id="more"></a>
+<p><strong>HNSW 文章：</strong></p>
+<ul>
+<li><p><a href="[https://www.ryanligod.com/2018/11/27/2018-11-27%20HNSW%20%E4%BB%8B%E7%BB%8D/](https://www.ryanligod.com/2018/11/27/2018-11-27 HNSW 介绍/">近似最近邻算法 HNSW 学习笔记（一）介绍</a>)</p>
+</li>
+<li><p><a href="[https://www.ryanligod.com/2018/11/29/2018-11-29%20HNSW%20%E4%B8%BB%E8%A6%81%E7%AE%97%E6%B3%95/](https://www.ryanligod.com/2018/11/29/2018-11-29 HNSW 主要算法/">近似最近邻算法 HNSW 学习笔记（二） 主要算法伪代码分析</a>)</p>
+</li>
+<li><p><a href="[https://www.ryanligod.com/2019/07/23/2019-07-23%20关于%20HNSW%20启发式算法的一些看法/](https://www.ryanligod.com/2019/07/23/2019-07-23 关于 HNSW 启发式算法的一些看法/">近似最近邻算法 HNSW 学习笔记（三）对于启发式近邻选择算法的一些看法</a>)</p>
+</li>
+</ul>
 <h1 id="算法解释"><a href="#算法解释" class="headerlink" title="算法解释"></a>算法解释</h1><h2 id="算法一：插入算法"><a href="#算法一：插入算法" class="headerlink" title="算法一：插入算法"></a>算法一：插入算法</h2><p>$\tt INSERT(\it hnsw, q, M, M_{max}, efConstruction, m_L \tt)$ : 新元素 $q$ 插入算法。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">INSERT(hnsw, q, M, Mmax, efConstruction, mL)</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 输入</span></span><br><span class="line"><span class="comment"> * hnsw：q插入的目标图</span></span><br><span class="line"><span class="comment"> * q：插入的新元素</span></span><br><span class="line"><span class="comment"> * M：每个点需要与图中其他的点建立的连接数</span></span><br><span class="line"><span class="comment"> * Mmax：最大的连接数，超过则需要进行缩减（shrink）</span></span><br><span class="line"><span class="comment"> * efConstruction：动态候选元素集合大小</span></span><br><span class="line"><span class="comment"> * mL：选择q的层数时用到的标准化因子</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">Input: </span><br><span class="line">multilayer graph hnsw, </span><br><span class="line"><span class="keyword">new</span> element q, </span><br><span class="line">number of established connections M, </span><br><span class="line">maximum number of connections <span class="keyword">for</span> each element per layer Mmax, </span><br><span class="line">size of the dynamic candidate <span class="built_in">list</span> efConstruction, </span><br><span class="line">normalization factor <span class="keyword">for</span> level generation mL</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 输出：新的hnsw图</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">Output: update hnsw inserting element q</span><br><span class="line"></span><br><span class="line">W ← ∅  <span class="comment">// W：现在发现的最近邻元素集合</span></span><br><span class="line">ep ← get enter point <span class="keyword">for</span> hnsw</span><br><span class="line">L ← level of ep</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * unif(0..1)是取0到1之中的随机数</span></span><br><span class="line"><span class="comment"> * 根据mL获取新元素q的层数l</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">l ← ⌊-ln(unif(<span class="number">0.</span><span class="number">.1</span>))∙mL⌋</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 自顶层向q的层数l逼近搜索，一直到l+1,每层寻找当前层q最近邻的1个点</span></span><br><span class="line"><span class="comment"> * 找到所有层中最近的一个点作为q插入到l层的入口点</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">for</span> lc ← L … l+<span class="number">1</span></span><br><span class="line">    W ← SEARCH_LAYER(q, ep, ef=<span class="number">1</span>, lc)</span><br><span class="line">    ep ← get the nearest element from W to q</span><br><span class="line"><span class="comment">// 自l层向底层逼近搜索,每层寻找当前层q最近邻的efConstruction个点赋值到集合W</span></span><br><span class="line"><span class="keyword">for</span> lc ← min(L, l) … <span class="number">0</span></span><br><span class="line">    W ← SEARCH_LAYER(q, ep, efConstruction, lc)</span><br><span class="line">    <span class="comment">// 在W中选择q最近邻的M个点作为neighbors双向连接起来</span></span><br><span class="line">    neighbors ← SELECT_NEIGHBORS(q, W, M, lc)</span><br><span class="line">    add bidirectional connectionts from neighbors to q at layer lc</span><br><span class="line">    <span class="comment">// 检查每个neighbors的连接数，如果大于Mmax，则需要缩减连接到最近邻的Mmax个</span></span><br><span class="line">    <span class="keyword">for</span> each e ∈ neighbors</span><br><span class="line">        eConn ← neighbourhood(e) at layer lc</span><br><span class="line">        <span class="keyword">if</span> │eConn│ &gt; Mmax</span><br><span class="line">            eNewConn ← SELECT_NEIGHBORS(e, eConn, Mmax, lc)</span><br><span class="line">            <span class="built_in">set</span> neighbourhood(e) at layer lc to eNewConn</span><br><span class="line">    ep ← W</span><br><span class="line"><span class="keyword">if</span> l &gt; L</span><br><span class="line">    <span class="built_in">set</span> enter point <span class="keyword">for</span> hnsw to q</span><br></pre></td></tr></table></figure>
 <h2 id="算法二：搜索当前层的最近邻"><a href="#算法二：搜索当前层的最近邻" class="headerlink" title="算法二：搜索当前层的最近邻"></a>算法二：搜索当前层的最近邻</h2><p>$\tt SEARCH\ LAYER(\it q, ep, ef, l_c \tt)$ : 在第  $l_c$ 层查找距离 $q$ 最近邻的 $ef$ 个元素。</p>
@@ -549,6 +558,8 @@
             <a href="/tags/推荐系统/" rel="tag"># 推荐系统</a>
           
             <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/HNSW/" rel="tag"># HNSW</a>
           
         </div>
       
@@ -778,7 +789,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">37</span>
+                      
+                    
+                    <span class="site-state-item-count">38</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

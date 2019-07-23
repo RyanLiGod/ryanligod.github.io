@@ -122,7 +122,7 @@
 <meta property="og:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2019-07-23-075352.png">
 <meta property="og:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2019-07-23-080127.png">
 <meta property="og:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2019-07-23-080557.png">
-<meta property="og:updated_time" content="2019-07-23T08:14:32.079Z">
+<meta property="og:updated_time" content="2019-07-23T08:23:23.234Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="对于 HNSW Heuristic Select 启发式近邻选择算法的一些看法">
 <meta name="twitter:description" content="img {     max-height: 400px !important;   }   前言在 HNSW 中一大创新就是在选择连接的近邻时使用了启发式算法，在之后脱颖而出的近似最近邻算法 NSG 和 SSG （论文中提到是阿里巴巴正在使用的可用于十亿级别数据集的近似最近邻算法，表现出甚至优于 HNSW 的性能）中也采用了类似于其启发式的 RNG （不是那个 RNG 哦，顺便 LPL 加油">
@@ -406,7 +406,7 @@
                 
               
 
-              <time title="创建时间：2019-07-23 15:23:33 / 修改时间：16:14:32" itemprop="dateCreated datePublished" datetime="2019-07-23T15:23:33+08:00">2019-07-23</time>
+              <time title="创建时间：2019-07-23 15:23:33 / 修改时间：16:23:23" itemprop="dateCreated datePublished" datetime="2019-07-23T15:23:33+08:00">2019-07-23</time>
             
 
             
@@ -495,10 +495,11 @@
 <p><img src="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2019-07-23-075352.png" alt="image-20190723155351746"></p>
 <p>这样的图可能不是很准确，但是可以说明问题，每个点之间的间隔代表向量之间的距离。这时候假设我们的入口点是黄色点，目标查询点是红色点，那么按照贪婪算法出来的路径方向是这样的：</p>
 <p><img src="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2019-07-23-080127.png" alt="image-20190723160126763"></p>
-<p>可以看到这个路径是绕了一圈的，那么怎么可以更直接地到红点所在的区域呢，如果按照简单搜索算法，明显黄点和红点距离很远，在黄点周围有很多点可以连接，是永远轮不到红点的，但是如果使用启发式选择，他的选择办法是：只有目标点（红点4）和插入点（黄点1）的距离比目标点到所有插入点已经连接的点（2，3）都近，就把目标点（红点4）和插入点（黄点1）连接起来。这句话很绕，其实就是，如果 <code>距离（1，4）&lt; 距离（2，4）</code> 且<code>距离（1，4）&lt; 距离（3，4）</code> ，就连接 1 和 4，如图所示，当然图中的 link 很随性不一定严谨。</p>
+<p>可以看到这个路径是绕了一圈的，那么怎么可以更直接地到红点所在的区域呢，如果按照简单搜索算法，明显黄点和红点距离很远，在黄点周围有很多点可以连接，是永远轮不到红点的，但是如果使用启发式选择，他的选择办法是：只有目标点（红点4）和插入点（黄点1）的距离比目标点到所有插入点已经连接的点（2，3）都近，就把目标点（红点4）和插入点（黄点1）连接起来。这句话很绕，其实就是，如果 <code>距离（1，4）&lt; 距离（2，4）</code> 且 <code>距离（1，4）&lt; 距离（3，4）</code> ，就连接 1 和 4，如图所示，当然图中的 link 很随性不一定严谨。</p>
 <p><img src="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2019-07-23-080557.png" alt="image-20190723160557230"></p>
 <p>这样 1 就可以直接查询到 4 所处的区域了，也就是说论文中的两簇数据。所以，<strong>启发式选择的目的不是为了解决图的全局连通性，而是为了有一条”高速公路“可以到另一个区域。</strong></p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>以上就是我对 HNSW Heuristic Select 启发式近邻选择算法的一些看法，总的来说，启发式选择既考虑了结点之间的距离因素，也考虑了整个图不同区域的连通性，可以快速地查询到另一个区域，以减少了贪婪搜索的次数。</p>
+<p><strong>这也就是为什么增大 <code>efConstruction</code> 可以提升搜索效果了，如果 <code>efConstruction</code> 数值越接近 <code>M</code> , 那么启发式选择算法的效果越接近简单选择算法，当 <code>efConstruction</code> 设置足够大的时候，那么启发式选择算法才能发挥其作用，毕竟有些值得连接的点可不是真正最近的点。当然是不是 <code>efConstruction</code> 越大越好值得商榷。</strong></p>
 <p>这是我粗浅的个人理解，如果有不同的看法或者有什么疑惑欢迎发邮件 ryanligod@qq.com 或 ryanligod@gmail.com 和我讨论。</p>
 
       

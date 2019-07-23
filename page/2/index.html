@@ -306,7 +306,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">51</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">52</span></a>
 
   </li>
 
@@ -342,6 +342,202 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/11/29/2018-11-29 HNSW 主要算法/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan Li">
+      <meta itemprop="description" content="Hello World.">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ryan Li God">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/11/29/2018-11-29 HNSW 主要算法/" class="post-title-link" itemprop="https://www.ryanligod.com/page/2/index.html">近似最近邻算法 HNSW 学习笔记（二） 主要算法伪代码分析</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-11-29 15:28:19" itemprop="dateCreated datePublished" datetime="2018-11-29T15:28:19+08:00">2018-11-29</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-03-15 20:14:27" itemprop="dateModified" datetime="2019-03-15T20:14:27+08:00">2019-03-15</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/11/29/2018-11-29 HNSW 主要算法/" class="leancloud_visitors" data-flag-title="近似最近邻算法 HNSW 学习笔记（二） 主要算法伪代码分析">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>近期在研究近似最近邻算法 HNSW 的源码和论文，这里结合论文中的伪代码做一下 HNSW 主要的几个算法的解读，这将对读懂源码十分有帮助。本文介绍以下算法：</p>
+<ul>
+<li>$\tt INSERT(\it hnsw, q, M, M_{max}, efConstruction, m_L \tt)$ : 新元素 $q$ 插入算法。</li>
+<li>$\tt SEARCH\ LAYER(\it q, ep, ef, l_c \tt)$ : 在第  $l_c$ 层查找距离 $q$ 最近邻的 $ef$ 个元素。</li>
+<li>$\tt SELECT\ NEIGHBORS\ SIMPLE( \it q, C, M \tt) $ : 在候选点集合 $C$ 中 选取距离 $q$ 最近邻的 $M$ 个元素。</li>
+<li>$\tt SELECT\ NEIGHBORS\ HEURISTIC(\it q, C, M, lc, extendCandidates, keepPrunedConnections \tt)$ : 探索式寻找最近邻。</li>
+<li>$\tt KNN\ SEARCH(\it hnsw, q, K, ef \tt)$ : 在 $hnsw$ 索引中查询距离 $q$ 最近邻的 $K$ 个元素。</li>
+</ul>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/11/29/2018-11-29 HNSW 主要算法/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -2090,204 +2286,6 @@ D(n)=(n-1)(D(n-1)+D(n-2))\qquad D(1)=0,D(2)=1,n\geq3</script>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/10/29/2018-10-29 pybind11 入门/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan Li">
-      <meta itemprop="description" content="Hello World.">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ryan Li God">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/10/29/2018-10-29 pybind11 入门/" class="post-title-link" itemprop="https://www.ryanligod.com/page/2/index.html">Python 调用 C++ 之 pybind11入门（macOS）</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-10-29 15:04:18" itemprop="dateCreated datePublished" datetime="2018-10-29T15:04:18+08:00">2018-10-29</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-03-21 11:00:50" itemprop="dateModified" datetime="2019-03-21T11:00:50+08:00">2019-03-21</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/10/29/2018-10-29 pybind11 入门/" class="leancloud_visitors" data-flag-title="Python 调用 C++ 之 pybind11入门（macOS）">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="pybind11-简介与环境安装"><a href="#pybind11-简介与环境安装" class="headerlink" title="pybind11 简介与环境安装"></a>pybind11 简介与环境安装</h2><p>pybind11 是一个轻量级的只包含头文件的库，它主要是用来在已有的 C++ 代码的基础上做扩展，它的语法和目标非常像 Boost.Python，但 Boost.Python 为了兼容现有的基本所有的 C++ 编译器而变得非常复杂和庞大，而因此付出的代价是很多晦涩的模板技巧以及很多不必要的对旧版编译器的支持。Pybind11 摒弃了这些支持，它只支持 python 2.7 以上以及 C++ 11 以上的编译器，使得它比 Boost.Python 更加简洁高效。 </p>
-<p>为了使用pybind11，我们需要支持 C++ 11 标准的编译器（GCC 4.8以上）以及 python 2.7 以上的版本，还需要下载 <a href="https://cmake.org/cmake-tutorial/" target="_blank" rel="noopener">CMake</a> (macOS中只需要 <code>brew install cmake</code> )，有了这些以后：</p>
-<ol>
-<li>从 pybind11 github网址：<a href="https://github.com/pybind/pybind11" target="_blank" rel="noopener">https://github.com/pybind/pybind11</a> 上下载源码。</li>
-<li>CMake 工程之前，要先安装pytest <code>pip install pytest</code>，否则会出错。</li>
-<li>用 <code>CMake</code> 编译并运行测试用例：</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mkdir build</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> build</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> cmake ..</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> make check -j 4</span></span><br></pre></td></tr></table></figure>
-<p>最后一行命令会编译并且运行 tests，如果所有测试用例都通过了，说明安装成功了。</p>
-<h2 id="Python-调用C"><a href="#Python-调用C" class="headerlink" title="Python 调用C++"></a>Python 调用C++</h2><p>下载编译好 pybind11 之后，我们就可以开始对着官方的<a href="http://pybind11.readthedocs.io/en/stable/index.html" target="_blank" rel="noopener">pybind11 Tutorial</a>进行学习了，详细的入门教程及语法请参考官方文档，这里，我们简单演示下如何编写供python调用的C++模块。</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/10/29/2018-10-29 pybind11 入门/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-         
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2337,7 +2335,7 @@ D(n)=(n-1)(D(n-1)+D(n-2))\qquad D(1)=0,D(2)=1,n\geq3</script>
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">51</span>
+                    <span class="site-state-item-count">52</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

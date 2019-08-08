@@ -467,7 +467,7 @@
 
       
         
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>关于java的读写锁，在jdk1.7之前是ReentrantReadWriteLock，在jdk1.8之后引入了StampedLock。</p>
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>关于java的读写锁 ReentrantReadWriteLock，在jdk1.8之后引入了 StampedLock。</p>
 <h2 id="ReentrantReadWriteLock"><a href="#ReentrantReadWriteLock" class="headerlink" title="ReentrantReadWriteLock"></a>ReentrantReadWriteLock</h2><p>ReentrantReadWriteLock是基于AQS同步队列实现的读写锁，其允许读操作之间不阻塞，写操作与写操作、读操作都是阻塞的，即如果要获取写锁，必须保证写锁和读锁都没有被占用。ReentrantReadWriteLock的读锁是不能被升级为写锁，但是写锁是可以降为读锁。</p>
           <!--noindex-->
           

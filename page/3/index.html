@@ -268,7 +268,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">38</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">39</span></a>
 
   </li>
         
@@ -287,7 +287,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">14</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">15</span></a>
 
   </li>
         
@@ -306,7 +306,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">52</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">57</span></a>
 
   </li>
 
@@ -342,6 +342,587 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/11/08/2018-11-08 C++ 中的 using 简单总结/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan Li">
+      <meta itemprop="description" content="Hello World.">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ryan Li God">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/11/08/2018-11-08 C++ 中的 using 简单总结/" class="post-title-link" itemprop="https://www.ryanligod.com/page/3/index.html">C++ 中的 using 简单总结</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-11-08 16:33:59 / 修改时间：17:02:52" itemprop="dateCreated datePublished" datetime="2018-11-08T16:33:59+08:00">2018-11-08</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/11/08/2018-11-08 C++ 中的 using 简单总结/" class="leancloud_visitors" data-flag-title="C++ 中的 using 简单总结">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="1-命名空间"><a href="#1-命名空间" class="headerlink" title="1. 命名空间"></a>1. 命名空间</h2><p>该用法能直接在程序中使用 using 后所跟的命名空间的元素，而不用每次要使用时指定命名空间。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="2-定义别名"><a href="#2-定义别名" class="headerlink" title="2. 定义别名"></a>2. 定义别名</h2><p>给某一类型定义别名，和 typedef 作用一样。</p>
+<blockquote>
+<p>using 类型别名 = 原类型;</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> uint = <span class="keyword">unsigned</span> <span class="keyword">int</span>;</span><br><span class="line">uint i = <span class="number">0</span>;  <span class="comment">// 相当于unsigned int;</span></span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/11/08/2018-11-08 C++ 中的 using 简单总结/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/11/08/2018-11-08 ShadowsocksX 更新 PAC 方法/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan Li">
+      <meta itemprop="description" content="Hello World.">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ryan Li God">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/11/08/2018-11-08 ShadowsocksX 更新 PAC 方法/" class="post-title-link" itemprop="https://www.ryanligod.com/page/3/index.html">ShadowsocksX 更新 PAC 方法</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-11-08 10:20:55" itemprop="dateCreated datePublished" datetime="2018-11-08T10:20:55+08:00">2018-11-08</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-11-09 15:08:01" itemprop="dateModified" datetime="2018-11-09T15:08:01+08:00">2018-11-09</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/工具/" itemprop="url" rel="index"><span itemprop="name">工具</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/11/08/2018-11-08 ShadowsocksX 更新 PAC 方法/" class="leancloud_visitors" data-flag-title="ShadowsocksX 更新 PAC 方法">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="更新方法"><a href="#更新方法" class="headerlink" title="更新方法"></a>更新方法</h3><p>手动下载 gfwlist.txt, 转成 PAC 所用的 gfwlist.js 之后放到默认存放位置。</p>
+<ol>
+<li><p>获取 gfwlist.txt， 最新地址 <a href="https://github.com/gfwlist/gfwlist：" target="_blank" rel="noopener">https://github.com/gfwlist/gfwlist：</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> wget https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装 gfwlist2pac，注意这里需要 python 2.7 的环境，我这里使用 conda 切换到 python 2.7 的环境：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">source</span> activate py27</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> pip install gfwlist2pac</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>转换 PAC：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> gfwlist2pac -i gfwlist.txt -f gfwlist.js -p <span class="string">"SOCKS5 127.0.0.1:1080;"</span> --precise</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>拷贝新生成的 gfwlist.js 到 ShadowsocksX PAC 目录（macOS）：</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cp gfwlist.js ~/.ShadowsocksX/</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/10/31/2018-10-31 Vue.js 入门—Vue CLI，Vue Router/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan Li">
+      <meta itemprop="description" content="Hello World.">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ryan Li God">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/10/31/2018-10-31 Vue.js 入门—Vue CLI，Vue Router/" class="post-title-link" itemprop="https://www.ryanligod.com/page/3/index.html">Vue.js 入门——Vue CLI，Vue Router，axios，iView，ECharts</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-31 12:52:26" itemprop="dateCreated datePublished" datetime="2018-10-31T12:52:26+08:00">2018-10-31</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-11-20 13:55:40" itemprop="dateModified" datetime="2018-11-20T13:55:40+08:00">2018-11-20</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/10/31/2018-10-31 Vue.js 入门—Vue CLI，Vue Router/" class="leancloud_visitors" data-flag-title="Vue.js 入门——Vue CLI，Vue Router，axios，iView，ECharts">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>近期需要搭建一个展示图数据库的前端平台，之前用了很长一段时间的 AngularJS 1.3 ，但是前端技术发展非常快，在我没写前端的短短一年时间中，Angular 已经从 2.0 版本来到了 7.0 。但是 Angular 真正的大变化基本上还是在 1.0 到 2.0，基本上就是完全不同的两个框架了。<br>本次我用 Vue.js 来搭建这个平台。对于 Vue.js 我也是听闻已久，借此次机会学习一下 Vue.js。至于为什么选择Vue.js，原因如下：</p>
+<ol>
+<li>AngularJS（1.x）使用脏检查，当 watcher 越来越多时会变得越来越慢，因为作用域内的每一次变化，所有 watcher 都要重新计算。AngularJS 用户常常要使用深奥的技术，以解决脏检查循环的问题。</li>
+<li>Vue.js 的学习曲线不像Angular2那样陡峭，而且更加灵活、轻便。具体见 <a href="https://cn.vuejs.org/v2/guide/comparison.html" target="_blank" rel="noopener">Vue对比其他框架</a> 。</li>
+<li>Vue 非常火！</li>
+</ol>
+<h2 id="Vue-CLI"><a href="#Vue-CLI" class="headerlink" title="Vue-CLI"></a>Vue-CLI</h2><p>Vue 提供了一个<a href="https://github.com/vuejs/vue-cli" target="_blank" rel="noopener">官方的 CLI</a>，为单页面应用 (SPA) 快速搭建繁杂的脚手架。它为现代前端工作流提供了 batteries-included 的构建设置。只需要几分钟的时间就可以运行起来并带有热重载、保存时 lint 校验，以及生产环境可用的构建版本。更多详情可查阅 <a href="https://cli.vuejs.org/" target="_blank" rel="noopener">Vue CLI 的文档</a>。</p>
+<p><strong>安装方法：</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm install -g @vue/cli</span></span><br></pre></td></tr></table></figure>
+<p>本次我进行了一些粗略的应用，使用 Vue-CLI 创建了项目：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vue create graph-visualization</span></span><br><span class="line">Vue CLI v3.0.5</span><br><span class="line">? Please pick a preset: (Use arrow keys)</span><br><span class="line">❯ default (babel, eslint)</span><br><span class="line">  Manually select features</span><br></pre></td></tr></table></figure>
+<p>因为要用到路由，我选择了 <code>Manually select features</code> 。</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/10/31/2018-10-31 Vue.js 入门—Vue CLI，Vue Router/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -1156,6 +1737,195 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/08/30/2018-08-30 Java ReentrantLock/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan Li">
+      <meta itemprop="description" content="Hello World.">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ryan Li God">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/08/30/2018-08-30 Java ReentrantLock/" class="post-title-link" itemprop="https://www.ryanligod.com/page/3/index.html">Java 可重入锁 - ReentrantLock</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-30 21:25:35" itemprop="dateCreated datePublished" datetime="2018-08-30T21:25:35+08:00">2018-08-30</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-08 14:48:38" itemprop="dateModified" datetime="2019-08-08T14:48:38+08:00">2019-08-08</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/08/30/2018-08-30 Java ReentrantLock/" class="leancloud_visitors" data-flag-title="Java 可重入锁 - ReentrantLock">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>了解了java的队列式同步器AQS的基本实现，接下来可以看看java中频繁使用的可重入锁ReentrantLock。ReentrantLock是基于AQS实现的，内部类Sync继承了AQS，提供了公平锁和非公平锁。同synchronized相比，ReentrantLock是代码实现的锁，而synchronized是虚拟机上实现的锁，都是可重入的排他锁，即一个线程占有锁，其他线程必须等待锁的释放，同一个线程多次进入已将占有的锁，在效率方面，之前是ReentrantLock 效率更高，但后来java对synchronized进行了优化，效率目前来说差不多，ReentrantLock使用起来比synchronized更加灵活，synchronized使用来说更加方便，不用担心加锁释放锁的代码。</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/08/30/2018-08-30 Java ReentrantLock/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/08/29/2018-08-29 MathJax 支持的 LaTeX 总结/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1415,7 +2185,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/08/21/2018-08-21 吴恩达ML（六） 神经网络参数的反向传播算法/">
+    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/08/25/2018-08-25 Java 同步器-AQS/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ryan Li">
@@ -1435,7 +2205,7 @@
           <h2 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/08/21/2018-08-21 吴恩达ML（六） 神经网络参数的反向传播算法/" class="post-title-link" itemprop="https://www.ryanligod.com/page/3/index.html">吴恩达机器学习笔记（六） 神经网络参数的反向传播算法</a>
+                <a href="/2018/08/25/2018-08-25 Java 同步器-AQS/" class="post-title-link" itemprop="https://www.ryanligod.com/page/3/index.html">Java 同步器 - AQS</a>
               
             
           </h2>
@@ -1460,7 +2230,7 @@
                 
               
 
-              <time title="创建时间：2018-08-21 02:23:57" itemprop="dateCreated datePublished" datetime="2018-08-21T02:23:57+08:00">2018-08-21</time>
+              <time title="创建时间：2018-08-25 21:35:25" itemprop="dateCreated datePublished" datetime="2018-08-25T21:35:25+08:00">2018-08-25</time>
             
 
             
@@ -1477,7 +2247,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-11-27 16:47:47" itemprop="dateModified" datetime="2018-11-27T16:47:47+08:00">2018-11-27</time>
+                <time title="修改时间：2019-08-08 14:48:23" itemprop="dateModified" datetime="2019-08-08T14:48:23+08:00">2019-08-08</time>
               
             
           </span>
@@ -1494,7 +2264,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
 
                 
                 
@@ -1508,7 +2278,7 @@
 
           
           
-             <span id="/2018/08/21/2018-08-21 吴恩达ML（六） 神经网络参数的反向传播算法/" class="leancloud_visitors" data-flag-title="吴恩达机器学习笔记（六） 神经网络参数的反向传播算法">
+             <span id="/2018/08/25/2018-08-25 Java 同步器-AQS/" class="leancloud_visitors" data-flag-title="Java 同步器 - AQS">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1540,798 +2310,12 @@
 
       
         
-          <h1 id="代价函数"><a href="#代价函数" class="headerlink" title="代价函数"></a>代价函数</h1><p>逻辑回归：<br>$J(\theta)=-\frac{1}{m}\sum_{i=1}^{m}[y^{(i)}logh_\theta(x^{(i)})+(1-y^{(i)})log(1-h_\theta(x^{(i)}))]+\frac{\lambda}{2m}\sum_{j=1}^{n}\theta_j^2$ </p>
-<p><img src="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-08-20-143620.png" alt="image-20180821003619733"></p>
-<p><strong>不将偏差项正则化：</strong><br>其中正则项中的 $\Theta_{ji}^{l}$ 当 $i=0$ 时不会进行求和，和之前的逻辑回归中的正则化一样</p>
-<h1 id="反向传播算法"><a href="#反向传播算法" class="headerlink" title="反向传播算法"></a>反向传播算法</h1><p>目标： $min_{\Theta}J(\Theta)$<br>Need code to compute:</p>
-<ul>
-<li>$J(\Theta)$</li>
-<li>$\dfrac{\partial}{\partial\Theta_{ij}^{(l)}}J(\Theta)$ </li>
-</ul>
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>AQS，即AbstractQueuedSynchronized，抽象的队列式同步器，它是一个用于构建锁和同步器的基础框架，java中很多锁和同步器的实现都依赖AQS,比如ReentrantLock、 ReadWriteLock、Semaphore、CountDownLatch等。然而这些锁都没有直接来继承AQS,而是定义了一个Sync类去继承AQS.因为锁面向的是使用用户,而同步器面向的则是线程控制,那么在锁的实现中聚合同步器而不是直接继承AQS就可以很好的隔离二者所关注的事情.</p>
+<p>AQS的实现是基于CLH队列，CLH队列的提出是用于自旋锁，但在AQS中，JUC并发包的作者（Doug Lea）将其用于阻塞锁。在了解AQS之前首先来看看CAS和CLH队列。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2018/08/21/2018-08-21 吴恩达ML（六） 神经网络参数的反向传播算法/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-         
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/08/21/2018-08-21 吴恩达ML（五） 神经网络/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan Li">
-      <meta itemprop="description" content="Hello World.">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ryan Li God">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/08/21/2018-08-21 吴恩达ML（五） 神经网络/" class="post-title-link" itemprop="https://www.ryanligod.com/page/3/index.html">吴恩达机器学习笔记（五） 神经网络</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-08-21 01:21:57" itemprop="dateCreated datePublished" datetime="2018-08-21T01:21:57+08:00">2018-08-21</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-11-27 16:47:43" itemprop="dateModified" datetime="2018-11-27T16:47:43+08:00">2018-11-27</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/08/21/2018-08-21 吴恩达ML（五） 神经网络/" class="leancloud_visitors" data-flag-title="吴恩达机器学习笔记（五） 神经网络">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="神经网络模型"><a href="#神经网络模型" class="headerlink" title="神经网络模型"></a>神经网络模型</h1><p><img src="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-08-14-055934.jpg" alt="image-20180814155902083"></p>
-<p><strong>输入层、隐藏层、输出层：</strong></p>
-<p><img src="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-08-14-060208.png" alt="image-20180814160208306"></p>
-<p>If networks has $s_j$ units in layer $j$ , $s_{j+1}$ units in layer $j+1$ , then $\Theta^{(j)}$ will be of dimension $s_{j+1}  \times (s_j+1)$</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/08/21/2018-08-21 吴恩达ML（五） 神经网络/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-         
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/08/11/2018-08-11 吴恩达ML（四） 正则化/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan Li">
-      <meta itemprop="description" content="Hello World.">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ryan Li God">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/08/11/2018-08-11 吴恩达ML（四） 正则化/" class="post-title-link" itemprop="https://www.ryanligod.com/page/3/index.html">吴恩达机器学习笔记（四） 正则化</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-08-11 01:23:57" itemprop="dateCreated datePublished" datetime="2018-08-11T01:23:57+08:00">2018-08-11</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-11-27 16:47:49" itemprop="dateModified" datetime="2018-11-27T16:47:49+08:00">2018-11-27</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/08/11/2018-08-11 吴恩达ML（四） 正则化/" class="leancloud_visitors" data-flag-title="吴恩达机器学习笔记（四） 正则化">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="过拟合问题-Overfitting"><a href="#过拟合问题-Overfitting" class="headerlink" title="过拟合问题 Overfitting"></a>过拟合问题 Overfitting</h1><p>欠拟合 underfitting (high bias 高偏差)<br>过拟合 overfitting (high variance 高方差)</p>
-<p><img src="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-08-10-122840.png" alt="image-20180810222840351"></p>
-<p><img src="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-08-10-123105.png" alt="image-20180810223105167"></p>
-<h3 id="解决的办法"><a href="#解决的办法" class="headerlink" title="解决的办法"></a>解决的办法</h3><ol>
-<li><strong>减少特征的数量</strong><ul>
-<li>手动选择保留哪些特征</li>
-<li>模型选择算法</li>
-</ul>
-</li>
-<li><strong>正则化 Regularization</strong><ul>
-<li>保留所有特征，但是减少量级或者参数 $\theta$ 的大小</li>
-<li>当特征非常多的时候依旧非常有效，每一个特征都会对预测 $y$ 产生影响</li>
-</ul>
-</li>
-</ol>
-<h1 id="代价函数"><a href="#代价函数" class="headerlink" title="代价函数"></a>代价函数</h1><p><img src="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-08-10-124048.png" alt="image-20180810224047865"></p>
-<p><strong>解决办法的思想</strong><br>在 $\theta_3$ 和 $\theta_4$ 中增加惩罚，增加一个很大的数与之相乘，这样要最小化代价函数，最后 $\theta_3$ 和 $\theta_4$ 会变得非常小（接近于0），这样最后的结果得到了依旧类似于一个二次函数</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/08/11/2018-08-11 吴恩达ML（四） 正则化/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-         
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/08/10/2018-08-10 吴恩达ML（三）Logistic 回归/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan Li">
-      <meta itemprop="description" content="Hello World.">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ryan Li God">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/08/10/2018-08-10 吴恩达ML（三）Logistic 回归/" class="post-title-link" itemprop="https://www.ryanligod.com/page/3/index.html">吴恩达机器学习笔记（三） Logistic 回归</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-08-10 03:26:50" itemprop="dateCreated datePublished" datetime="2018-08-10T03:26:50+08:00">2018-08-10</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-11-27 16:47:55" itemprop="dateModified" datetime="2018-11-27T16:47:55+08:00">2018-11-27</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/08/10/2018-08-10 吴恩达ML（三）Logistic 回归/" class="leancloud_visitors" data-flag-title="吴恩达机器学习笔记（三） Logistic 回归">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="分类-Classfication"><a href="#分类-Classfication" class="headerlink" title="分类 Classfication"></a>分类 Classfication</h1><p>$y \in \{1,0\}$<br>0:  “Negative Class”<br>1:  “Positive Class”</p>
-<h1 id="逻辑回归"><a href="#逻辑回归" class="headerlink" title="逻辑回归"></a>逻辑回归</h1><p>逻辑回归是一种分类方法<br><strong>Logistic Regression Model</strong><br>Want  $ 0 \leq h_\theta(x) \leq 1$<br>$h_\theta(x)=g(\theta^Tx)$<br>其中  $g(z)=\dfrac{1}{1+e^{-z}}$  ，称作<strong>Sigmoid函数</strong>或<strong>Logistic函数</strong></p>
-<p><img src="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-08-09-150915.png" alt="image-20180810010915319"></p>
-<p>$h_\theta(x)=P(y=1|x;\theta)$</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/08/10/2018-08-10 吴恩达ML（三）Logistic 回归/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-         
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/08/10/2018-08-10 吴恩达ML（二）多元梯度下降、正规方程/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan Li">
-      <meta itemprop="description" content="Hello World.">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ryan Li God">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/08/10/2018-08-10 吴恩达ML（二）多元梯度下降、正规方程/" class="post-title-link" itemprop="https://www.ryanligod.com/page/3/index.html">吴恩达机器学习笔记（二） 多元梯度下降、正规方程</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-08-10 03:22:50" itemprop="dateCreated datePublished" datetime="2018-08-10T03:22:50+08:00">2018-08-10</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-11-27 16:47:58" itemprop="dateModified" datetime="2018-11-27T16:47:58+08:00">2018-11-27</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/08/10/2018-08-10 吴恩达ML（二）多元梯度下降、正规方程/" class="leancloud_visitors" data-flag-title="吴恩达机器学习笔记（二） 多元梯度下降、正规方程">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="特征缩放"><a href="#特征缩放" class="headerlink" title="特征缩放"></a>特征缩放</h1><p>Mean normalization<br>为了让梯度下降时候运行速度更快<br>将$x$的值控制在$(-1,1)$左右</p>
-<p><img src="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2018-08-09-125256.png" alt="image-20180809225256054"></p>
-<p>$x_1=\dfrac{x_1-\mu_1}{s_1}$<br>$\mu_1$ 是 $x_1$ 的平均数<br>$s_1$ 是 $x_1$ 中最大值-最小值</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/08/10/2018-08-10 吴恩达ML（二）多元梯度下降、正规方程/#more" rel="contents">
+              <a class="btn" href="/2018/08/25/2018-08-25 Java 同步器-AQS/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -2425,7 +2409,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">52</span>
+                    <span class="site-state-item-count">57</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2466,7 +2450,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">14</span>
+                      
+                    
+                    <span class="site-state-item-count">15</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2555,7 +2541,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">38</span>
+                      
+                    
+                    <span class="site-state-item-count">39</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2860,13 +2848,13 @@
       
     
       
+    
+      
+    
+      
+    
+      
         
-      
-    
-      
-    
-      
-    
       
     
       

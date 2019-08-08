@@ -268,7 +268,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">38</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">39</span></a>
 
   </li>
         
@@ -287,7 +287,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">14</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">15</span></a>
 
   </li>
         
@@ -306,7 +306,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">52</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">57</span></a>
 
   </li>
 
@@ -342,6 +342,978 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/08/03/2018-08-03 Spark RDD（九）基本的Action操作 first, take, collect, count, countByValue, reduce, aggregate, fold,top/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan Li">
+      <meta itemprop="description" content="Hello World.">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ryan Li God">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/08/03/2018-08-03 Spark RDD（九）基本的Action操作 first, take, collect, count, countByValue, reduce, aggregate, fold,top/" class="post-title-link" itemprop="https://www.ryanligod.com/page/5/index.html">Spark RDD常用算子操作（九）基本的Action操作 first, take, collect, count, countByValue, reduce, aggregate, fold,top</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-03 21:29:50" itemprop="dateCreated datePublished" datetime="2018-08-03T21:29:50+08:00">2018-08-03</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-08-12 18:58:20" itemprop="dateModified" datetime="2018-08-12T18:58:20+08:00">2018-08-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Spark/" itemprop="url" rel="index"><span itemprop="name">Spark</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/08/03/2018-08-03 Spark RDD（九）基本的Action操作 first, take, collect, count, countByValue, reduce, aggregate, fold,top/" class="leancloud_visitors" data-flag-title="Spark RDD常用算子操作（九）基本的Action操作 first, take, collect, count, countByValue, reduce, aggregate, fold,top">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>原文作者：翟开顺<br>首发：CSDN<br>本人仅为自己方便查阅做了摘抄，请支持原作者<br>原文地址：<a href="https://blog.csdn.net/t1dmzks/article/details/72077428" target="_blank" rel="noopener">https://blog.csdn.net/t1dmzks/article/details/72077428</a></p>
+</blockquote>
+<h1 id="基本的Action操作-first-take-collect-count-countByValue-reduce-aggregate-fold-top"><a href="#基本的Action操作-first-take-collect-count-countByValue-reduce-aggregate-fold-top" class="headerlink" title="基本的Action操作 first, take, collect, count, countByValue, reduce, aggregate, fold,top"></a>基本的Action操作 first, take, collect, count, countByValue, reduce, aggregate, fold,top</h1><h2 id="first"><a href="#first" class="headerlink" title="first"></a>first</h2><p>返回第一个元素<br><strong>scala</strong><br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="keyword">val</span> rdd = sc.parallelize(<span class="type">List</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">3</span>))</span><br><span class="line"></span><br><span class="line">scala&gt; rdd.first()</span><br><span class="line">res1: <span class="type">Int</span> = <span class="number">1</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>java</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">JavaRDD&lt;Integer&gt; rdd = sc.parallelize(Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>));</span><br><span class="line">Integer first = rdd.first();</span><br></pre></td></tr></table></figure></p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/08/03/2018-08-03 Spark RDD（九）基本的Action操作 first, take, collect, count, countByValue, reduce, aggregate, fold,top/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/08/03/2018-08-03 Spark RDD（八） 键值对关联操作 subtractByKey, join,fullOuterJoin, rightOuterJoin, leftOuterJoin/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan Li">
+      <meta itemprop="description" content="Hello World.">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ryan Li God">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/08/03/2018-08-03 Spark RDD（八） 键值对关联操作 subtractByKey, join,fullOuterJoin, rightOuterJoin, leftOuterJoin/" class="post-title-link" itemprop="https://www.ryanligod.com/page/5/index.html">Spark RDD常用算子操作（八） 键值对关联操作 subtractByKey, join,fullOuterJoin, rightOuterJoin, leftOuterJoin</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-03 21:28:50" itemprop="dateCreated datePublished" datetime="2018-08-03T21:28:50+08:00">2018-08-03</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-08-12 18:57:53" itemprop="dateModified" datetime="2018-08-12T18:57:53+08:00">2018-08-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Spark/" itemprop="url" rel="index"><span itemprop="name">Spark</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/08/03/2018-08-03 Spark RDD（八） 键值对关联操作 subtractByKey, join,fullOuterJoin, rightOuterJoin, leftOuterJoin/" class="leancloud_visitors" data-flag-title="Spark RDD常用算子操作（八） 键值对关联操作 subtractByKey, join,fullOuterJoin, rightOuterJoin, leftOuterJoin">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>原文作者：翟开顺<br>首发：CSDN<br>本人仅为自己方便查阅做了摘抄，请支持原作者<br>原文地址：<a href="https://blog.csdn.net/t1dmzks/article/details/72077428" target="_blank" rel="noopener">https://blog.csdn.net/t1dmzks/article/details/72077428</a></p>
+</blockquote>
+<h1 id="键值对关联操作-subtractByKey-join-fullOuterJoin-rightOuterJoin-leftOuterJoin"><a href="#键值对关联操作-subtractByKey-join-fullOuterJoin-rightOuterJoin-leftOuterJoin" class="headerlink" title="键值对关联操作 subtractByKey, join,fullOuterJoin, rightOuterJoin, leftOuterJoin"></a>键值对关联操作 subtractByKey, join,fullOuterJoin, rightOuterJoin, leftOuterJoin</h1><p>github: <a href="https://github.com/zhaikaishun/spark_tutorial/tree/master/src/main/java/com/spark/rdd_tutorial/tutorial8" target="_blank" rel="noopener">https://github.com/zhaikaishun/spark_tutorial/tree/master/src/main/java/com/spark/rdd_tutorial/tutorial8</a><br>先从spark-learning中的一张图大致了解其功能<br><img src="https://raw.githubusercontent.com/zhaikaishun/blog_img/master/blog/spark_join/spark-join.png" alt="键值对操作"></p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/08/03/2018-08-03 Spark RDD（八） 键值对关联操作 subtractByKey, join,fullOuterJoin, rightOuterJoin, leftOuterJoin/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/08/03/2018-08-03 Spark RDD（七） 键值对分组操作 groupByKey，cogroup/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan Li">
+      <meta itemprop="description" content="Hello World.">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ryan Li God">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/08/03/2018-08-03 Spark RDD（七） 键值对分组操作 groupByKey，cogroup/" class="post-title-link" itemprop="https://www.ryanligod.com/page/5/index.html">Spark RDD常用算子操作（七） 键值对分组操作 groupByKey，cogroup</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-03 21:27:50" itemprop="dateCreated datePublished" datetime="2018-08-03T21:27:50+08:00">2018-08-03</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-08-12 18:58:27" itemprop="dateModified" datetime="2018-08-12T18:58:27+08:00">2018-08-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Spark/" itemprop="url" rel="index"><span itemprop="name">Spark</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/08/03/2018-08-03 Spark RDD（七） 键值对分组操作 groupByKey，cogroup/" class="leancloud_visitors" data-flag-title="Spark RDD常用算子操作（七） 键值对分组操作 groupByKey，cogroup">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>原文作者：翟开顺<br>首发：CSDN<br>本人仅为自己方便查阅做了摘抄，请支持原作者<br>原文地址：<a href="https://blog.csdn.net/t1dmzks/article/details/72077428" target="_blank" rel="noopener">https://blog.csdn.net/t1dmzks/article/details/72077428</a></p>
+</blockquote>
+<h1 id="键值对分组操作-groupByKey，cogroup"><a href="#键值对分组操作-groupByKey，cogroup" class="headerlink" title="键值对分组操作 groupByKey，cogroup"></a>键值对分组操作 groupByKey，cogroup</h1><h2 id="groupByKey"><a href="#groupByKey" class="headerlink" title="groupByKey"></a>groupByKey</h2><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">groupByKey</span></span>(): <span class="type">RDD</span>[(<span class="type">K</span>, <span class="type">Iterable</span>[<span class="type">V</span>])]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">groupByKey</span></span>(numPartitions: <span class="type">Int</span>): <span class="type">RDD</span>[(<span class="type">K</span>, <span class="type">Iterable</span>[<span class="type">V</span>])]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">groupByKey</span></span>(partitioner: <span class="type">Partitioner</span>): <span class="type">RDD</span>[(<span class="type">K</span>, <span class="type">Iterable</span>[<span class="type">V</span>])]</span><br></pre></td></tr></table></figure>
+<p>groupByKey会将RDD[key,value] 按照相同的key进行分组，形成RDD[key,Iterable[value]]的形式， 有点类似于sql中的groupby，例如类似于mysql中的group_concat<br>例如这个例子， 我们对学生的成绩进行分组<br><strong>scala版本</strong><br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> scoreDetail = sc.parallelize(<span class="type">List</span>((<span class="string">"xiaoming"</span>,<span class="number">75</span>),(<span class="string">"xiaoming"</span>,<span class="number">90</span>),(<span class="string">"lihua"</span>,<span class="number">95</span>),(<span class="string">"lihua"</span>,<span class="number">100</span>),(<span class="string">"xiaofeng"</span>,<span class="number">85</span>)))</span><br><span class="line">scoreDetail.groupByKey().collect().foreach(println(_));</span><br><span class="line"><span class="comment">/*输出</span></span><br><span class="line"><span class="comment">(lihua,CompactBuffer(95, 100))</span></span><br><span class="line"><span class="comment">(xiaoming,CompactBuffer(75, 90))</span></span><br><span class="line"><span class="comment">(xiaofeng,CompactBuffer(85))</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>java版本</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">JavaRDD&lt;Tuple2&lt;String,Float&gt;&gt; scoreDetails = sc.parallelize(Arrays.asList(<span class="keyword">new</span> Tuple2(<span class="string">"xiaoming"</span>, <span class="number">75</span>)</span><br><span class="line">        , <span class="keyword">new</span> Tuple2(<span class="string">"xiaoming"</span>, <span class="number">90</span>)</span><br><span class="line">        , <span class="keyword">new</span> Tuple2(<span class="string">"lihua"</span>, <span class="number">95</span>)</span><br><span class="line">        , <span class="keyword">new</span> Tuple2(<span class="string">"lihua"</span>, <span class="number">188</span>)));</span><br><span class="line"><span class="comment">//将JavaRDD&lt;Tuple2&lt;String,Float&gt;&gt; 类型转换为 JavaPairRDD&lt;String, Float&gt;</span></span><br><span class="line">JavaPairRDD&lt;String, Float&gt; scoreMapRDD = JavaPairRDD.fromJavaRDD(scoreDetails);</span><br><span class="line">Map&lt;String, Iterable&lt;Float&gt;&gt; resultMap = scoreMapRDD.groupByKey().collectAsMap();</span><br><span class="line"><span class="keyword">for</span> (String key:resultMap.keySet()) &#123;</span><br><span class="line">    System.out.println(<span class="string">"("</span>+key+<span class="string">", "</span>+resultMap.get(key)+<span class="string">")"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/08/03/2018-08-03 Spark RDD（七） 键值对分组操作 groupByKey，cogroup/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/08/03/2018-08-03 Spark RDD（六） 键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan Li">
+      <meta itemprop="description" content="Hello World.">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ryan Li God">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/08/03/2018-08-03 Spark RDD（六） 键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey/" class="post-title-link" itemprop="https://www.ryanligod.com/page/5/index.html">Spark RDD常用算子操作（六） 键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-03 21:26:50" itemprop="dateCreated datePublished" datetime="2018-08-03T21:26:50+08:00">2018-08-03</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-08-12 18:58:25" itemprop="dateModified" datetime="2018-08-12T18:58:25+08:00">2018-08-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Spark/" itemprop="url" rel="index"><span itemprop="name">Spark</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/08/03/2018-08-03 Spark RDD（六） 键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey/" class="leancloud_visitors" data-flag-title="Spark RDD常用算子操作（六） 键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>原文作者：翟开顺<br>首发：CSDN<br>本人仅为自己方便查阅做了摘抄，请支持原作者<br>原文地址：<a href="https://blog.csdn.net/t1dmzks/article/details/72077428" target="_blank" rel="noopener">https://blog.csdn.net/t1dmzks/article/details/72077428</a></p>
+</blockquote>
+<h1 id="键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey"><a href="#键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey" class="headerlink" title="键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey"></a>键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey</h1><h2 id="reduceByKey"><a href="#reduceByKey" class="headerlink" title="reduceByKey"></a>reduceByKey</h2><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reduceByKey</span></span>(func: (<span class="type">V</span>, <span class="type">V</span>) =&gt; <span class="type">V</span>): <span class="type">RDD</span>[(<span class="type">K</span>, <span class="type">V</span>)]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reduceByKey</span></span>(func: (<span class="type">V</span>, <span class="type">V</span>) =&gt; <span class="type">V</span>, numPartitions: <span class="type">Int</span>): <span class="type">RDD</span>[(<span class="type">K</span>, <span class="type">V</span>)]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reduceByKey</span></span>(partitioner: <span class="type">Partitioner</span>, func: (<span class="type">V</span>, <span class="type">V</span>) =&gt; <span class="type">V</span>): <span class="type">RDD</span>[(<span class="type">K</span>, <span class="type">V</span>)]</span><br></pre></td></tr></table></figure>
+<p>接收一个函数，按照相同的key进行reduce操作，类似于scala的reduce的操作<br>例如RDD {(1, 2), (3, 4), (3, 6)}进行reduce<br><strong>scala版本</strong><br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">var</span> mapRDD = sc.parallelize(<span class="type">List</span>((<span class="number">1</span>,<span class="number">2</span>),(<span class="number">3</span>,<span class="number">4</span>),(<span class="number">3</span>,<span class="number">6</span>)))</span><br><span class="line">    <span class="keyword">var</span> reduceRDD = mapRDD.reduceByKey((x,y)=&gt;x+y)</span><br><span class="line">    reduceRDD.foreach(x=&gt;println(x))</span><br><span class="line">------输出---------</span><br><span class="line">(<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">(<span class="number">3</span>,<span class="number">10</span>)</span><br></pre></td></tr></table></figure></p>
+<p>再举例<br>单词计数<br>F:\sparktest\sample.txt中的内容如下<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">aa bb cc aa aa aa <span class="selector-tag">dd</span> <span class="selector-tag">dd</span> ee ee ee ee </span><br><span class="line">ff aa bb zks</span><br><span class="line">ee kks</span><br><span class="line">ee  zz zks</span><br></pre></td></tr></table></figure></p>
+<p><strong>scala版本</strong><br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">val</span> lines = sc.textFile(<span class="string">"F:\\sparktest\\sample.txt"</span>)</span><br><span class="line">    <span class="keyword">val</span> wordsRDD = lines.flatMap(x=&gt;x.split(<span class="string">"\\s+"</span>)).map(x=&gt;(x,<span class="number">1</span>))</span><br><span class="line">    <span class="keyword">val</span> wordCountRDD = wordsRDD.reduceByKey((x,y)=&gt;x+y)</span><br><span class="line">    wordCountRDD.foreach(x=&gt;println(x))</span><br><span class="line">---------输出-----------</span><br><span class="line">(ee,<span class="number">6</span>)</span><br><span class="line">(aa,<span class="number">5</span>)</span><br><span class="line">(dd,<span class="number">2</span>)</span><br><span class="line">(zz,<span class="number">1</span>)</span><br><span class="line">(zks,<span class="number">2</span>)</span><br><span class="line">(kks,<span class="number">1</span>)</span><br><span class="line">(ff,<span class="number">1</span>)</span><br><span class="line">(bb,<span class="number">2</span>)</span><br><span class="line">(cc,<span class="number">1</span>)</span><br></pre></td></tr></table></figure></p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/08/03/2018-08-03 Spark RDD（六） 键值对聚合操作reduceByKey，foldByKey，排序操作sortByKey/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/08/03/2018-08-03 Spark RDD（五） 键值对聚合操作 combineByKey/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan Li">
+      <meta itemprop="description" content="Hello World.">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ryan Li God">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/08/03/2018-08-03 Spark RDD（五） 键值对聚合操作 combineByKey/" class="post-title-link" itemprop="https://www.ryanligod.com/page/5/index.html">Spark RDD常用算子操作（五） 键值对聚合操作 combineByKey</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-03 21:25:50" itemprop="dateCreated datePublished" datetime="2018-08-03T21:25:50+08:00">2018-08-03</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-11-01 21:29:14" itemprop="dateModified" datetime="2018-11-01T21:29:14+08:00">2018-11-01</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Spark/" itemprop="url" rel="index"><span itemprop="name">Spark</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/08/03/2018-08-03 Spark RDD（五） 键值对聚合操作 combineByKey/" class="leancloud_visitors" data-flag-title="Spark RDD常用算子操作（五） 键值对聚合操作 combineByKey">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>原文作者：翟开顺<br>首发：CSDN<br>本人仅为自己方便查阅做了摘抄，请支持原作者<br>原文地址：<a href="https://blog.csdn.net/t1dmzks/article/details/72077428" target="_blank" rel="noopener">https://blog.csdn.net/t1dmzks/article/details/72077428</a></p>
+</blockquote>
+<h1 id="键值对聚合操作-combineByKey"><a href="#键值对聚合操作-combineByKey" class="headerlink" title="键值对聚合操作 combineByKey"></a>键值对聚合操作 combineByKey</h1><h2 id="combineByKey"><a href="#combineByKey" class="headerlink" title="combineByKey"></a>combineByKey</h2><p>聚合数据一般在集中式数据比较方便，如果涉及到分布式的数据集，该如何去实现呢。这里介绍一下combineByKey, 这个是各种聚集操作的鼻祖，应该要好好了解一下,参考<br><a href="http://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.rdd.PairRDDFunctions" target="_blank" rel="noopener">scala API</a></p>
+<h3 id="简要介绍"><a href="#简要介绍" class="headerlink" title="简要介绍"></a>简要介绍</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">combineByKey</span></span>[<span class="type">C</span>](createCombiner: (<span class="type">V</span>) =&gt; <span class="type">C</span>,  </span><br><span class="line">                    mergeValue: (<span class="type">C</span>, <span class="type">V</span>) =&gt; <span class="type">C</span>,   </span><br><span class="line">                    mergeCombiners: (<span class="type">C</span>, <span class="type">C</span>) =&gt; <span class="type">C</span>): <span class="type">RD</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>createCombiner:</strong> combineByKey() 会遍历分区中的所有元素，因此每个元素的键要么还没有遇到过，要么就和之前的某个元素的键相同。如果这是一个新的元素， combineByKey() 会使用一个叫做createCombiner() 的函数来创建那个键对应的累加器的初始值</li>
+<li><strong>mergeValue:</strong> 如果这是一个在处理当前分区之前已经遇到的键，它会使用 mergeValue() 方法将该键的累加器对应的当前值与这个新的值进行合并</li>
+<li><strong>mergeCombiners:</strong> 由于每个分区都是独立处理的， 因此对于同一个键可以有多个累加器。如果有两个或者更多的分区都有对应同一个键的累加器， 就需要使用用户提供的 mergeCombiners() 方法将各个分区的结果进行合并。</li>
+</ul>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/08/03/2018-08-03 Spark RDD（五） 键值对聚合操作 combineByKey/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -1333,1008 +2305,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/07/31/2018-07-31 kafka-2-9-2-0-8-1集群搭建/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan Li">
-      <meta itemprop="description" content="Hello World.">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ryan Li God">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/07/31/2018-07-31 kafka-2-9-2-0-8-1集群搭建/" class="post-title-link" itemprop="https://www.ryanligod.com/page/5/index.html">Spark学习笔记（五）：Kafka 2.9.2-0.8.1集群搭建（包括scala安装）</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-07-31 14:41:58" itemprop="dateCreated datePublished" datetime="2018-07-31T14:41:58+08:00">2018-07-31</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-08-12 18:56:37" itemprop="dateModified" datetime="2018-08-12T18:56:37+08:00">2018-08-12</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Spark/" itemprop="url" rel="index"><span itemprop="name">Spark</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/07/31/2018-07-31 kafka-2-9-2-0-8-1集群搭建/" class="leancloud_visitors" data-flag-title="Spark学习笔记（五）：Kafka 2.9.2-0.8.1集群搭建（包括scala安装）">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="安装scala-2-11-8"><a href="#安装scala-2-11-8" class="headerlink" title="安装scala 2.11.8"></a>安装scala 2.11.8</h2><blockquote><p>注意，scala的版本和之后要安装的spark版本密切关联，必须要和spark/jars中的scala-compiler-2.11.8.jar版本一致，而且之后用IDE打包的时候，选择scala版本也要一致</p>
-</blockquote>
-<ol>
-<li>将scala-2.11.8.tgz使用WinSCP拷贝到spark1的/usr/local目录下。</li>
-<li><p>对scala-2.11.8.tgz进行解压缩：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">tar</span> <span class="selector-tag">-zxvf</span> <span class="selector-tag">scala-2</span><span class="selector-class">.11</span><span class="selector-class">.8</span><span class="selector-class">.tgz</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>对scala目录进行重命名：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">mv</span> <span class="selector-tag">scala-2</span><span class="selector-class">.11</span><span class="selector-class">.8</span> <span class="selector-tag">scala</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>配置scala相关的环境变量</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vi .bashrc</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">SCALA_HOME</span>=/usr/local/scala</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">PATH</span>=<span class="variable">$SCALA_HOME</span>/bin</span><br><span class="line"></span><br><span class="line">source .bashrc</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>查看scala是否安装成功：</p>
-<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">scala</span> -<span class="keyword">version</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>按照上述步骤在spark2和spark3机器上都安装好scala。使用scp将scala和.bashrc拷贝到spark2和spark3上即可</p>
-</li>
-</ol>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/07/31/2018-07-31 kafka-2-9-2-0-8-1集群搭建/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-         
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/07/31/2018-07-31 ZooKeeper3-4-5集群搭建/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan Li">
-      <meta itemprop="description" content="Hello World.">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ryan Li God">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/07/31/2018-07-31 ZooKeeper3-4-5集群搭建/" class="post-title-link" itemprop="https://www.ryanligod.com/page/5/index.html">Spark学习笔记（四）：ZooKeeper 3.4.5集群搭建</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-07-31 14:32:43" itemprop="dateCreated datePublished" datetime="2018-07-31T14:32:43+08:00">2018-07-31</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-08-12 19:03:31" itemprop="dateModified" datetime="2018-08-12T19:03:31+08:00">2018-08-12</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Spark/" itemprop="url" rel="index"><span itemprop="name">Spark</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/07/31/2018-07-31 ZooKeeper3-4-5集群搭建/" class="leancloud_visitors" data-flag-title="Spark学习笔记（四）：ZooKeeper 3.4.5集群搭建">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="安装ZooKeeper包"><a href="#安装ZooKeeper包" class="headerlink" title="安装ZooKeeper包"></a>安装ZooKeeper包</h2><ol>
-<li>将zookeeper-3.4.5.tar.gz使用SFTP工具拷贝到spark1的/usr/local目录下</li>
-<li><p>对zookeeper-3.4.5.tar.gz进行解压缩：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">tar</span> <span class="selector-tag">-zxvf</span> <span class="selector-tag">zookeeper-3</span><span class="selector-class">.4</span><span class="selector-class">.5</span><span class="selector-class">.tar</span><span class="selector-class">.gz</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>对zookeeper目录进行重命名：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">mv</span> <span class="selector-tag">zookeeper-3</span><span class="selector-class">.4</span><span class="selector-class">.5</span> <span class="selector-tag">zk</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>配置zookeeper相关的环境变量</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi .bashrc</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">ZOOKEEPER_HOME</span>=/usr/local/zk</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">PATH</span>=<span class="variable">$ZOOKEEPER_HOME</span>/bin</span><br><span class="line">source .bashrc</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/07/31/2018-07-31 ZooKeeper3-4-5集群搭建/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-         
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/07/31/2018-07-31 Hive0-13搭建/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan Li">
-      <meta itemprop="description" content="Hello World.">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ryan Li God">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/07/31/2018-07-31 Hive0-13搭建/" class="post-title-link" itemprop="https://www.ryanligod.com/page/5/index.html">Spark学习笔记（三）：Hive 0.13搭建</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-07-31 14:24:55" itemprop="dateCreated datePublished" datetime="2018-07-31T14:24:55+08:00">2018-07-31</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-08-12 18:56:43" itemprop="dateModified" datetime="2018-08-12T18:56:43+08:00">2018-08-12</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Spark/" itemprop="url" rel="index"><span itemprop="name">Spark</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/07/31/2018-07-31 Hive0-13搭建/" class="leancloud_visitors" data-flag-title="Spark学习笔记（三）：Hive 0.13搭建">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="安装hive包"><a href="#安装hive包" class="headerlink" title="安装hive包"></a>安装hive包</h2><ol>
-<li>将apache-hive-0.13.1-bin.tar.gz使用SFTP工具上传到spark1的/usr/local目录下。</li>
-<li><p>解压缩hive安装包：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">tar</span> <span class="selector-tag">-zxvf</span> <span class="selector-tag">apache-hive-0</span><span class="selector-class">.13</span><span class="selector-class">.1-bin</span><span class="selector-class">.tar</span><span class="selector-class">.gz</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>重命名hive目录：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">mv</span> <span class="selector-tag">apache-hive-0</span><span class="selector-class">.13</span><span class="selector-class">.1-bin</span> <span class="selector-tag">hive</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>配置hive相关的环境变量</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi .bashrc</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">HIVE_HOME</span>=/usr/local/hive</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">PATH</span>=<span class="variable">$HIVE_HOME</span>/bin</span><br><span class="line">source .bashrc</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/07/31/2018-07-31 Hive0-13搭建/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-         
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/07/31/2018-07-31 Hadoop2-4-1集群搭建/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan Li">
-      <meta itemprop="description" content="Hello World.">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ryan Li God">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/07/31/2018-07-31 Hadoop2-4-1集群搭建/" class="post-title-link" itemprop="https://www.ryanligod.com/page/5/index.html">Spark学习笔记（二）：Hadoop 2.4.1集群搭建</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-07-31 13:32:07" itemprop="dateCreated datePublished" datetime="2018-07-31T13:32:07+08:00">2018-07-31</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-08-23 17:59:16" itemprop="dateModified" datetime="2018-08-23T17:59:16+08:00">2018-08-23</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Spark/" itemprop="url" rel="index"><span itemprop="name">Spark</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/07/31/2018-07-31 Hadoop2-4-1集群搭建/" class="leancloud_visitors" data-flag-title="Spark学习笔记（二）：Hadoop 2.4.1集群搭建">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="安装hadoop包"><a href="#安装hadoop包" class="headerlink" title="安装hadoop包"></a>安装hadoop包</h2><ol>
-<li>下载好hadoop-2.4.1.tar.gz，使用SFTP工具上传到CentOS的/usr/local目录下</li>
-<li>将hadoop包进行解压缩：<br> tar -zxvf hadoop-2.4.1.tar.gz</li>
-<li>对hadoop目录进行重命名：<br> mv hadoop-2.4.1 hadoop</li>
-<li><p>配置hadoop相关环境变量<br> vi .bashrc<br> export HADOOP_HOME=/usr/local/hadoop<br> export PATH=$HADOOP_HOME/bin:$HADOOP_HOME/sbin</p>
-<p> source .bashrc</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/07/31/2018-07-31 Hadoop2-4-1集群搭建/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-         
-          <!--/noindex-->
-        
-      
-    </li></ol></div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/07/31/2018-07-31 CentOS6-5集群搭建/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan Li">
-      <meta itemprop="description" content="Hello World.">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ryan Li God">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/07/31/2018-07-31 CentOS6-5集群搭建/" class="post-title-link" itemprop="https://www.ryanligod.com/page/5/index.html">Spark学习笔记（一）：CentOS 6.5集群搭建</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-07-31 12:46:36" itemprop="dateCreated datePublished" datetime="2018-07-31T12:46:36+08:00">2018-07-31</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-08-12 18:57:10" itemprop="dateModified" datetime="2018-08-12T18:57:10+08:00">2018-08-12</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Spark/" itemprop="url" rel="index"><span itemprop="name">Spark</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/07/31/2018-07-31 CentOS6-5集群搭建/" class="leancloud_visitors" data-flag-title="Spark学习笔记（一）：CentOS 6.5集群搭建">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="运行环境"><a href="#运行环境" class="headerlink" title="运行环境"></a>运行环境</h2><ol>
-<li>CentOS 6.5</li>
-<li>JDK 1.7</li>
-<li>Hadoop 2.4.1</li>
-<li>Hive 0.13</li>
-<li>ZooKeeper 3.4.5</li>
-<li>kafka_2.9.2-0.8.1</li>
-<li>Spark 2.1.3</li>
-<li>scala 2.11.8</li>
-</ol>
-<h2 id="安装CentOS-6-5"><a href="#安装CentOS-6-5" class="headerlink" title="安装CentOS 6.5"></a>安装CentOS 6.5</h2><ol>
-<li>在macOS下，使用<strong><em>Parallels Desktop</em></strong>直接安装，CentOS 6.5使用的只需要官网的一个DVD1.iso文件。</li>
-<li>启动以后使用<strong><em>Termius</em></strong>连接三台机器，使用<strong><em>Transmit</em></strong>传文件。
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/07/31/2018-07-31 CentOS6-5集群搭建/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-         
-          <!--/noindex-->
-        
-      
-    </li></ol></div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2384,7 +2354,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">52</span>
+                    <span class="site-state-item-count">57</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2425,7 +2395,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">14</span>
+                      
+                    
+                    <span class="site-state-item-count">15</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2514,7 +2486,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">38</span>
+                      
+                    
+                    <span class="site-state-item-count">39</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

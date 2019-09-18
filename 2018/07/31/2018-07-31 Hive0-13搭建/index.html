@@ -268,7 +268,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">39</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">40</span></a>
 
   </li>
         
@@ -287,7 +287,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">15</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">16</span></a>
 
   </li>
         
@@ -306,7 +306,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">57</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">58</span></a>
 
   </li>
 
@@ -466,34 +466,34 @@
         <h2 id="安装hive包"><a href="#安装hive包" class="headerlink" title="安装hive包"></a>安装hive包</h2><ol>
 <li>将apache-hive-0.13.1-bin.tar.gz使用SFTP工具上传到spark1的/usr/local目录下。</li>
 <li><p>解压缩hive安装包：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">tar</span> <span class="selector-tag">-zxvf</span> <span class="selector-tag">apache-hive-0</span><span class="selector-class">.13</span><span class="selector-class">.1-bin</span><span class="selector-class">.tar</span><span class="selector-class">.gz</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf apache-hive-0.13.1-bin.tar.gz</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>重命名hive目录：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">mv</span> <span class="selector-tag">apache-hive-0</span><span class="selector-class">.13</span><span class="selector-class">.1-bin</span> <span class="selector-tag">hive</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv apache-hive-0.13.1-bin hive</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>配置hive相关的环境变量</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi .bashrc</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">HIVE_HOME</span>=/usr/local/hive</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">PATH</span>=<span class="variable">$HIVE_HOME</span>/bin</span><br><span class="line">source .bashrc</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi .bashrc</span><br><span class="line">export HIVE_HOME=/usr/local/hive</span><br><span class="line">export PATH=$HIVE_HOME/bin</span><br><span class="line">source .bashrc</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <a id="more"></a>
 <h2 id="安装mysql"><a href="#安装mysql" class="headerlink" title="安装mysql"></a>安装mysql</h2><ol>
 <li>在spark1上安装mysql</li>
 <li><p>使用yum安装mysql server</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install -y mysql-server</span><br><span class="line">service mysqld start</span><br><span class="line">chkconfig mysqld on</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install -y mysql-server</span><br><span class="line">service mysqld start</span><br><span class="line">chkconfig mysqld on</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>使用yum安装mysql connector</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="keyword">install</span> -y mysql-connector-<span class="keyword">java</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y mysql-connector-java</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>将mysql connector拷贝到hive的lib包中</p>
-<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /usr/share/java/mysql-connector-java-<span class="number">5.1</span>.<span class="number">17</span>.jar /usr/local/hive/<span class="class"><span class="keyword">lib</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /usr/share/java/mysql-connector-java-5.1.17.jar /usr/local/hive/lib</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>在mysql上创建hive元数据库，并对hive进行授权</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> <span class="keyword">if</span> <span class="keyword">not</span> <span class="keyword">exists</span> hive_metadata;</span><br><span class="line"><span class="keyword">grant</span> all <span class="keyword">privileges</span> <span class="keyword">on</span> hive_metadata.* <span class="keyword">to</span> <span class="string">'hive'</span>@<span class="string">'%'</span> <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'hive'</span>;</span><br><span class="line"><span class="keyword">grant</span> all <span class="keyword">privileges</span> <span class="keyword">on</span> hive_metadata.* <span class="keyword">to</span> <span class="string">'hive'</span>@<span class="string">'localhost'</span> <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'hive'</span>;</span><br><span class="line"><span class="keyword">grant</span> all <span class="keyword">privileges</span> <span class="keyword">on</span> hive_metadata.* <span class="keyword">to</span> <span class="string">'hive'</span>@<span class="string">'spark1'</span> <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'hive'</span>;</span><br><span class="line"><span class="keyword">flush</span> <span class="keyword">privileges</span>;</span><br><span class="line"><span class="keyword">use</span> hive_metadata;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">create database if not exists hive_metadata;</span><br><span class="line">grant all privileges on hive_metadata.* to &apos;hive&apos;@&apos;%&apos; identified by &apos;hive&apos;;</span><br><span class="line">grant all privileges on hive_metadata.* to &apos;hive&apos;@&apos;localhost&apos; identified by &apos;hive&apos;;</span><br><span class="line">grant all privileges on hive_metadata.* to &apos;hive&apos;@&apos;spark1&apos; identified by &apos;hive&apos;;</span><br><span class="line">flush privileges;</span><br><span class="line">use hive_metadata;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<h2 id="配置hive-site-xml"><a href="#配置hive-site-xml" class="headerlink" title="配置hive-site.xml"></a>配置hive-site.xml</h2><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mv hive-default<span class="selector-class">.xml</span><span class="selector-class">.template</span> hive-site.xml</span><br><span class="line">vi hive-site.xml</span><br></pre></td></tr></table></figure>
-<p>更改如下项目：<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="params">&lt;property&gt;</span></span><br><span class="line">  <span class="params">&lt;name&gt;</span>javax.jdo.option.ConnectionURL<span class="params">&lt;/name&gt;</span></span><br><span class="line">  <span class="params">&lt;value&gt;</span>jdbc:mysql:<span class="comment">//spark1:3306/hive_metadata?createDatabaseIfNotExist=true&lt;/value&gt;</span></span><br><span class="line"><span class="params">&lt;/property&gt;</span></span><br><span class="line"><span class="params">&lt;property&gt;</span></span><br><span class="line">  <span class="params">&lt;name&gt;</span>javax.jdo.option.ConnectionDriverName<span class="params">&lt;/name&gt;</span></span><br><span class="line">  <span class="params">&lt;value&gt;</span>com.mysql.jdbc.Driver<span class="params">&lt;/value&gt;</span></span><br><span class="line"><span class="params">&lt;/property&gt;</span></span><br><span class="line"><span class="params">&lt;property&gt;</span></span><br><span class="line">  <span class="params">&lt;name&gt;</span>javax.jdo.option.ConnectionUserName<span class="params">&lt;/name&gt;</span></span><br><span class="line">  <span class="params">&lt;value&gt;</span>hive<span class="params">&lt;/value&gt;</span></span><br><span class="line"><span class="params">&lt;/property&gt;</span></span><br><span class="line"><span class="params">&lt;property&gt;</span></span><br><span class="line">  <span class="params">&lt;name&gt;</span>javax.jdo.option.ConnectionPassword<span class="params">&lt;/name&gt;</span></span><br><span class="line">  <span class="params">&lt;value&gt;</span>hive<span class="params">&lt;/value&gt;</span></span><br><span class="line"><span class="params">&lt;/property&gt;</span></span><br><span class="line"><span class="params">&lt;property&gt;</span></span><br><span class="line">  <span class="params">&lt;name&gt;</span>hive.metastore.warehouse.dir<span class="params">&lt;/name&gt;</span></span><br><span class="line">  <span class="params">&lt;value&gt;</span><span class="meta-keyword">/user/</span>hive/warehouse<span class="params">&lt;/value&gt;</span></span><br><span class="line"><span class="params">&lt;/property&gt;</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="配置hive-env-sh和hive-config-sh"><a href="#配置hive-env-sh和hive-config-sh" class="headerlink" title="配置hive-env.sh和hive-config.sh"></a>配置hive-env.sh和hive-config.sh</h2><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mv hive-env.sh.template hive-env.sh</span><br><span class="line">vi /usr/local/hive/bin/hive-config.sh</span><br><span class="line"></span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">JAVA_HOME</span>=/usr/java/latest</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">HIVE_HOME</span>=/usr/local/hive</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">HADOOP_HOME</span>=/usr/local/hadoop</span><br></pre></td></tr></table></figure>
+<h2 id="配置hive-site-xml"><a href="#配置hive-site-xml" class="headerlink" title="配置hive-site.xml"></a>配置hive-site.xml</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mv hive-default.xml.template hive-site.xml</span><br><span class="line">vi hive-site.xml</span><br></pre></td></tr></table></figure>
+<p>更改如下项目：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;javax.jdo.option.ConnectionURL&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;jdbc:mysql://spark1:3306/hive_metadata?createDatabaseIfNotExist=true&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;javax.jdo.option.ConnectionDriverName&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;com.mysql.jdbc.Driver&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;javax.jdo.option.ConnectionUserName&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;hive&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;javax.jdo.option.ConnectionPassword&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;hive&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;hive.metastore.warehouse.dir&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;/user/hive/warehouse&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="配置hive-env-sh和hive-config-sh"><a href="#配置hive-env-sh和hive-config-sh" class="headerlink" title="配置hive-env.sh和hive-config.sh"></a>配置hive-env.sh和hive-config.sh</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mv hive-env.sh.template hive-env.sh</span><br><span class="line">vi /usr/local/hive/bin/hive-config.sh</span><br><span class="line"></span><br><span class="line">export JAVA_HOME=/usr/java/latest</span><br><span class="line">export HIVE_HOME=/usr/local/hive</span><br><span class="line">export HADOOP_HOME=/usr/local/hadoop</span><br></pre></td></tr></table></figure>
 <h2 id="验证hive是否安装成功"><a href="#验证hive是否安装成功" class="headerlink" title="验证hive是否安装成功"></a>验证hive是否安装成功</h2><p>直接输入hive命令，可以进入hive命令行</p>
 
       
@@ -650,7 +650,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">57</span>
+                    <span class="site-state-item-count">58</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -693,7 +693,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">15</span>
+                      
+                    
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -784,7 +786,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">39</span>
+                      
+                    
+                    <span class="site-state-item-count">40</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

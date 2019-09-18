@@ -117,7 +117,7 @@
 <meta property="og:site_name" content="Ryan Li God">
 <meta property="og:description" content="原文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428  distinct，union，intersection，subtract，cartesianspark伪集合尽管 RDD 本身不是严格意义上的集合，但它也支持许多数学上的集合操作，比如合并和相交操作, 下">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-08-12T10:58:32.980Z">
+<meta property="og:updated_time" content="2018-08-12T10:58:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spark RDD常用算子操作（三） distinct，union，intersection，subtract，cartesian">
 <meta name="twitter:description" content="原文作者：翟开顺首发：CSDN本人仅为自己方便查阅做了摘抄，请支持原作者原文地址：https://blog.csdn.net/t1dmzks/article/details/72077428  distinct，union，intersection，subtract，cartesianspark伪集合尽管 RDD 本身不是严格意义上的集合，但它也支持许多数学上的集合操作，比如合并和相交操作, 下">
@@ -268,7 +268,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">39</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">40</span></a>
 
   </li>
         
@@ -287,7 +287,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">15</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">16</span></a>
 
   </li>
         
@@ -306,7 +306,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">57</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">58</span></a>
 
   </li>
 
@@ -473,7 +473,7 @@
 <h2 id="union"><a href="#union" class="headerlink" title="union"></a>union</h2><p>两个RDD进行合并<br><strong>scala版本</strong><br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="keyword">var</span> <span class="type">RDD1</span> = sc.parallelize(<span class="type">List</span>(<span class="string">"aa"</span>,<span class="string">"aa"</span>,<span class="string">"bb"</span>,<span class="string">"cc"</span>,<span class="string">"dd"</span>))</span><br><span class="line">scala&gt; <span class="keyword">var</span> <span class="type">RDD2</span> = sc.parallelize(<span class="type">List</span>(<span class="string">"aa"</span>,<span class="string">"dd"</span>,<span class="string">"ff"</span>))</span><br><span class="line"></span><br><span class="line">scala&gt; <span class="type">RDD1</span>.collect</span><br><span class="line">res6: <span class="type">Array</span>[<span class="type">String</span>] = <span class="type">Array</span>(aa, aa, bb, cc, dd)</span><br><span class="line"></span><br><span class="line">scala&gt; <span class="type">RDD2</span>.collect</span><br><span class="line">res7: <span class="type">Array</span>[<span class="type">String</span>] = <span class="type">Array</span>(aa, dd, ff)</span><br><span class="line"></span><br><span class="line">scala&gt; <span class="type">RDD1</span>.union(<span class="type">RDD2</span>).collect</span><br><span class="line">res8: <span class="type">Array</span>[<span class="type">String</span>] = <span class="type">Array</span>(aa, aa, bb, cc, dd, aa, dd, ff)</span><br></pre></td></tr></table></figure></p>
 <p><strong>java版本</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">    JavaRDD&lt;String&gt; RDD1 = sc.parallelize(Arrays.asList(<span class="string">"aa"</span>, <span class="string">"aa"</span>, <span class="string">"bb"</span>, <span class="string">"cc"</span>, <span class="string">"dd"</span>));</span><br><span class="line">    JavaRDD&lt;String&gt; RDD2 = sc.parallelize(Arrays.asList(<span class="string">"aa"</span>,<span class="string">"dd"</span>,<span class="string">"ff"</span>));</span><br><span class="line">    JavaRDD&lt;String&gt; unionRDD = RDD1.union(RDD2);</span><br><span class="line">    List&lt;String&gt; collect = unionRDD.collect();</span><br><span class="line">    <span class="keyword">for</span> (String str:collect) &#123;</span><br><span class="line">        System.out.print(str+<span class="string">", "</span>);</span><br><span class="line">    &#125;</span><br><span class="line">-----------输出---------</span><br><span class="line">aa, aa, bb, cc, dd, aa, dd, ff,</span><br></pre></td></tr></table></figure></p>
 <h2 id="intersection"><a href="#intersection" class="headerlink" title="intersection"></a>intersection</h2><p>RDD1.intersection(RDD2) 返回两个RDD的交集，并且去重<br>intersection 需要混洗数据，比较浪费性能<br><strong>scala版本</strong><br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="keyword">var</span> <span class="type">RDD1</span> = sc.parallelize(<span class="type">List</span>(<span class="string">"aa"</span>,<span class="string">"aa"</span>,<span class="string">"bb"</span>,<span class="string">"cc"</span>,<span class="string">"dd"</span>))</span><br><span class="line">scala&gt; <span class="keyword">var</span> <span class="type">RDD2</span> = sc.parallelize(<span class="type">List</span>(<span class="string">"aa"</span>,<span class="string">"dd"</span>,<span class="string">"ff"</span>))</span><br><span class="line"></span><br><span class="line">scala&gt; <span class="type">RDD1</span>.collect</span><br><span class="line">res6: <span class="type">Array</span>[<span class="type">String</span>] = <span class="type">Array</span>(aa, aa, bb, cc, dd)</span><br><span class="line"></span><br><span class="line">scala&gt; <span class="type">RDD2</span>.collect</span><br><span class="line">res7: <span class="type">Array</span>[<span class="type">String</span>] = <span class="type">Array</span>(aa, dd, ff)</span><br><span class="line"></span><br><span class="line">scala&gt; <span class="keyword">var</span> insertsectionRDD = <span class="type">RDD1</span>.intersection(<span class="type">RDD2</span>)</span><br><span class="line">scala&gt; insertsectionRDD.collect</span><br><span class="line"></span><br><span class="line">res9: <span class="type">Array</span>[<span class="type">String</span>] = <span class="type">Array</span>(aa, dd)</span><br></pre></td></tr></table></figure></p>
-<p><strong>java版本</strong><br><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">    JavaRDD&lt;<span class="keyword">String</span>&gt; RDD1 = sc.parallelize(Arrays.asList(<span class="string">"aa"</span>, <span class="string">"aa"</span>, <span class="string">"bb"</span>, <span class="string">"cc"</span>, <span class="string">"dd"</span>));</span><br><span class="line">    JavaRDD&lt;<span class="keyword">String</span>&gt; RDD2 = sc.parallelize(Arrays.asList(<span class="string">"aa"</span>,<span class="string">"dd"</span>,<span class="string">"ff"</span>));</span><br><span class="line">    JavaRDD&lt;<span class="keyword">String</span>&gt; intersectionRDD = RDD1.intersection(RDD2);</span><br><span class="line">    List&lt;<span class="keyword">String</span>&gt; collect = intersectionRDD.collect();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">String</span> <span class="built_in">str</span>:collect) &#123;</span><br><span class="line">        System.out.<span class="built_in">print</span>(<span class="built_in">str</span>+<span class="string">" "</span>);</span><br><span class="line">    &#125;</span><br><span class="line">-------------输出-----------</span><br><span class="line">aa dd</span><br></pre></td></tr></table></figure></p>
+<p><strong>java版本</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">    JavaRDD&lt;String&gt; RDD1 = sc.parallelize(Arrays.asList(&quot;aa&quot;, &quot;aa&quot;, &quot;bb&quot;, &quot;cc&quot;, &quot;dd&quot;));</span><br><span class="line">    JavaRDD&lt;String&gt; RDD2 = sc.parallelize(Arrays.asList(&quot;aa&quot;,&quot;dd&quot;,&quot;ff&quot;));</span><br><span class="line">    JavaRDD&lt;String&gt; intersectionRDD = RDD1.intersection(RDD2);</span><br><span class="line">    List&lt;String&gt; collect = intersectionRDD.collect();</span><br><span class="line">    for (String str:collect) &#123;</span><br><span class="line">        System.out.print(str+&quot; &quot;);</span><br><span class="line">    &#125;</span><br><span class="line">-------------输出-----------</span><br><span class="line">aa dd</span><br></pre></td></tr></table></figure></p>
 <h2 id="subtract"><a href="#subtract" class="headerlink" title="subtract"></a>subtract</h2><p>RDD1.subtract(RDD2),返回在RDD1中出现，但是不在RDD2中出现的元素，不去重<br><strong>scala版本</strong><br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">JavaRDD</span>&lt;<span class="type">String</span>&gt; <span class="type">RDD1</span> = sc.parallelize(<span class="type">Arrays</span>.asList(<span class="string">"aa"</span>, <span class="string">"aa"</span>,<span class="string">"bb"</span>, <span class="string">"cc"</span>, <span class="string">"dd"</span>));</span><br><span class="line"></span><br><span class="line"><span class="type">JavaRDD</span>&lt;<span class="type">String</span>&gt; <span class="type">RDD2</span> = sc.parallelize(<span class="type">Arrays</span>.asList(<span class="string">"aa"</span>,<span class="string">"dd"</span>,<span class="string">"ff"</span>));</span><br><span class="line"></span><br><span class="line">scala&gt; <span class="keyword">var</span> substractRDD =<span class="type">RDD1</span>.subtract(<span class="type">RDD2</span>)</span><br><span class="line"></span><br><span class="line">scala&gt;  substractRDD.collect</span><br><span class="line">res10: <span class="type">Array</span>[<span class="type">String</span>] = <span class="type">Array</span>(bb, cc)</span><br></pre></td></tr></table></figure></p>
 <p><strong>java版本</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">    JavaRDD&lt;String&gt; RDD1 = sc.parallelize(Arrays.asList(<span class="string">"aa"</span>, <span class="string">"aa"</span>, <span class="string">"bb"</span>,<span class="string">"cc"</span>, <span class="string">"dd"</span>));</span><br><span class="line">    JavaRDD&lt;String&gt; RDD2 = sc.parallelize(Arrays.asList(<span class="string">"aa"</span>,<span class="string">"dd"</span>,<span class="string">"ff"</span>));</span><br><span class="line">    JavaRDD&lt;String&gt; subtractRDD = RDD1.subtract(RDD2);</span><br><span class="line">    List&lt;String&gt; collect = subtractRDD.collect();</span><br><span class="line">    <span class="keyword">for</span> (String str:collect) &#123;</span><br><span class="line">        System.out.print(str+<span class="string">" "</span>);</span><br><span class="line">    &#125;</span><br><span class="line">------------输出-----------------</span><br><span class="line">bb  cc</span><br></pre></td></tr></table></figure></p>
 <h2 id="cartesian"><a href="#cartesian" class="headerlink" title="cartesian"></a>cartesian</h2><p>RDD1.cartesian(RDD2) 返回RDD1和RDD2的笛卡儿积，这个开销非常大</p>
@@ -634,7 +634,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">57</span>
+                    <span class="site-state-item-count">58</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -677,7 +677,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">15</span>
+                      
+                    
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -768,7 +770,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">39</span>
+                      
+                    
+                    <span class="site-state-item-count">40</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

@@ -117,7 +117,7 @@
 <meta property="og:site_name" content="Ryan Li God">
 <meta property="og:description" content="本文编译器构建部分启发自 rswier/c4 和 lotabout/write-a-C-interpreter，其中有博客内容和代码的借鉴。  前言最近看了一些汇编和计算机组成原理的内容，感觉还是兴趣满满，于是找了一些资料来支撑实现自己的编程语言，打算把这个语言设计成中文编写，初步先使用 C 语言的基本语法形式， struct 之类的也先不考虑，后面学多了看看能不能加点例如 GC 之类的内容。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-23T07:20:12.107Z">
+<meta property="og:updated_time" content="2019-07-23T07:20:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Rylang 语言以及编译器构建（一）虚拟机">
 <meta name="twitter:description" content="本文编译器构建部分启发自 rswier/c4 和 lotabout/write-a-C-interpreter，其中有博客内容和代码的借鉴。  前言最近看了一些汇编和计算机组成原理的内容，感觉还是兴趣满满，于是找了一些资料来支撑实现自己的编程语言，打算把这个语言设计成中文编写，初步先使用 C 语言的基本语法形式， struct 之类的也先不考虑，后面学多了看看能不能加点例如 GC 之类的内容。">
@@ -268,7 +268,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">39</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">40</span></a>
 
   </li>
         
@@ -287,7 +287,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">15</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">16</span></a>
 
   </li>
         
@@ -306,7 +306,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">57</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">58</span></a>
 
   </li>
 
@@ -495,7 +495,7 @@
 <li>堆（heap）用于为程序动态分配内存。</li>
 </ol>
 <p>它们在内存中的位置类似于下图：</p>
-<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="code">+------------------+</span></span><br><span class="line">|    stack   |     |      high address</span><br><span class="line">|    ...     v     |</span><br><span class="line">|                  |</span><br><span class="line">|                  |</span><br><span class="line">|                  |</span><br><span class="line">|                  |</span><br><span class="line">|    ...     ^     |</span><br><span class="line">|    heap    |     |</span><br><span class="line"><span class="code">+------------------+</span></span><br><span class="line">| bss  segment     |</span><br><span class="line"><span class="code">+------------------+</span></span><br><span class="line">| data segment     |</span><br><span class="line"><span class="code">+------------------+</span></span><br><span class="line">| text segment     |      low address</span><br><span class="line"><span class="code">+------------------+</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">+------------------+</span><br><span class="line">|    stack   |     |      high address</span><br><span class="line">|    ...     v     |</span><br><span class="line">|                  |</span><br><span class="line">|                  |</span><br><span class="line">|                  |</span><br><span class="line">|                  |</span><br><span class="line">|    ...     ^     |</span><br><span class="line">|    heap    |     |</span><br><span class="line">+------------------+</span><br><span class="line">| bss  segment     |</span><br><span class="line">+------------------+</span><br><span class="line">| data segment     |</span><br><span class="line">+------------------+</span><br><span class="line">| text segment     |      low address</span><br><span class="line">+------------------+</span><br></pre></td></tr></table></figure>
 <p>我们的虚拟机并不打算模拟完整的计算机，因此简单起见，我们只关心三个内容：代码段、数据段以及栈。其中的数据段我们只用来存放字符串，因为我们的编译器并不支持初始化变量，因此我们也不需要未初始化数据段。</p>
 <p>当用户的程序需要分配内存时，理论上我们的虚拟机需要维护一个堆用于内存分配，但实际实现上较为复杂且与编译无关，故我们引入一个指令<code>MSET</code>，使我们能直接使用编译器（解释器）中的内存。</p>
 <p>综上，我们需要首先在全局添加如下代码：</p>
@@ -532,7 +532,7 @@
 <h3 id="子函数调用"><a href="#子函数调用" class="headerlink" title="子函数调用"></a>子函数调用</h3><p>这是汇编中最难理解的部分，所以合在一起说，要引入的命令有 <code>CALL</code>, <code>ENT</code>, <code>ADJ</code> 及 <code>LEV</code>。</p>
 <p>首先我们介绍 <code>CALL &lt;addr&gt;</code> 与 <code>RET</code> 指令，<code>CALL</code> 的作用是跳转到地址为 <code>&lt;addr&gt;</code> 的子函数，<code>RET</code> 则用于从子函数中返回。</p>
 <p>为什么不能直接使用 <code>JMP</code> 指令呢？原因是当我们从子函数中返回时，程序需要回到跳转之前的地方继续运行，这就需要事先将这个位置信息存储起来。反过来，子函数要返回时，就需要获取并恢复这个信息。因此实际中我们将 <code>PC</code> 保存在栈中。如下：</p>
-<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (op == <span class="keyword">CALL</span>) &#123;*--sp = (<span class="built_in">int</span>)(pc+<span class="number">1</span>); pc = (<span class="built_in">int</span> *)*pc;&#125;           // <span class="keyword">call</span> <span class="function"><span class="keyword">subroutine</span></span></span><br><span class="line">//<span class="keyword">else</span> <span class="keyword">if</span> (op == RET)  &#123;pc = (<span class="built_in">int</span> *)*sp++;&#125;                              // <span class="keyword">return</span> from <span class="function"><span class="keyword">subroutine</span></span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">else if (op == CALL) &#123;*--sp = (int)(pc+1); pc = (int *)*pc;&#125;           // call subroutine</span><br><span class="line">//else if (op == RET)  &#123;pc = (int *)*sp++;&#125;                              // return from subroutine;</span><br></pre></td></tr></table></figure>
 <p>这里我们把 <code>RET</code> 相关的内容注释了，是因为之后我们将用 <code>LEV</code> 指令来代替它。</p>
 <p>在实际调用函数时，不仅要考虑函数的地址，还要考虑如何传递参数和如何返回结果。这里我们约定，如果子函数有返回结果，那么就在返回时保存在 <code>ax</code> 中，它可以是一个值，也可以是一个地址。那么参数的传递呢？</p>
 <p>各种编程语言关于如何调用子函数有不同的约定，例如 C 语言的调用标准是：</p>
@@ -566,7 +566,7 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (op == LEV)  &#123;sp = bp; bp = (<span class="keyword">int</span> *)*sp++; pc = (<span class="keyword">int</span> *)*sp++;&#125;  <span class="comment">// restore call frame and PC</span></span><br></pre></td></tr></table></figure>
 <p>注意的是，<code>LEV</code> 已经把 <code>RET</code> 的功能包含了，所以我们不再需要 <code>RET</code> 指令。</p>
 <h3 id="LEA"><a href="#LEA" class="headerlink" title="LEA"></a>LEA</h3><p>上面的一些指令解决了调用帧的问题，但还有一个问题是如何在子函数中获得传入的参数。这里我们首先要了解的是当参数调用时，栈中的调用帧是什么样的。我们依旧用上面的例子（只是现在用“顺序”调用参数）：</p>
-<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">sub<span class="emphasis">_function(arg1, arg2, arg3);</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">|    ....       | high address</span></span><br><span class="line"><span class="emphasis">+---------------+</span></span><br><span class="line"><span class="emphasis">| arg: 1        |    new_</span>bp + 4</span><br><span class="line"><span class="code">+---------------+</span></span><br><span class="line">| arg: 2        |    new<span class="emphasis">_bp + 3</span></span><br><span class="line"><span class="emphasis">+---------------+</span></span><br><span class="line"><span class="emphasis">| arg: 3        |    new_</span>bp + 2</span><br><span class="line"><span class="code">+---------------+</span></span><br><span class="line">|return address |    new<span class="emphasis">_bp + 1</span></span><br><span class="line"><span class="emphasis">+---------------+</span></span><br><span class="line"><span class="emphasis">| old BP        | &lt;- new BP</span></span><br><span class="line"><span class="emphasis">+---------------+</span></span><br><span class="line"><span class="emphasis">| local var 1   |    new_</span>bp - 1</span><br><span class="line"><span class="code">+---------------+</span></span><br><span class="line">| local var 2   |    new<span class="emphasis">_bp - 2</span></span><br><span class="line"><span class="emphasis">+---------------+</span></span><br><span class="line"><span class="emphasis">|    ....       |  low address</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">sub_function(arg1, arg2, arg3);</span><br><span class="line"></span><br><span class="line">|    ....       | high address</span><br><span class="line">+---------------+</span><br><span class="line">| arg: 1        |    new_bp + 4</span><br><span class="line">+---------------+</span><br><span class="line">| arg: 2        |    new_bp + 3</span><br><span class="line">+---------------+</span><br><span class="line">| arg: 3        |    new_bp + 2</span><br><span class="line">+---------------+</span><br><span class="line">|return address |    new_bp + 1</span><br><span class="line">+---------------+</span><br><span class="line">| old BP        | &lt;- new BP</span><br><span class="line">+---------------+</span><br><span class="line">| local var 1   |    new_bp - 1</span><br><span class="line">+---------------+</span><br><span class="line">| local var 2   |    new_bp - 2</span><br><span class="line">+---------------+</span><br><span class="line">|    ....       |  low address</span><br></pre></td></tr></table></figure>
 <p>所以为了获取第一个参数，我们需要得到 <code>new_bp + 4</code>，但就如上面的说，我们的 <code>ADD</code> 指令无法操作除 <code>ax</code> 外的寄存器，所以我们提供了一个新的指令：<code>LEA &lt;offset&gt;</code></p>
 <p>实现如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (op == LEA)  &#123;ax = (<span class="keyword">int</span>)(bp + *pc++);&#125;  <span class="comment">// load address for arguments.</span></span><br></pre></td></tr></table></figure>
@@ -730,7 +730,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">57</span>
+                    <span class="site-state-item-count">58</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -773,7 +773,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">15</span>
+                      
+                    
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -864,7 +866,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">39</span>
+                      
+                    
+                    <span class="site-state-item-count">40</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

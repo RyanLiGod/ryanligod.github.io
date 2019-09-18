@@ -117,7 +117,7 @@
 <meta property="og:site_name" content="Ryan Li God">
 <meta property="og:description" content="运行环境 CentOS 6.5 JDK 1.7 Hadoop 2.4.1 Hive 0.13 ZooKeeper 3.4.5 kafka_2.9.2-0.8.1 Spark 2.1.3 scala 2.11.8  安装CentOS 6.5 在macOS下，使用Parallels Desktop直接安装，CentOS 6.5使用的只需要官网的一个DVD1.iso文件。 启动以后使用Termius连接">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-08-12T10:57:10.460Z">
+<meta property="og:updated_time" content="2018-08-12T10:57:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spark学习笔记（一）：CentOS 6.5集群搭建">
 <meta name="twitter:description" content="运行环境 CentOS 6.5 JDK 1.7 Hadoop 2.4.1 Hive 0.13 ZooKeeper 3.4.5 kafka_2.9.2-0.8.1 Spark 2.1.3 scala 2.11.8  安装CentOS 6.5 在macOS下，使用Parallels Desktop直接安装，CentOS 6.5使用的只需要官网的一个DVD1.iso文件。 启动以后使用Termius连接">
@@ -268,7 +268,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">39</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">40</span></a>
 
   </li>
         
@@ -287,7 +287,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">15</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">16</span></a>
 
   </li>
         
@@ -306,7 +306,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">57</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">58</span></a>
 
   </li>
 
@@ -478,21 +478,21 @@
 <li>启动以后使用<strong><em>Termius</em></strong>连接三台机器，使用<strong><em>Transmit</em></strong>传文件。<a id="more"></a>
 </li>
 </ol>
-<h2 id="CentOS-6-5防火墙配置"><a href="#CentOS-6-5防火墙配置" class="headerlink" title="CentOS 6.5防火墙配置"></a>CentOS 6.5防火墙配置</h2><p>关闭防火墙<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">service iptables stop</span><br><span class="line">chkconfig iptables off</span><br><span class="line">vi /etc/selinux/config</span><br><span class="line"><span class="attribute">SELINUX</span>=disabled</span><br></pre></td></tr></table></figure></p>
+<h2 id="CentOS-6-5防火墙配置"><a href="#CentOS-6-5防火墙配置" class="headerlink" title="CentOS 6.5防火墙配置"></a>CentOS 6.5防火墙配置</h2><p>关闭防火墙<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">service iptables stop</span><br><span class="line">chkconfig iptables off</span><br><span class="line">vi /etc/selinux/config</span><br><span class="line">SELINUX=disabled</span><br></pre></td></tr></table></figure></p>
 <h2 id="JDK-1-7安装"><a href="#JDK-1-7安装" class="headerlink" title="JDK 1.7安装"></a>JDK 1.7安装</h2><p>我下载的CentOS自带，所以不用安装，装之前用java -version测试是否自带JDK。</p>
 <ol>
 <li>将jdk-7u60-linux-i586.rpm通过WinSCP上传到虚拟机中</li>
 <li><p>安装JDK：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">rpm</span> <span class="selector-tag">-ivh</span> <span class="selector-tag">jdk-7u65-linux-i586</span><span class="selector-class">.rpm</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh jdk-7u65-linux-i586.rpm</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>配置jdk相关的环境变量</p>
 </li>
-<li><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi .bashrc</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">JAVA_HOME</span>=/usr/java/latest</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">PATH</span>=<span class="variable">$PATH</span>:$JAVA_HOME/bin</span><br><span class="line">source .bashrc</span><br></pre></td></tr></table></figure>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi .bashrc</span><br><span class="line">export JAVA_HOME=/usr/java/latest</span><br><span class="line">export PATH=$PATH:$JAVA_HOME/bin</span><br><span class="line">source .bashrc</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>测试jdk安装是否成功：</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -<span class="built_in">version</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
 </li>
-<li><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -f <span class="regexp">/etc/u</span>dev<span class="regexp">/rules.d/</span><span class="number">70</span>-persistent-net.rules</span><br></pre></td></tr></table></figure>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -f /etc/udev/rules.d/70-persistent-net.rules</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <h2 id="安装第二台和第三台虚拟机"><a href="#安装第二台和第三台虚拟机" class="headerlink" title="安装第二台和第三台虚拟机"></a>安装第二台和第三台虚拟机</h2><ol>
@@ -500,20 +500,20 @@
 <li>集群的最小环境就是三台。因为后面要搭建ZooKeeper、kafka等集群。</li>
 <li>另外两台机器的hostname分别设置为spark2和spark3即可，通过终端输入ifconfig查看ip，记下。</li>
 <li><p>安装好之后，记得要在三台机器的/etc/hosts文件中，配置全三台机器的ip地址到hostname的映射，而不能只配置本机。比如我的：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[spark1@spark1 Desktop]$ cat /etc/hosts</span><br><span class="line"><span class="number">127.0</span>.<span class="number">0.1</span>   localhost localhost<span class="selector-class">.localdomain</span> localhost4 localhost4.localdomain4</span><br><span class="line">::<span class="number">1</span>         localhost localhost<span class="selector-class">.localdomain</span> localhost6 localhost6.localdomain6</span><br><span class="line"><span class="number">10.211</span>.<span class="number">55.24</span> spark1</span><br><span class="line"><span class="number">10.211</span>.<span class="number">55.25</span> spark2</span><br><span class="line"><span class="number">10.211</span>.<span class="number">55.26</span> spark3</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[spark1@spark1 Desktop]$ cat /etc/hosts</span><br><span class="line">127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4</span><br><span class="line">::1         localhost localhost.localdomain localhost6 localhost6.localdomain6</span><br><span class="line">10.211.55.24 spark1</span><br><span class="line">10.211.55.25 spark2</span><br><span class="line">10.211.55.26 spark3</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>mac中Parallels Desktop会自动配置到虚拟机的地址映射，开启虚拟机以后在mac中可以直接ssh root@spark1进行连接</p>
 </li>
 </ol>
 <h2 id="配置集群ssh免密码登录"><a href="#配置集群ssh免密码登录" class="headerlink" title="配置集群ssh免密码登录"></a>配置集群ssh免密码登录</h2><ol>
 <li><p>首先在三台机器上配置对本机的ssh免密码登录<br>生成本机的公钥，过程中不断敲回车即可，ssh-keygen命令默认会将公钥放在/root/.ssh目录下</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">ssh-keygen -t rsa</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>将公钥复制为authorized_keys文件，此时使用ssh连接本机就不需要输入密码了</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /root/.ssh</span><br><span class="line">cp id_rsa<span class="selector-class">.pub</span> authorized_keys</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /root/.ssh</span><br><span class="line">cp id_rsa.pub authorized_keys</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>接着配置三台机器互相之间的ssh免密码登录，使用ssh-copy-id -i spark{N}命令将本机的公钥拷贝到指定机器的authorized_keys文件中：</p>
-<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="symbol">@spark1</span> ~]<span class="meta"># ssh-copy-id -i spark2</span></span><br><span class="line">[root<span class="symbol">@spark1</span> ~]<span class="meta"># ssh-copy-id -i spark3</span></span><br><span class="line">[root<span class="symbol">@spark2</span> ~]<span class="meta"># ssh-copy-id -i spark1</span></span><br><span class="line">[root<span class="symbol">@spark2</span> ~]<span class="meta"># ssh-copy-id -i spark3</span></span><br><span class="line">[root<span class="symbol">@spark3</span> ~]<span class="meta"># ssh-copy-id -i spark1</span></span><br><span class="line">[root<span class="symbol">@spark3</span> ~]<span class="meta"># ssh-copy-id -i spark2</span></span><br></pre></td></tr></table></figure></li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@spark1 ~]# ssh-copy-id -i spark2</span><br><span class="line">[root@spark1 ~]# ssh-copy-id -i spark3</span><br><span class="line">[root@spark2 ~]# ssh-copy-id -i spark1</span><br><span class="line">[root@spark2 ~]# ssh-copy-id -i spark3</span><br><span class="line">[root@spark3 ~]# ssh-copy-id -i spark1</span><br><span class="line">[root@spark3 ~]# ssh-copy-id -i spark2</span><br></pre></td></tr></table></figure></li>
 </ol>
 
       
@@ -668,7 +668,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">57</span>
+                    <span class="site-state-item-count">58</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -711,7 +711,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">15</span>
+                      
+                    
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -802,7 +804,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">39</span>
+                      
+                    
+                    <span class="site-state-item-count">40</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

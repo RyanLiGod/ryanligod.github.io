@@ -268,7 +268,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">39</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">40</span></a>
 
   </li>
         
@@ -287,7 +287,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">15</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">16</span></a>
 
   </li>
         
@@ -306,7 +306,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">57</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">58</span></a>
 
   </li>
 
@@ -468,16 +468,16 @@
 <ol>
 <li>将scala-2.11.8.tgz使用WinSCP拷贝到spark1的/usr/local目录下。</li>
 <li><p>对scala-2.11.8.tgz进行解压缩：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">tar</span> <span class="selector-tag">-zxvf</span> <span class="selector-tag">scala-2</span><span class="selector-class">.11</span><span class="selector-class">.8</span><span class="selector-class">.tgz</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf scala-2.11.8.tgz</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>对scala目录进行重命名：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">mv</span> <span class="selector-tag">scala-2</span><span class="selector-class">.11</span><span class="selector-class">.8</span> <span class="selector-tag">scala</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv scala-2.11.8 scala</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>配置scala相关的环境变量</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vi .bashrc</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">SCALA_HOME</span>=/usr/local/scala</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">PATH</span>=<span class="variable">$SCALA_HOME</span>/bin</span><br><span class="line"></span><br><span class="line">source .bashrc</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vi .bashrc</span><br><span class="line">export SCALA_HOME=/usr/local/scala</span><br><span class="line">export PATH=$SCALA_HOME/bin</span><br><span class="line"></span><br><span class="line">source .bashrc</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>查看scala是否安装成功：</p>
-<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">scala</span> -<span class="keyword">version</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scala -version</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>按照上述步骤在spark2和spark3机器上都安装好scala。使用scp将scala和.bashrc拷贝到spark2和spark3上即可</p>
 </li>
@@ -486,16 +486,16 @@
 <h2 id="安装Kafka包"><a href="#安装Kafka包" class="headerlink" title="安装Kafka包"></a>安装Kafka包</h2><ol>
 <li>将kafka_2.9.2-0.8.1.tgz使用SFTP工具拷贝到spark1的/usr/local目录下</li>
 <li><p>对kafka_2.9.2-0.8.1.tgz进行解压缩：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">tar</span> <span class="selector-tag">-zxvf</span> <span class="selector-tag">kafka_2</span><span class="selector-class">.9</span><span class="selector-class">.2-0</span><span class="selector-class">.8</span><span class="selector-class">.1</span><span class="selector-class">.tgz</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf kafka_2.9.2-0.8.1.tgz</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>对kafka目录进行改名：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">mv</span> <span class="selector-tag">kafka_2</span><span class="selector-class">.9</span><span class="selector-class">.2-0</span><span class="selector-class">.8</span><span class="selector-class">.1</span> <span class="selector-tag">kafka</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv kafka_2.9.2-0.8.1 kafka</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>配置kafka</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">vi</span> /usr/local/kafka/config/server.properties</span><br><span class="line"><span class="comment"># broker.id：依次增长的整数，0、1、2、3、4，集群中Broker的唯一id</span></span><br><span class="line"></span><br><span class="line">zookeeper.connect=<span class="number">10.211.55.24:2181</span>,<span class="number">10.211.55.25:2181</span>,<span class="number">10.211.55.26:2181</span></span><br><span class="line"><span class="comment"># 这里填写自己的 spark1:2181,spark2:2181,spark3:2181</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vi /usr/local/kafka/config/server.properties</span><br><span class="line"># broker.id：依次增长的整数，0、1、2、3、4，集群中Broker的唯一id</span><br><span class="line"></span><br><span class="line">zookeeper.connect=10.211.55.24:2181,10.211.55.25:2181,10.211.55.26:2181</span><br><span class="line"># 这里填写自己的 spark1:2181,spark2:2181,spark3:2181</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>安装slf4j<br>将slf4j-1.7.6.zip上传到/usr/local目录下，再把slf4j中的slf4j-nop-1.7.6.jar复制到kafka的libs目录下面</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">unzip</span> <span class="selector-tag">slf4j-1</span><span class="selector-class">.7</span><span class="selector-class">.6</span><span class="selector-class">.zip</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip slf4j-1.7.6.zip</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <h2 id="搭建kafka集群"><a href="#搭建kafka集群" class="headerlink" title="搭建kafka集群"></a>搭建kafka集群</h2><ol>
@@ -504,12 +504,12 @@
 </ol>
 <h2 id="启动kafka集群"><a href="#启动kafka集群" class="headerlink" title="启动kafka集群"></a>启动kafka集群</h2><ol>
 <li><p>在三台机器上分别执行以下命令：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup bin/kafka-server-start<span class="selector-class">.sh</span> config/server<span class="selector-class">.properties</span> &amp;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup bin/kafka-server-start.sh config/server.properties &amp;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>使用jps检查启动是否成功</p>
 </li>
 </ol>
-<h2 id="测试kafka集群"><a href="#测试kafka集群" class="headerlink" title="测试kafka集群"></a>测试kafka集群</h2><p>使用基本命令检查kafka是否搭建成功<br><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh --zookeeper <span class="number">10.211</span><span class="meta">.55</span><span class="meta">.24</span>:<span class="number">2181</span>,<span class="number">10.211</span><span class="meta">.55</span><span class="meta">.25</span>:<span class="number">2181</span>,<span class="number">10.211</span><span class="meta">.55</span><span class="meta">.26</span>:<span class="number">2181</span> --topic TestTopic --replication-factor <span class="number">1</span> --partitions <span class="number">1</span> --create</span><br><span class="line"></span><br><span class="line">bin/kafka-console-producer.sh --broker-list <span class="number">10.211</span><span class="meta">.55</span><span class="meta">.24</span>:<span class="number">9092</span>,<span class="number">10.211</span><span class="meta">.55</span><span class="meta">.25</span>:<span class="number">9092</span>,<span class="number">10.211</span><span class="meta">.55</span><span class="meta">.26</span>:<span class="number">9092</span> --topic TestTopic</span><br><span class="line"></span><br><span class="line">bin/kafka-console-consumer.sh --zookeeper <span class="number">10.211</span><span class="meta">.55</span><span class="meta">.24</span>:<span class="number">2181</span>,<span class="number">10.211</span><span class="meta">.55</span><span class="meta">.25</span>:<span class="number">2181</span>,<span class="number">10.211</span><span class="meta">.55</span><span class="meta">.26</span>:<span class="number">2181</span> --topic TestTopic --from-beginning</span><br></pre></td></tr></table></figure></p>
+<h2 id="测试kafka集群"><a href="#测试kafka集群" class="headerlink" title="测试kafka集群"></a>测试kafka集群</h2><p>使用基本命令检查kafka是否搭建成功<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh --zookeeper 10.211.55.24:2181,10.211.55.25:2181,10.211.55.26:2181 --topic TestTopic --replication-factor 1 --partitions 1 --create</span><br><span class="line"></span><br><span class="line">bin/kafka-console-producer.sh --broker-list 10.211.55.24:9092,10.211.55.25:9092,10.211.55.26:9092 --topic TestTopic</span><br><span class="line"></span><br><span class="line">bin/kafka-console-consumer.sh --zookeeper 10.211.55.24:2181,10.211.55.25:2181,10.211.55.26:2181 --topic TestTopic --from-beginning</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -667,7 +667,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">57</span>
+                    <span class="site-state-item-count">58</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -710,7 +710,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">15</span>
+                      
+                    
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -801,7 +803,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">39</span>
+                      
+                    
+                    <span class="site-state-item-count">40</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

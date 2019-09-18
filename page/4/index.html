@@ -268,7 +268,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">39</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">40</span></a>
 
   </li>
         
@@ -287,7 +287,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">15</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">16</span></a>
 
   </li>
         
@@ -306,7 +306,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">57</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">58</span></a>
 
   </li>
 
@@ -342,6 +342,180 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/08/25/2018-08-25 Java 同步器-AQS/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan Li">
+      <meta itemprop="description" content="Hello World.">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ryan Li God">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/08/25/2018-08-25 Java 同步器-AQS/" class="post-title-link" itemprop="https://www.ryanligod.com/page/4/index.html">Java 同步器 - AQS</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-25 21:35:25" itemprop="dateCreated datePublished" datetime="2018-08-25T21:35:25+08:00">2018-08-25</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/08/25/2018-08-25 Java 同步器-AQS/" class="leancloud_visitors" data-flag-title="Java 同步器 - AQS">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>AQS，即AbstractQueuedSynchronized，抽象的队列式同步器，它是一个用于构建锁和同步器的基础框架，java中很多锁和同步器的实现都依赖AQS,比如ReentrantLock、 ReadWriteLock、Semaphore、CountDownLatch等。然而这些锁都没有直接来继承AQS,而是定义了一个Sync类去继承AQS.因为锁面向的是使用用户,而同步器面向的则是线程控制,那么在锁的实现中聚合同步器而不是直接继承AQS就可以很好的隔离二者所关注的事情.</p>
+<p>AQS的实现是基于CLH队列，CLH队列的提出是用于自旋锁，但在AQS中，JUC并发包的作者（Doug Lea）将其用于阻塞锁。在了解AQS之前首先来看看CAS和CLH队列。</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/08/25/2018-08-25 Java 同步器-AQS/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -1946,183 +2120,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/08/03/2018-08-03 Spark RDD（十） PairRDD的Action操作countByKey, collectAsMap/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan Li">
-      <meta itemprop="description" content="Hello World.">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ryan Li God">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/08/03/2018-08-03 Spark RDD（十） PairRDD的Action操作countByKey, collectAsMap/" class="post-title-link" itemprop="https://www.ryanligod.com/page/4/index.html">Spark RDD常用算子操作（十） PairRDD的Action操作countByKey, collectAsMap</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-08-03 21:30:50" itemprop="dateCreated datePublished" datetime="2018-08-03T21:30:50+08:00">2018-08-03</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Spark/" itemprop="url" rel="index"><span itemprop="name">Spark</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/08/03/2018-08-03 Spark RDD（十） PairRDD的Action操作countByKey, collectAsMap/" class="leancloud_visitors" data-flag-title="Spark RDD常用算子操作（十） PairRDD的Action操作countByKey, collectAsMap">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>原文作者：翟开顺<br>首发：CSDN<br>本人仅为自己方便查阅做了摘抄，请支持原作者<br>原文地址：<a href="https://blog.csdn.net/t1dmzks/article/details/72077428" target="_blank" rel="noopener">https://blog.csdn.net/t1dmzks/article/details/72077428</a></p>
-</blockquote>
-<h1 id="PairRDD的Action操作countByKey-collectAsMap"><a href="#PairRDD的Action操作countByKey-collectAsMap" class="headerlink" title="PairRDD的Action操作countByKey, collectAsMap"></a>PairRDD的Action操作countByKey, collectAsMap</h1><h2 id="countByKey"><a href="#countByKey" class="headerlink" title="countByKey"></a>countByKey</h2><p>def countByKey(): Map[K, Long]<br>以RDD{(1, 2),(2,4),(2,5), (3, 4),(3,5), (3, 6)}为例 rdd.countByKey会返回{(1,1),(2,2),(3,3)}<br><strong>scala例子</strong><br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="keyword">val</span> rdd = sc.parallelize(<span class="type">Array</span>((<span class="number">1</span>, <span class="number">2</span>),(<span class="number">2</span>,<span class="number">4</span>),(<span class="number">2</span>,<span class="number">5</span>), (<span class="number">3</span>, <span class="number">4</span>),(<span class="number">3</span>,<span class="number">5</span>), (<span class="number">3</span>, <span class="number">6</span>)))</span><br><span class="line"></span><br><span class="line">scala&gt; <span class="keyword">val</span> countbyKeyRDD = rdd.countByKey()</span><br><span class="line">countbyKeyRDD: scala.collection.<span class="type">Map</span>[<span class="type">Int</span>,<span class="type">Long</span>] = <span class="type">Map</span>(<span class="number">1</span> -&gt; <span class="number">1</span>, <span class="number">2</span> -&gt; <span class="number">2</span>, <span class="number">3</span> -&gt; <span class="number">3</span>)</span><br></pre></td></tr></table></figure></p>
-<p><strong>java例子</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">    JavaRDD&lt;Tuple2&lt;Integer, Integer&gt;&gt; tupleRDD =</span><br><span class="line">            sc.parallelize(Arrays.asList(<span class="keyword">new</span> Tuple2&lt;&gt;(<span class="number">1</span>, <span class="number">2</span>),</span><br><span class="line">            <span class="keyword">new</span> Tuple2&lt;&gt;(<span class="number">2</span>, <span class="number">4</span>),</span><br><span class="line">            <span class="keyword">new</span> Tuple2&lt;&gt;(<span class="number">2</span>, <span class="number">5</span>),</span><br><span class="line">            <span class="keyword">new</span> Tuple2&lt;&gt;(<span class="number">3</span>, <span class="number">4</span>),</span><br><span class="line">            <span class="keyword">new</span> Tuple2&lt;&gt;(<span class="number">3</span>, <span class="number">5</span>),</span><br><span class="line">            <span class="keyword">new</span> Tuple2&lt;&gt;(<span class="number">3</span>, <span class="number">6</span>)));</span><br><span class="line">    JavaPairRDD&lt;Integer, Integer&gt; mapRDD = JavaPairRDD.fromJavaRDD(tupleRDD);</span><br><span class="line">    <span class="comment">//countByKey</span></span><br><span class="line">    Map&lt;Integer, Object&gt; countByKeyRDD = mapRDD.countByKey();</span><br><span class="line">    <span class="keyword">for</span> (Integer i:countByKeyRDD.keySet()) &#123;</span><br><span class="line">        System.out.println(<span class="string">"("</span>+i+<span class="string">", "</span>+countByKeyRDD.get(i)+<span class="string">")"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">输出  </span></span><br><span class="line"><span class="comment">(1, 1)</span></span><br><span class="line"><span class="comment">(3, 3)</span></span><br><span class="line"><span class="comment">(2, 2)</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/08/03/2018-08-03 Spark RDD（十） PairRDD的Action操作countByKey, collectAsMap/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-         
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2172,7 +2169,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">57</span>
+                    <span class="site-state-item-count">58</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2215,7 +2212,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">15</span>
+                      
+                    
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2306,7 +2305,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">39</span>
+                      
+                    
+                    <span class="site-state-item-count">40</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2609,9 +2610,9 @@
   
     
       
-        
-      
     
+      
+        
       
     
       

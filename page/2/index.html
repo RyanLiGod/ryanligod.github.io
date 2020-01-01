@@ -306,7 +306,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">58</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">59</span></a>
 
   </li>
 
@@ -471,6 +471,188 @@
             <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ivecs_read</span><span class="params">(fname)</span>:</span></span><br><span class="line">    a = np.fromfile(fname, dtype=<span class="string">'int32'</span>)</span><br><span class="line">    d = a[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">return</span> a.reshape(<span class="number">-1</span>, d + <span class="number">1</span>)[:, <span class="number">1</span>:].copy()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fvecs_read</span><span class="params">(fname)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> ivecs_read(fname).view(<span class="string">'float32'</span>)</span><br></pre></td></tr></table></figure>
 
           
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2019/03/21/2019-05-22 Golang 线程安全的 Map/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan Li">
+      <meta itemprop="description" content="Hello World.">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ryan Li God">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/21/2019-05-22 Golang 线程安全的 Map/" class="post-title-link" itemprop="https://www.ryanligod.com/page/2/index.html">Golang 线程安全的 sync.Map 以及使用时遇到的问题</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-21 16:46:56" itemprop="dateCreated datePublished" datetime="2019-03-21T16:46:56+08:00">2019-03-21</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Golang/" itemprop="url" rel="index"><span itemprop="name">Golang</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/03/21/2019-05-22 Golang 线程安全的 Map/" class="leancloud_visitors" data-flag-title="Golang 线程安全的 sync.Map 以及使用时遇到的问题">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近在使用 Golang 实现 HNSW 算法的多属性支持，在其中用到的 map 结构。然后 Map 并不是线程安全的，使用多线程的话在新版本的 Golang 中会直接出现 panic。</p>
+<p>sync.Map 这个数据结构是线程安全的，它填补了 Map 线程不安全的缺陷，不过最好只在需要的情况下使用。它一般用于并发模型中对同一类 map 结构体的读写，或其他适用于 sync.Map 的情况。</p>
+<p>关于 sync.Map 的源码解析文章：<a href="https://segmentfault.com/a/1190000010294041" target="_blank" rel="noopener">Go 1.9 sync.Map揭秘</a></p>
+<h1 id="sync-Map使用方法"><a href="#sync-Map使用方法" class="headerlink" title="sync.Map使用方法"></a>sync.Map使用方法</h1><ol>
+<li><code>Store</code>   存 key，value</li>
+<li><code>LoadOrStore</code>   取&amp;存—具体看代码</li>
+<li><code>Load</code>   取 key 对应的 value</li>
+<li><code>Range</code>   遍历所有的 key，value</li>
+<li><code>Delete</code>   删除 key，及其 value</li>
+</ol>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/03/21/2019-05-22 Golang 线程安全的 Map/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
         
       
     </div>
@@ -1930,183 +2112,6 @@ D(n)=(n-1)(D(n-1)+D(n-2))\qquad D(1)=0,D(2)=1,n\geq3</script>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/11/09/2018-11-09 Docker 之 Dockerfile/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan Li">
-      <meta itemprop="description" content="Hello World.">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ryan Li God">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/11/09/2018-11-09 Docker 之 Dockerfile/" class="post-title-link" itemprop="https://www.ryanligod.com/page/2/index.html">Docker 之 Dockerfile</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-11-09 18:19:21" itemprop="dateCreated datePublished" datetime="2018-11-09T18:19:21+08:00">2018-11-09</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Docker/" itemprop="url" rel="index"><span itemprop="name">Docker</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/11/09/2018-11-09 Docker 之 Dockerfile/" class="leancloud_visitors" data-flag-title="Docker 之 Dockerfile">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="Dockerfile-介绍"><a href="#Dockerfile-介绍" class="headerlink" title="Dockerfile 介绍"></a>Dockerfile 介绍</h1><p>Dockerfile 是由一系列命令和参数构成的脚本，这些命令应用于基础镜像并最终创建一个新的镜像。它们简化了从头到尾的流程并极大的简化了部署工作。Dockerfile 从 FROM 命令开始，紧接着跟随者各种方法，命令和参数。其产出为一个新的可以用于创建容器的镜像。</p>
-<h1 id="Dockerfile-语法"><a href="#Dockerfile-语法" class="headerlink" title="Dockerfile 语法"></a>Dockerfile 语法</h1><p>Dockerfile语法由两部分构成，<code>注释</code> 和 <code>命令 + 参数</code> ：</p>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Line blocks used for commenting</span></span><br><span class="line">command argument argument ..</span><br></pre></td></tr></table></figure>
-<p>一个简单的例子：</p>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Print "Hello docker!"</span></span><br><span class="line"><span class="keyword">RUN</span> echo "Hello docker!"</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/11/09/2018-11-09 Docker 之 Dockerfile/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-         
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2156,7 +2161,7 @@ D(n)=(n-1)(D(n-1)+D(n-2))\qquad D(1)=0,D(2)=1,n\geq3</script>
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">58</span>
+                    <span class="site-state-item-count">59</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2359,7 +2364,7 @@ D(n)=(n-1)(D(n-1)+D(n-2))\qquad D(1)=0,D(2)=1,n\geq3</script>
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
@@ -2605,9 +2610,9 @@ D(n)=(n-1)(D(n-1)+D(n-2))\qquad D(1)=0,D(2)=1,n\geq3</script>
       
     
       
-        
-      
     
+      
+        
       
     
       

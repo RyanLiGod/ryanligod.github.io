@@ -306,7 +306,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">58</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">59</span></a>
 
   </li>
 
@@ -342,6 +342,183 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/11/09/2018-11-09 Docker 之 Dockerfile/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan Li">
+      <meta itemprop="description" content="Hello World.">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ryan Li God">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/11/09/2018-11-09 Docker 之 Dockerfile/" class="post-title-link" itemprop="https://www.ryanligod.com/page/3/index.html">Docker 之 Dockerfile</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-11-09 18:19:21" itemprop="dateCreated datePublished" datetime="2018-11-09T18:19:21+08:00">2018-11-09</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Docker/" itemprop="url" rel="index"><span itemprop="name">Docker</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/11/09/2018-11-09 Docker 之 Dockerfile/" class="leancloud_visitors" data-flag-title="Docker 之 Dockerfile">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Dockerfile-介绍"><a href="#Dockerfile-介绍" class="headerlink" title="Dockerfile 介绍"></a>Dockerfile 介绍</h1><p>Dockerfile 是由一系列命令和参数构成的脚本，这些命令应用于基础镜像并最终创建一个新的镜像。它们简化了从头到尾的流程并极大的简化了部署工作。Dockerfile 从 FROM 命令开始，紧接着跟随者各种方法，命令和参数。其产出为一个新的可以用于创建容器的镜像。</p>
+<h1 id="Dockerfile-语法"><a href="#Dockerfile-语法" class="headerlink" title="Dockerfile 语法"></a>Dockerfile 语法</h1><p>Dockerfile语法由两部分构成，<code>注释</code> 和 <code>命令 + 参数</code> ：</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Line blocks used for commenting</span></span><br><span class="line">command argument argument ..</span><br></pre></td></tr></table></figure>
+<p>一个简单的例子：</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Print "Hello docker!"</span></span><br><span class="line"><span class="keyword">RUN</span> echo "Hello docker!"</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/11/09/2018-11-09 Docker 之 Dockerfile/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -826,17 +1003,17 @@
             <h3 id="更新方法"><a href="#更新方法" class="headerlink" title="更新方法"></a>更新方法</h3><p>手动下载 gfwlist.txt, 转成 PAC 所用的 gfwlist.js 之后放到默认存放位置。</p>
 <ol>
 <li><p>获取 gfwlist.txt， 最新地址 <a href="https://github.com/gfwlist/gfwlist：" target="_blank" rel="noopener">https://github.com/gfwlist/gfwlist：</a></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> wget https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> wget https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>安装 gfwlist2pac，注意这里需要 python 2.7 的环境，我这里使用 conda 切换到 python 2.7 的环境：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">source</span> activate py27</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> pip install gfwlist2pac</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> source activate py27</span><br><span class="line"><span class="meta">$</span> pip install gfwlist2pac</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>转换 PAC：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> gfwlist2pac -i gfwlist.txt -f gfwlist.js -p <span class="string">"SOCKS5 127.0.0.1:1080;"</span> --precise</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> gfwlist2pac -i gfwlist.txt -f gfwlist.js -p "SOCKS5 127.0.0.1:1080;" --precise</span><br></pre></td></tr></table></figure>
 <ol>
 <li>拷贝新生成的 gfwlist.js 到 ShadowsocksX PAC 目录（macOS）：</li>
 </ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cp gfwlist.js ~/.ShadowsocksX/</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> cp gfwlist.js ~/.ShadowsocksX/</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 
@@ -1971,249 +2148,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/08/29/2018-08-29 MathJax 支持的 LaTeX 总结/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan Li">
-      <meta itemprop="description" content="Hello World.">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ryan Li God">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/08/29/2018-08-29 MathJax 支持的 LaTeX 总结/" class="post-title-link" itemprop="https://www.ryanligod.com/page/3/index.html">MathJax 支持的 LaTeX 总结</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-08-29 21:25:35" itemprop="dateCreated datePublished" datetime="2018-08-29T21:25:35+08:00">2018-08-29</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Markdown/" itemprop="url" rel="index"><span itemprop="name">Markdown</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/08/29/2018-08-29 MathJax 支持的 LaTeX 总结/" class="leancloud_visitors" data-flag-title="MathJax 支持的 LaTeX 总结">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p><strong>简要介绍</strong><br>因为要使用MarkDown中使用LaTeX编辑数学公式然后在文档、网页中使用，但是自己总是记不住这么多东西，特别是几天不用，很多都忘记了，因此准备就数学公式的Latex编辑方式做一个整理，以方便自己和读者今后使用。</p>
-</blockquote>
-<h5 id="分数-平方"><a href="#分数-平方" class="headerlink" title="分数 平方"></a>分数 平方</h5><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>算式</th>
-<th>LaTeX</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>$\frac{7x+5}{1+y^2}$</td>
-<td>\frac{7x+5}{1+y^2}</td>
-</tr>
-<tr>
-<td>$\dfrac{7x+5}{1+y^2}$</td>
-<td>\dfrac{7x+5}{1+y^2}</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h5 id="下标"><a href="#下标" class="headerlink" title="下标"></a>下标</h5><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>算式</th>
-<th>LaTeX</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>$z=z_l$</td>
-<td>z=z_l</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h5 id="省略号"><a href="#省略号" class="headerlink" title="省略号"></a>省略号</h5><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>算式</th>
-<th>LaTeX</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>$\cdots$</td>
-<td>\cdots</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h5 id="行间公式（使用两个-包含公式可以独立一行）"><a href="#行间公式（使用两个-包含公式可以独立一行）" class="headerlink" title="行间公式（使用两个$包含公式可以独立一行）"></a>行间公式（使用两个$包含公式可以独立一行）</h5><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>算式</th>
-<th>LaTeX</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>$\frac{d}{dx}e^{ax}=ae^{ax} \quad \sum_{i=1}^{n}{(X_i - \overline{X})^2}$</td>
-<td>\frac{d}{dx}e\^{ax}=ae\^{ax} <strong>\quad</strong> \sum_{i=1}^{n}{(X_i - \overline{X})^2}</td>
-</tr>
-</tbody>
-</table>
-</div>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/08/29/2018-08-29 MathJax 支持的 LaTeX 总结/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-         
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2263,7 +2197,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">58</span>
+                    <span class="site-state-item-count">59</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2466,7 +2400,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
@@ -2714,9 +2648,9 @@
       
     
       
-        
-      
     
+      
+        
       
     
       

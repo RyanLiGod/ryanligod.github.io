@@ -306,7 +306,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">58</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">59</span></a>
 
   </li>
 
@@ -342,6 +342,191 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2020/01/01/2020-01-01 Mac环境编译openjdk8记录/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan Li">
+      <meta itemprop="description" content="Hello World.">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ryan Li God">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/01/01/2020-01-01 Mac环境编译openjdk8记录/" class="post-title-link" itemprop="https://www.ryanligod.com/index.html">Mac 环境编译 OpenJDK8 记录</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-01-01 18:20:27" itemprop="dateCreated datePublished" datetime="2020-01-01T18:20:27+08:00">2020-01-01</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2020/01/01/2020-01-01 Mac环境编译openjdk8记录/" class="leancloud_visitors" data-flag-title="Mac 环境编译 OpenJDK8 记录">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>今天学习怎么自己编译 <a href="http://hg.openjdk.java.net/" target="_blank" rel="noopener">OpenJDK</a>，选择了较为常用的 jdk8u 版本。动机是之前学习了一个大佬的修 Bug 过程，其中用到了自己编译的 JDK 来输出原本 JDK 不会输出的报错信息，于是今天学习一下以作积累。</p>
+<h1 id="前期工作"><a href="#前期工作" class="headerlink" title="前期工作"></a>前期工作</h1><p>系统环境：macOS Catalina 10.15.2</p>
+<ol>
+<li><p>安装 OpenJDK 的版本控制工具 <a href="https://www.mercurial-scm.org/" target="_blank" rel="noopener">Mercurial</a>，mac 版可以直接下载 pkg 安装包</p>
+</li>
+<li><p>安装 <a href="https://apps.apple.com/cn/app/xcode/id497799835?mt=12" target="_blank" rel="noopener">Xcode</a>，只有 Mac 开发工具集是不够的</p>
+</li>
+<li><p>安装 <a href="https://brew.sh/" target="_blank" rel="noopener">Homebrew</a>，然后安装 OpenJDK 的依赖 freetype，安装 ccache 提升编译速度：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 Homebrew</span></span><br><span class="line">/usr/bin/ruby -e <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span></span><br><span class="line"><span class="comment"># 安装依赖</span></span><br><span class="line">brew install freetype</span><br><span class="line">brew install ccache</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装 XQuartz。见：<a href="https://support.apple.com/zh-cn/HT201341" target="_blank" rel="noopener">https://support.apple.com/zh-cn/HT201341</a></p>
+</li>
+</ol>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2020/01/01/2020-01-01 Mac环境编译openjdk8记录/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -1952,188 +2137,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2019/03/21/2019-05-22 Golang 线程安全的 Map/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ryan Li">
-      <meta itemprop="description" content="Hello World.">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ryan Li God">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/21/2019-05-22 Golang 线程安全的 Map/" class="post-title-link" itemprop="https://www.ryanligod.com/index.html">Golang 线程安全的 sync.Map 以及使用时遇到的问题</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-03-21 16:46:56" itemprop="dateCreated datePublished" datetime="2019-03-21T16:46:56+08:00">2019-03-21</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Golang/" itemprop="url" rel="index"><span itemprop="name">Golang</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2019/03/21/2019-05-22 Golang 线程安全的 Map/" class="leancloud_visitors" data-flag-title="Golang 线程安全的 sync.Map 以及使用时遇到的问题">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近在使用 Golang 实现 HNSW 算法的多属性支持，在其中用到的 map 结构。然后 Map 并不是线程安全的，使用多线程的话在新版本的 Golang 中会直接出现 panic。</p>
-<p>sync.Map 这个数据结构是线程安全的，它填补了 Map 线程不安全的缺陷，不过最好只在需要的情况下使用。它一般用于并发模型中对同一类 map 结构体的读写，或其他适用于 sync.Map 的情况。</p>
-<p>关于 sync.Map 的源码解析文章：<a href="https://segmentfault.com/a/1190000010294041" target="_blank" rel="noopener">Go 1.9 sync.Map揭秘</a></p>
-<h1 id="sync-Map使用方法"><a href="#sync-Map使用方法" class="headerlink" title="sync.Map使用方法"></a>sync.Map使用方法</h1><ol>
-<li><code>Store</code>   存 key，value</li>
-<li><code>LoadOrStore</code>   取&amp;存—具体看代码</li>
-<li><code>Load</code>   取 key 对应的 value</li>
-<li><code>Range</code>   遍历所有的 key，value</li>
-<li><code>Delete</code>   删除 key，及其 value</li>
-</ol>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/03/21/2019-05-22 Golang 线程安全的 Map/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-         
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2183,7 +2186,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">58</span>
+                    <span class="site-state-item-count">59</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2386,7 +2389,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
@@ -2628,9 +2631,9 @@
       
     
       
-        
-      
     
+      
+        
       
     
       

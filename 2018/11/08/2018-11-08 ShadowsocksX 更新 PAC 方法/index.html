@@ -117,7 +117,7 @@
 <meta property="og:site_name" content="Ryan Li God">
 <meta property="og:description" content="更新方法手动下载 gfwlist.txt, 转成 PAC 所用的 gfwlist.js 之后放到默认存放位置。  获取 gfwlist.txt， 最新地址 https://github.com/gfwlist/gfwlist： 1$ wget https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt  安装 gfwli">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-11-09T07:08:01.382Z">
+<meta property="og:updated_time" content="2018-11-09T07:08:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ShadowsocksX 更新 PAC 方法">
 <meta name="twitter:description" content="更新方法手动下载 gfwlist.txt, 转成 PAC 所用的 gfwlist.js 之后放到默认存放位置。  获取 gfwlist.txt， 最新地址 https://github.com/gfwlist/gfwlist： 1$ wget https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt  安装 gfwli">
@@ -306,7 +306,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">58</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">59</span></a>
 
   </li>
 
@@ -466,17 +466,17 @@
         <h3 id="更新方法"><a href="#更新方法" class="headerlink" title="更新方法"></a>更新方法</h3><p>手动下载 gfwlist.txt, 转成 PAC 所用的 gfwlist.js 之后放到默认存放位置。</p>
 <ol>
 <li><p>获取 gfwlist.txt， 最新地址 <a href="https://github.com/gfwlist/gfwlist：" target="_blank" rel="noopener">https://github.com/gfwlist/gfwlist：</a></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> wget https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> wget https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>安装 gfwlist2pac，注意这里需要 python 2.7 的环境，我这里使用 conda 切换到 python 2.7 的环境：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">source</span> activate py27</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> pip install gfwlist2pac</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> source activate py27</span><br><span class="line"><span class="meta">$</span> pip install gfwlist2pac</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>转换 PAC：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> gfwlist2pac -i gfwlist.txt -f gfwlist.js -p <span class="string">"SOCKS5 127.0.0.1:1080;"</span> --precise</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> gfwlist2pac -i gfwlist.txt -f gfwlist.js -p "SOCKS5 127.0.0.1:1080;" --precise</span><br></pre></td></tr></table></figure>
 <ol>
 <li>拷贝新生成的 gfwlist.js 到 ShadowsocksX PAC 目录（macOS）：</li>
 </ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cp gfwlist.js ~/.ShadowsocksX/</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> cp gfwlist.js ~/.ShadowsocksX/</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 
@@ -628,7 +628,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">58</span>
+                    <span class="site-state-item-count">59</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -847,7 +847,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>

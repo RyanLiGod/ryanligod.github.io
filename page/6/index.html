@@ -306,7 +306,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">58</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">59</span></a>
 
   </li>
 
@@ -342,6 +342,198 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2018/08/03/2018-08-03 Spark RDD（一） parallelize，makeRDD，textFile/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ryan Li">
+      <meta itemprop="description" content="Hello World.">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ryan Li God">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/08/03/2018-08-03 Spark RDD（一） parallelize，makeRDD，textFile/" class="post-title-link" itemprop="https://www.ryanligod.com/page/6/index.html">Spark RDD常用算子操作（一） parallelize，makeRDD，textFile</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-03 21:21:50" itemprop="dateCreated datePublished" datetime="2018-08-03T21:21:50+08:00">2018-08-03</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Spark/" itemprop="url" rel="index"><span itemprop="name">Spark</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/08/03/2018-08-03 Spark RDD（一） parallelize，makeRDD，textFile/" class="leancloud_visitors" data-flag-title="Spark RDD常用算子操作（一） parallelize，makeRDD，textFile">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>原文作者：翟开顺<br>首发：CSDN<br>本人仅为自己方便查阅做了摘抄，请支持原作者<br>原文地址：<a href="https://blog.csdn.net/t1dmzks/article/details/72077428" target="_blank" rel="noopener">https://blog.csdn.net/t1dmzks/article/details/72077428</a></p>
+</blockquote>
+<h1 id="parallelize，makeRDD，textFile"><a href="#parallelize，makeRDD，textFile" class="headerlink" title="parallelize，makeRDD，textFile"></a>parallelize，makeRDD，textFile</h1><h2 id="parallelize"><a href="#parallelize" class="headerlink" title="parallelize"></a>parallelize</h2><p>调用SparkContext 的 parallelize()，将一个存在的集合，变成一个RDD，这种方式试用于学习spark和做一些spark的测试</p>
+<p><strong>scala版本</strong><br>def parallelize[T](seq: Seq[T], numSlices: Int = defaultParallelism)(implicit arg0: ClassTag[T]): RDD[T] </p>
+<ul>
+<li>第一个参数一是一个 Seq集合 </li>
+<li>第二个参数是分区数 </li>
+<li>返回的是RDD[T]</li>
+</ul>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; sc.parallelize(<span class="type">List</span>(<span class="string">"shenzhen"</span>, <span class="string">"is a beautiful city"</span>))</span><br><span class="line">res1: org.apache.spark.rdd.<span class="type">RDD</span>[<span class="type">String</span>] = <span class="type">ParallelCollectionRDD</span>[<span class="number">1</span>] at parallelize at &lt;console&gt;:<span class="number">22</span></span><br></pre></td></tr></table></figure>
+<p><strong>java版本</strong><br>def parallelize[T](list : java.util.List[T], numSlices : scala.Int) : org.apache.spark.api.java.JavaRDD[T] = { /* compiled code */ } </p>
+<ul>
+<li>第一个参数是一个List集合 </li>
+<li>第二个参数是一个分区，可以默认 </li>
+<li>返回的是一个JavaRDD[T]<br>java版本只能接收List的集合</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JavaRDD&lt;String&gt; javaStringRDD = sc.parallelize(Arrays.asList(<span class="string">"shenzhen"</span>, <span class="string">"is a beautiful city"</span>));</span><br></pre></td></tr></table></figure>
+<h2 id="makeRDD"><a href="#makeRDD" class="headerlink" title="makeRDD"></a>makeRDD</h2><p>只有scala版本的才有makeRDD<br>def makeRDD[T](seq : scala.Seq[T], numSlices : scala.Int = { /* compiled code */ })<br>跟parallelize类似</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sc.makeRDD(<span class="type">List</span>(<span class="string">"shenzhen"</span>, <span class="string">"is a beautiful city"</span>))</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/08/03/2018-08-03 Spark RDD（一） parallelize，makeRDD，textFile/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -1860,7 +2052,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">58</span>
+                    <span class="site-state-item-count">59</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2063,7 +2255,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
@@ -2299,6 +2491,8 @@
 
   
   
+    
+      
     
       
     

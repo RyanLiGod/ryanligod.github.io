@@ -118,7 +118,7 @@
 <meta property="og:description" content="前言最近在使用 Golang 实现 HNSW 算法的多属性支持，在其中用到的 map 结构。然后 Map 并不是线程安全的，使用多线程的话在新版本的 Golang 中会直接出现 panic。 sync.Map 这个数据结构是线程安全的，它填补了 Map 线程不安全的缺陷，不过最好只在需要的情况下使用。它一般用于并发模型中对同一类 map 结构体的读写，或其他适用于 sync.Map 的情况。 关于">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2019-05-22-100239.png">
-<meta property="og:updated_time" content="2019-05-27T10:59:24.842Z">
+<meta property="og:updated_time" content="2019-05-27T10:59:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Golang 线程安全的 sync.Map 以及使用时遇到的问题">
 <meta name="twitter:description" content="前言最近在使用 Golang 实现 HNSW 算法的多属性支持，在其中用到的 map 结构。然后 Map 并不是线程安全的，使用多线程的话在新版本的 Golang 中会直接出现 panic。 sync.Map 这个数据结构是线程安全的，它填补了 Map 线程不安全的缺陷，不过最好只在需要的情况下使用。它一般用于并发模型中对同一类 map 结构体的读写，或其他适用于 sync.Map 的情况。 关于">
@@ -308,7 +308,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">58</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">59</span></a>
 
   </li>
 
@@ -572,8 +572,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/21/2019-03-21 读取 fvecs 数据集/" rel="next" title="Python 读取 fvecs 数据集">
-                <i class="fa fa-chevron-left"></i> Python 读取 fvecs 数据集
+              <a href="/2019/03/14/2019-03-14 排序算法/" rel="next" title="排序算法 Python 实现">
+                <i class="fa fa-chevron-left"></i> 排序算法 Python 实现
               </a>
             
           </div>
@@ -582,8 +582,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/04/22/2019-04-22 Java 线程池 - ThreadPoolExecutor/" rel="prev" title="Java 线程池 - ThreadPoolExecutor">
-                Java 线程池 - ThreadPoolExecutor <i class="fa fa-chevron-right"></i>
+              <a href="/2019/03/21/2019-03-21 读取 fvecs 数据集/" rel="prev" title="Python 读取 fvecs 数据集">
+                Python 读取 fvecs 数据集 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -661,7 +661,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">58</span>
+                    <span class="site-state-item-count">59</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -880,7 +880,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>

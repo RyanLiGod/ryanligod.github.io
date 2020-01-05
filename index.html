@@ -378,7 +378,7 @@
           <h2 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2020/01/01/2020-01-01 Mac环境编译openjdk8记录/" class="post-title-link" itemprop="https://www.ryanligod.com/index.html">Mac 环境编译 OpenJDK8 记录</a>
+                <a href="/2020/01/01/2020-01-01 Mac环境编译openjdk8记录/" class="post-title-link" itemprop="https://www.ryanligod.com/index.html">Mac 环境编译 OpenJDK11 记录</a>
               
             
           </h2>
@@ -435,7 +435,7 @@
 
           
           
-             <span id="/2020/01/01/2020-01-01 Mac环境编译openjdk8记录/" class="leancloud_visitors" data-flag-title="Mac 环境编译 OpenJDK8 记录">
+             <span id="/2020/01/01/2020-01-01 Mac环境编译openjdk8记录/" class="leancloud_visitors" data-flag-title="Mac 环境编译 OpenJDK11 记录">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -467,19 +467,14 @@
 
       
         
-          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>今天学习怎么自己编译 <a href="http://hg.openjdk.java.net/" target="_blank" rel="noopener">OpenJDK</a>，选择了较为常用的 jdk8u 版本。动机是之前学习了一个大佬的修 Bug 过程，其中用到了自己编译的 JDK 来输出原本 JDK 不会输出的报错信息，于是今天学习一下以作积累。</p>
+          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>今天学习怎么自己编译 <a href="http://hg.openjdk.java.net/" target="_blank" rel="noopener">OpenJDK</a>，选择了和 JDK8 同为 LTS 的 jdk11 版本。动机是之前学习了一个大佬的修 Bug 过程，其中用到了自己编译的 JDK 来输出原本 JDK 不会输出的报错信息，于是今天学习一下以作积累。</p>
 <h1 id="前期工作"><a href="#前期工作" class="headerlink" title="前期工作"></a>前期工作</h1><p>系统环境：macOS Catalina 10.15.2</p>
 <ol>
-<li><p>安装 OpenJDK 的版本控制工具 <a href="https://www.mercurial-scm.org/" target="_blank" rel="noopener">Mercurial</a>，mac 版可以直接下载 pkg 安装包</p>
-</li>
-<li><p>安装 <a href="https://apps.apple.com/cn/app/xcode/id497799835?mt=12" target="_blank" rel="noopener">Xcode</a>，只有 Mac 开发工具集是不够的</p>
+<li><p>安装 <a href="https://apps.apple.com/cn/app/xcode/id497799835?mt=12" target="_blank" rel="noopener">Xcode</a> 和 Command line tools，只有 Command line tools 是不够的，不安装的话报错信息记录在见下文编译过程：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 Command line tools</span></span><br><span class="line">xcode-select --install</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>安装 <a href="https://brew.sh/" target="_blank" rel="noopener">Homebrew</a>，然后安装 OpenJDK 的依赖 freetype，安装 ccache 提升编译速度：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 Homebrew</span></span><br><span class="line">/usr/bin/ruby -e <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span></span><br><span class="line"><span class="comment"># 安装依赖</span></span><br><span class="line">brew install freetype</span><br><span class="line">brew install ccache</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>安装 XQuartz。见：<a href="https://support.apple.com/zh-cn/HT201341" target="_blank" rel="noopener">https://support.apple.com/zh-cn/HT201341</a></p>
-</li>
-</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 Homebrew</span></span><br><span class="line">/usr/bin/ruby -e <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span></span><br><span class="line"><span class="comment"># 安装依赖</span></span><br><span class="line">brew install autoconf</span><br><span class="line">brew install freetype</span><br><span class="line">brew install ccache</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -491,7 +486,7 @@
           <!--/noindex-->
         
       
-    </div>
+    </li></ol></div>
 
     
 

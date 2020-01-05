@@ -113,12 +113,12 @@
 <meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mac 环境编译 OpenJDK11 记录">
-<meta property="og:url" content="https://www.ryanligod.com/2020/01/01/2020-01-01 Mac环境编译openjdk8记录/index.html">
+<meta property="og:url" content="https://www.ryanligod.com/2020/01/01/2020-01-01 Mac环境编译OpenJDK11记录/index.html">
 <meta property="og:site_name" content="Ryan Li God">
 <meta property="og:description" content="前言今天学习怎么自己编译 OpenJDK，选择了和 JDK8 同为 LTS 的 jdk11 版本。动机是之前学习了一个大佬的修 Bug 过程，其中用到了自己编译的 JDK 来输出原本 JDK 不会输出的报错信息，于是今天学习一下以作积累。 前期工作系统环境：macOS Catalina 10.15.2  安装 Xcode 和 Command line tools，只有 Command line t">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2020-01-05-072555.png">
-<meta property="og:updated_time" content="2020-01-05T08:49:51.721Z">
+<meta property="og:updated_time" content="2020-01-05T09:19:54.188Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mac 环境编译 OpenJDK11 记录">
 <meta name="twitter:description" content="前言今天学习怎么自己编译 OpenJDK，选择了和 JDK8 同为 LTS 的 jdk11 版本。动机是之前学习了一个大佬的修 Bug 过程，其中用到了自己编译的 JDK 来输出原本 JDK 不会输出的报错信息，于是今天学习一下以作积累。 前期工作系统环境：macOS Catalina 10.15.2  安装 Xcode 和 Command line tools，只有 Command line t">
@@ -129,7 +129,7 @@
 
 
 
-  <link rel="canonical" href="https://www.ryanligod.com/2020/01/01/2020-01-01 Mac环境编译openjdk8记录/">
+  <link rel="canonical" href="https://www.ryanligod.com/2020/01/01/2020-01-01 Mac环境编译OpenJDK11记录/">
 
 
 
@@ -360,7 +360,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2020/01/01/2020-01-01 Mac环境编译openjdk8记录/">
+    <link itemprop="mainEntityOfPage" href="https://www.ryanligod.com/2020/01/01/2020-01-01 Mac环境编译OpenJDK11记录/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ryan Li">
@@ -434,7 +434,7 @@
 
           
           
-             <span id="/2020/01/01/2020-01-01 Mac环境编译openjdk8记录/" class="leancloud_visitors" data-flag-title="Mac 环境编译 OpenJDK11 记录">
+             <span id="/2020/01/01/2020-01-01 Mac环境编译OpenJDK11记录/" class="leancloud_visitors" data-flag-title="Mac 环境编译 OpenJDK11 记录">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -475,7 +475,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 Homebrew</span></span><br><span class="line">/usr/bin/ruby -e <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span></span><br><span class="line"><span class="comment"># 安装依赖</span></span><br><span class="line">brew install autoconf</span><br><span class="line">brew install freetype</span><br><span class="line">brew install ccache</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 </li>
-<li><p>安装 XQuartz，见：<a href="https://support.apple.com/zh-cn/HT201341。X11这玩意是" target="_blank" rel="noopener">https://support.apple.com/zh-cn/HT201341。X11这玩意是</a> Unix 类 os 使用的图形系统，10.8 以前的 OS X 是自带的，但是从此以后就不自带了。对应于 Mac，你需要装 XQuartz，这个没有版本限制，去网上下最新版即可。装这个的原因是当时在编译 PolicyTools 的时候出现了如下错误：</p>
+<li><p>安装 <a href="https://support.apple.com/zh-cn/HT201341" target="_blank" rel="noopener">XQuartz</a>。X11 是 Unix 类 OS 使用的图形系统，10.8 以前的 OS X 是自带的，但是从此以后就不自带了。对应于 Mac，你需要装 XQuartz，这个没有版本限制，去网上下最新版即可。装这个的原因是当时在编译 PolicyTools 的时候出现了如下错误：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ld: library not found <span class="keyword">for</span> -lX11</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
@@ -504,8 +504,15 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Creating jdk image</span><br><span class="line">Finished building target <span class="string">'all'</span> <span class="keyword">in</span> configuration <span class="string">'macosx-x86_64-normal-server-slowdebug'</span></span><br></pre></td></tr></table></figure>
 </li>
 </ol>
+<p>我用了 <code>jenv</code> 来管理 Java 版本，将编译好的 OpenJDK11 加入到 jenv 中：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jenv add /Users/Ryan/code/c/openjdk11/build/macosx-x86_64-normal-server-slowdebug/jdk</span><br></pre></td></tr></table></figure>
+<p>然后切换到 OpenJDK：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jenv <span class="built_in">local</span> openjdk64-11-internal</span><br></pre></td></tr></table></figure>
+<p>查看 Java 版本 <code>java -version</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">openjdk version <span class="string">"11-internal"</span> 2018-09-25</span><br><span class="line">OpenJDK Runtime Environment (slowdebug build 11-internal+0-adhoc.ryan.openjdk11)</span><br><span class="line">OpenJDK 64-Bit Server VM (slowdebug build 11-internal+0-adhoc.ryan.openjdk11, mixed mode)</span><br></pre></td></tr></table></figure>
+<p>达到预期效果，编译成功。</p>
 <blockquote>
-<p>后续更新使用自己编译的 JDK 进行 Debug 的方法~</p>
+<p>后续更新使用自己编译的 OpenJDK 进行 Debug 的方法~</p>
 </blockquote>
 
       
@@ -1000,7 +1007,7 @@
   
     <script type="text/javascript">
       window.livereOptions = {
-        refer: '2020/01/01/2020-01-01 Mac环境编译openjdk8记录/'
+        refer: '2020/01/01/2020-01-01 Mac环境编译OpenJDK11记录/'
       };
       (function(d, s) {
         var j, e = d.getElementsByTagName(s)[0];

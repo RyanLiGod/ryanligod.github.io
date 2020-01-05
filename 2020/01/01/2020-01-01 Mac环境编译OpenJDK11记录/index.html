@@ -118,7 +118,7 @@
 <meta property="og:description" content="前言今天学习怎么自己编译 OpenJDK，选择了和 JDK8 同为 LTS 的 jdk11 版本。动机是之前学习了一个大佬的修 Bug 过程，其中用到了自己编译的 JDK 来输出原本 JDK 不会输出的报错信息，于是今天学习一下以作积累。 前期工作系统环境：macOS Catalina 10.15.2  安装 Xcode 和 Command line tools，只有 Command line t">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2020-01-05-072555.png">
-<meta property="og:updated_time" content="2020-01-05T09:19:54.188Z">
+<meta property="og:updated_time" content="2020-01-05T09:24:52.108Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mac 环境编译 OpenJDK11 记录">
 <meta name="twitter:description" content="前言今天学习怎么自己编译 OpenJDK，选择了和 JDK8 同为 LTS 的 jdk11 版本。动机是之前学习了一个大佬的修 Bug 过程，其中用到了自己编译的 JDK 来输出原本 JDK 不会输出的报错信息，于是今天学习一下以作积累。 前期工作系统环境：macOS Catalina 10.15.2  安装 Xcode 和 Command line tools，只有 Command line t">
@@ -480,7 +480,7 @@
 </li>
 </ol>
 <h1 id="编译过程"><a href="#编译过程" class="headerlink" title="编译过程"></a>编译过程</h1><ol>
-<li><p>下载 OpenJDK11 源码 <a href="http://jdk.java.net/，选择" target="_blank" rel="noopener">http://jdk.java.net/，选择</a> 11 版本：</p>
+<li><p>下载 OpenJDK11 源码 <a href="http://jdk.java.net/" target="_blank" rel="noopener">http://jdk.java.net/</a>，选择 11 版本：</p>
 <p><img src="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2020-01-05-072555.png" alt="image-20200105152554733"></p>
 </li>
 <li><p>运行自带的 configure，注意这里需要一个 Bootstrap JDK，如果需要编译版本为 <code>N</code> 的OpenJDK，那么 Bootstrap JDK 的版本应不低于 <code>N-1</code>，需要带上用 brew 安装的路径，不然会报错 <code>configure: error: Could not find freetype!</code>：</p>
@@ -498,7 +498,7 @@
 </blockquote>
 <p>&gt;</p>
 <blockquote>
-<p>把编译命令改成：<code>make all -stdlib=libc++</code>，还是失败……最后还是从网上搞来了 Xcode 9 中的相关文件，放入到 Xcode 文件夹的相同路径：<a href="https://segmentfault.com/q/1010000017752615。" target="_blank" rel="noopener">https://segmentfault.com/q/1010000017752615。</a></p>
+<p>把编译命令改成：<code>make all -stdlib=libc++</code>，还是失败……最后还是从网上搞来了 Xcode 9 中的相关文件，放入到 Xcode 文件夹的相同路径：<a href="https://segmentfault.com/q/1010000017752615" target="_blank" rel="noopener">https://segmentfault.com/q/1010000017752615</a>。</p>
 </blockquote>
 <p>完成编译：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Creating jdk image</span><br><span class="line">Finished building target <span class="string">'all'</span> <span class="keyword">in</span> configuration <span class="string">'macosx-x86_64-normal-server-slowdebug'</span></span><br></pre></td></tr></table></figure>

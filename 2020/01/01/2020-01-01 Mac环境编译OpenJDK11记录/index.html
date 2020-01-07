@@ -109,19 +109,19 @@
 
 
 
-  <meta name="description" content="前言今天学习怎么自己编译 OpenJDK，选择了和 JDK8 同为 LTS 的 jdk11 版本。动机是之前学习了一个大佬的修 Bug 过程，其中用到了自己编译的 JDK 来输出原本 JDK 不会输出的报错信息，于是今天学习一下以作积累。 前期工作系统环境：macOS Catalina 10.15.2  安装 Xcode 和 Command line tools，只有 Command line t">
+  <meta name="description" content="前言今天学习怎么自己编译 OpenJDK，选择了 LTS 的 jdk11 版本。动机是之前学习了一个大佬的修 Bug 过程，其中用到了自己编译的 JDK 来输出原本 JDK 不会输出的报错信息，于是今天学习一下以作积累。 前期工作系统环境：macOS Catalina 10.15.2  安装 Xcode 和 Command line tools，只有 Command line tools 是不够的">
 <meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mac 环境编译 OpenJDK11 记录">
 <meta property="og:url" content="https://www.ryanligod.com/2020/01/01/2020-01-01 Mac环境编译OpenJDK11记录/index.html">
 <meta property="og:site_name" content="Ryan Li God">
-<meta property="og:description" content="前言今天学习怎么自己编译 OpenJDK，选择了和 JDK8 同为 LTS 的 jdk11 版本。动机是之前学习了一个大佬的修 Bug 过程，其中用到了自己编译的 JDK 来输出原本 JDK 不会输出的报错信息，于是今天学习一下以作积累。 前期工作系统环境：macOS Catalina 10.15.2  安装 Xcode 和 Command line tools，只有 Command line t">
+<meta property="og:description" content="前言今天学习怎么自己编译 OpenJDK，选择了 LTS 的 jdk11 版本。动机是之前学习了一个大佬的修 Bug 过程，其中用到了自己编译的 JDK 来输出原本 JDK 不会输出的报错信息，于是今天学习一下以作积累。 前期工作系统环境：macOS Catalina 10.15.2  安装 Xcode 和 Command line tools，只有 Command line tools 是不够的">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2020-01-05-072555.png">
-<meta property="og:updated_time" content="2020-01-05T09:24:52.108Z">
+<meta property="og:updated_time" content="2020-01-07T06:40:38.891Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mac 环境编译 OpenJDK11 记录">
-<meta name="twitter:description" content="前言今天学习怎么自己编译 OpenJDK，选择了和 JDK8 同为 LTS 的 jdk11 版本。动机是之前学习了一个大佬的修 Bug 过程，其中用到了自己编译的 JDK 来输出原本 JDK 不会输出的报错信息，于是今天学习一下以作积累。 前期工作系统环境：macOS Catalina 10.15.2  安装 Xcode 和 Command line tools，只有 Command line t">
+<meta name="twitter:description" content="前言今天学习怎么自己编译 OpenJDK，选择了 LTS 的 jdk11 版本。动机是之前学习了一个大佬的修 Bug 过程，其中用到了自己编译的 JDK 来输出原本 JDK 不会输出的报错信息，于是今天学习一下以作积累。 前期工作系统环境：macOS Catalina 10.15.2  安装 Xcode 和 Command line tools，只有 Command line tools 是不够的">
 <meta name="twitter:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2020-01-05-072555.png">
 
 
@@ -465,7 +465,7 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>今天学习怎么自己编译 <a href="http://hg.openjdk.java.net/" target="_blank" rel="noopener">OpenJDK</a>，选择了和 JDK8 同为 LTS 的 jdk11 版本。动机是之前学习了一个大佬的修 Bug 过程，其中用到了自己编译的 JDK 来输出原本 JDK 不会输出的报错信息，于是今天学习一下以作积累。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>今天学习怎么自己编译 OpenJDK，选择了 LTS 的 jdk11 版本。动机是之前学习了一个大佬的修 Bug 过程，其中用到了自己编译的 JDK 来输出原本 JDK 不会输出的报错信息，于是今天学习一下以作积累。</p>
 <h1 id="前期工作"><a href="#前期工作" class="headerlink" title="前期工作"></a>前期工作</h1><p>系统环境：macOS Catalina 10.15.2</p>
 <ol>
 <li><p>安装 <a href="https://apps.apple.com/cn/app/xcode/id497799835?mt=12" target="_blank" rel="noopener">Xcode</a> 和 Command line tools，只有 Command line tools 是不够的，不安装的话报错信息记录在见下文编译过程：</p>
@@ -483,9 +483,9 @@
 <li><p>下载 OpenJDK11 源码 <a href="http://jdk.java.net/" target="_blank" rel="noopener">http://jdk.java.net/</a>，选择 11 版本：</p>
 <p><img src="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2020-01-05-072555.png" alt="image-20200105152554733"></p>
 </li>
-<li><p>运行自带的 configure，注意这里需要一个 Bootstrap JDK，如果需要编译版本为 <code>N</code> 的OpenJDK，那么 Bootstrap JDK 的版本应不低于 <code>N-1</code>，需要带上用 brew 安装的路径，不然会报错 <code>configure: error: Could not find freetype!</code>：</p>
+<li><p>运行自带的 configure，注意这里需要一个 Bootstrap JDK，如果需要编译版本为 <code>N</code> 的OpenJDK，那么 Bootstrap JDK 的版本应不低于 <code>N-1</code>，注意一定要带上 <code>--disable-warnings-as-errors</code>，不然会把警告当做错误就无法继续编译了：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash ./configure --with-debug-level=slowdebug --with-boot-jdk=/Library/Java/JavaVirtualMachines/jdk-11.0.5.jdk/Contents/Home --with-target-bits=64 --<span class="built_in">enable</span>-ccache --<span class="built_in">disable</span>-warnings-as-errors --with-boot-jdk-jvmargs=<span class="string">"-Xlint:deprecation -Xlint:unchecked"</span></span><br></pre></td></tr></table></figure>
-<p>成功信息：</p>
+<p>配置成功信息：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">A new configuration has been successfully created <span class="keyword">in</span></span><br><span class="line">   /Users/Ryan/code/c/openjdk11/build/macosx-x86_64-normal-server-slowdebug</span><br><span class="line">   using configure arguments <span class="string">'--with-debug-level=slowdebug --with-boot-jdk=/Library/Java/JavaVirtualMachines/jdk-11.0.5.jdk/Contents/Home --with-target-bits=64 --enable-ccache --disable-warnings-as-errors --with-boot-jdk-jvmargs='</span>-Xlint:deprecation -Xlint:unchecked<span class="string">''</span>.</span><br><span class="line">   </span><br><span class="line">   Configuration summary:</span><br><span class="line">   * Debug level:    slowdebug</span><br><span class="line">   * HS debug level: debug</span><br><span class="line">   * JVM variants:   server</span><br><span class="line">   * JVM features:   server: <span class="string">'aot cds cmsgc compiler1 compiler2 dtrace epsilongc g1gc graal jfr jni-check jvmci jvmti management nmt parallelgc serialgc services vm-structs'</span></span><br><span class="line">   * OpenJDK target: OS: macosx, CPU architecture: x86, address length: 64</span><br><span class="line">   * Version string: 11-internal+0-adhoc.ryan.openjdk11 (11-internal)</span><br><span class="line">   </span><br><span class="line">   Tools summary:</span><br><span class="line">   * Boot JDK:       java version <span class="string">"11.0.5"</span> 2019-10-15 LTS Java(TM) SE Runtime Environment 18.9 (build 11.0.5+10-LTS) Java HotSpot(TM) 64-Bit Server VM 18.9 (build 11.0.5+10-LTS, mixed mode)  (at /Library/Java/JavaVirtualMachines/jdk-11.0.5.jdk/Contents/Home)</span><br><span class="line">   * Toolchain:      clang (clang/LLVM from Xcode 11.3)</span><br><span class="line">   * C Compiler:     Version 11.0.0 (at /usr/bin/clang)</span><br><span class="line">   * C++ Compiler:   Version 11.0.0 (at /usr/bin/g++)</span><br><span class="line">   </span><br><span class="line">   Build performance summary:</span><br><span class="line">   * Cores to use:   8</span><br><span class="line">   * Memory <span class="built_in">limit</span>:   16384 MB</span><br><span class="line">   * ccache status:  Active (3.7.5)</span><br></pre></td></tr></table></figure>
 </li>
 </ol>

@@ -118,7 +118,7 @@
 <meta property="og:description" content="前言今天学习怎么自己编译 OpenJDK，选择了 LTS 的 jdk11 版本。动机是之前学习了一个大佬的修 Bug 过程，其中用到了自己编译的 JDK 来输出原本 JDK 不会输出的报错信息，于是今天学习一下以作积累。 前期工作系统环境：macOS Catalina 10.15.2  安装 Xcode 和 Command line tools，只有 Command line tools 是不够的">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://markdown-1251440652.cos.ap-guangzhou.myqcloud.com/2020-01-05-072555.png">
-<meta property="og:updated_time" content="2020-01-07T06:40:38.891Z">
+<meta property="og:updated_time" content="2020-01-18T04:50:45.516Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mac 环境编译 OpenJDK11 记录">
 <meta name="twitter:description" content="前言今天学习怎么自己编译 OpenJDK，选择了 LTS 的 jdk11 版本。动机是之前学习了一个大佬的修 Bug 过程，其中用到了自己编译的 JDK 来输出原本 JDK 不会输出的报错信息，于是今天学习一下以作积累。 前期工作系统环境：macOS Catalina 10.15.2  安装 Xcode 和 Command line tools，只有 Command line tools 是不够的">
@@ -495,9 +495,6 @@
 <p>（以下这个问题在编译 OpenJDK8 时候遇到，由于编译 OpenJDK11 的时候这些文件已经加上，所以不确定会不会引起这个问题）</p>
 <p>Xcode10 移除了GCC的 stdc++，于是遇到问题：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; error: include path <span class="keyword">for</span> stdlibc++ headers not found; pass ‘-std=libc++’ on the <span class="built_in">command</span> line to use the libc++ standard library instead</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>&gt;</p>
-<blockquote>
 <p>把编译命令改成：<code>make all -stdlib=libc++</code>，还是失败……最后还是从网上搞来了 Xcode 9 中的相关文件，放入到 Xcode 文件夹的相同路径：<a href="https://segmentfault.com/q/1010000017752615" target="_blank" rel="noopener">https://segmentfault.com/q/1010000017752615</a>。</p>
 </blockquote>
 <p>完成编译：</p>
